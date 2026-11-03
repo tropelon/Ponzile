@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="150 100 724 850" role="img" aria-label="tropelon logo">
+  <title>tropelon</title>
+  <defs>
+    <linearGradient id="tp-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c084fc"/>
+      <stop offset="0.5" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#3b0764"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#tp-g)" stroke="#1e0b36" stroke-width="6" stroke-linejoin="round">
+    <path id="tp-ul" d="M178 208 L503 517 Q380 485 255 482 Q178 470 178 400 Z"/>
+    <use href="#tp-ul" transform="translate(1024 0) scale(-1 1)"/>
+    <path id="tp-ll" d="M180 888 L503 527 Q370 555 262 585 Q180 610 180 690 Z"/>
+    <use href="#tp-ll" transform="translate(1024 0) scale(-1 1)"/>
+    <path d="M515 122 L620 235 Q640 260 625 295 L512 512 L405 295 Q392 260 408 235 Z"/>
+    <path d="M514 618 C480 690 413 760 413 835 C413 890 458 926 514 926 C570 926 614 890 614 835 C614 760 548 690 514 618 Z"/>
+  </g>
+</svg>
