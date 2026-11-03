@@ -1,0 +1,15 @@
+name: tropelon
+tagline:
+  bn: কমিউনিটি পোস্ট ও কনভার্টার টুলস, এক জায়গায়
+  en: Community posts and converter tools, in one place
+email: contact@tropelon.2bd.net
+social:
+  - {key: youtube, name: YouTube, url: "https://www.youtube.com/channel/UCijufPWJQ_Ym5HMDW66GXew"}
+  - {key: x, name: X, url: "https://x.com/tropelonBD"}
+  - {key: instagram, name: Instagram, url: "https://www.instagram.com/tropelonBD"}
+  - {key: telegram, name: Telegram, url: "https://t.me/tropelon"}
+  - {key: reddit, name: Reddit, url: "https://www.reddit.com/user/tropelon"}
+  - {key: github, name: GitHub, url: "https://github.com/tropelon"}
+  - {key: blog, name: Blog, url: "https://tropelon.blogspot.com"}
+# WhatsApp নম্বর পেলে বসান, যেমন https://wa.me/8801XXXXXXXXX
+whatsapp: ""
