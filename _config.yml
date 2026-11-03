@@ -1,0 +1,22 @@
+title: tropelon
+description: কমিউনিটি পোস্ট ও কনভার্টার টুলস | Community posts and converter tools
+lang: bn
+url: "https://tropelon.github.io"
+# কাস্টম ডোমেইন চালু হলে baseurl: "" করবেন
+baseurl: "/Ponzile"
+timezone: Asia/Dhaka
+markdown: kramdown
+permalink: /posts/:title/
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+exclude:
+  - README.md
+  - LICENSE
