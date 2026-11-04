@@ -1,0 +1,56 @@
+---
+layout: default
+---
+<section class="hero">
+  <img src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="72" height="85" style="filter:drop-shadow(0 0 18px rgba(168,85,247,.55))">
+  <h1 class="grad-text">tropelon</h1>
+  <p class="lead">
+    <span class="bn">{{ site.data.site.tagline.bn }}</span>
+    <span class="en">{{ site.data.site.tagline.en }}</span>
+  </p>
+  <div class="actions">
+    <a class="btn btn-primary" href="{{ '/explore/' | relative_url }}"><span class="bn">পোস্ট দেখুন</span><span class="en">Browse posts</span></a>
+    <a class="btn" href="{{ '/tools/' | relative_url }}"><span class="bn">টুলস ব্যবহার করুন</span><span class="en">Use tools</span></a>
+  </div>
+</section>
+
+<h2 class="section-title"><span class="bn">সাম্প্রতিক পোস্ট</span><span class="en">Latest posts</span></h2>
+<div class="grid">
+  {% for post in site.posts limit: 6 %}
+    {% assign img = nil %}
+    {% if post.image %}
+      {% if post.image contains '://' %}{% assign img = post.image %}{% else %}{% assign img = post.image | relative_url %}{% endif %}
+    {% endif %}
+    <a class="card post-card" href="{{ post.url | relative_url }}">
+      {% if img %}<img src="{{ img }}" alt="" loading="lazy">{% else %}<div style="aspect-ratio:16/9;background:var(--grad);opacity:.35"></div>{% endif %}
+      <div class="body">
+        <h3>{{ post.title }}</h3>
+        <p class="meta">{{ post.date | date: "%d-%m-%Y" }}</p>
+      </div>
+    </a>
+  {% else %}
+    <p class="meta"><span class="bn">এখনো কোনো পোস্ট নেই।</span><span class="en">No posts yet.</span></p>
+  {% endfor %}
+</div>
+
+<h2 class="section-title"><span class="bn">টুলস</span><span class="en">Tools</span></h2>
+<div class="grid">
+  <a class="card" href="{{ '/tools/' | relative_url }}">
+    <h3><span class="bn">ইউনিকোড ↔ বিজয়</span><span class="en">Unicode ↔ Bijoy</span></h3>
+    <p class="meta"><span class="bn">বাংলা লেখা ইউনিকোড আর বিজয় বায়ান্ন (সুতন্নীMJ), দুই দিকেই।</span><span class="en">Bangla text between Unicode and Bijoy Bayanno (SutonnyMJ), both ways.</span></p>
+  </a>
+  <a class="card" href="{{ '/tools/' | relative_url }}">
+    <h3><span class="bn">ছবি কনভার্টার</span><span class="en">Image converter</span></h3>
+    <p class="meta"><span class="bn">PNG, JPG, WebP। ছবি আপনার ফোনেই থাকে, কোথাও আপলোড হয় না।</span><span class="en">PNG, JPG, WebP. Images stay on your device and are never uploaded.</span></p>
+  </a>
+  <a class="card" href="{{ '/tools/' | relative_url }}">
+    <h3><span class="bn">ইউনিট কনভার্টার</span><span class="en">Unit converter</span></h3>
+    <p class="meta"><span class="bn">দৈর্ঘ্য, ওজন, তাপমাত্রা ও আরও।</span><span class="en">Length, weight, temperature and more.</span></p>
+  </a>
+</div>
+
+<h2 class="section-title"><span class="bn">কমিউনিটি</span><span class="en">Community</span></h2>
+<a class="card" href="{{ '/contact/' | relative_url }}">
+  <h3><span class="bn">আপনার পোস্ট শেয়ার করতে চান?</span><span class="en">Want to share your post?</span></h3>
+  <p class="meta"><span class="bn">যোগাযোগ করুন, আমরা আপনাকে পোস্ট দেওয়ার সুযোগ দেব।</span><span class="en">Get in touch and we will give you posting access.</span></p>
+</a>
