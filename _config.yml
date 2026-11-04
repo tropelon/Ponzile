@@ -3,7 +3,7 @@ description: কমিউনিটি পোস্ট ও কনভার্ট�
 lang: bn
 url: "https://tropelon.github.io"
 # কাস্টম ডোমেইন চালু হলে baseurl: "" করবেন
-baseurl: "/Ponzile"
+baseurl: ""
 timezone: Asia/Dhaka
 markdown: kramdown
 permalink: /posts/:title/
