@@ -1,0 +1,361 @@
+---
+layout: default
+title: টুলস
+permalink: /tools/
+---
+<style>
+  .tabs{display:flex;gap:8px;overflow-x:auto;margin:14px -16px 0;padding:4px 16px 10px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab,.mode{flex:none;font:inherit;font-size:.85rem;font-weight:600;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;white-space:nowrap}
+  .tab.on,.mode.on{color:#fff;background:var(--grad);border-color:transparent}
+  .modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .tool{display:none;margin-top:6px}
+  .tool.on{display:block}
+  .tool:hover{transform:none;border-color:var(--line)}
+  .tool h2{font-size:1.25rem}
+  .tool textarea{min-height:150px;resize:vertical;line-height:1.6}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .bar .btn{padding:9px 18px;font-size:.9rem}
+  .note{color:var(--muted);font-size:.82rem;margin-top:10px}
+  .status{min-height:1.4em;font-size:.85rem;color:#d8b4fe;margin-top:8px}
+  .drop{display:block;border:1.5px dashed rgba(192,132,252,.45);border-radius:14px;padding:22px 14px;text-align:center;color:var(--muted);cursor:pointer;margin:0}
+  .drop input{display:none}
+  .drop:hover{border-color:var(--accent)}
+  .results{display:grid;gap:10px;margin-top:14px}
+  .res{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+  .res img{width:56px;height:56px;object-fit:cover;border-radius:10px;flex:none;background:#000}
+  .res .info{flex:1;min-width:0}
+  .res .info b{display:block;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .res .btn{padding:8px 16px;font-size:.85rem;flex:none}
+  .big{font-size:clamp(1.3rem,5vw,1.8rem);font-weight:800;margin-top:16px;word-break:break-word}
+  .all{display:grid;gap:6px 14px;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));margin-top:12px;font-size:.88rem;color:var(--muted)}
+  .all b{color:var(--text);font-weight:600}
+  input[type=range]{padding:0;height:34px;accent-color:#a855f7}
+</style>
+
+<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">টুলস</span><span class="en">Tools</span></h1>
+<p class="meta"><span class="bn">সবকিছু আপনার ব্রাউজারেই চলে। আপনার লেখা বা ছবি কোথাও আপলোড হয় না।</span><span class="en">Everything runs in your browser. Your text and images are never uploaded.</span></p>
+
+<div class="tabs" id="tabs" role="tablist">
+  <button type="button" class="tab on" data-t="bijoy"><span class="bn">ইউনিকোড ↔ বিজয়</span><span class="en">Unicode ↔ Bijoy</span></button>
+  <button type="button" class="tab" data-t="image"><span class="bn">ছবি কনভার্টার</span><span class="en">Image converter</span></button>
+  <button type="button" class="tab" data-t="unit"><span class="bn">ইউনিট কনভার্টার</span><span class="en">Unit converter</span></button>
+</div>
+
+<!-- ===================== ইউনিকোড ↔ বিজয় ===================== -->
+<section class="card tool on" id="tool-bijoy">
+  <h2><span class="bn">ইউনিকোড ↔ বিজয় বায়ান্ন (সুতন্নীMJ)</span><span class="en">Unicode ↔ Bijoy Bayanno (SutonnyMJ)</span></h2>
+  <div class="modes" id="modes" style="margin-top:12px">
+    <button type="button" class="mode on" data-m="u2b"><span class="bn">ইউনিকোড → বিজয়</span><span class="en">Unicode → Bijoy</span></button>
+    <button type="button" class="mode" data-m="b2u"><span class="bn">বিজয় → ইউনিকোড</span><span class="en">Bijoy → Unicode</span></button>
+    <button type="button" class="mode" data-m="fix"><span class="bn">এলোমেলো লেখা ঠিক করুন</span><span class="en">Fix scrambled text</span></button>
+  </div>
+
+  <label for="bjIn"><span class="bn">এখানে লেখা দিন</span><span class="en">Paste your text here</span></label>
+  <textarea id="bjIn" spellcheck="false" autocomplete="off"></textarea>
+
+  <div class="bar">
+    <button type="button" class="btn" id="bjSwap"><span class="bn">⇅ অদলবদল</span><span class="en">⇅ Swap</span></button>
+    <button type="button" class="btn" id="bjClear"><span class="bn">মুছুন</span><span class="en">Clear</span></button>
+  </div>
+
+  <label for="bjOut"><span class="bn">ফলাফল</span><span class="en">Result</span></label>
+  <textarea id="bjOut" readonly spellcheck="false"></textarea>
+  <div class="bar">
+    <button type="button" class="btn btn-primary" id="bjCopy"><span class="bn">কপি করুন</span><span class="en">Copy</span></button>
+  </div>
+  <p class="status" id="bjStatus" aria-live="polite"></p>
+
+  <p class="note" id="noteB"><span class="bn">বিজয় লেখা সাধারণ ফন্টে এলোমেলো চিহ্নের মতো দেখায়, এটা স্বাভাবিক। MS Word বা Photoshop-এ পেস্ট করে ফন্ট SutonnyMJ দিলে ঠিকঠাক দেখাবে।</span><span class="en">Bijoy text looks like random symbols in normal fonts, which is expected. Paste it into MS Word or Photoshop and set the font to SutonnyMJ.</span></p>
+  <p class="note"><span class="bn">বিজয় → ইউনিকোড করলে লেখার ভেতরের ইংরেজি শব্দও বাংলা অক্ষরে বদলে যায়, তাই শুধু বিজয় অংশটুকু দিন। খুব জটিল যুক্তাক্ষরে কখনো সামান্য গরমিল হতে পারে, কনভার্টের পর একবার চোখ বুলিয়ে নিন।</span><span class="en">Converting Bijoy → Unicode also turns English words in the same text into Bangla letters, so give only the Bijoy part. Very rare conjuncts may come out slightly off, so skim the result once.</span></p>
+  <p class="note"><span class="bn">“এলোমেলো ঠিক করুন”: বিজয় কোড ধরা পড়লে ইউনিকোডে আনে; ইউনিকোড লেখায় ি, ে, ৈ ভুল জায়গায় বসলে বা অা, ো ভেঙে গেলে সেগুলো ঠিক করে।</span><span class="en">“Fix scrambled text”: if Bijoy codes are detected they are converted to Unicode; in Unicode text it repairs misplaced ি ে ৈ, broken অা and split ো.</span></p>
+</section>
+
+<!-- ===================== ছবি কনভার্টার ===================== -->
+<section class="card tool" id="tool-image">
+  <h2><span class="bn">ছবি কনভার্টার</span><span class="en">Image converter</span></h2>
+  <p class="meta" style="margin-top:6px"><span class="bn">PNG, JPG ও WebP-তে বদলান, চাইলে ছোটও করুন।</span><span class="en">Convert to PNG, JPG or WebP, and resize if you like.</span></p>
+
+  <label class="drop" for="imgFile" style="margin-top:14px">
+    <input id="imgFile" type="file" accept="image/*" multiple>
+    <span class="bn">ছবি বাছাই করতে এখানে ট্যাপ করুন (একসাথে একাধিক হবে)</span><span class="en">Tap here to choose images (several at once is fine)</span>
+  </label>
+
+  <div class="row">
+    <div>
+      <label for="imgFmt"><span class="bn">কোন ফরম্যাটে</span><span class="en">Output format</span></label>
+      <select id="imgFmt">
+        <option value="image/png">PNG</option>
+        <option value="image/jpeg">JPG</option>
+        <option value="image/webp" selected>WebP</option>
+      </select>
+    </div>
+    <div>
+      <label for="imgW"><span class="bn">সর্বোচ্চ প্রস্থ (px), ফাঁকা = আসল মাপ</span><span class="en">Max width (px), empty = original</span></label>
+      <input id="imgW" type="number" inputmode="numeric" min="16" max="8000" placeholder="1280">
+    </div>
+  </div>
+
+  <div id="qWrap">
+    <label for="imgQ"><span class="bn">কোয়ালিটি</span><span class="en">Quality</span>: <b id="imgQv">85</b>%</label>
+    <input id="imgQ" type="range" min="40" max="100" value="85">
+  </div>
+
+  <div class="bar"><button type="button" class="btn btn-primary" id="imgGo"><span class="bn">কনভার্ট করুন</span><span class="en">Convert</span></button></div>
+  <p class="status" id="imgStatus" aria-live="polite"></p>
+  <div class="results" id="imgRes"></div>
+</section>
+
+<!-- ===================== ইউনিট কনভার্টার ===================== -->
+<section class="card tool" id="tool-unit">
+  <h2><span class="bn">ইউনিট কনভার্টার</span><span class="en">Unit converter</span></h2>
+
+  <label for="uCat"><span class="bn">ধরন</span><span class="en">Type</span></label>
+  <select id="uCat"></select>
+
+  <label for="uVal"><span class="bn">সংখ্যা</span><span class="en">Value</span></label>
+  <input id="uVal" type="text" inputmode="decimal" value="1" autocomplete="off">
+
+  <div class="row">
+    <div><label for="uFrom"><span class="bn">কোথা থেকে</span><span class="en">From</span></label><select id="uFrom"></select></div>
+    <div><label for="uTo"><span class="bn">কোথায়</span><span class="en">To</span></label><select id="uTo"></select></div>
+  </div>
+  <div class="bar"><button type="button" class="btn" id="uSwap"><span class="bn">⇄ অদলবদল</span><span class="en">⇄ Swap</span></button></div>
+
+  <p class="big grad-text" id="uOut"></p>
+  <div class="all" id="uAll"></div>
+  <p class="note" id="uNote"></p>
+</section>
+
+<script src="{{ '/assets/js/bijoy.js' | relative_url }}"></script>
+{% raw %}
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var isEn = function () { return document.documentElement.lang === 'en'; };
+  var t = function (bn, en) { return isEn() ? en : bn; };
+  var BN = '০১২৩৪৫৬৭৮৯';
+  var toAscii = function (s) { return String(s).replace(/[০-৯]/g, function (d) { return BN.indexOf(d); }); };
+
+  /* ---------- ট্যাব ---------- */
+  var tabs = [].slice.call(document.querySelectorAll('#tabs .tab'));
+  function showTab(name) {
+    if (!$('tool-' + name)) name = 'bijoy';
+    tabs.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-t') === name); });
+    ['bijoy', 'image', 'unit'].forEach(function (n) { $('tool-' + n).classList.toggle('on', n === name); });
+    try { history.replaceState(null, '', '#' + name); } catch (e) {}
+  }
+  tabs.forEach(function (b) { b.addEventListener('click', function () { showTab(b.getAttribute('data-t')); }); });
+  showTab((location.hash || '').slice(1));
+  window.addEventListener('hashchange', function () { showTab((location.hash || '').slice(1)); });
+
+  /* ---------- কপি ---------- */
+  function copyText(txt, done) {
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta); done(ok);
+    }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(function () { done(true); }, fallback);
+    else fallback();
+  }
+
+  /* ---------- ইউনিকোড ↔ বিজয় ---------- */
+  var mode = 'u2b', lastMsg = null;
+  var inEl = $('bjIn'), outEl = $('bjOut'), stEl = $('bjStatus');
+  var modeBtns = [].slice.call(document.querySelectorAll('#modes .mode'));
+
+  function say(bn, en) { lastMsg = [bn, en]; stEl.textContent = t(bn, en); }
+
+  function runBijoy() {
+    var v = inEl.value, r = '';
+    lastMsg = null; stEl.textContent = '';
+    if (!window.Bijoy) { say('কনভার্টার ফাইল (bijoy.js) লোড হয়নি।', 'Converter file (bijoy.js) did not load.'); return; }
+    if (mode === 'u2b') r = Bijoy.toBijoy(v);
+    else if (mode === 'b2u') r = Bijoy.toUnicode(v);
+    else {
+      var f = Bijoy.fix(v); r = f.text;
+      if (v.trim()) {
+        if (f.detected === 'bijoy') say('বিজয় কোড ধরা পড়েছে, ইউনিকোডে বদলে ঠিক করা হয়েছে।', 'Bijoy codes detected and converted to Unicode.');
+        else if (f.changed) say('ইউনিকোড লেখার এলোমেলো অংশ ঠিক করা হয়েছে।', 'Scrambled parts of the Unicode text were repaired.');
+        else say('কোনো সমস্যা পাওয়া যায়নি।', 'No problems found.');
+      }
+    }
+    outEl.value = r;
+  }
+
+  function setMode(m) {
+    mode = m;
+    modeBtns.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-m') === m); });
+    $('bjSwap').style.display = m === 'fix' ? 'none' : '';
+    $('noteB').style.display = m === 'b2u' ? 'none' : '';
+    inEl.placeholder = m === 'u2b' ? t('যেমন: আমার সোনার বাংলা', 'e.g. আমার সোনার বাংলা')
+                     : m === 'b2u' ? t('যেমন: Avgvi †mvbvi evsjv', 'e.g. Avgvi †mvbvi evsjv')
+                     : t('এলোমেলো লেখাটা পেস্ট করুন', 'Paste the scrambled text');
+    runBijoy();
+  }
+  modeBtns.forEach(function (b) { b.addEventListener('click', function () { setMode(b.getAttribute('data-m')); }); });
+  inEl.addEventListener('input', runBijoy);
+
+  $('bjClear').addEventListener('click', function () { inEl.value = ''; outEl.value = ''; stEl.textContent = ''; inEl.focus(); });
+  $('bjSwap').addEventListener('click', function () {
+    var o = outEl.value; if (!o) return;
+    inEl.value = o; setMode(mode === 'u2b' ? 'b2u' : 'u2b');
+  });
+  $('bjCopy').addEventListener('click', function () {
+    if (!outEl.value) { say('কপি করার মতো কিছু নেই।', 'Nothing to copy.'); return; }
+    copyText(outEl.value, function (ok) { ok ? say('কপি হয়েছে ✓', 'Copied ✓') : say('কপি হয়নি, ফলাফলে চেপে ধরে নিজে কপি করুন।', 'Copy failed, long-press the result to copy manually.'); });
+  });
+
+  /* ---------- ছবি কনভার্টার ---------- */
+  var fileEl = $('imgFile'), fmtEl = $('imgFmt'), qEl = $('imgQ'), resEl = $('imgRes'), imgSt = $('imgStatus');
+  var urls = [];
+  var EXT = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp' };
+  function kb(n) { return n >= 1048576 ? (n / 1048576).toFixed(2) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB'; }
+  function syncQ() { $('qWrap').style.display = fmtEl.value === 'image/png' ? 'none' : ''; $('imgQv').textContent = qEl.value; }
+  fmtEl.addEventListener('change', syncQ); qEl.addEventListener('input', syncQ); syncQ();
+
+  function loadImg(file) {
+    return new Promise(function (res, rej) {
+      var u = URL.createObjectURL(file), im = new Image();
+      im.onload = function () { URL.revokeObjectURL(u); res(im); };
+      im.onerror = function () { URL.revokeObjectURL(u); rej(new Error('decode')); };
+      im.src = u;
+    });
+  }
+  function convertOne(file, type, q, maxW) {
+    return loadImg(file).then(function (im) {
+      var w = im.naturalWidth, h = im.naturalHeight;
+      if (maxW && w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+      var c = document.createElement('canvas'); c.width = w; c.height = h;
+      var g = c.getContext('2d');
+      if (type === 'image/jpeg') { g.fillStyle = '#fff'; g.fillRect(0, 0, w, h); }
+      g.drawImage(im, 0, 0, w, h);
+      return new Promise(function (res, rej) {
+        c.toBlob(function (b) { b ? res(b) : rej(new Error('encode')); }, type, q);
+      });
+    });
+  }
+  $('imgGo').addEventListener('click', function () {
+    var files = [].slice.call(fileEl.files || []);
+    urls.forEach(function (u) { URL.revokeObjectURL(u); }); urls = []; resEl.innerHTML = '';
+    if (!files.length) { imgSt.textContent = t('আগে ছবি বাছাই করুন।', 'Choose images first.'); return; }
+    var type = fmtEl.value, q = (+qEl.value) / 100, maxW = parseInt(toAscii(($('imgW').value || '').trim()), 10) || 0;
+    var done = 0, bad = 0;
+    imgSt.textContent = t('কনভার্ট হচ্ছে…', 'Converting…');
+    files.reduce(function (p, f) {
+      return p.then(function () {
+        return convertOne(f, type, q, maxW).then(function (blob) {
+          done++;
+          var u = URL.createObjectURL(blob); urls.push(u);
+          var name = f.name.replace(/\.[^.]+$/, '') + '.' + EXT[type];
+          var row = document.createElement('div'); row.className = 'res';
+          var im = document.createElement('img'); im.src = u; im.alt = '';
+          var info = document.createElement('div'); info.className = 'info';
+          var b = document.createElement('b'); b.textContent = name;
+          var s = document.createElement('span'); s.className = 'meta'; s.textContent = kb(f.size) + ' → ' + kb(blob.size);
+          if (blob.type && blob.type !== type) s.textContent += t(' (এই ব্রাউজার এই ফরম্যাট দেয় না, ' + blob.type.replace('image/', '').toUpperCase() + ' হয়েছে)', ' (browser lacks this format, got ' + blob.type.replace('image/', '').toUpperCase() + ')');
+          info.appendChild(b); info.appendChild(s);
+          var a = document.createElement('a'); a.className = 'btn'; a.href = u; a.download = name; a.textContent = t('ডাউনলোড', 'Download');
+          row.appendChild(im); row.appendChild(info); row.appendChild(a); resEl.appendChild(row);
+        }, function () {
+          bad++;
+          var row = document.createElement('div'); row.className = 'res';
+          row.innerHTML = '<div class="info"><b></b><span class="meta"></span></div>';
+          row.querySelector('b').textContent = f.name;
+          row.querySelector('.meta').textContent = t('এই ছবি খোলা যায়নি (HEIC বা নষ্ট ফাইল হতে পারে)।', 'Could not open this image (maybe HEIC or a damaged file).');
+          resEl.appendChild(row);
+        });
+      });
+    }, Promise.resolve()).then(function () {
+      imgSt.textContent = t(done + 'টি ছবি তৈরি হয়েছে', done + ' image(s) ready') + (bad ? t(', ' + bad + 'টি হয়নি', ', ' + bad + ' failed') : '');
+    });
+  });
+
+  /* ---------- ইউনিট কনভার্টার ---------- */
+  // f = বেস ইউনিটে গুণক (তাপমাত্রা আলাদা)
+  var CATS = [
+    { id: 'len', bn: 'দৈর্ঘ্য', en: 'Length', u: [
+      ['m', 'মিটার', 'Meter', 1], ['km', 'কিলোমিটার', 'Kilometer', 1000], ['cm', 'সেন্টিমিটার', 'Centimeter', 0.01], ['mm', 'মিলিমিটার', 'Millimeter', 0.001],
+      ['in', 'ইঞ্চি', 'Inch', 0.0254], ['ft', 'ফুট', 'Foot', 0.3048], ['yd', 'গজ', 'Yard', 0.9144], ['hat', 'হাত', 'Hat (cubit, 18 in)', 0.4572], ['mi', 'মাইল', 'Mile', 1609.344]] },
+    { id: 'wt', bn: 'ওজন', en: 'Weight', u: [
+      ['kg', 'কেজি', 'Kilogram', 1], ['g', 'গ্রাম', 'Gram', 0.001], ['mg', 'মিলিগ্রাম', 'Milligram', 0.000001], ['lb', 'পাউন্ড', 'Pound', 0.45359237], ['oz', 'আউন্স', 'Ounce', 0.028349523125],
+      ['bhori', 'ভরি / তোলা', 'Bhori / Tola', 0.0116638], ['ser', 'সের', 'Ser (seer)', 0.93310], ['mon', 'মণ', 'Mon (maund)', 37.3242], ['ton', 'মেট্রিক টন', 'Metric ton', 1000]] },
+    { id: 'tmp', bn: 'তাপমাত্রা', en: 'Temperature', u: [['c', '°সেলসিয়াস', '°Celsius'], ['f', '°ফারেনহাইট', '°Fahrenheit'], ['k', 'কেলভিন', 'Kelvin']] },
+    { id: 'area', bn: 'ক্ষেত্রফল', en: 'Area', note: ['শতাংশ = ৪৩৫.৬ বর্গফুট। কাঠা ও বিঘা অঞ্চলভেদে ভিন্ন হয়; এখানে ধরা হয়েছে ১ কাঠা = ৭২০ বর্গফুট, ১ বিঘা = ২০ কাঠা।', 'Shotangsho (decimal) = 435.6 sq ft. Katha and bigha vary by region; here 1 katha = 720 sq ft and 1 bigha = 20 katha.'], u: [
+      ['sqm', 'বর্গমিটার', 'Square meter', 1], ['sqft', 'বর্গফুট', 'Square foot', 0.09290304], ['sqyd', 'বর্গগজ', 'Square yard', 0.83612736], ['sqkm', 'বর্গকিলোমিটার', 'Square km', 1000000],
+      ['ha', 'হেক্টর', 'Hectare', 10000], ['acre', 'একর', 'Acre', 4046.8564224], ['sho', 'শতাংশ', 'Shotangsho (decimal)', 40.468564224], ['katha', 'কাঠা', 'Katha', 66.8901888], ['bigha', 'বিঘা', 'Bigha', 1337.803776]] },
+    { id: 'vol', bn: 'আয়তন', en: 'Volume', u: [
+      ['l', 'লিটার', 'Liter', 1], ['ml', 'মিলিলিটার', 'Milliliter', 0.001], ['m3', 'ঘনমিটার', 'Cubic meter', 1000], ['gal', 'গ্যালন (US)', 'Gallon (US)', 3.785411784], ['cup', 'কাপ (US)', 'Cup (US)', 0.2365882365], ['tbsp', 'টেবিল চামচ (US)', 'Tablespoon (US)', 0.01478676478125], ['tsp', 'চা চামচ (US)', 'Teaspoon (US)', 0.00492892159375]] },
+    { id: 'spd', bn: 'গতি', en: 'Speed', u: [
+      ['ms', 'মিটার/সেকেন্ড', 'm/s', 1], ['kmh', 'কিমি/ঘণ্টা', 'km/h', 0.2777777778], ['mph', 'মাইল/ঘণ্টা', 'mph', 0.44704], ['kn', 'নট', 'Knot', 0.5144444444]] },
+    { id: 'data', bn: 'ডেটা', en: 'Data', u: [
+      ['b', 'বাইট', 'Byte', 1], ['kb', 'কিলোবাইট (KB)', 'Kilobyte (KB)', 1024], ['mb', 'মেগাবাইট (MB)', 'Megabyte (MB)', 1048576], ['gb', 'গিগাবাইট (GB)', 'Gigabyte (GB)', 1073741824], ['tb', 'টেরাবাইট (TB)', 'Terabyte (TB)', 1099511627776], ['bit', 'বিট', 'Bit', 0.125]] }
+  ];
+  var catEl = $('uCat'), valEl = $('uVal'), fromEl = $('uFrom'), toEl = $('uTo');
+  var nameOf = function (u) { return isEn() ? u[2] : u[1]; };
+  function curCat() { return CATS[+catEl.value] || CATS[0]; }
+  function fmt(n) {
+    if (!isFinite(n)) return '—';
+    if (n !== 0 && (Math.abs(n) >= 1e15 || Math.abs(n) < 1e-9)) return n.toExponential(4);
+    return new Intl.NumberFormat(isEn() ? 'en-US' : 'bn-BD', { maximumSignificantDigits: 9 }).format(n);
+  }
+  function conv(cat, v, from, to) {
+    if (cat.id === 'tmp') {
+      var c = from === 'c' ? v : from === 'f' ? (v - 32) * 5 / 9 : v - 273.15;
+      return to === 'c' ? c : to === 'f' ? c * 9 / 5 + 32 : c + 273.15;
+    }
+    var f = 1, tt = 1;
+    cat.u.forEach(function (u) { if (u[0] === from) f = u[3]; if (u[0] === to) tt = u[3]; });
+    return v * f / tt;
+  }
+  function fillCats() {
+    var keep = catEl.value || '0';
+    catEl.innerHTML = '';
+    CATS.forEach(function (c, i) { var o = document.createElement('option'); o.value = i; o.textContent = isEn() ? c.en : c.bn; catEl.appendChild(o); });
+    catEl.value = keep;
+  }
+  function fillUnits(reset) {
+    var cat = curCat(), kf = fromEl.value, kt = toEl.value;
+    [fromEl, toEl].forEach(function (s) {
+      s.innerHTML = '';
+      cat.u.forEach(function (u) { var o = document.createElement('option'); o.value = u[0]; o.textContent = nameOf(u); s.appendChild(o); });
+    });
+    var ok = function (k) { return cat.u.some(function (u) { return u[0] === k; }); };
+    fromEl.value = !reset && ok(kf) ? kf : cat.u[0][0];
+    toEl.value = !reset && ok(kt) ? kt : cat.u[1][0];
+  }
+  function calc() {
+    var cat = curCat(), raw = toAscii(valEl.value).replace(/,/g, '').trim(), v = parseFloat(raw);
+    if (raw === '' || isNaN(v)) { $('uOut').textContent = '—'; $('uAll').innerHTML = ''; }
+    else {
+      var from = fromEl.value, to = toEl.value, nm = function (k) { return nameOf(cat.u.filter(function (u) { return u[0] === k; })[0]); };
+      $('uOut').textContent = fmt(v) + ' ' + nm(from) + ' = ' + fmt(conv(cat, v, from, to)) + ' ' + nm(to);
+      var all = $('uAll'); all.innerHTML = '';
+      cat.u.forEach(function (u) {
+        if (u[0] === from) return;
+        var d = document.createElement('div'), b = document.createElement('b');
+        b.textContent = fmt(conv(cat, v, from, u[0])); d.appendChild(b); d.appendChild(document.createTextNode(' ' + nameOf(u))); all.appendChild(d);
+      });
+    }
+    $('uNote').textContent = cat.note ? (isEn() ? cat.note[1] : cat.note[0]) : '';
+  }
+  catEl.addEventListener('change', function () { fillUnits(true); calc(); });
+  [valEl, fromEl, toEl].forEach(function (e) { e.addEventListener('input', calc); e.addEventListener('change', calc); });
+  $('uSwap').addEventListener('click', function () { var a = fromEl.value; fromEl.value = toEl.value; toEl.value = a; calc(); });
+  fillCats(); fillUnits(true); calc();
+
+  /* ---------- ভাষা বদলালে ডায়নামিক লেখা নতুন করে ---------- */
+  new MutationObserver(function () {
+    var keep = lastMsg;
+    fillCats(); fillUnits(false); calc(); setMode(mode);
+    if (keep) say(keep[0], keep[1]);
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+  setMode('u2b');
+})();
+</script>
+{% endraw %}
