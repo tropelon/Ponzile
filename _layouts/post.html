@@ -1,0 +1,45 @@
+---
+layout: default
+---
+<article>
+  <a class="meta" href="{{ '/explore/' | relative_url }}">← <span class="bn">এক্সপ্লোর</span><span class="en">Explore</span></a>
+
+  <h1 class="post-caption" style="margin-top:10px">{{ page.title }}</h1>
+  <p class="meta" style="margin-top:8px">{{ page.date | date: "%d-%m-%Y" }}{% if page.author %} · {{ page.author }}{% endif %}</p>
+
+  {% if page.tags.size > 0 %}
+  <p style="margin-top:10px">{% for t in page.tags %}<a class="tag" href="{{ '/explore/' | relative_url }}?tag={{ t | url_encode }}">{{ t }}</a>{% endfor %}</p>
+  {% endif %}
+
+  {% if page.image %}
+    {% if page.image contains '://' %}{% assign img = page.image %}{% else %}{% assign img = page.image | relative_url %}{% endif %}
+    <img src="{{ img }}" alt="{{ page.title | escape }}" style="display:block;width:100%;height:auto;border-radius:14px;margin-top:18px">
+  {% endif %}
+
+  {% if page.video %}
+    {% assign v = page.video %}
+    {% assign vid = '' %}
+    {% if v contains '.mp4' or v contains '.webm' %}
+      {% if v contains '://' %}{% assign vsrc = v %}{% else %}{% assign vsrc = v | relative_url %}{% endif %}
+      <video controls preload="metadata" playsinline src="{{ vsrc }}" style="display:block;width:100%;border-radius:14px;margin-top:18px"></video>
+    {% else %}
+      {% if v contains 'youtu.be/' %}{% assign vid = v | split: 'youtu.be/' | last | split: '?' | first %}
+      {% elsif v contains '/shorts/' %}{% assign vid = v | split: '/shorts/' | last | split: '?' | first %}
+      {% elsif v contains '/embed/' %}{% assign vid = v | split: '/embed/' | last | split: '?' | first %}
+      {% elsif v contains 'v=' %}{% assign vid = v | split: 'v=' | last | split: '&' | first %}
+      {% endif %}
+      {% if vid != '' %}
+      <div class="video-wrap" style="margin-top:18px"><iframe src="https://www.youtube-nocookie.com/embed/{{ vid | escape }}" title="{{ page.title | escape }}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {%- comment -%} বডির ভেতরের /assets/... ছবি ও ফাইলের লিংকে baseurl বসায় (baseurl ফাঁকা হলে কিছু বদলায় না) {%- endcomment -%}
+  {% capture fix_src %}src="{{ site.baseurl }}/assets/{% endcapture %}
+  {% capture fix_href %}href="{{ site.baseurl }}/assets/{% endcapture %}
+  <div class="post-body">
+    {{ content | replace: 'src="/assets/', fix_src | replace: 'href="/assets/', fix_href }}
+  </div>
+
+  <p style="margin-top:28px"><a class="btn" href="{{ '/explore/' | relative_url }}"><span class="bn">আরও পোস্ট দেখুন</span><span class="en">More posts</span></a></p>
+</article>
