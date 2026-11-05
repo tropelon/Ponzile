@@ -1,10 +1,10 @@
 title: tropelon
 description: কমিউনিটি পোস্ট ও কনভার্টার টুলস | Community posts and converter tools
 lang: bn
-url: "https://tropelon.github.io"
-# কাস্টম ডোমেইন চালু হলে baseurl: "" করবেন
+url: "https://tropelon.2bd.net"
 baseurl: ""
 timezone: Asia/Dhaka
+future: true
 markdown: kramdown
 permalink: /posts/:title/
 plugins:
