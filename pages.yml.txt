@@ -1,0 +1,81 @@
+# tropelon — Pages CMS (পোস্ট এডিটর) কনফিগ
+# এই ফাইল শুধু রিপোর মালিক (GitHub অ্যাকাউন্ট) বদলাতে পারবেন, ইমেইলে আমন্ত্রিত এডিটররা পারবেন না।
+
+media:
+  - name: images
+    label: ছবি
+    input: assets/uploads/images        # ছবি রিপোর এই ফোল্ডারে জমা হবে
+    output: /assets/uploads/images      # পোস্টের ভেতরে এই ঠিকানা লেখা হবে
+    rename: safe                        # ফাইলের নাম নিরাপদ করে নেয় (ফাঁকা জায়গা, বিশেষ চিহ্ন বাদ)
+    extensions: [png, jpg, jpeg, webp, gif]
+
+content:
+  - name: posts
+    label: পোস্ট
+    type: collection
+    path: _posts
+    format: yaml-frontmatter
+    filename:
+      template: "{year}-{month}-{day}-{year}{month}{day}-{hour}{minute}{second}.md"
+      field: false                      # ফাইলের নাম নিজে তৈরি হয়, এডিটরকে ভাবতে হয় না
+    view:
+      fields: [title, date, tags]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: ক্যাপশন
+        type: string
+        required: true
+        description: পোস্টের বড় ও বোল্ড শিরোনাম হিসেবে দেখা যাবে।
+        options:
+          maxlength: 150
+
+      - name: date
+        label: তারিখ ও সময়
+        type: date
+        required: true
+        options:
+          time: true
+          format: "yyyy-MM-dd HH:mm"
+
+      - name: image
+        label: কভার ছবি
+        type: image
+        description: পোস্টের উপরে আর কার্ডে দেখা যাবে। ফাঁকা রাখলেও চলবে।
+        options:
+          media: images
+
+      - name: video
+        label: ভিডিও লিংক
+        type: string
+        description: YouTube লিংক বসান (youtu.be/... বা youtube.com/watch?v=... বা shorts)। ফাঁকা রাখলেও চলবে।
+
+      - name: tags
+        label: ট্যাগ
+        type: string
+        list: true
+        description: এক্সপ্লোর পেজে খোঁজার জন্য। এক বা দুই শব্দের ছোট ট্যাগ দিন।
+
+      - name: description
+        label: সংক্ষেপ
+        type: text
+        description: এক-দুই লাইনের সারকথা। কার্ডে ও সার্চ ইঞ্জিনে দেখা যাবে।
+        options:
+          maxlength: 200
+
+      - name: author
+        label: লেখকের নাম
+        type: string
+
+      - name: body
+        label: লেখা
+        type: rich-text
+        description: সাধারণ লেখা এখানে। টুলবার থেকে বোল্ড, লিংক, তালিকা ও ছবি যোগ করা যাবে।
+        options:
+          format: markdown
+          media: images
+          rename: safe
