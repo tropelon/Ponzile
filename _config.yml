@@ -14,8 +14,10 @@ plugins:
 defaults:
   - scope:
       path: ""
-      type: "posts"
+      type: "pages"
     values:
+      image: /assets/og.png
+  
       layout: post
 exclude:
   - README.md
