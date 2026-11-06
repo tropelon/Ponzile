@@ -1,0 +1,147 @@
+---
+layout: default
+title: Services
+description: ডকুমেন্ট ও PDF, স্প্রেডশিট, ভিডিও স্ক্রিপ্ট, গ্রাফিক্স ডিজাইন, ভিডিও এডিটিং ও ছোট ওয়েবসাইট | Documents, spreadsheets, video scripts, graphic design, video editing and small websites
+permalink: /services/
+---
+<style>
+  .svc-hero{padding:28px 0 6px}
+  .svc-hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800}
+  .svc:hover{transform:none;border-color:var(--line)}
+  .svc{display:flex;flex-direction:column}
+  .svc .ico{font-size:1.6rem;line-height:1;margin-bottom:10px}
+  .svc h3{font-size:1.1rem;font-weight:800;margin-bottom:4px}
+  .svc ul{margin:12px 0 16px;padding-left:1.2em;color:var(--muted);font-size:.92rem}
+  .svc li{margin:4px 0}
+  .svc .go{margin-top:auto;align-self:flex-start;padding:9px 18px;font-size:.88rem}
+  .steps{counter-reset:s;display:grid;gap:12px;margin-top:6px;padding:0}
+  .steps li{list-style:none;position:relative;padding:14px 16px 14px 56px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+  .steps li b{display:block;margin-bottom:2px}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;color:#fff;background:var(--grad)}
+  .rules{display:grid;gap:10px;padding:0;margin-top:6px}
+  .rules li{list-style:none;padding:12px 16px;border-left:3px solid var(--accent);background:rgba(255,255,255,.03);border-radius:0 12px 12px 0;color:var(--muted)}
+</style>
+
+<section class="svc-hero">
+  <h1 class="grad-text"><span class="bn">সার্ভিস</span><span class="en">Services</span></h1>
+  <p class="lead">
+    <span class="bn">ডকুমেন্ট, স্প্রেডশিট, ভিডিও স্ক্রিপ্ট, গ্রাফিক্স আর ভিডিও এডিটিংয়ের কাজ। কী কী করা যায় আর কীভাবে কাজ হয়, সব এখানে।</span>
+    <span class="en">Documents, spreadsheets, video scripts, graphics and video editing. Here is what can be done and how the work goes.</span>
+  </p>
+</section>
+
+<div class="grid" style="margin-top:22px">
+
+  <div class="card svc">
+    <div class="ico">📄</div>
+    <h3><span class="bn">ডকুমেন্ট ও PDF</span><span class="en">Documents &amp; PDF</span></h3>
+    <p class="meta"><span class="bn">Word ও PDF ফাইল গোছানো, ফরম্যাটিং আর রূপান্তর।</span><span class="en">Organising, formatting and converting Word and PDF files.</span></p>
+    <ul>
+      <li><span class="bn">Word ফাইলের ফরম্যাটিং ও পেজ সাজানো</span><span class="en">Word formatting and page layout</span></li>
+      <li><span class="bn">PDF তৈরি ও ফরম্যাট বদল</span><span class="en">PDF creation and conversion</span></li>
+      <li><span class="bn">বাংলা টাইপিং</span><span class="en">Bangla typing</span></li>
+      <li><span class="bn">ইউনিকোড ↔ বিজয় লেখা রূপান্তর</span><span class="en">Unicode ↔ Bijoy text conversion</span></li>
+    </ul>
+    <a class="btn go" href="{{ '/contact/?service=documents' | relative_url }}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
+  </div>
+
+  <div class="card svc">
+    <div class="ico">📊</div>
+    <h3><span class="bn">স্প্রেডশিট</span><span class="en">Spreadsheets</span></h3>
+    <p class="meta"><span class="bn">হিসাব আর ডেটা সাজানোর শিট।</span><span class="en">Sheets for calculations and organised data.</span></p>
+    <ul>
+      <li><span class="bn">ডেটা এন্ট্রি ও গোছানো শিট</span><span class="en">Data entry and tidy sheets</span></li>
+      <li><span class="bn">ফর্মুলা ও স্বয়ংক্রিয় হিসাব</span><span class="en">Formulas and automatic calculation</span></li>
+      <li><span class="bn">দৈনন্দিন হিসাবের ট্র্যাকার</span><span class="en">Everyday record trackers</span></li>
+      <li><span class="bn">Excel বা Google Sheets-এ</span><span class="en">In Excel or Google Sheets</span></li>
+    </ul>
+    <a class="btn go" href="{{ '/contact/?service=spreadsheet' | relative_url }}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
+  </div>
+
+  <div class="card svc">
+    <div class="ico">🎬</div>
+    <h3><span class="bn">ভিডিও স্ক্রিপ্ট লেখা</span><span class="en">Video script writing</span></h3>
+    <p class="meta"><span class="bn">ইউটিউব ভিডিওর পূর্ণ স্ক্রিপ্ট।</span><span class="en">Complete scripts for YouTube videos.</span></p>
+    <ul>
+      <li><span class="bn">ডকুমেন্টারি ও শিক্ষামূলক ভিডিও</span><span class="en">Documentary and educational videos</span></li>
+      <li><span class="bn">গল্প ও হরর বর্ণনা</span><span class="en">Story and horror narration</span></li>
+      <li><span class="bn">ভয়েসওভারের উপযোগী করে লেখা</span><span class="en">Written to suit voiceover</span></li>
+      <li><span class="bn">বাংলা বা ইংরেজিতে</span><span class="en">In Bangla or English</span></li>
+    </ul>
+    <a class="btn go" href="{{ '/contact/?service=script' | relative_url }}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
+  </div>
+
+  <div class="card svc">
+    <div class="ico">🎨</div>
+    <h3><span class="bn">গ্রাফিক্স ডিজাইন</span><span class="en">Graphic design</span></h3>
+    <p class="meta"><span class="bn">অনলাইনে ব্যবহারের ডিজাইন।</span><span class="en">Designs for online use.</span></p>
+    <ul>
+      <li><span class="bn">ইউটিউব থাম্বনেইল</span><span class="en">YouTube thumbnails</span></li>
+      <li><span class="bn">সোশ্যাল মিডিয়া পোস্ট ও ব্যানার</span><span class="en">Social media posts and banners</span></li>
+      <li><span class="bn">পোস্টার ও ফ্লায়ার</span><span class="en">Posters and flyers</span></li>
+    </ul>
+    <a class="btn go" href="{{ '/contact/?service=design' | relative_url }}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
+  </div>
+
+  <div class="card svc">
+    <div class="ico">✂️</div>
+    <h3><span class="bn">ভিডিও এডিটিং</span><span class="en">Video editing</span></h3>
+    <p class="meta"><span class="bn">কাঁচা ফুটেজ থেকে প্রকাশের উপযোগী ভিডিও।</span><span class="en">From raw footage to a video ready to publish.</span></p>
+    <ul>
+      <li><span class="bn">কাটছাঁট ও ক্লিপ সাজানো</span><span class="en">Cutting and arranging clips</span></li>
+      <li><span class="bn">সাবটাইটেল ও ব্যাকগ্রাউন্ড মিউজিক</span><span class="en">Subtitles and background music</span></li>
+      <li><span class="bn">ইউটিউব ও সোশ্যাল মিডিয়ার জন্য এডিট</span><span class="en">Edits for YouTube and social media</span></li>
+    </ul>
+    <a class="btn go" href="{{ '/contact/?service=video' | relative_url }}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
+  </div>
+
+  <div class="card svc">
+    <div class="ico">🌐</div>
+    <h3><span class="bn">ছোট ওয়েবসাইট</span><span class="en">Small websites</span></h3>
+    <p class="meta"><span class="bn">সহজ আর দ্রুত লোড হওয়া সাইট।</span><span class="en">Simple, fast-loading sites.</span></p>
+    <ul>
+      <li><span class="bn">পোর্টফোলিও বা ল্যান্ডিং পেজ</span><span class="en">Portfolio or landing pages</span></li>
+      <li><span class="bn">মোবাইলে সুন্দর দেখায় এমন ডিজাইন</span><span class="en">Mobile-friendly design</span></li>
+      <li><span class="bn">GitHub Pages-এ বিনামূল্যে হোস্টিং</span><span class="en">Free hosting on GitHub Pages</span></li>
+      <li><span class="bn">এই সাইটটাই তার একটা নমুনা</span><span class="en">This very site is an example</span></li>
+    </ul>
+    <a class="btn go" href="{{ '/contact/?service=website' | relative_url }}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
+  </div>
+
+</div>
+
+<h2 class="section-title"><span class="bn">কীভাবে কাজ হয়</span><span class="en">How the work goes</span></h2>
+<ol class="steps">
+  <li>
+    <b><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></b>
+    <span class="meta"><span class="bn">যোগাযোগ পেজের ফর্মে কী লাগবে আর কবে লাগবে লিখে জানান।</span><span class="en">Use the form on the contact page to say what you need and by when.</span></span>
+  </li>
+  <li>
+    <b><span class="bn">আলোচনা ও পরিধি ঠিক করা</span><span class="en">Discuss and agree the scope</span></b>
+    <span class="meta"><span class="bn">কাজের পরিধি, সময় আর মূল্য ইমেইলে লিখিতভাবে ঠিক হয়।</span><span class="en">Scope, timing and price are agreed in writing by email.</span></span>
+  </li>
+  <li>
+    <b><span class="bn">কাজ শুরু</span><span class="en">Work begins</span></b>
+    <span class="meta"><span class="bn">শর্ত ঠিক হওয়ার পরই কাজ শুরু হয়, আর কাজের মাঝে অগ্রগতি জানানো হয়।</span><span class="en">Work starts once terms are agreed, with progress updates along the way.</span></span>
+  </li>
+  <li>
+    <b><span class="bn">যাচাই ও সংশোধন</span><span class="en">Review and revisions</span></b>
+    <span class="meta"><span class="bn">আপনি দেখে মতামত দিন, সেই অনুযায়ী সংশোধন করা হয়।</span><span class="en">You review it and give feedback, and revisions follow.</span></span>
+  </li>
+  <li>
+    <b><span class="bn">চূড়ান্ত ডেলিভারি</span><span class="en">Final delivery</span></b>
+    <span class="meta"><span class="bn">চূড়ান্ত ফাইল আপনাকে পাঠানো হয়।</span><span class="en">The final files are sent to you.</span></span>
+  </li>
+</ol>
+
+<h2 class="section-title"><span class="bn">কাজের নিয়ম</span><span class="en">Ground rules</span></h2>
+<ul class="rules">
+  <li><span class="bn">কাজ শুরুর আগে সব শর্ত লিখিতভাবে ঠিক হয়।</span><span class="en">Every term is agreed in writing before work starts.</span></li>
+  <li><span class="bn">আপনার ফাইল শুধু ওই কাজের জন্যই ব্যবহার হয়, আপনার অনুমতি ছাড়া কোথাও দেখানো হয় না।</span><span class="en">Your files are used only for that job and never shown anywhere without your permission.</span></li>
+  <li><span class="bn">যে কাজ করা সম্ভব নয়, সেটা আগেই জানিয়ে দেওয়া হয়।</span><span class="en">If something is not possible, you are told up front.</span></li>
+</ul>
+
+<p style="margin-top:28px">
+  <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">সার্ভিসের অনুরোধ পাঠান</span><span class="en">Request a service</span></a>
+  <a class="btn" href="{{ '/portfolio/' | relative_url }}"><span class="bn">কাজের নমুনা দেখুন</span><span class="en">See sample work</span></a>
+</p>
