@@ -1,0 +1,61 @@
+---
+layout: default
+title: Portfolio
+description: নিজের তৈরি প্রকল্প ও নমুনা কাজ | Own projects and sample work
+permalink: /portfolio/
+---
+<style>
+  .pf-hero{padding:28px 0 6px}
+  .pf-hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800}
+  .pf{display:flex;flex-direction:column}
+  .pf:hover{transform:none;border-color:var(--line)}
+  .pf h3{font-size:1.1rem;font-weight:800;margin:8px 0 4px}
+  .pf .btn{margin-top:auto;align-self:flex-start;padding:9px 18px;font-size:.88rem}
+  .pf p.meta{margin-bottom:14px}
+  .pf .tag{align-self:flex-start;margin:0}
+  .pf-empty{border-style:dashed;background:transparent}
+</style>
+
+<section class="pf-hero">
+  <h1 class="grad-text"><span class="bn">পোর্টফোলিও</span><span class="en">Portfolio</span></h1>
+  <p class="lead">
+    <span class="bn">নিজের তৈরি প্রকল্প আর নমুনা কাজ এখানে দেখানো হয়। ক্লায়েন্টের কাজ তাদের অনুমতি নিয়েই যোগ করা হবে।</span>
+    <span class="en">Own projects and sample work are shown here. Client work will be added only with the client's permission.</span>
+  </p>
+</section>
+
+<h2 class="section-title"><span class="bn">নিজের প্রকল্প</span><span class="en">Own projects</span></h2>
+<div class="grid">
+
+  <div class="card pf">
+    <span class="tag"><span class="bn">ওয়েবসাইট</span><span class="en">Website</span></span>
+    <h3>tropelon.2bd.net</h3>
+    <p class="meta"><span class="bn">এই ওয়েবসাইট। দুই ভাষার ইন্টারফেস, মোবাইলে সুবিধাজনক ডার্ক ডিজাইন, GitHub Pages-এ বিনামূল্যে হোস্ট করা।</span><span class="en">This website. A two-language interface, a mobile-friendly dark design, hosted free on GitHub Pages.</span></p>
+    <a class="btn" href="{{ '/' | relative_url }}"><span class="bn">দেখুন</span><span class="en">View</span></a>
+  </div>
+
+  <div class="card pf">
+    <span class="tag"><span class="bn">টুলস</span><span class="en">Tools</span></span>
+    <h3><span class="bn">ফ্রি কনভার্টার টুলস</span><span class="en">Free converter tools</span></h3>
+    <p class="meta"><span class="bn">ইউনিকোড ↔ বিজয় বায়ান্ন লেখা রূপান্তর, ছবির ফরম্যাট বদল আর ইউনিট কনভার্টার। সবকিছু ব্রাউজারেই চলে, কিছু আপলোড হয় না।</span><span class="en">Unicode ↔ Bijoy Bayanno text conversion, image format conversion and a unit converter. Everything runs in the browser, nothing is uploaded.</span></p>
+    <a class="btn" href="{{ '/tools/' | relative_url }}"><span class="bn">ব্যবহার করুন</span><span class="en">Try it</span></a>
+  </div>
+
+  <div class="card pf">
+    <span class="tag"><span class="bn">ভিডিও স্ক্রিপ্ট</span><span class="en">Video scripts</span></span>
+    <h3>Tropelon BD</h3>
+    <p class="meta"><span class="bn">নিজের ইউটিউব চ্যানেল। ডকুমেন্টারি, শিক্ষামূলক ও হরর বর্ণনার ভিডিওর স্ক্রিপ্ট নিজে লেখা।</span><span class="en">My own YouTube channel. Scripts for documentary, educational and horror narration videos, written myself.</span></p>
+    {% for s in site.data.site.social %}{% if s.key == 'youtube' %}<a class="btn" href="{{ s.url }}" target="_blank" rel="noopener"><span class="bn">চ্যানেল দেখুন</span><span class="en">Visit channel</span></a>{% endif %}{% endfor %}
+  </div>
+
+</div>
+
+<h2 class="section-title"><span class="bn">ক্লায়েন্টের কাজ</span><span class="en">Client work</span></h2>
+<div class="card pf pf-empty">
+  <p class="meta"><span class="bn">এখনো কোনো ক্লায়েন্টের কাজ যোগ হয়নি। কাজ সম্পন্ন হলে, ক্লায়েন্টের অনুমতি নিয়ে এখানে দেখানো হবে।</span><span class="en">No client work has been added yet. Once a job is done, it will be shown here with the client's permission.</span></p>
+</div>
+
+<p style="margin-top:28px">
+  <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">কাজের অনুরোধ পাঠান</span><span class="en">Request a service</span></a>
+  <a class="btn" href="{{ '/services/' | relative_url }}"><span class="bn">সার্ভিস দেখুন</span><span class="en">See services</span></a>
+</p>
