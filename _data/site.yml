@@ -1,7 +1,7 @@
 name: tropelon
 tagline:
-  bn: কমিউনিটি পোস্ট ও কনভার্টার টুলস, এক জায়গায়
-  en: Community posts and converter tools, in one place
+  bn: ডকুমেন্ট, স্প্রেডশিট, স্ক্রিপ্ট, ডিজাইন ও ভিডিও এডিটিংয়ের ডিজিটাল সার্ভিস
+  en: Digital services for documents, spreadsheets, scripts, design and video editing
 email: contact@tropelon.2bd.net
 social:
   - {key: youtube, name: YouTube, url: "https://www.youtube.com/channel/UCijufPWJQ_Ym5HMDW66GXew"}
@@ -11,5 +11,10 @@ social:
   - {key: reddit, name: Reddit, url: "https://www.reddit.com/user/tropelon"}
   - {key: github, name: GitHub, url: "https://github.com/tropelon"}
   - {key: blog, name: Blog, url: "https://tropelon.blogspot.com"}
-# WhatsApp নম্বর পেলে বসান, যেমন https://wa.me/8801XXXXXXXXX
 whatsapp: ""
+# ============================================================
+# নিচের লাইনটাই সেই জায়গা (ফাইলের একদম শেষ লাইন)।
+# Google Apps Script-এর /exec দিয়ে শেষ হওয়া লিংকটা দুই উদ্ধৃতি চিহ্নের ভেতরে বসান।
+# লিংক না বসানো পর্যন্ত খালি ("") রাখুন।
+# ============================================================
+client_api: ""
