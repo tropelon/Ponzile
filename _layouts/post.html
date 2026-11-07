@@ -1,10 +1,15 @@
 ---
 layout: default
 ---
+{%- comment -%}
+  দ্বিভাষিক লেখা: title/description/body বাংলা, title_en/description_en/body_en ইংরেজি (ঐচ্ছিক)।
+  ইংরেজি অংশ না থাকলে বাংলা লেখাই দুই ভাষার মোডে দেখায়।
+{%- endcomment -%}
+{% assign t_en = page.title_en | default: page.title %}
 <article>
-  <a class="meta" href="{{ '/explore/' | relative_url }}">← <span class="bn">এক্সপ্লোর</span><span class="en">Explore</span></a>
+  <a class="meta" href="{{ '/explore/' | relative_url }}">← <span class="bn">লেখা</span><span class="en">Articles</span></a>
 
-  <h1 class="post-caption" style="margin-top:10px">{{ page.title }}</h1>
+  <h1 class="post-caption" style="margin-top:10px"><span class="bn">{{ page.title }}</span><span class="en">{{ t_en }}</span></h1>
   <p class="meta" style="margin-top:8px">{{ page.date | date: "%d-%m-%Y" }}{% if page.author %} · {{ page.author }}{% endif %}</p>
 
   {% if page.tags.size > 0 %}
@@ -37,9 +42,22 @@ layout: default
   {%- comment -%} বডির ভেতরের /assets/... ছবি ও ফাইলের লিংকে baseurl বসায় (baseurl ফাঁকা হলে কিছু বদলায় না) {%- endcomment -%}
   {% capture fix_src %}src="{{ site.baseurl }}/assets/{% endcapture %}
   {% capture fix_href %}href="{{ site.baseurl }}/assets/{% endcapture %}
-  <div class="post-body">
-    {{ content | replace: 'src="/assets/', fix_src | replace: 'href="/assets/', fix_href }}
-  </div>
+  {% assign body_bn = content | replace: 'src="/assets/', fix_src | replace: 'href="/assets/', fix_href %}
 
-  <p style="margin-top:28px"><a class="btn" href="{{ '/explore/' | relative_url }}"><span class="bn">আরও পোস্ট দেখুন</span><span class="en">More posts</span></a></p>
+  {% if page.body_en and page.body_en != '' %}
+    {% assign body_en = page.body_en | markdownify | replace: 'src="/assets/', fix_src | replace: 'href="/assets/', fix_href %}
+    <div class="post-body bn">{{ body_bn }}</div>
+    <div class="post-body en">{{ body_en }}</div>
+  {% else %}
+    <div class="post-body">{{ body_bn }}</div>
+    <p class="meta en" style="margin-top:10px">This article is written in Bangla only.</p>
+  {% endif %}
+
+  <section class="card" style="margin-top:32px;text-align:center;border-color:rgba(192,132,252,.35);background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(236,72,153,.08))">
+    <h3 style="font-size:1.1rem"><span class="bn">ডকুমেন্ট, স্ক্রিপ্ট, ডিজাইন বা ভিডিও এডিটিংয়ের কাজ লাগবে?</span><span class="en">Need help with documents, scripts, design or video editing?</span></h3>
+    <p class="meta" style="margin-top:6px"><span class="bn">কাজটা জানিয়ে একটা অনুরোধ পাঠান, দাম আর সময় জানিয়ে দেওয়া হবে।</span><span class="en">Send a request and you will get a price and timeline.</span></p>
+    <p style="margin-top:14px"><a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></a></p>
+  </section>
+
+  <p style="margin-top:22px"><a class="btn" href="{{ '/explore/' | relative_url }}"><span class="bn">আরও লেখা দেখুন</span><span class="en">More articles</span></a></p>
 </article>
