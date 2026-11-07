@@ -17,4 +17,4 @@ whatsapp: ""
 # Google Apps Script-এর /exec দিয়ে শেষ হওয়া লিংকটা দুই উদ্ধৃতি চিহ্নের ভেতরে বসান।
 # লিংক না বসানো পর্যন্ত খালি ("") রাখুন।
 # ============================================================
-client_api: ""
+client_api: "https://script.google.com/macros/s/AKfycbz6kIZkqeQU0WcRDfd3vF__P5eYaXEFKJ9NVNUfUAOgemUQGdTJWVTtHa78sV-xYCa-/exec"
