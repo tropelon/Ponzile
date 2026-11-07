@@ -1,63 +1,94 @@
 ---
 layout: default
-title: About
+title: পরিচিতি
+description: tropelon একজন কনটেন্ট ক্রিয়েটরের ডিজিটাল সার্ভিস স্টুডিও | tropelon is a digital service studio run by a content creator
 permalink: /about/
 ---
 <style>
-  .about-hero{text-align:center;padding:28px 0 10px}
-  .about-hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800;margin-top:10px}
-  .about-hero .lead{margin-inline:auto}
-  .about-card:hover{transform:none;border-color:var(--line)}
-  .about-card h3{font-size:1.05rem;margin-bottom:6px}
-  .about-card .ico{font-size:1.5rem;line-height:1;margin-bottom:10px}
-  .steps{counter-reset:s;display:grid;gap:12px;margin-top:6px}
-  .steps li{list-style:none;position:relative;padding:14px 16px 14px 56px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
-  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;color:#fff;background:var(--grad)}
-  .steps{padding:0}
+  .ab-hero{text-align:center;padding:28px 0 10px}
+  .ab-hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800;margin-top:10px}
+  .ab-hero .lead{margin-inline:auto}
+  .ab-card:hover{transform:none;border-color:var(--line)}
+  .ab-card h3{font-size:1.05rem;margin-bottom:6px}
+  .ab-ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:12px;background:rgba(192,132,252,.14);border:1px solid rgba(192,132,252,.28)}
+  .ab-ico svg{width:24px;height:24px;fill:none;stroke:#d8b4fe;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ab-story{padding:20px}
+  .ab-story p{color:var(--text);font-size:1.02rem;margin:0 0 .9em}
+  .ab-story p:last-child{margin-bottom:0}
+  .ab-story a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+  .ab-cta{margin-top:34px;text-align:center;padding:26px 18px;border-radius:var(--r);border:1px solid rgba(192,132,252,.35);background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(236,72,153,.10))}
+  .ab-cta h2{font-size:1.3rem}
+  .ab-cta p{color:var(--muted);margin:8px auto 0;max-width:52ch}
+  .ab-cta .actions{justify-content:center}
 </style>
 
-<section class="about-hero">
+<section class="ab-hero">
   <img src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="64" height="76" style="filter:drop-shadow(0 0 18px rgba(168,85,247,.55))">
   <h1 class="grad-text">tropelon</h1>
   <p class="lead">
-    <span class="bn">একটা বাংলা ও ইংরেজি কমিউনিটি সাইট। এখানে সবাই মিলে পোস্ট শেয়ার করা যায়, আর হাতের কাছে থাকে কিছু কাজের কনভার্টার টুল, সবই বিনামূল্যে।</span>
-    <span class="en">A Bangla and English community site. Share posts together, and keep a few handy converter tools within reach, all free.</span>
+    <span class="bn">একজন কনটেন্ট ক্রিয়েটরের চালানো ডিজিটাল সার্ভিস স্টুডিও। ডকুমেন্ট, স্প্রেডশিট, ভিডিও স্ক্রিপ্ট, ডিজাইন, ভিডিও এডিটিং আর ছোট ওয়েবসাইট।</span>
+    <span class="en">A digital service studio run by a content creator. Documents, spreadsheets, video scripts, design, video editing and small websites.</span>
   </p>
 </section>
 
-<h2 class="section-title"><span class="bn">এখানে কী পাবেন</span><span class="en">What you will find</span></h2>
-<div class="grid">
-  <div class="card about-card">
-    <div class="ico">✍️</div>
-    <h3><span class="bn">কমিউনিটি পোস্ট</span><span class="en">Community posts</span></h3>
-    <p class="meta"><span class="bn">লেখা, ছবি আর ভিডিও নিয়ে পোস্ট। ট্যাগ ধরে বা সার্চ করে সহজে খুঁজে নেওয়া যায়।</span><span class="en">Posts with text, photos and video. Find them by tag or by searching.</span></p>
-  </div>
-  <div class="card about-card">
-    <div class="ico">🔁</div>
-    <h3><span class="bn">কনভার্টার টুলস</span><span class="en">Converter tools</span></h3>
-    <p class="meta"><span class="bn">ইউনিকোড ↔ বিজয় বায়ান্ন, ছবির ফরম্যাট বদল আর ইউনিট কনভার্টার।</span><span class="en">Unicode ↔ Bijoy Bayanno, image format conversion and a unit converter.</span></p>
-  </div>
-  <div class="card about-card">
-    <div class="ico">🔒</div>
-    <h3><span class="bn">আপনার ডেটা আপনার কাছেই</span><span class="en">Your data stays with you</span></h3>
-    <p class="meta"><span class="bn">টুলসের সবকিছু আপনার ব্রাউজারেই চলে। লেখা বা ছবি কোথাও আপলোড হয় না।</span><span class="en">Every tool runs in your browser. Your text and images are never uploaded.</span></p>
-  </div>
+<h2 class="section-title"><span class="bn">আমার কথা</span><span class="en">About me</span></h2>
+<div class="card ab-card ab-story">
+  <p class="bn">আমি একটা বাংলা ইউটিউব চ্যানেল চালাই। সেখানে ডকুমেন্টারি, ভয়ের গল্পের বর্ণনা আর শিক্ষামূলক ভিডিও বানাই। প্রতিটা ভিডিওর জন্য পুরো স্ক্রিপ্ট লেখা আর গুছিয়ে সাজানো আমার নিজের কাজ।</p>
+  <p class="bn">নিজের কাজে যে যত্ন লাগে, অন্যের কাজেও সেটাই দিতে চাই। tropelon এক মানুষের স্টুডিও, তাই যার সঙ্গে আপনার কথা হয়, কাজটাও সেই করে। মাঝখানে হাত বদল হয় না।</p>
+  <p class="bn">আমার চ্যানেলে গেলে কাজের ধরন নিজের চোখে দেখতে পারবেন।
+  {% for s in site.data.site.social %}{% if s.key == 'youtube' %}<a href="{{ s.url }}" target="_blank" rel="noopener">YouTube চ্যানেল দেখুন</a>{% endif %}{% endfor %}</p>
+
+  <p class="en">I run a Bangla YouTube channel where I make documentaries, horror narrations and educational videos. Writing a full script for each video and shaping it is my own work.</p>
+  <p class="en">I want to give client work the same care I give my own. tropelon is a one-person studio, so the person you talk to is the person who does the work. Nothing gets handed around in between.</p>
+  <p class="en">You can see the kind of work I do on my channel.
+  {% for s in site.data.site.social %}{% if s.key == 'youtube' %}<a href="{{ s.url }}" target="_blank" rel="noopener">Visit the YouTube channel</a>{% endif %}{% endfor %}</p>
 </div>
 
-<h2 class="section-title"><span class="bn">কীভাবে পোস্ট দেওয়া যায়</span><span class="en">How posting works</span></h2>
-<ol class="steps">
-  <li><span class="bn">যোগাযোগ পেজ থেকে আপনার ইমেইল জানিয়ে পোস্ট দেওয়ার অনুরোধ করুন।</span><span class="en">Ask for posting access from the contact page, with your email.</span></li>
-  <li><span class="bn">অনুমতি পেলে সেই ইমেইলে এডিটরের আমন্ত্রণ আসবে।</span><span class="en">Once approved, you get an editor invitation by email.</span></li>
-  <li><span class="bn">এডিটরে বড় ও বোল্ড ক্যাপশন, সাধারণ লেখা, লিংক, ছবি আর ভিডিও দিয়ে পোস্ট লিখুন।</span><span class="en">In the editor, write with a big bold caption, normal body text, links, photos and video.</span></li>
-  <li><span class="bn">সেভ করলে কিছুক্ষণের মধ্যে পোস্টটা সাইটে চলে আসে।</span><span class="en">Save, and the post appears on the site within a short while.</span></li>
-</ol>
+<h2 class="section-title"><span class="bn">কাজের ধরন</span><span class="en">How I work</span></h2>
+<div class="grid">
+  <div class="card ab-card">
+    <div class="ab-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="m9 14 2 2 4-4"/></svg></div>
+    <h3><span class="bn">শর্ত লিখিতভাবে</span><span class="en">Terms in writing</span></h3>
+    <p class="meta"><span class="bn">কাজ শুরুর আগে কী হবে, কতদিনে হবে আর দাম কত, সব ইমেইলে লিখে নেওয়া হয়।</span><span class="en">Before work starts, what will be done, how long it takes and the price are all written down by email.</span></p>
+  </div>
+  <div class="card ab-card">
+    <div class="ab-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
+    <h3><span class="bn">অগ্রগতি খোলা</span><span class="en">Open progress</span></h3>
+    <p class="meta"><span class="bn">অনুরোধ পাঠালে একটা কোড পাবেন। সেটা দিয়ে কাজ কতদূর এগোলো নিজেই দেখতে পারবেন।</span><span class="en">You get a code when you send a request. Use it to see for yourself how far the work has come.</span></p>
+  </div>
+  <div class="card ab-card">
+    <div class="ab-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    <h3><span class="bn">মাঝপথে প্রিভিউ</span><span class="en">A midway preview</span></h3>
+    <p class="meta"><span class="bn">কাজ প্রায় অর্ধেক হলে একবারের জন্য প্রিভিউ দেখা যায়। ভুল দিকে গেলে তখনই ধরা পড়ে।</span><span class="en">At around halfway you can view a one-time preview, so a wrong direction is caught early.</span></p>
+  </div>
+  <div class="card ab-card">
+    <div class="ab-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+    <h3><span class="bn">আপনার তথ্য গোপন</span><span class="en">Your information stays private</span></h3>
+    <p class="meta"><span class="bn">কাজের তথ্য আলাদা ব্যক্তিগত জায়গায় থাকে, এই খোলা সাইটে নয়। পাসওয়ার্ড বা ব্যাংকের তথ্য চাওয়া হয় না।</span><span class="en">Job details are kept in a separate private place, not on this public site. Passwords and bank details are never asked for.</span></p>
+  </div>
+  <div class="card ab-card">
+    <div class="ab-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></div>
+    <h3><span class="bn">বাংলা ও ইংরেজি</span><span class="en">Bangla and English</span></h3>
+    <p class="meta"><span class="bn">দুই ভাষাতেই কাজ আর যোগাযোগ চলে। আপনার সুবিধামতো ভাষায় লিখুন।</span><span class="en">Work and communication run in both languages. Write in whichever suits you.</span></p>
+  </div>
+  <div class="card ab-card">
+    <div class="ab-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/></svg></div>
+    <h3><span class="bn">ফ্রি টুলস</span><span class="en">Free tools</span></h3>
+    <p class="meta"><span class="bn">বিজয় ↔ ইউনিকোড, ছবি আর ইউনিট কনভার্টার বিনামূল্যে ব্যবহার করুন। সবকিছু আপনার ব্রাউজারেই চলে।</span><span class="en">Use the Bijoy ↔ Unicode, image and unit converters for free. Everything runs in your browser.</span></p>
+    <p style="margin-top:10px"><a class="btn" href="{{ '/tools/' | relative_url }}" style="padding:8px 18px;font-size:.88rem"><span class="bn">টুলস খুলুন</span><span class="en">Open tools</span></a></p>
+  </div>
+</div>
 
 <h2 class="section-title"><span class="bn">আমাদের সাথে থাকুন</span><span class="en">Follow along</span></h2>
 <div class="socials" style="justify-content:flex-start">
   {% for s in site.data.site.social %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
 </div>
 
-<p style="margin-top:26px">
-  <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">যোগাযোগ করুন</span><span class="en">Get in touch</span></a>
-  <a class="btn" href="{{ '/tools/' | relative_url }}"><span class="bn">টুলস দেখুন</span><span class="en">Try the tools</span></a>
-</p>
+<section class="ab-cta">
+  <h2><span class="bn">একটা কাজের কথা বলতে চান?</span><span class="en">Have a job in mind?</span></h2>
+  <p><span class="bn">কী লাগবে লিখে অনুরোধ পাঠান। দাম আর সময় জানিয়ে উত্তর দেওয়া হবে।</span><span class="en">Write what you need and send a request. You will get a price and timeline in reply.</span></p>
+  <div class="actions">
+    <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></a>
+    <a class="btn" href="{{ '/services/' | relative_url }}"><span class="bn">সার্ভিস দেখুন</span><span class="en">See services</span></a>
+  </div>
+</section>
