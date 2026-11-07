@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Contact
+description: কাজের অনুরোধ পাঠান বা যোগাযোগ করুন | Send a service request or get in touch
 permalink: /contact/
 ---
 <style>
@@ -12,13 +13,89 @@ permalink: /contact/
   .bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .bar .btn{padding:10px 20px;font-size:.92rem}
   .status{min-height:1.4em;font-size:.85rem;color:#d8b4fe;margin-top:10px}
+  .status.err{color:#fda4af}
   .stack{display:grid;gap:14px;margin-top:6px}
+  .f2{display:grid;gap:0 12px;grid-template-columns:1fr}
+  @media (min-width:560px){.f2{grid-template-columns:1fr 1fr}}
+  .opt{color:var(--muted);font-weight:400}
+  .hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0 0;font-size:.85rem;color:var(--muted);line-height:1.55}
+  .consent input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:#a855f7}
+  .consent a{color:var(--accent);text-decoration:underline}
+  .warn{margin-top:12px;font-size:.82rem;color:var(--muted);border-left:3px solid var(--accent);padding:8px 12px;background:rgba(255,255,255,.03);border-radius:0 10px 10px 0}
+  .done-card{text-align:center;padding:26px 18px}
+  .done-card .tick{width:54px;height:54px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;background:#34d399;color:#0b0714;font-size:1.7rem;font-weight:800}
+  .code-box{display:inline-block;margin:12px 0 4px;padding:12px 20px;border-radius:14px;border:1px dashed var(--accent);background:rgba(192,132,252,.08);font:700 1.5rem/1.2 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;user-select:all;-webkit-user-select:all}
+  .done-card .bar{justify-content:center}
+  [hidden]{display:none!important}
 </style>
 
-<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">যোগাযোগ</span><span class="en">Contact</span></h1>
-<p class="meta"><span class="bn">প্রশ্ন, মতামত বা পোস্ট দেওয়ার অনুরোধ, যেকোনো কিছু জানাতে পারেন।</span><span class="en">Questions, feedback or a request to post, tell us anything.</span></p>
+<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">যোগাযোগ ও কাজের অনুরোধ</span><span class="en">Contact &amp; service request</span></h1>
+<p class="meta"><span class="bn">কী কাজ লাগবে লিখে পাঠান। অনুরোধ পাঠালে একটা ট্র্যাকিং কোড পাবেন, তা দিয়ে কাজের অগ্রগতি দেখা যাবে।</span><span class="en">Tell us what you need. After you send a request you get a tracking code to follow the progress.</span></p>
 
 <div class="stack">
+
+  <section class="card c-card" id="reqCard">
+    <h2><span class="bn">কাজের অনুরোধ</span><span class="en">Service request</span></h2>
+    <p class="meta"><span class="bn">যত স্পষ্ট করে লিখবেন, দাম আর সময় তত দ্রুত জানানো যাবে।</span><span class="en">The clearer you write, the faster a price and timeline can be given.</span></p>
+
+    <form id="rForm" data-api="{{ site.data.site.client_api }}" data-email="{{ site.data.site.email }}" novalidate>
+      <label for="rService"><span class="bn">কোন সার্ভিস</span><span class="en">Which service</span></label>
+      <select id="rService">
+        <option value="documents" data-bn="ডকুমেন্ট ও PDF" data-en="Documents &amp; PDF">ডকুমেন্ট ও PDF</option>
+        <option value="spreadsheet" data-bn="স্প্রেডশিট" data-en="Spreadsheet">স্প্রেডশিট</option>
+        <option value="script" data-bn="ভিডিও স্ক্রিপ্ট লেখা" data-en="Video script writing">ভিডিও স্ক্রিপ্ট লেখা</option>
+        <option value="design" data-bn="গ্রাফিক্স ডিজাইন" data-en="Graphic design">গ্রাফিক্স ডিজাইন</option>
+        <option value="video" data-bn="ভিডিও এডিটিং" data-en="Video editing">ভিডিও এডিটিং</option>
+        <option value="website" data-bn="ছোট ওয়েবসাইট" data-en="Small website">ছোট ওয়েবসাইট</option>
+        <option value="other" data-bn="অন্য কিছু / সাধারণ প্রশ্ন" data-en="Something else / general question">অন্য কিছু / সাধারণ প্রশ্ন</option>
+      </select>
+
+      <div class="f2">
+        <div><label for="rName"><span class="bn">আপনার নাম</span><span class="en">Your name</span></label><input id="rName" type="text" autocomplete="name" maxlength="80"></div>
+        <div><label for="rMail"><span class="bn">আপনার ইমেইল</span><span class="en">Your email</span></label><input id="rMail" type="email" autocomplete="email" inputmode="email" maxlength="120"></div>
+      </div>
+
+      <div class="f2">
+        <div><label for="rContact"><span class="bn">অন্য যোগাযোগ <span class="opt">(ঐচ্ছিক)</span></span><span class="en">Other contact <span class="opt">(optional)</span></span></label><input id="rContact" type="text" maxlength="120" placeholder="Telegram / WhatsApp"></div>
+        <div><label for="rDeadline"><span class="bn">কবে লাগবে <span class="opt">(ঐচ্ছিক)</span></span><span class="en">Needed by <span class="opt">(optional)</span></span></label><input id="rDeadline" type="text" maxlength="60"></div>
+      </div>
+
+      <label for="rDetails"><span class="bn">কাজের বিবরণ</span><span class="en">Job details</span></label>
+      <textarea id="rDetails" maxlength="3000"></textarea>
+
+      <label for="rRef"><span class="bn">ফাইল বা রেফারেন্সের লিংক <span class="opt">(ঐচ্ছিক)</span></span><span class="en">File or reference link <span class="opt">(optional)</span></span></label>
+      <input id="rRef" type="url" inputmode="url" maxlength="300" placeholder="https://">
+
+      <p class="warn"><span class="bn">এখানে ফাইল আপলোড হয় না। ফাইল থাকলে Google Drive-এর মতো সেবায় তুলে “লিংক ধরে যে কেউ দেখতে পারবে” দিয়ে লিংকটা ওপরের ঘরে দিন। পাসওয়ার্ড, ব্যাংক বা কার্ডের তথ্য, NID নম্বর কখনো লিখবেন না।</span><span class="en">Files are not uploaded here. If you have files, put them on a service like Google Drive, share them as “anyone with the link can view”, and paste the link above. Never write passwords, bank or card details or ID numbers.</span></p>
+
+      <div class="hp" aria-hidden="true"><label for="rWebsite">Website</label><input id="rWebsite" type="text" tabindex="-1" autocomplete="off"></div>
+
+      <label class="consent" for="rConsent">
+        <input id="rConsent" type="checkbox">
+        <span><span class="bn">আমি জানি, আমার নাম, ইমেইল আর কাজের বিবরণ শুধু এই অনুরোধ সামলাতে ব্যবহার হবে। <a href="{{ '/privacy/' | relative_url }}">প্রাইভেসি পেজ</a> দেখেছি।</span><span class="en">I understand my name, email and job details are used only to handle this request. I have read the <a href="{{ '/privacy/' | relative_url }}">privacy page</a>.</span></span>
+      </label>
+
+      <div class="bar">
+        <button type="submit" class="btn btn-primary" id="rSend"><span class="bn">অনুরোধ পাঠান</span><span class="en">Send request</span></button>
+        <button type="button" class="btn" id="rCopy" hidden><span class="bn">বার্তা কপি করুন</span><span class="en">Copy message</span></button>
+      </div>
+      <p class="status" id="rStatus" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="card c-card done-card" id="doneCard" hidden>
+    <div class="tick" aria-hidden="true">✓</div>
+    <h2><span class="bn">অনুরোধ পাঠানো হয়েছে</span><span class="en">Request sent</span></h2>
+    <p class="meta"><span class="bn">এটা আপনার ট্র্যাকিং কোড। কোডটা কোথাও লিখে বা কপি করে রাখুন, অন্য কাউকে দেবেন না।</span><span class="en">This is your tracking code. Save or copy it somewhere and do not share it.</span></p>
+    <div class="code-box" id="doneCode">TP-XXXXXXXX</div>
+    <p class="meta"><span class="bn">কোডসহ একটা নিশ্চিতকরণ ইমেইলও গেছে। না পেলে স্প্যাম ফোল্ডার দেখুন।</span><span class="en">A confirmation email with the code was also sent. If you do not see it, check spam.</span></p>
+    <div class="bar">
+      <button type="button" class="btn" id="doneCopy"><span class="bn">কোড কপি করুন</span><span class="en">Copy code</span></button>
+      <a class="btn btn-primary" id="doneTrack" href="{{ '/track/' | relative_url }}"><span class="bn">অগ্রগতি দেখুন</span><span class="en">Track progress</span></a>
+    </div>
+    <p class="status" id="doneStatus" aria-live="polite"></p>
+  </section>
 
   <section class="card c-card">
     <h2><span class="bn">ইমেইল</span><span class="en">Email</span></h2>
@@ -34,35 +111,6 @@ permalink: /contact/
     </div>
   </section>
 
-  <section class="card c-card">
-    <h2><span class="bn">বার্তা লিখুন</span><span class="en">Write a message</span></h2>
-    <p class="meta"><span class="bn">পোস্ট দেওয়ার অনুমতি চাইলে অবশ্যই আপনার ইমেইল দিন, ওই ইমেইলেই এডিটরের আমন্ত্রণ যাবে। “ইমেইলে পাঠান” চাপলে আপনার ফোনের ইমেইল অ্যাপ খুলে যাবে।</span><span class="en">To request posting access, include your email, which is where the editor invitation will go. “Send by email” opens your phone’s mail app.</span></p>
-
-    <form id="cForm" data-email="{{ site.data.site.email }}" novalidate>
-      <label for="cTopic"><span class="bn">বিষয়</span><span class="en">Topic</span></label>
-      <select id="cTopic">
-        <option value="post" data-bn="পোস্ট দেওয়ার অনুমতি চাই" data-en="Request to post">পোস্ট দেওয়ার অনুমতি চাই</option>
-        <option value="feedback" data-bn="মতামত বা পরামর্শ" data-en="Feedback or suggestion">মতামত বা পরামর্শ</option>
-        <option value="bug" data-bn="টুলস বা সাইটে সমস্যা" data-en="Problem with tools or site">টুলস বা সাইটে সমস্যা</option>
-        <option value="other" data-bn="অন্য কিছু" data-en="Something else">অন্য কিছু</option>
-      </select>
-
-      <div class="row">
-        <div><label for="cName"><span class="bn">আপনার নাম</span><span class="en">Your name</span></label><input id="cName" type="text" autocomplete="name"></div>
-        <div><label for="cMail"><span class="bn">আপনার ইমেইল</span><span class="en">Your email</span></label><input id="cMail" type="email" autocomplete="email" inputmode="email"></div>
-      </div>
-
-      <label for="cMsg"><span class="bn">বার্তা</span><span class="en">Message</span></label>
-      <textarea id="cMsg"></textarea>
-
-      <div class="bar">
-        <button type="submit" class="btn btn-primary"><span class="bn">ইমেইলে পাঠান</span><span class="en">Send by email</span></button>
-        <button type="button" class="btn" id="cCopy"><span class="bn">বার্তা কপি করুন</span><span class="en">Copy message</span></button>
-      </div>
-      <p class="status" id="cStatus" aria-live="polite"></p>
-    </form>
-  </section>
-
 </div>
 
 {% raw %}
@@ -72,35 +120,113 @@ permalink: /contact/
   var $ = function (id) { return document.getElementById(id); };
   var isEn = function () { return document.documentElement.lang === 'en'; };
   var t = function (bn, en) { return isEn() ? en : bn; };
-  var form = $('cForm'), email = form.getAttribute('data-email'), st = $('cStatus'), topic = $('cTopic');
+  var form = $('rForm'), api = (form.getAttribute('data-api') || '').trim(), email = form.getAttribute('data-email');
+  var st = $('rStatus'), sel = $('rService'), sendBtn = $('rSend'), copyBtn = $('rCopy');
+  var loaded = Date.now(), busy = false;
+  var useApi = /^https:\/\/script\.google\.com\//.test(api);
 
-  // বিষয়ের তালিকা ভাষা অনুযায়ী
-  function labelTopics() {
-    [].forEach.call(topic.options, function (o) { o.textContent = isEn() ? o.getAttribute('data-en') : o.getAttribute('data-bn'); });
-  }
-  labelTopics();
-  new MutationObserver(function () { labelTopics(); st.textContent = ''; }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  function say(msg, bad) { st.textContent = msg; st.className = 'status' + (bad ? ' err' : ''); }
 
-  function build() {
-    var o = topic.options[topic.selectedIndex];
-    var subject = 'tropelon: ' + (isEn() ? o.getAttribute('data-en') : o.getAttribute('data-bn'));
-    var name = $('cName').value.trim(), from = $('cMail').value.trim(), msg = $('cMsg').value.trim();
-    var body = (name ? t('নাম: ', 'Name: ') + name + '\n' : '') + (from ? t('ইমেইল: ', 'Email: ') + from + '\n' : '') + '\n' + msg;
-    return { subject: subject, body: body, from: from, msg: msg };
+  // সার্ভিসের তালিকা ভাষা অনুযায়ী, আর ?service= থেকে আগে থেকে বাছাই
+  function labelOptions() {
+    [].forEach.call(sel.options, function (o) { o.textContent = isEn() ? o.getAttribute('data-en') : o.getAttribute('data-bn'); });
   }
-  function check(m) {
-    if (!m.msg) { st.textContent = t('আগে বার্তাটা লিখুন।', 'Please write your message first.'); $('cMsg').focus(); return false; }
-    if (topic.value === 'post' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.from)) {
-      st.textContent = t('পোস্ট দেওয়ার অনুরোধে আপনার সঠিক ইমেইল দিতে হবে।', 'A valid email is needed for a posting request.'); $('cMail').focus(); return false;
-    }
+  labelOptions();
+  try {
+    var q = new URLSearchParams(location.search).get('service');
+    if (q) [].forEach.call(sel.options, function (o) { if (o.value === q) sel.value = q; });
+  } catch (e) {}
+  new MutationObserver(function () { labelOptions(); say(''); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+  // API না থাকলে ইমেইল অ্যাপের পথ
+  if (!useApi) {
+    copyBtn.hidden = false;
+    sendBtn.querySelector('.bn').textContent = 'ইমেইলে পাঠান';
+    sendBtn.querySelector('.en').textContent = 'Send by email';
+  }
+
+  function vals() {
+    return {
+      service: sel.value,
+      serviceLabel: sel.options[sel.selectedIndex].textContent,
+      name: $('rName').value.trim(),
+      email: $('rMail').value.trim(),
+      contact: $('rContact').value.trim(),
+      deadline: $('rDeadline').value.trim(),
+      details: $('rDetails').value.trim(),
+      ref: $('rRef').value.trim(),
+      consent: $('rConsent').checked
+    };
+  }
+  function check(v) {
+    if (!v.name) { say(t('আপনার নাম লিখুন।', 'Please enter your name.'), true); $('rName').focus(); return false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)) { say(t('সঠিক ইমেইল ঠিকানা দিন।', 'Please enter a valid email address.'), true); $('rMail').focus(); return false; }
+    if (v.details.length < 10) { say(t('কাজের বিবরণ আরেকটু বিস্তারিত লিখুন (কমপক্ষে ১০ অক্ষর)।', 'Please describe the job in a bit more detail (at least 10 characters).'), true); $('rDetails').focus(); return false; }
+    if (v.ref && !/^https?:\/\/\S+$/i.test(v.ref)) { say(t('লিংকটা https:// দিয়ে শুরু হতে হবে।', 'The link must start with https://'), true); $('rRef').focus(); return false; }
+    if (!v.consent) { say(t('এগিয়ে যেতে সম্মতির ঘরে টিক দিন।', 'Tick the consent box to continue.'), true); $('rConsent').focus(); return false; }
     return true;
+  }
+  function plainMessage(v) {
+    return t('সার্ভিস: ', 'Service: ') + v.serviceLabel + '\n' +
+      t('নাম: ', 'Name: ') + v.name + '\n' + t('ইমেইল: ', 'Email: ') + v.email + '\n' +
+      (v.contact ? t('যোগাযোগ: ', 'Contact: ') + v.contact + '\n' : '') +
+      (v.deadline ? t('কবে লাগবে: ', 'Needed by: ') + v.deadline + '\n' : '') +
+      (v.ref ? t('লিংক: ', 'Link: ') + v.ref + '\n' : '') + '\n' + v.details;
+  }
+
+  var errText = {
+    name: ['আপনার নাম লিখুন।', 'Please enter your name.'],
+    email: ['সঠিক ইমেইল ঠিকানা দিন।', 'Please enter a valid email address.'],
+    service: ['সার্ভিস বাছাই করুন।', 'Please choose a service.'],
+    details: ['কাজের বিবরণ আরেকটু বিস্তারিত লিখুন।', 'Please describe the job in more detail.'],
+    consent: ['সম্মতির ঘরে টিক দিন।', 'Tick the consent box.'],
+    busy: ['এই মুহূর্তে অনেক অনুরোধ এসেছে। কিছুক্ষণ পরে আবার চেষ্টা করুন, অথবা সরাসরি ইমেইল করুন।', 'Too many requests right now. Try again a little later, or email directly.']
+  };
+
+  function fallbackNote() {
+    copyBtn.hidden = false;
+    say(t('পাঠানো যায়নি। নিচের ইমেইল ঠিকানায় সরাসরি লিখুন, অথবা “বার্তা কপি করুন” চেপে নিজে পাঠান।', 'Could not send. Write to the email address below directly, or use “Copy message” and send it yourself.'), true);
+  }
+
+  function post(payload, ms) {
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function () { ctl.abort(); }, ms || 30000) : null;
+    return fetch(api, {
+      method: 'POST', redirect: 'follow', referrerPolicy: 'no-referrer',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload), signal: ctl ? ctl.signal : undefined
+    }).then(function (r) { return r.text(); }).then(function (txt) {
+      if (timer) clearTimeout(timer);
+      return JSON.parse(txt);
+    }, function (e) { if (timer) clearTimeout(timer); throw e; });
   }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var m = build(); if (!check(m)) return;
-    st.textContent = t('ইমেইল অ্যাপ খুলছে… না খুলে থাকলে “বার্তা কপি করুন” চেপে নিজে পাঠান।', 'Opening your mail app… if nothing opens, use “Copy message” and send it yourself.');
-    window.location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(m.subject) + '&body=' + encodeURIComponent(m.body);
+    if (busy) return;
+    var v = vals(); if (!check(v)) return;
+
+    if (!useApi) {
+      say(t('ইমেইল অ্যাপ খুলছে… না খুলে থাকলে “বার্তা কপি করুন” চেপে নিজে পাঠান।', 'Opening your mail app… if nothing opens, use “Copy message” and send it yourself.'));
+      window.location.href = 'mailto:' + email + '?subject=' + encodeURIComponent('tropelon: ' + v.serviceLabel) + '&body=' + encodeURIComponent(plainMessage(v));
+      return;
+    }
+
+    busy = true; sendBtn.disabled = true;
+    say(t('পাঠানো হচ্ছে…', 'Sending…'));
+    post({
+      service: v.service, name: v.name, email: v.email, contact: v.contact, deadline: v.deadline,
+      details: v.details, ref: v.ref, consent: true, website: $('rWebsite').value,
+      t: Date.now() - loaded, lang: isEn() ? 'en' : 'bn'
+    }).then(function (res) {
+      busy = false; sendBtn.disabled = false;
+      if (res && res.ok && res.code) { showDone(res.code, v.email); return; }
+      var k = res && res.error, m = errText[k];
+      if (m) { say(t(m[0], m[1]), true); if (k === 'busy') copyBtn.hidden = false; }
+      else fallbackNote();
+    }, function () {
+      busy = false; sendBtn.disabled = false; fallbackNote();
+    });
   });
 
   function copyText(txt, done) {
@@ -114,10 +240,25 @@ permalink: /contact/
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(function () { done(true); }, fallback);
     else fallback();
   }
-  $('cCopy').addEventListener('click', function () {
-    var m = build(); if (!check(m)) return;
-    copyText(t('প্রাপক: ', 'To: ') + email + '\n' + t('বিষয়: ', 'Subject: ') + m.subject + '\n\n' + m.body, function (ok) {
-      st.textContent = ok ? t('কপি হয়েছে ✓ এবার ইমেইলে পেস্ট করে পাঠান।', 'Copied ✓ now paste it into an email and send.') : t('কপি হয়নি, লেখাটা চেপে ধরে নিজে কপি করুন।', 'Copy failed, long-press the text to copy it yourself.');
+  copyBtn.addEventListener('click', function () {
+    var v = vals(); if (!check(v)) return;
+    copyText(t('প্রাপক: ', 'To: ') + email + '\n' + t('বিষয়: ', 'Subject: ') + 'tropelon: ' + v.serviceLabel + '\n\n' + plainMessage(v), function (ok) {
+      say(ok ? t('কপি হয়েছে ✓ এবার ইমেইলে পেস্ট করে পাঠান।', 'Copied ✓ now paste it into an email and send it.') : t('কপি হয়নি, লেখাটা চেপে ধরে নিজে কপি করুন।', 'Copy failed, long-press the text to copy it yourself.'), !ok);
+    });
+  });
+
+  function showDone(code, mail) {
+    $('reqCard').hidden = true;
+    $('doneCard').hidden = false;
+    $('doneCode').textContent = code;
+    var a = $('doneTrack'); a.href = a.getAttribute('href').split('?')[0] + '?code=' + encodeURIComponent(code);
+    form.reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  $('doneCopy').addEventListener('click', function () {
+    copyText($('doneCode').textContent, function (ok) {
+      var s = $('doneStatus');
+      s.textContent = ok ? t('কোড কপি হয়েছে ✓', 'Code copied ✓') : t('কপি হয়নি, কোডটা চেপে ধরে কপি করুন।', 'Copy failed, long-press the code to copy it.');
     });
   });
 })();
