@@ -1,23 +1,26 @@
-# tropelon — Pages CMS (পোস্ট এডিটর) কনফিগ
+# tropelon — Pages CMS (লেখা এডিটর) কনফিগ
 # এই ফাইল শুধু রিপোর মালিক (GitHub অ্যাকাউন্ট) বদলাতে পারবেন, ইমেইলে আমন্ত্রিত এডিটররা পারবেন না।
+#
+# প্রতিটা লেখায় বাংলা অংশ আবশ্যক। ইংরেজি অংশ (ইংরেজি ক্যাপশন, ইংরেজি সংক্ষেপ, ইংরেজি লেখা) ঐচ্ছিক।
+# ইংরেজি অংশ ফাঁকা থাকলে সাইটে ইংরেজি মোডেও বাংলা লেখাটাই দেখায়।
 
 media:
   - name: images
     label: ছবি
     input: assets/uploads/images        # ছবি রিপোর এই ফোল্ডারে জমা হবে
-    output: /assets/uploads/images      # পোস্টের ভেতরে এই ঠিকানা লেখা হবে
+    output: /assets/uploads/images      # লেখার ভেতরে এই ঠিকানা বসবে
     rename: safe                        # ফাইলের নাম নিরাপদ করে নেয় (ফাঁকা জায়গা, বিশেষ চিহ্ন বাদ)
     extensions: [png, jpg, jpeg, webp, gif]
 
 content:
   - name: posts
-    label: পোস্ট
+    label: লেখা
     type: collection
     path: _posts
     format: yaml-frontmatter
     filename:
       template: "{year}-{month}-{day}-{year}{month}{day}-{hour}{minute}{second}.md"
-      field: false                      # ফাইলের নাম নিজে তৈরি হয়, এডিটরকে ভাবতে হয় না
+      field: false                      # ফাইলের নাম নিজে তৈরি হয়, ভাবতে হয় না
     view:
       fields: [title, date, tags]
       primary: title
@@ -27,10 +30,17 @@ content:
         order: desc
     fields:
       - name: title
-        label: ক্যাপশন
+        label: ক্যাপশন (বাংলা)
         type: string
         required: true
-        description: পোস্টের বড় ও বোল্ড শিরোনাম হিসেবে দেখা যাবে।
+        description: লেখার বড় ও বোল্ড শিরোনাম।
+        options:
+          maxlength: 150
+
+      - name: title_en
+        label: ক্যাপশন (ইংরেজি, ঐচ্ছিক)
+        type: string
+        description: ইংরেজি মোডে এটা দেখাবে। ফাঁকা রাখলে বাংলাটাই দেখাবে।
         options:
           maxlength: 150
 
@@ -45,7 +55,7 @@ content:
       - name: image
         label: কভার ছবি
         type: image
-        description: পোস্টের উপরে আর কার্ডে দেখা যাবে। ফাঁকা রাখলেও চলবে।
+        description: লেখার উপরে আর কার্ডে দেখাবে। ফাঁকা রাখলেও চলবে।
         options:
           media: images
 
@@ -58,12 +68,19 @@ content:
         label: ট্যাগ
         type: string
         list: true
-        description: এক্সপ্লোর পেজে খোঁজার জন্য। এক বা দুই শব্দের ছোট ট্যাগ দিন।
+        description: লেখা পেজে খোঁজার জন্য। এক বা দুই শব্দের ছোট ট্যাগ দিন।
 
       - name: description
-        label: সংক্ষেপ
+        label: সংক্ষেপ (বাংলা)
         type: text
-        description: এক-দুই লাইনের সারকথা। কার্ডে ও সার্চ ইঞ্জিনে দেখা যাবে।
+        description: এক-দুই লাইনের সারকথা। কার্ডে ও সার্চ ইঞ্জিনে দেখাবে।
+        options:
+          maxlength: 200
+
+      - name: description_en
+        label: সংক্ষেপ (ইংরেজি, ঐচ্ছিক)
+        type: text
+        description: ইংরেজি মোডে কার্ডে এটা দেখাবে। ফাঁকা রাখলে বাংলাটাই দেখাবে।
         options:
           maxlength: 200
 
@@ -72,10 +89,15 @@ content:
         type: string
 
       - name: body
-        label: লেখা
+        label: লেখা (বাংলা)
         type: rich-text
-        description: সাধারণ লেখা এখানে। টুলবার থেকে বোল্ড, লিংক, তালিকা ও ছবি যোগ করা যাবে।
+        description: মূল লেখা এখানে। টুলবার থেকে বোল্ড, লিংক, তালিকা ও ছবি যোগ করা যাবে।
         options:
           format: markdown
           media: images
           rename: safe
+
+      - name: body_en
+        label: লেখা (ইংরেজি, ঐচ্ছিক)
+        type: text
+        description: ইংরেজি সংস্করণ। সাধারণ লেখা চলবে। বোল্ড করতে **এভাবে**, লিংকের জন্য [নাম](https://...), তালিকার জন্য লাইনের শুরুতে "- " দিন। প্রতিটা অনুচ্ছেদের মাঝে একটা ফাঁকা লাইন রাখুন। ফাঁকা রাখলে ইংরেজি মোডেও বাংলা লেখাটাই দেখাবে।
