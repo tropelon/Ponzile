@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0b0714">
   {% seo %}
+  {% unless page.image %}<meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}">{% endunless %}
+  {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
   {% feed_meta %}
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/logo.svg' | relative_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <style>.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:14px}.foot-links a{text-decoration:underline;text-underline-offset:3px}</style>
   <script>try{var l=localStorage.getItem('tp-lang');if(l==='bn'||l==='en')document.documentElement.lang=l}catch(e){}</script>
 </head>
 <body>
@@ -35,7 +38,12 @@
       {% if site.data.site.whatsapp != "" %}<a href="{{ site.data.site.whatsapp }}" target="_blank" rel="noopener">WhatsApp</a>{% endif %}
     </div>
     <p><a href="mailto:{{ site.data.site.email }}">{{ site.data.site.email }}</a></p>
-        <p><a href="{{ '/privacy/' | relative_url }}"><span class="bn">গোপনীয়তা ও নিয়মাবলি</span><span class="en">Privacy &amp; rules</span></a></p>
+    <p class="foot-links">
+      <a href="{{ '/tools/' | relative_url }}"><span class="bn">ফ্রি টুলস</span><span class="en">Free tools</span></a>
+      <a href="{{ '/explore/' | relative_url }}"><span class="bn">লেখা</span><span class="en">Articles</span></a>
+      <a href="{{ '/track/' | relative_url }}"><span class="bn">কাজের অগ্রগতি</span><span class="en">Track a request</span></a>
+      <a href="{{ '/privacy/' | relative_url }}"><span class="bn">গোপনীয়তা ও নিয়মাবলি</span><span class="en">Privacy &amp; rules</span></a>
+    </p>
     <p>© {{ site.time | date: "%Y" }} {{ site.data.site.name }}</p>
   </footer>
 
