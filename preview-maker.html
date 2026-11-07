@@ -1,0 +1,149 @@
+---
+layout: default
+title: Preview maker
+description: ক্লায়েন্টকে দেখানোর জন্য কম রেজোলিউশনের ছাপ-দেওয়া প্রিভিউ ছবি বানান | Make low-resolution, watermarked preview images
+permalink: /preview-maker/
+sitemap: false
+noindex: true
+---
+<style>
+  .pm-card:hover{transform:none;border-color:var(--line)}
+  .pm-card h2{font-size:1.15rem;margin-bottom:6px}
+  .stack{display:grid;gap:14px;margin-top:6px}
+  .f2{display:grid;gap:0 12px;grid-template-columns:1fr}
+  @media (min-width:560px){.f2{grid-template-columns:1fr 1fr}}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .bar .btn{padding:10px 20px;font-size:.92rem}
+  .status{min-height:1.4em;font-size:.85rem;color:#d8b4fe;margin-top:10px}
+  .status.err{color:#fda4af}
+  .outs{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin-top:14px}
+  .out{border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.03)}
+  .out canvas{display:block;width:100%;height:auto;border-radius:8px;background:#000}
+  .out .meta{margin:8px 0}
+  .out .btn{padding:8px 16px;font-size:.85rem}
+  .ok{color:#a7f3d0}.big{color:#fda4af}
+  [hidden]{display:none!important}
+</style>
+
+<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">প্রিভিউ মেকার</span><span class="en">Preview maker</span></h1>
+<p class="meta"><span class="bn">কাজের ছবি বা স্ক্রিনশট নিন। এই টুল ছবি ছোট করে, কোনাকুনি “PREVIEW” ছাপ বসিয়ে, ক্লায়েন্টকে দেখানোর উপযোগী করে দেবে। সবকিছু আপনার ফোনের ব্রাউজারেই হয়, কিছু আপলোড হয় না।</span><span class="en">Pick work images or screenshots. This tool shrinks them and stamps a diagonal “PREVIEW” across, ready to show a client. Everything happens in your browser, nothing is uploaded.</span></p>
+
+<div class="stack">
+  <section class="card pm-card">
+    <h2><span class="bn">ছবি বাছাই</span><span class="en">Choose images</span></h2>
+    <label for="pmFiles"><span class="bn">ছবি (সর্বোচ্চ ৬টা)</span><span class="en">Images (up to 6)</span></label>
+    <input id="pmFiles" type="file" accept="image/*" multiple>
+    <div class="f2">
+      <div><label for="pmText"><span class="bn">ছাপের লেখা</span><span class="en">Stamp text</span></label><input id="pmText" type="text" value="PREVIEW" maxlength="24"></div>
+      <div><label for="pmWidth"><span class="bn">ছবির চওড়া</span><span class="en">Image width</span></label>
+        <select id="pmWidth"><option value="640">640 px</option><option value="800" selected>800 px</option><option value="1000">1000 px</option></select></div>
+    </div>
+    <div class="bar"><button type="button" class="btn btn-primary" id="pmGo"><span class="bn">প্রিভিউ বানান</span><span class="en">Make previews</span></button></div>
+    <p class="status" id="pmStatus" aria-live="polite"></p>
+    <div class="outs" id="pmOuts"></div>
+    <div class="bar" id="pmAllBar" hidden><button type="button" class="btn" id="pmAll"><span class="bn">সবগুলো নামান</span><span class="en">Download all</span></button></div>
+  </section>
+
+  <section class="card pm-card">
+    <h2><span class="bn">এরপর কী করবেন</span><span class="en">What next</span></h2>
+    <p class="meta"><span class="bn">নামানো ছবিগুলো Google Drive-এর “tropelon previews (PRIVATE)” ফোল্ডারে তুলুন। তারপর শিটে ওই ক্লায়েন্টের সারিতে preview_files ঘরে ছবির লিংক বা ID কমা দিয়ে বসান, আর preview ঘরে YES দিন। প্রতিটা ছবি ৯০০ কিলোবাইটের নিচে হতে হবে, এই টুল সেটা নিজেই সামলায়।</span><span class="en">Upload the downloaded images to the “tropelon previews (PRIVATE)” folder in Google Drive. Then, in that client’s row in the sheet, paste the image links or IDs (comma separated) into preview_files and set preview to YES. Each image must stay under 900 KB, and this tool handles that for you.</span></p>
+  </section>
+</div>
+
+{% raw %}
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var isEn = function () { return document.documentElement.lang === 'en'; };
+  var t = function (bn, en) { return isEn() ? en : bn; };
+  var LIMIT = 880000;   // ব্যাকএন্ডের সীমা ৯০০০০০ বাইটের নিচে
+  var results = [];
+
+  function say(m, bad) { $('pmStatus').textContent = m; $('pmStatus').className = 'status' + (bad ? ' err' : ''); }
+
+  function load(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () { URL.revokeObjectURL(url); res(img); };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error('bad image')); };
+      img.src = url;
+    });
+  }
+  function toBlob(c, q) { return new Promise(function (res) { c.toBlob(res, 'image/jpeg', q); }); }
+
+  function stamp(ctx, w, h, text) {
+    var base = Math.max(14, Math.round(w / 22));
+    ctx.save();
+    ctx.translate(w / 2, h / 2); ctx.rotate(-0.5);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.miterLimit = 2;
+    var diag = Math.sqrt(w * w + h * h);
+    ctx.font = '800 ' + Math.round(base * 1.4) + 'px sans-serif';
+    var tw = ctx.measureText(text).width + base * 2, step = base * 3.4;
+    for (var y = -diag / 2; y < diag / 2; y += step) {
+      var off = (Math.round((y + diag / 2) / step) % 2) * (tw / 2);
+      for (var x = -diag / 2 - tw; x < diag / 2 + tw; x += tw) {
+        ctx.lineWidth = Math.max(2, base / 6); ctx.strokeStyle = 'rgba(0,0,0,.28)'; ctx.strokeText(text, x + off, y);
+        ctx.fillStyle = 'rgba(255,255,255,.38)'; ctx.fillText(text, x + off, y);
+      }
+    }
+    ctx.restore();
+  }
+
+  async function make(file, width, text) {
+    var img = await load(file);
+    var w = Math.min(width, img.naturalWidth), h = Math.round(w * img.naturalHeight / img.naturalWidth);
+    var c = document.createElement('canvas'); c.width = w; c.height = h;
+    var x = c.getContext('2d');
+    x.fillStyle = '#fff'; x.fillRect(0, 0, w, h);
+    x.drawImage(img, 0, 0, w, h);
+    stamp(x, w, h, text);
+    var q = 0.62, blob = await toBlob(c, q);
+    while (blob && blob.size > LIMIT && q > 0.25) { q -= 0.08; blob = await toBlob(c, q); }
+    return { canvas: c, blob: blob, w: w, h: h };
+  }
+
+  function download(blob, name) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  }
+
+  $('pmGo').addEventListener('click', async function () {
+    var files = [].slice.call($('pmFiles').files || []).filter(function (f) { return /^image\//.test(f.type); });
+    if (!files.length) { say(t('আগে ছবি বাছাই করুন।', 'Choose images first.'), true); return; }
+    if (files.length > 6) { files = files.slice(0, 6); }
+    var text = ($('pmText').value.trim() || 'PREVIEW').toUpperCase(), width = parseInt($('pmWidth').value, 10) || 800;
+    $('pmGo').disabled = true; say(t('বানানো হচ্ছে…', 'Working…'));
+    var outs = $('pmOuts'); outs.innerHTML = ''; results = [];
+    for (var i = 0; i < files.length; i++) {
+      try {
+        var r = await make(files[i], width, text);
+        if (!r.blob) throw new Error('no blob');
+        results.push(r);
+        var kb = Math.round(r.blob.size / 1024), ok = r.blob.size <= LIMIT;
+        var box = document.createElement('div'); box.className = 'out';
+        r.canvas.setAttribute('aria-label', 'preview ' + (i + 1));
+        var meta = document.createElement('p'); meta.className = 'meta';
+        var tag = document.createElement('span'); tag.className = ok ? 'ok' : 'big'; tag.textContent = kb + ' KB';
+        meta.appendChild(document.createTextNode(r.w + '×' + r.h + ' · ')); meta.appendChild(tag);
+        var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn';
+        btn.textContent = t('নামান', 'Download');
+        (function (blob, n) { btn.addEventListener('click', function () { download(blob, 'preview-' + n + '.jpg'); }); })(r.blob, i + 1);
+        box.appendChild(r.canvas); box.appendChild(meta); box.appendChild(btn); outs.appendChild(box);
+      } catch (e) {
+        var p = document.createElement('p'); p.className = 'meta big'; p.textContent = files[i].name + ': ' + t('ছবিটা পড়া যায়নি।', 'could not read this image.'); outs.appendChild(p);
+      }
+    }
+    $('pmGo').disabled = false;
+    $('pmAllBar').hidden = !results.length;
+    say(results.length ? t('তৈরি। এবার ছবিগুলো নামান।', 'Done. Now download the images.') : t('কোনো ছবি তৈরি হয়নি।', 'No image was made.'), !results.length);
+  });
+
+  $('pmAll').addEventListener('click', function () {
+    results.forEach(function (r, i) { setTimeout(function () { download(r.blob, 'preview-' + (i + 1) + '.jpg'); }, i * 500); });
+  });
+})();
+</script>
+{% endraw %}
