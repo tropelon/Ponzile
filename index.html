@@ -47,7 +47,7 @@ layout: default
   </p>
 </section>
 
-<h2 class="section-title"><span class="bn">আমরা যা করি</span><span class="en">What we do</span></h2>
+<h2 class="section-title"><span class="bn">সার্ভিস</span><span class="en">Services</span></h2>
 <div class="grid">
   <a class="card hm-card" href="{{ '/services/' | relative_url }}">
     <div class="hm-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg></div>
@@ -83,7 +83,7 @@ layout: default
 
 <h2 class="section-title"><span class="bn">কীভাবে কাজ হয়</span><span class="en">How it works</span></h2>
 <ol class="hm-steps">
-  <li><span class="bn"><b>অনুরোধ পাঠান।</b> ফর্মে কী লাগবে লিখুন। সঙ্গে একটা ট্র্যাকিং কোড পাবেন।</span><span class="en"><b>Send a request.</b> Tell us what you need in the form. You get a tracking code.</span></li>
+  <li><span class="bn"><b>অনুরোধ পাঠান।</b> ফর্মে কী লাগবে লিখুন। সঙ্গে একটা ট্র্যাকিং কোড পাবেন।</span><span class="en"><b>Send a request.</b> Describe what you need in the form. You get a tracking code.</span></li>
   <li><span class="bn"><b>দাম আর সময় ঠিক হবে।</b> ইমেইলে লিখিতভাবে সবকিছু জানিয়ে নিয়ে কাজ শুরু।</span><span class="en"><b>Price and timeline agreed.</b> Everything is confirmed in writing by email before work starts.</span></li>
   <li><span class="bn"><b>অগ্রগতি নিজে দেখুন।</b> কোড আর ইমেইল দিয়ে ট্র্যাক পেজে কত শতাংশ হলো দেখা যায়।</span><span class="en"><b>Follow the progress.</b> Use your code and email on the track page to see how far along the work is.</span></li>
   <li><span class="bn"><b>মাঝপথে একবার প্রিভিউ।</b> কাজ প্রায় অর্ধেক হলে একবারের জন্য প্রিভিউ দেখা যায়, তারপর সংশোধন আর চূড়ান্ত ফাইল।</span><span class="en"><b>A preview midway.</b> At around halfway you can view a one-time preview, then revisions and the final files.</span></li>
@@ -101,7 +101,7 @@ layout: default
   </div>
   <div class="card">
     <h3><span class="bn">খোলাখুলি নিয়ম</span><span class="en">Plain rules</span></h3>
-    <p class="meta"><span class="bn">কী তথ্য রাখা হয় আর কতদিন, সব লেখা আছে গোপনীয়তা পেজে।</span><span class="en">What we keep and for how long is written on the privacy page.</span></p>
+    <p class="meta"><span class="bn">কী তথ্য রাখা হয় আর কতদিন, সব লেখা আছে গোপনীয়তা পেজে।</span><span class="en">What is kept, and for how long, is written on the privacy page.</span></p>
     <a class="hm-more" href="{{ '/privacy/' | relative_url }}"><span class="bn">গোপনীয়তা ও নিয়মাবলি</span><span class="en">Privacy &amp; rules</span></a>
   </div>
 </div>
@@ -117,7 +117,7 @@ layout: default
     <a class="card post-card" href="{{ post.url | relative_url }}">
       {% if img %}<img src="{{ img }}" alt="" loading="lazy">{% else %}<div style="aspect-ratio:16/9;background:var(--grad);opacity:.35"></div>{% endif %}
       <div class="body">
-        <h3>{{ post.title }}</h3>
+        <h3><span class="bn">{{ post.title }}</span><span class="en">{{ post.title_en | default: post.title }}</span></h3>
         <p class="meta">{{ post.date | date: "%d-%m-%Y" }}</p>
       </div>
     </a>
@@ -133,7 +133,7 @@ layout: default
 </a>
 
 <section class="hm-cta">
-  <h2><span class="bn">কাজটা কী, একবার জানান</span><span class="en">Tell us about your job</span></h2>
+  <h2><span class="bn">কাজটা কী, একবার জানান</span><span class="en">Describe your job</span></h2>
   <p><span class="bn">যত পরিষ্কার লিখবেন, তত দ্রুত দাম আর সময় জানানো যাবে।</span><span class="en">The clearer you write, the faster a price and timeline can be given.</span></p>
   <div class="actions">
     <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></a>
