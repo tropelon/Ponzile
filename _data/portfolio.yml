@@ -1,0 +1,64 @@
+# ============================================================
+# পোর্টফোলিওর কাজের তালিকা (সব কাজ এখানে থেকে পেজে আসে)
+#
+# নতুন কাজ যোগ করতে: নিচের "works:" তালিকার শেষে একটা ব্লক যোগ করুন।
+# প্রতিটা ব্লক "  - " (দুই স্পেস, ড্যাশ, স্পেস) দিয়ে শুরু হয়।
+# লেখার ভেতরে কোলন (:) থাকলে পুরো লেখাটা " " উদ্ধৃতি চিহ্নের ভেতরে রাখুন।
+#
+# kind    : client = ক্লায়েন্টের কাজ | sample = নমুনা ও টেমপ্লেট | own = নিজের প্রকল্প
+# service : documents | spreadsheet | script | design | video | website | other
+# public  : true  = ডেমো দেখানো হবে (ক্লায়েন্ট অনুমতি দিয়েছেন)
+#           false = "গ্রাহক প্রকাশ করার অনুমতি দেয়নি" লেখা আসবে, ডেমো আসবে না
+# image   : ডেমোর ছবি, যেমন /assets/uploads/images/demo-1.jpg (ফাঁকা রাখা যায়)
+# link    : বাইরের বা ভেতরের লিংক (ফাঁকা রাখা যায়)
+# summary : কাজের ধরনের এক-দুই লাইন। ক্লায়েন্টের নাম বা গোপন তথ্য লিখবেন না।
+#
+# --- ক্লায়েন্টের কাজের উদাহরণ (এটা মন্তব্য, পেজে আসবে না) ---
+#  - kind: client
+#    service: documents
+#    year: 2026
+#    public: false
+#    title_bn: ১০ পেজের রিপোর্ট
+#    title_en: A 10-page report
+#    summary_bn: ফরম্যাটিংসহ PDF রিপোর্ট
+#    summary_en: A formatted PDF report
+# ============================================================
+works:
+  - kind: own
+    service: website
+    year: 2026
+    public: true
+    title_bn: tropelon.2bd.net
+    title_en: tropelon.2bd.net
+    summary_bn: এই ওয়েবসাইট। দুই ভাষার ইন্টারফেস, মোবাইলে সুবিধাজনক ডার্ক ডিজাইন, GitHub Pages-এ বিনামূল্যে হোস্ট করা।
+    summary_en: This website. A two-language interface, a mobile-friendly dark design, hosted free on GitHub Pages.
+    link: /
+    link_bn: দেখুন
+    link_en: View
+    image: ""
+
+  - kind: own
+    service: other
+    year: 2026
+    public: true
+    title_bn: ফ্রি কনভার্টার টুলস
+    title_en: Free converter tools
+    summary_bn: ইউনিকোড ↔ বিজয় বায়ান্ন লেখা রূপান্তর, ছবির ফরম্যাট বদল আর ইউনিট কনভার্টার। সবকিছু ব্রাউজারেই চলে, কিছু আপলোড হয় না।
+    summary_en: Unicode ↔ Bijoy Bayanno text conversion, image format conversion and a unit converter. Everything runs in the browser, nothing is uploaded.
+    link: /tools/
+    link_bn: ব্যবহার করুন
+    link_en: Try it
+    image: ""
+
+  - kind: own
+    service: script
+    year: 2026
+    public: true
+    title_bn: Tropelon BD
+    title_en: Tropelon BD
+    summary_bn: নিজের ইউটিউব চ্যানেল। ডকুমেন্টারি, শিক্ষামূলক ও হরর বর্ণনার ভিডিওর স্ক্রিপ্ট নিজে লেখা।
+    summary_en: My own YouTube channel. Scripts for documentary, educational and horror narration videos, written myself.
+    link: "https://www.youtube.com/channel/UCijufPWJQ_Ym5HMDW66GXew"
+    link_bn: চ্যানেল দেখুন
+    link_en: Visit channel
+    image: ""
