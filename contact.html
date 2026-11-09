@@ -73,7 +73,11 @@ permalink: /contact/
 
       <label class="consent" for="rConsent">
         <input id="rConsent" type="checkbox">
-        <span><span class="bn">আমি জানি, আমার নাম, ইমেইল আর কাজের বিবরণ শুধু এই অনুরোধ সামলাতে ব্যবহার হবে। <a href="{{ '/privacy/' | relative_url }}">প্রাইভেসি পেজ</a> দেখেছি।</span><span class="en">I understand my name, email and job details are used only to handle this request. I have read the <a href="{{ '/privacy/' | relative_url }}">privacy page</a>.</span></span>
+        <span><span class="bn">আমি জানি, আমার নাম, ইমেইল আর কাজের বিবরণ শুধু এই অনুরোধ সামলাতে ব্যবহার হবে। <a href="{{ '/privacy/' | relative_url }}">প্রাইভেসি পেজ</a> দেখেছি। এই সম্মতি যেকোনো সময় ফিরিয়ে নেওয়া যায়।</span><span class="en">I understand my name, email and job details are used only to handle this request. I have read the <a href="{{ '/privacy/' | relative_url }}">privacy page</a>. I can withdraw this consent at any time.</span></span>
+      </label>
+      <label class="consent" for="rTerms">
+        <input id="rTerms" type="checkbox">
+        <span><span class="bn">আমি <a href="{{ '/privacy/#cancel' | relative_url }}">বাতিল ও ফির নিয়ম</a> পড়েছি। জানি যে কাজ অর্ধেক হয়ে গেলে অর্ডার বাতিল করা যায় না, তখন কাজটা নিই বা না নিই ঠিক করা ফি দিতে হবে। কুপন আর পেমেন্টের নিয়মও <a href="{{ '/privacy/#payment' | relative_url }}">এখানে</a> আছে।</span><span class="en">I have read the <a href="{{ '/privacy/#cancel' | relative_url }}">cancellation and fee rules</a>. I know that once a job is half done the order cannot be cancelled, and the agreed fee must be paid whether or not I take the work. Coupon and payment rules are <a href="{{ '/privacy/#payment' | relative_url }}">here</a> too.</span></span>
       </label>
 
       <div class="bar">
@@ -155,7 +159,8 @@ permalink: /contact/
       deadline: $('rDeadline').value.trim(),
       details: $('rDetails').value.trim(),
       ref: $('rRef').value.trim(),
-      consent: $('rConsent').checked
+      consent: $('rConsent').checked,
+      terms: $('rTerms').checked
     };
   }
   function check(v) {
@@ -163,7 +168,8 @@ permalink: /contact/
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)) { say(t('সঠিক ইমেইল ঠিকানা দিন।', 'Please enter a valid email address.'), true); $('rMail').focus(); return false; }
     if (v.details.length < 10) { say(t('কাজের বিবরণ আরেকটু বিস্তারিত লিখুন (কমপক্ষে ১০ অক্ষর)।', 'Please describe the job in a bit more detail (at least 10 characters).'), true); $('rDetails').focus(); return false; }
     if (v.ref && !/^https?:\/\/\S+$/i.test(v.ref)) { say(t('লিংকটা https:// দিয়ে শুরু হতে হবে।', 'The link must start with https://'), true); $('rRef').focus(); return false; }
-    if (!v.consent) { say(t('এগিয়ে যেতে সম্মতির ঘরে টিক দিন।', 'Tick the consent box to continue.'), true); $('rConsent').focus(); return false; }
+    if (!v.consent) { say(t('এগিয়ে যেতে তথ্য ব্যবহারের সম্মতির ঘরে টিক দিন।', 'Tick the data-use consent box to continue.'), true); $('rConsent').focus(); return false; }
+    if (!v.terms) { say(t('এগিয়ে যেতে বাতিল ও ফির নিয়মের ঘরে টিক দিন।', 'Tick the cancellation and fee rules box to continue.'), true); $('rTerms').focus(); return false; }
     return true;
   }
   function plainMessage(v) {
@@ -216,7 +222,7 @@ permalink: /contact/
     say(t('পাঠানো হচ্ছে…', 'Sending…'));
     post({
       service: v.service, name: v.name, email: v.email, contact: v.contact, deadline: v.deadline,
-      details: v.details, ref: v.ref, consent: true, website: $('rWebsite').value,
+      details: v.details, ref: v.ref, consent: v.consent && v.terms, website: $('rWebsite').value,
       t: Date.now() - loaded, lang: isEn() ? 'en' : 'bn'
     }).then(function (res) {
       busy = false; sendBtn.disabled = false;
