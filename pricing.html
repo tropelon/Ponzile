@@ -1,0 +1,391 @@
+---
+layout: default
+title: দামের তালিকা
+description: কোন কাজে কত টাকা পড়বে, প্রতি পৃষ্ঠা, প্রতি ঘণ্টা বা প্রতি ছবি হিসেবে, আর কীভাবে টাকা দিতে হয় | What each job costs, per page, hour or image, and how payment works
+permalink: /pricing/
+# ====================================================================
+# দাম বসানোর জায়গা। শুধু নিচের "price:" লেখার পর সংখ্যা বসান, টাকায়।
+#   price: 150      <- প্রতি এককের দাম ১৫০ টাকা (বাংলা সংখ্যা ১৫০ লিখলেও চলবে)
+#   price: ""       <- ফাঁকা থাকলে পেজে "আলোচনা সাপেক্ষে" দেখাবে
+# একটাও দাম না বসালে "হিসাব করে দেখুন" অংশটা লুকানো থাকবে।
+# নতুন লাইন যোগ করতে চাইলে যেকোনো একটা লাইন কপি করে বদলে নিন।
+# ====================================================================
+currency: "৳"
+min_order: ""        # ন্যূনতম অর্ডার (টাকা)। ফাঁকা থাকলে দেখানো হবে না
+rush_percent: ""     # জরুরি কাজে বাড়তি কত শতাংশ। ফাঁকা থাকলে দেখানো হবে না
+free_revisions: ""   # বিনামূল্যে কতবার সংশোধন। ফাঁকা থাকলে দেখানো হবে না
+rates:
+  - key: documents
+    bn: ডকুমেন্ট ও PDF
+    en: Documents & PDF
+    items:
+      - {price: "", bn: "Word ফাইলের ফরম্যাটিং ও পেজ সাজানো", en: "Word formatting and page layout", unit_bn: "প্রতি পৃষ্ঠা", unit_en: "per page"}
+      - {price: "", bn: "বাংলা টাইপিং", en: "Bangla typing", unit_bn: "প্রতি পৃষ্ঠা", unit_en: "per page"}
+      - {price: "", bn: "ইউনিকোড ↔ বিজয় লেখা রূপান্তর", en: "Unicode ↔ Bijoy conversion", unit_bn: "প্রতি ১,০০০ অক্ষর", unit_en: "per 1,000 characters"}
+      - {price: "", bn: "PDF তৈরি বা ফরম্যাট বদল", en: "PDF creation or conversion", unit_bn: "প্রতি ফাইল", unit_en: "per file"}
+  - key: spreadsheet
+    bn: স্প্রেডশিট
+    en: Spreadsheets
+    items:
+      - {price: "", bn: "ডেটা এন্ট্রি ও গোছানো শিট", en: "Data entry and tidy sheets", unit_bn: "প্রতি ১০০ সারি", unit_en: "per 100 rows"}
+      - {price: "", bn: "ফর্মুলা ও স্বয়ংক্রিয় হিসাবের শিট", en: "Formula and auto-calculation sheet", unit_bn: "প্রতি শিট", unit_en: "per sheet"}
+      - {price: "", bn: "দৈনন্দিন হিসাবের ট্র্যাকার", en: "Everyday record tracker", unit_bn: "প্রতি ট্র্যাকার", unit_en: "per tracker"}
+      - {price: "", bn: "ঘণ্টার হিসাবে শিটের কাজ", en: "Sheet work by the hour", unit_bn: "প্রতি ঘণ্টা", unit_en: "per hour"}
+  - key: script
+    bn: ভিডিও স্ক্রিপ্ট লেখা
+    en: Video script writing
+    items:
+      - {price: "", bn: "ভিডিও স্ক্রিপ্ট (বাংলা বা ইংরেজি)", en: "Video script (Bangla or English)", unit_bn: "প্রতি মিনিটের ভিডিও", unit_en: "per minute of video"}
+      - {price: "", bn: "লেখা ও বর্ণনা", en: "Writing and narration", unit_bn: "প্রতি ১,০০০ শব্দ", unit_en: "per 1,000 words"}
+  - key: design
+    bn: গ্রাফিক্স ডিজাইন
+    en: Graphic design
+    items:
+      - {price: "", bn: "ইউটিউব থাম্বনেইল", en: "YouTube thumbnail", unit_bn: "প্রতি ছবি", unit_en: "per image"}
+      - {price: "", bn: "সোশ্যাল মিডিয়া পোস্ট বা ব্যানার", en: "Social media post or banner", unit_bn: "প্রতি ডিজাইন", unit_en: "per design"}
+      - {price: "", bn: "পোস্টার বা ফ্লায়ার", en: "Poster or flyer", unit_bn: "প্রতি ডিজাইন", unit_en: "per design"}
+      - {price: "", bn: "দিনের হিসাবে ডিজাইনের কাজ", en: "Design work by the day", unit_bn: "প্রতি দিন", unit_en: "per day"}
+  - key: video
+    bn: ভিডিও এডিটিং
+    en: Video editing
+    items:
+      - {price: "", bn: "কাটছাঁট, ক্লিপ সাজানো ও সাবটাইটেল", en: "Cutting, arranging clips and subtitles", unit_bn: "প্রতি মিনিটের ভিডিও", unit_en: "per minute of video"}
+      - {price: "", bn: "ঘণ্টার হিসাবে এডিটিং", en: "Editing by the hour", unit_bn: "প্রতি ঘণ্টা", unit_en: "per hour"}
+      - {price: "", bn: "দিনের হিসাবে এডিটিং", en: "Editing by the day", unit_bn: "প্রতি দিন", unit_en: "per day"}
+  - key: website
+    bn: ছোট ওয়েবসাইট
+    en: Small websites
+    items:
+      - {price: "", bn: "পোর্টফোলিও বা ল্যান্ডিং পেজ", en: "Portfolio or landing page", unit_bn: "প্রতি সাইট", unit_en: "per site"}
+      - {price: "", bn: "অতিরিক্ত পেজ", en: "Extra page", unit_bn: "প্রতি পেজ", unit_en: "per page"}
+      - {price: "", bn: "ঘণ্টার হিসাবে ওয়েবের কাজ", en: "Web work by the hour", unit_bn: "প্রতি ঘণ্টা", unit_en: "per hour"}
+---
+{% assign cur = page.currency | default: "৳" %}
+{% assign any_price = false %}
+{% for s in page.rates %}{% for it in s.items %}{% capture pp %}{{ it.price }}{% endcapture %}{% if pp != "" %}{% assign any_price = true %}{% endif %}{% endfor %}{% endfor %}
+{% capture min_s %}{{ page.min_order }}{% endcapture %}
+{% capture rush_s %}{{ page.rush_percent }}{% endcapture %}
+{% capture rev_s %}{{ page.free_revisions }}{% endcapture %}
+
+<style>
+  [hidden]{display:none!important}
+  .pr-hero{padding:28px 0 6px}
+  .pr-hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800}
+  .pr-card{border:1px solid var(--line);border-radius:var(--r);padding:20px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
+  .pr-card h2,.pr-card h3{font-size:1.15rem;font-weight:800;margin-bottom:4px}
+  .pr-h2{font-size:1.25rem;margin:36px 0 12px}
+  .pr-grid{display:grid;gap:16px;margin-top:6px}
+  @media (min-width:760px){.pr-grid{grid-template-columns:1fr 1fr}}
+  .pr-rows{list-style:none;padding:0;margin:12px 0 16px;display:grid;gap:0}
+  .pr-rows li{display:grid;grid-template-columns:1fr auto;column-gap:14px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+  .pr-rows li:first-child{border-top:0}
+  .pr-rows .nm{grid-column:1;font-weight:600;font-size:.96rem}
+  .pr-rows .un{grid-column:1;color:var(--muted);font-size:.84rem}
+  .pr-rows .pv{grid-column:2;grid-row:1 / span 2;text-align:right;font-weight:800;font-size:1.05rem;white-space:nowrap}
+  .pr-rows .pv.neg{font-weight:500;font-size:.82rem;color:var(--muted);white-space:normal;max-width:9ch;line-height:1.35}
+  .pr-card .go{padding:9px 18px;font-size:.88rem}
+
+  .est{margin-top:22px}
+  .est form{display:grid;gap:12px;margin-top:12px}
+  .est .e-row{display:grid;gap:12px}
+  @media (min-width:640px){.est .e-row{grid-template-columns:1fr 160px auto;align-items:end}}
+  .est select,.est input[type=number]{min-height:50px}
+  .est .e-err{color:#fda4af;font-size:.9rem;min-height:1.2em}
+  .e-lines{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+  .e-lines li{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}
+  .e-lines .t{font-size:.92rem}
+  .e-lines .t small{display:block;color:var(--muted)}
+  .e-lines .s{font-weight:700;white-space:nowrap}
+  .e-lines button{font:inherit;color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;width:32px;height:32px;cursor:pointer}
+  .e-lines button:hover{color:#fff;border-color:var(--accent)}
+  .e-total{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);display:grid;gap:6px}
+  .e-total .line{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.92rem}
+  .e-total .big{display:flex;justify-content:space-between;gap:12px;font-weight:800;font-size:1.25rem;color:var(--text)}
+  .e-note{color:var(--muted);font-size:.85rem;margin-top:10px}
+  .chk{display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--muted)}
+  .chk input{width:auto;accent-color:#a855f7}
+
+  .pr-steps{counter-reset:s;display:grid;gap:12px;padding:0;margin-top:6px}
+  .pr-steps li{list-style:none;position:relative;padding:14px 16px 14px 56px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+  .pr-steps li b{display:block;margin-bottom:2px}
+  .pr-steps li span.d{color:var(--muted);font-size:.93rem}
+  .pr-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;color:#fff;background:var(--grad)}
+  .pr-rules{display:grid;gap:10px;padding:0;margin-top:6px}
+  .pr-rules li{list-style:none;padding:12px 16px;border-left:3px solid var(--accent);background:rgba(255,255,255,.03);border-radius:0 12px 12px 0;color:var(--muted);font-size:.96rem}
+  .pr-rules li.key{border-left-color:#fbbf24;color:var(--text)}
+  .pr-rules a,.faq a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+  .faq{display:grid;gap:10px}
+  .faq details{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);padding:0 16px}
+  .faq summary{cursor:pointer;padding:14px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-size:1.3rem;color:var(--accent);line-height:1}
+  .faq details[open] summary::after{content:"\2212"}
+  .faq details p{color:var(--muted);font-size:.95rem;padding-bottom:14px}
+  .pr-cta{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px}
+</style>
+
+<section class="pr-hero">
+  <h1 class="grad-text"><span class="bn">দামের তালিকা</span><span class="en">Price list</span></h1>
+  <p class="lead">
+    <span class="bn">কোন কাজে কত টাকা পড়বে, প্রতি পৃষ্ঠা, প্রতি ঘণ্টা, প্রতি ছবি বা প্রতি দিন হিসেবে। নিচে নিজেই মোটামুটি হিসাব করে দেখতে পারবেন। চূড়ান্ত দাম কাজ দেখে আমরা ইমেইলে জানাই, কাজ শুরুর আগে।</span>
+    <span class="en">What each job costs, per page, hour, image or day. You can work out a rough total below. We confirm the final price by email after looking at the job, before any work starts.</span>
+  </p>
+</section>
+
+{% if any_price %}
+<section class="pr-card est" id="estimator" aria-labelledby="estH">
+  <h2 id="estH"><span class="bn">হিসাব করে দেখুন</span><span class="en">Work out a rough total</span></h2>
+  <p class="meta"><span class="bn">কাজ বাছুন, কতটা লাগবে লিখুন, “যোগ করুন” চাপুন। একাধিক কাজ যোগ করে মোট দেখা যায়।</span><span class="en">Pick a job, enter how much you need, press “Add”. Add several jobs to see the total.</span></p>
+  <form id="eForm" novalidate data-cur="{{ cur | escape }}" data-min="{{ min_s | escape }}" data-rush="{{ rush_s | escape }}">
+    <div class="e-row">
+      <div>
+        <label for="eItem"><span class="bn">কোন কাজ</span><span class="en">Which job</span></label>
+        <select id="eItem">
+          {% for s in page.rates %}
+          <optgroup label="{{ s.bn | escape }}" data-bn="{{ s.bn | escape }}" data-en="{{ s.en | escape }}">
+            {% for it in s.items %}{% capture pp %}{{ it.price }}{% endcapture %}
+            <option value="{{ s.key }}-{{ forloop.index }}" data-price="{{ pp | escape }}" data-bn="{{ it.bn | escape }}" data-en="{{ it.en | escape }}" data-ubn="{{ it.unit_bn | escape }}" data-uen="{{ it.unit_en | escape }}"{% if pp == "" %} disabled{% endif %}>{{ it.bn | escape }}</option>
+            {% endfor %}
+          </optgroup>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label for="eQty"><span class="bn">কতটা (সংখ্যা)</span><span class="en">How many</span></label>
+        <input id="eQty" type="number" inputmode="decimal" min="0" step="any" value="1" autocomplete="off">
+      </div>
+      <button class="btn btn-primary" type="submit" id="eAdd"><span class="bn">যোগ করুন</span><span class="en">Add</span></button>
+    </div>
+    <p class="e-err" id="eErr" role="alert"></p>
+  </form>
+  <ul class="e-lines" id="eLines"></ul>
+  <div class="e-total" id="eTotalBox" hidden aria-live="polite">
+    <div class="line" id="eSubRow"><span class="bn">কাজের মোট</span><span class="en">Jobs subtotal</span><span id="eSub"></span></div>
+    <div class="line" id="eMinRow" hidden><span class="bn">ন্যূনতম অর্ডার প্রযোজ্য</span><span class="en">Minimum order applies</span><span id="eMin"></span></div>
+    {% if rush_s != "" %}
+    <label class="chk"><input type="checkbox" id="eRush"><span><span class="bn">জরুরি কাজ (দাম <span class="mv" data-v="{{ rush_s | escape }}">{{ rush_s }}</span>% বেশি)</span><span class="en">Rush job (<span class="mv" data-v="{{ rush_s | escape }}">{{ rush_s }}</span>% extra)</span></span></label>
+    <div class="line" id="eRushRow" hidden><span class="bn">জরুরি কাজের বাড়তি</span><span class="en">Rush extra</span><span id="eRushAmt"></span></div>
+    {% endif %}
+    <div class="big"><span class="bn">আনুমানিক মোট</span><span class="en">Estimated total</span><span id="eTotal"></span></div>
+  </div>
+  <p class="e-note"><span class="bn">এটা শুধু আনুমানিক হিসাব, দাম পাকা করা নয়। কুপন থাকলে ছাড় পেমেন্টের সময় অগ্রগতি পেজে বসে।</span><span class="en">This is only a rough estimate, not a fixed price. A coupon, if you have one, is applied on the progress page at payment time.</span></p>
+</section>
+{% endif %}
+
+<h2 class="pr-h2"><span class="bn">কাজ অনুযায়ী দাম</span><span class="en">Prices by service</span></h2>
+<div class="pr-grid">
+  {% for s in page.rates %}
+  <section class="pr-card" id="p-{{ s.key }}">
+    <h3><span class="bn">{{ s.bn | escape }}</span><span class="en">{{ s.en | escape }}</span></h3>
+    <ul class="pr-rows">
+      {% for it in s.items %}{% capture pp %}{{ it.price }}{% endcapture %}
+      <li>
+        <span class="nm"><span class="bn">{{ it.bn | escape }}</span><span class="en">{{ it.en | escape }}</span></span>
+        <span class="un"><span class="bn">{{ it.unit_bn | escape }}</span><span class="en">{{ it.unit_en | escape }}</span></span>
+        {% if pp != "" %}<span class="pv">{{ cur }}<span class="mv" data-v="{{ pp | escape }}">{{ pp }}</span></span>
+        {% else %}<span class="pv neg"><span class="bn">আলোচনা সাপেক্ষে</span><span class="en">On request</span></span>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    <a class="btn go" href="{{ '/contact/?service=' | append: s.key | relative_url }}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
+  </section>
+  {% endfor %}
+</div>
+
+<h2 class="pr-h2"><span class="bn">দাম ঠিক হয় যেভাবে</span><span class="en">How the price is set</span></h2>
+<ul class="pr-rules">
+  <li><span class="bn">এই তালিকা শুরুর হিসাব। কাজ দেখে আমরা ইমেইলে চূড়ান্ত দাম আর সময় লিখে জানাই, আপনি রাজি হলে তবেই কাজ শুরু হয়।</span><span class="en">This list is a starting point. After looking at the job we send the final price and time in writing by email, and work starts only when you agree.</span></li>
+  <li><span class="bn">ফাইল অগোছালো হলে, কাজ বেশি জটিল হলে, সময় খুব কম হলে বা কাজের পরিধি বাড়লে দাম বদলাতে পারে। বদলাতে হলে আগে জানাই, আপনার সম্মতি ছাড়া বাড়তি কিছু ধরা হয় না।</span><span class="en">The price can change if files are messy, the job is harder, time is very short or the scope grows. If it must change we tell you first and add nothing without your agreement.</span></li>
+  {% if min_s != "" %}<li><span class="bn">ন্যূনতম অর্ডার <b>{{ cur }}<span class="mv" data-v="{{ min_s | escape }}">{{ min_s }}</span></b>। এর কম হিসাব হলেও এই অঙ্ক ধরা হয়।</span><span class="en">Minimum order <b>{{ cur }}<span class="mv" data-v="{{ min_s | escape }}">{{ min_s }}</span></b>. If the total comes lower, this amount applies.</span></li>{% endif %}
+  {% if rush_s != "" %}<li><span class="bn">জরুরি কাজে (খুব অল্প সময়ে চাইলে) দাম <b><span class="mv" data-v="{{ rush_s | escape }}">{{ rush_s }}</span>%</b> বেশি।</span><span class="en">Rush jobs (needed in very little time) cost <b><span class="mv" data-v="{{ rush_s | escape }}">{{ rush_s }}</span>%</b> more.</span></li>{% endif %}
+  {% if rev_s != "" %}<li><span class="bn">কাজ দেখার পর <b><span class="mv" data-v="{{ rev_s | escape }}">{{ rev_s }}</span> বার</b> সংশোধন বিনামূল্যে। এর বেশি বা পুরো নতুনভাবে বদলাতে হলে আলাদা হিসাব হয়।</span><span class="en"><b><span class="mv" data-v="{{ rev_s | escape }}">{{ rev_s }}</span></b> round(s) of corrections after you see the work are free. More than that, or a full redo, is priced separately.</span></li>{% endif %}
+  <li><span class="bn">সব দাম টাকায় (৳)। পরিশোধ বিকাশে।</span><span class="en">All prices are in taka (৳). Payment is by bKash.</span></li>
+</ul>
+
+<h2 class="pr-h2"><span class="bn">টাকা দেবেন যেভাবে</span><span class="en">How payment works</span></h2>
+<ol class="pr-steps">
+  <li><b><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></b><span class="d"><span class="bn"><a href="{{ '/contact/' | relative_url }}">যোগাযোগ পেজের ফর্মে</a> কাজের বিবরণ লিখুন। আপনি একটা ট্র্যাকিং কোড পাবেন।</span><span class="en">Describe the job in the <a href="{{ '/contact/' | relative_url }}">contact form</a>. You get a tracking code.</span></span></li>
+  <li><b><span class="bn">আমরা দাম জানাই</span><span class="en">We quote a price</span></b><span class="d"><span class="bn">কাজ দেখে দাম আর সময় জানাই। আপনি রাজি হলে কাজ শুরু হয়।</span><span class="en">We look at the job and send a price and timeline. Work starts when you agree.</span></span></li>
+  <li><b><span class="bn">অগ্রগতি পেজে কুপন ও বিকাশ</span><span class="en">Coupon and bKash on the progress page</span></b><span class="d"><span class="bn"><a href="{{ '/track/' | relative_url }}">কাজের অগ্রগতি পেজে</a> কোড আর ইমেইল দিয়ে ঢুকুন। কুপন থাকলে আগে বসান, তারপর QR স্ক্যান করে বা নম্বরে বিকাশে টাকা পাঠান।</span><span class="en">Open the <a href="{{ '/track/' | relative_url }}">progress page</a> with your code and email. Apply a coupon first if you have one, then pay on bKash by scanning the QR or using the number.</span></span></li>
+  <li><b><span class="bn">Transaction ID বসান</span><span class="en">Paste the Transaction ID</span></b><span class="d"><span class="bn">বিকাশের মেসেজের TrxID পেজে বসিয়ে জমা দিন। আমাদের শুধু TrxID-ই লাগে, আপনার নম্বর, PIN বা OTP কখনো লাগে না।</span><span class="en">Paste the TrxID from the bKash message and submit it. We only need the TrxID, never your number, PIN or OTP.</span></span></li>
+  <li><b><span class="bn">আমরা মিলিয়ে নিশ্চিত করি</span><span class="en">We verify and confirm</span></b><span class="d"><span class="bn">বিকাশে টাকা এসেছে কিনা মিলিয়ে দেখে নিশ্চিত করি, আপনার ইমেইলে রসিদ যায়। চূড়ান্ত ফাইল পরিশোধ নিশ্চিত হওয়ার পর পাঠাই।</span><span class="en">We check the money arrived on bKash and confirm; a receipt goes to your email. Final files are sent once payment is confirmed.</span></span></li>
+</ol>
+<p class="meta" style="margin-top:10px"><span class="bn">বিকাশ নম্বর আর QR এই পেজে দেওয়া নেই। দাম ঠিক হওয়ার পর শুধু আপনার নিজের অগ্রগতি পেজেই দেখা যায়, যাতে ভুয়া পেজ বা ভুল নম্বরে টাকা যাওয়ার ঝুঁকি কমে।</span><span class="en">The bKash number and QR are not shown on this page. After the price is set they appear only on your own progress page, which lowers the risk of fake pages or paying the wrong number.</span></p>
+
+<h2 class="pr-h2"><span class="bn">বাতিল ও ফি</span><span class="en">Cancellation and fee</span></h2>
+<ul class="pr-rules">
+  <li><span class="bn">কাজ <b>৫০%</b>-এর কম হলে অগ্রগতি পেজ থেকে বাতিলের অনুরোধ করা যায়। আমরা দেখে ইমেইলে সিদ্ধান্ত জানাই।</span><span class="en">While a job is under <b>50%</b> done you can request cancellation from the progress page. We review it and reply by email.</span></li>
+  <li class="key"><span class="bn">কাজ <b>অর্ধেক হয়ে গেলে আর বাতিল করা যায় না</b>। তখন আপনি কাজটা নিন বা না নিন, চূড়ান্ত দামের ফি আপনাকে দিতে হবে।</span><span class="en"><b>Once a job is half done it can no longer be cancelled.</b> From then on the agreed fee is payable whether or not you take the finished work.</span></li>
+  <li><span class="bn">এক নজর প্রিভিউ দেখানো হয়ে গেলেও বাতিল করা যায় না।</span><span class="en">Cancellation is also closed once the one-look preview has been shown.</span></li>
+  <li><span class="bn">পুরো নিয়ম <a href="{{ '/privacy/#cancel' | relative_url }}">গোপনীয়তা ও নিয়মাবলি</a> পেজে লেখা আছে।</span><span class="en">The full rules are on the <a href="{{ '/privacy/#cancel' | relative_url }}">Privacy &amp; rules</a> page.</span></li>
+</ul>
+
+<h2 class="pr-h2"><span class="bn">কুপন</span><span class="en">Coupons</span></h2>
+<ul class="pr-rules">
+  <li><span class="bn">কুপন দুই রকম: শতাংশ ছাড়, আর ব্যালেন্স কুপন (একটা নির্দিষ্ট টাকার ভাউচার, যা ব্যবহারের সাথে সাথে কমে)।</span><span class="en">Coupons come in two kinds: a percentage off, and a balance coupon (a voucher worth a fixed amount that goes down as it is used).</span></li>
+  <li><span class="bn">প্রতিটা কুপনের নিজের মেয়াদ, সর্বোচ্চ কতবার ব্যবহার করা যাবে আর একজন কতবার নিতে পারবে, এসব সীমা আছে। এক অনুরোধে একটাই কুপন, আর পেমেন্ট জমা দেওয়ার আগে বসাতে হয়।</span><span class="en">Each coupon has its own expiry date, a maximum number of uses and a per-person limit. One coupon per request, applied before you submit payment.</span></li>
+  <li><span class="bn">কুপন টাকা হিসেবে ফেরত বা বদল করা যায় না। বিস্তারিত <a href="{{ '/privacy/#coupon' | relative_url }}">কুপনের নিয়মে</a>।</span><span class="en">Coupons cannot be exchanged for cash. Details in the <a href="{{ '/privacy/#coupon' | relative_url }}">coupon rules</a>.</span></li>
+</ul>
+
+<h2 class="pr-h2"><span class="bn">সচরাচর প্রশ্ন</span><span class="en">Common questions</span></h2>
+<div class="faq">
+  <details>
+    <summary><span class="bn">কাজের আগে কি সম্পূর্ণ টাকা দিতে হবে?</span><span class="en">Do I pay everything before the work?</span></summary>
+    <p><span class="bn">দাম ঠিক হওয়ার পর যেকোনো সময় অগ্রগতি পেজ থেকে পরিশোধ করা যায়। চূড়ান্ত ফাইল পরিশোধ নিশ্চিত হওয়ার পর পাঠানো হয়। কাজ অর্ধেক হয়ে গেলে ফি আর ফেরানো বা বাতিল করা যায় না, তাই আগে থেকে দাম আর পরিধি ভালো করে মিলিয়ে নিন।</span><span class="en">After the price is set you can pay at any time from the progress page. Final files are sent once payment is confirmed. Once a job is half done the fee can no longer be cancelled, so check the price and scope carefully beforehand.</span></p>
+  </details>
+  <details>
+    <summary><span class="bn">ভুল Transaction ID দিয়ে ফেললে?</span><span class="en">What if I enter a wrong Transaction ID?</span></summary>
+    <p><span class="bn">আমরা বিকাশে মিলিয়ে দেখি। না মিললে অগ্রগতি পেজে সেটা দেখা যায় আর আপনি আবার সঠিকটা দিতে পারেন। এক অনুরোধে সীমিত কয়েকবার জমা দেওয়া যায়, তাই বসানোর আগে একবার দেখে নিন।</span><span class="en">We check it on bKash. If it does not match, the progress page shows that and you can send the right one. A limited number of submissions is allowed per request, so look once before you paste.</span></p>
+  </details>
+  <details>
+    <summary><span class="bn">কম টাকা বা বেশি টাকা পাঠিয়ে ফেললে?</span><span class="en">What if I send too little or too much?</span></summary>
+    <p><span class="bn">কম হলে বাকি অংশ পেজে “বাকি” হিসেবে দেখায়, পরে বাকিটা দিলেই হয়। বেশি পাঠালে ইমেইলে জানান, আমরা দেখে মিটিয়ে দেব।</span><span class="en">If it is too little, the rest shows as “due” and you can pay it later. If you sent too much, email us and we will review and settle it.</span></p>
+  </details>
+  <details>
+    <summary><span class="bn">৫০%-এর আগে বাতিল করলে টাকা ফেরত পাব?</span><span class="en">If I cancel before 50%, do I get a refund?</span></summary>
+    <p><span class="bn">বাতিলের অনুরোধ আমরা দেখে ইমেইলে সিদ্ধান্ত জানাই। আগে টাকা পাঠিয়ে থাকলে, যতটুকু কাজ হয়েছে তার অংশ রেখে বাকিটা ফেরত দেওয়া হয়।</span><span class="en">We review the request and reply by email. If you already paid, the part for the work done so far is kept and the rest is refunded.</span></p>
+  </details>
+  <details>
+    <summary><span class="bn">কুপন কেন বসানো যাচ্ছে না?</span><span class="en">Why can't I apply my coupon?</span></summary>
+    <p><span class="bn">কুপনের মেয়াদ শেষ, ব্যবহারের সীমা শেষ, বা পেমেন্ট জমা দেওয়া হয়ে গেছে, এসবের যেকোনো একটা কারণ হতে পারে। দাম ঠিক হওয়ার আগেও কুপন বসে না। পেজে কারণটা লেখা আসে।</span><span class="en">The coupon may be expired, used up, or a payment may already be submitted. A coupon also cannot be applied before the price is set. The page shows the reason.</span></p>
+  </details>
+  <details>
+    <summary><span class="bn">অন্য কোনোভাবে (নগদ, ব্যাংক) টাকা দেওয়া যায়?</span><span class="en">Can I pay another way (Nagad, bank)?</span></summary>
+    <p><span class="bn">এখন শুধু বিকাশে নেওয়া হয়। অন্য কোনো পদ্ধতি লাগলে আগে ইমেইলে জানান।</span><span class="en">For now we take bKash only. If you need another method, email us first.</span></p>
+  </details>
+</div>
+
+<div class="pr-cta">
+  <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">কাজের অনুরোধ পাঠান</span><span class="en">Send a request</span></a>
+  <a class="btn" href="{{ '/portfolio/' | relative_url }}"><span class="bn">কাজের নমুনা দেখুন</span><span class="en">See our work</span></a>
+</div>
+
+{% raw %}
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var isEn = function () { return document.documentElement.lang === 'en'; };
+  var t = function (bn, en) { return isEn() ? en : bn; };
+
+  // বাংলা সংখ্যা (১২৩) ইংরেজি সংখ্যায়, আর কমা বাদ
+  function toNum(s) {
+    s = String(s == null ? '' : s).replace(/[০-৯]/g, function (d) { return String(d.charCodeAt(0) - 0x09E6); }).replace(/[,\s]/g, '');
+    if (s === '' || !/^\d+(\.\d+)?$/.test(s)) return NaN;
+    return Number(s);
+  }
+  function fmtNum(n) {
+    try { return new Intl.NumberFormat(isEn() ? 'en-US' : 'bn-BD', { maximumFractionDigits: 2 }).format(n); } catch (e) { return String(n); }
+  }
+
+  // পেজের সব স্থির দাম ভাষা অনুযায়ী সাজানো
+  function fmtStatic() {
+    [].forEach.call(document.querySelectorAll('.mv'), function (el) {
+      var n = toNum(el.getAttribute('data-v'));
+      if (isFinite(n)) el.textContent = fmtNum(n);
+    });
+  }
+
+  var form = $('eForm');
+  var sel = form && $('eItem');
+  if (!form || !sel) {
+    fmtStatic();
+    new MutationObserver(fmtStatic).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    return;
+  }
+
+  var cur = form.getAttribute('data-cur') || '৳';
+  var minOrder = toNum(form.getAttribute('data-min')); if (!isFinite(minOrder) || minOrder < 0) minOrder = 0;
+  var rushPct = toNum(form.getAttribute('data-rush')); if (!isFinite(rushPct) || rushPct < 0) rushPct = 0;
+  var qtyEl = $('eQty'), errEl = $('eErr'), listEl = $('eLines'), box = $('eTotalBox');
+  var subEl = $('eSub'), minRow = $('eMinRow'), minEl = $('eMin'), totEl = $('eTotal');
+  var rushChk = $('eRush'), rushRow = $('eRushRow'), rushAmt = $('eRushAmt');
+  var lines = [];
+  var MAX_LINES = 20, MAX_QTY = 100000;
+
+  function money(n) { return cur + fmtNum(n); }
+  function opt(id) {
+    for (var i = 0; i < sel.options.length; i++) if (sel.options[i].value === id) return sel.options[i];
+    return null;
+  }
+  function priceOf(o) { return toNum(o.getAttribute('data-price')); }
+
+  function labelOptions() {
+    [].forEach.call(sel.querySelectorAll('optgroup'), function (g) {
+      g.label = g.getAttribute(isEn() ? 'data-en' : 'data-bn') || g.label;
+    });
+    var firstOk = null;
+    [].forEach.call(sel.options, function (o) {
+      var p = priceOf(o);
+      var base = o.getAttribute(isEn() ? 'data-en' : 'data-bn') || '';
+      var unit = o.getAttribute(isEn() ? 'data-uen' : 'data-ubn') || '';
+      if (isFinite(p) && p > 0) {
+        o.disabled = false;
+        o.textContent = base + (unit ? ' · ' + unit : '') + ' · ' + money(p);
+        if (!firstOk) firstOk = o;
+      } else {
+        o.disabled = true;
+        o.textContent = base + ' · ' + t('আলোচনা সাপেক্ষে', 'on request');
+      }
+    });
+    if (sel.selectedIndex < 0 || sel.options[sel.selectedIndex].disabled) { if (firstOk) sel.value = firstOk.value; }
+  }
+
+  function render() {
+    labelOptions();
+    fmtStatic();
+    while (listEl.firstChild) listEl.removeChild(listEl.firstChild);
+    var sub = 0;
+    lines.forEach(function (ln, idx) {
+      var o = opt(ln.id); if (!o) return;
+      var p = priceOf(o), amount = Math.round(p * ln.qty);
+      sub += amount;
+      var li = document.createElement('li');
+      var tx = document.createElement('span'); tx.className = 't';
+      tx.textContent = o.getAttribute(isEn() ? 'data-en' : 'data-bn');
+      var sm = document.createElement('small');
+      sm.textContent = fmtNum(ln.qty) + ' × ' + money(p) + ' (' + (o.getAttribute(isEn() ? 'data-uen' : 'data-ubn') || '') + ')';
+      tx.appendChild(sm);
+      var am = document.createElement('span'); am.className = 's'; am.textContent = money(amount);
+      var rm = document.createElement('button'); rm.type = 'button';
+      rm.textContent = '×';
+      rm.setAttribute('aria-label', t('সরান', 'Remove'));
+      rm.addEventListener('click', function () { lines.splice(idx, 1); render(); });
+      li.appendChild(tx); li.appendChild(am); li.appendChild(rm);
+      listEl.appendChild(li);
+    });
+    box.hidden = lines.length === 0;
+    if (!lines.length) return;
+    var base = sub;
+    subEl.textContent = money(sub);
+    if (minOrder > 0 && sub < minOrder) { base = minOrder; minRow.hidden = false; minEl.textContent = money(minOrder); }
+    else minRow.hidden = true;
+    var total = base;
+    if (rushChk && rushPct > 0 && rushChk.checked) {
+      var extra = Math.round(base * rushPct / 100);
+      total = base + extra;
+      rushRow.hidden = false; rushAmt.textContent = '+' + money(extra);
+    } else if (rushRow) rushRow.hidden = true;
+    totEl.textContent = money(total);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errEl.textContent = '';
+    var o = sel.options[sel.selectedIndex];
+    if (!o || o.disabled) { errEl.textContent = t('একটা কাজ বাছুন যার দাম দেওয়া আছে।', 'Pick a job that has a price.'); return; }
+    var q = toNum(qtyEl.value);
+    if (!isFinite(q) || q <= 0) { errEl.textContent = t('কতটা লাগবে তা ০-র বেশি একটা সংখ্যায় লিখুন।', 'Enter an amount greater than 0.'); return; }
+    if (q > MAX_QTY) { errEl.textContent = t('সংখ্যাটা অনেক বড়। বড় কাজের দাম আমরা সরাসরি জানাই, ইমেইল করুন।', 'That number is very large. For big jobs email us for a direct quote.'); return; }
+    if (lines.length >= MAX_LINES) { errEl.textContent = t('একসাথে এর বেশি লাইন যোগ করা যায় না।', 'No more lines can be added.'); return; }
+    lines.push({ id: o.value, qty: q });
+    qtyEl.value = '1';
+    render();
+  });
+  if (rushChk) rushChk.addEventListener('change', render);
+
+  render();
+  new MutationObserver(function () { errEl.textContent = ''; render(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+})();
+</script>
+{% endraw %}
