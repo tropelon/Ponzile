@@ -101,3 +101,236 @@ content:
         label: লেখা (ইংরেজি, ঐচ্ছিক)
         type: text
         description: ইংরেজি সংস্করণ। সাধারণ লেখা চলবে। বোল্ড করতে **এভাবে**, লিংকের জন্য [নাম](https://...), তালিকার জন্য লাইনের শুরুতে "- " দিন। প্রতিটা অনুচ্ছেদের মাঝে একটা ফাঁকা লাইন রাখুন। ফাঁকা রাখলে ইংরেজি মোডেও বাংলা লেখাটাই দেখাবে।
+
+  # ------------------------------------------------------------------
+  # দামের তালিকা (_data/pricing.yml)। এখানে বদলালে /pricing/ পেজে দাম বদলে যায়।
+  # দাম ফাঁকা থাকলে পেজে "আলোচনা সাপেক্ষে" দেখায়। সব দাম ফাঁকা থাকলে হিসাবের বক্সও থাকে না।
+  # ------------------------------------------------------------------
+  - name: pricing
+    label: দামের তালিকা
+    type: file
+    path: _data/pricing.yml
+    format: yaml
+    fields:
+      - name: currency
+        label: টাকার চিহ্ন
+        type: string
+        description: দামের আগে যে চিহ্ন বসবে। সাধারণত ৳ থাকবে।
+        options:
+          maxlength: 5
+
+      - name: min_order
+        label: ন্যূনতম অর্ডার (টাকা)
+        type: string
+        description: শুধু সংখ্যা লিখুন, যেমন 300 বা ৩০০। ফাঁকা রাখলে ন্যূনতম অর্ডারের লাইন পেজে আসবে না।
+        options:
+          maxlength: 10
+
+      - name: rush_percent
+        label: জরুরি কাজে বাড়তি (শতাংশ)
+        type: string
+        description: শুধু সংখ্যা লিখুন, যেমন 25। ফাঁকা রাখলে জরুরি কাজের লাইন আসবে না।
+        options:
+          maxlength: 3
+
+      - name: free_revisions
+        label: বিনামূল্যে সংশোধন (বার)
+        type: string
+        description: কয়বার সংশোধন বিনামূল্যে, যেমন 2। ফাঁকা রাখলে এই লাইন আসবে না।
+        options:
+          maxlength: 2
+
+      - name: rates
+        label: কাজের ধরন ও দাম
+        type: object
+        description: প্রতিটা কাজের ধরনের ভেতরে একাধিক দামের লাইন থাকে।
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.bn}"
+        fields:
+          - name: key
+            label: কাজের ধরন (কোড)
+            type: select
+            required: true
+            description: এটা বদলাবেন না। অনুরোধ ফর্মে এই ধরনটাই আগে থেকে বাছাই হয়ে যায়।
+            options:
+              values:
+                - value: documents
+                  label: ডকুমেন্ট ও PDF
+                - value: spreadsheet
+                  label: স্প্রেডশিট
+                - value: script
+                  label: ভিডিও স্ক্রিপ্ট
+                - value: design
+                  label: গ্রাফিক ডিজাইন
+                - value: video
+                  label: ভিডিও এডিটিং
+                - value: website
+                  label: ছোট ওয়েবসাইট
+
+          - name: bn
+            label: নাম (বাংলা)
+            type: string
+            required: true
+            options:
+              maxlength: 80
+
+          - name: en
+            label: নাম (ইংরেজি, ঐচ্ছিক)
+            type: string
+            description: ফাঁকা রাখলে ইংরেজি মোডেও বাংলা নামই দেখাবে।
+            options:
+              maxlength: 80
+
+          - name: items
+            label: দামের লাইন
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{fields.bn} — {fields.price}"
+            fields:
+              - name: price
+                label: দাম (টাকা)
+                type: string
+                description: শুধু সংখ্যা লিখুন, যেমন 50 বা ৫০ (বাংলা অঙ্কও চলবে)। ফাঁকা রাখলে "আলোচনা সাপেক্ষে" দেখাবে।
+                options:
+                  maxlength: 10
+
+              - name: bn
+                label: কাজের নাম (বাংলা)
+                type: string
+                required: true
+                options:
+                  maxlength: 120
+
+              - name: en
+                label: কাজের নাম (ইংরেজি, ঐচ্ছিক)
+                type: string
+                options:
+                  maxlength: 120
+
+              - name: unit_bn
+                label: হিসাবের একক (বাংলা)
+                type: string
+                description: যেমন "প্রতি পেজ", "প্রতি ঘণ্টা", "প্রতি ছবি", "পুরো কাজ"।
+                options:
+                  maxlength: 40
+
+              - name: unit_en
+                label: হিসাবের একক (ইংরেজি, ঐচ্ছিক)
+                type: string
+                description: যেমন "per page", "per hour", "per image", "whole job"।
+                options:
+                  maxlength: 40
+
+  # ------------------------------------------------------------------
+  # পোর্টফোলিওর কাজ (_data/portfolio.yml)। এখানে বদলালে /portfolio/ পেজ বদলে যায়।
+  # ক্লায়েন্টের নাম, নম্বর বা গোপন তথ্য এখানে লিখবেন না।
+  # ------------------------------------------------------------------
+  - name: portfolio
+    label: পোর্টফোলিওর কাজ
+    type: file
+    path: _data/portfolio.yml
+    format: yaml
+    fields:
+      - name: works
+        label: কাজের তালিকা
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.title_bn}"
+        fields:
+          - name: kind
+            label: কাজের ধরন
+            type: select
+            required: true
+            description: ক্লায়েন্টের কাজ, নমুনা/টেমপ্লেট, নাকি নিজের প্রকল্প।
+            options:
+              values:
+                - value: client
+                  label: ক্লায়েন্টের কাজ
+                - value: sample
+                  label: নমুনা ও টেমপ্লেট
+                - value: own
+                  label: নিজের প্রকল্প
+
+          - name: service
+            label: সেবার বিভাগ
+            type: select
+            required: true
+            options:
+              values:
+                - value: documents
+                  label: ডকুমেন্ট ও PDF
+                - value: spreadsheet
+                  label: স্প্রেডশিট
+                - value: script
+                  label: ভিডিও স্ক্রিপ্ট
+                - value: design
+                  label: গ্রাফিক ডিজাইন
+                - value: video
+                  label: ভিডিও এডিটিং
+                - value: website
+                  label: ছোট ওয়েবসাইট
+                - value: other
+                  label: অন্যান্য
+
+          - name: year
+            label: সাল
+            type: number
+            description: যেমন 2026
+
+          - name: public
+            label: ডেমো প্রকাশ করা যাবে?
+            type: boolean
+            description: টিক থাকলে ডেমো দেখানো হবে (ক্লায়েন্ট অনুমতি দিয়েছেন)। টিক না থাকলে "গ্রাহক প্রকাশ করার অনুমতি দেয়নি" লেখা আসবে, ডেমো আসবে না।
+
+          - name: title_bn
+            label: শিরোনাম (বাংলা)
+            type: string
+            required: true
+            options:
+              maxlength: 100
+
+          - name: title_en
+            label: শিরোনাম (ইংরেজি, ঐচ্ছিক)
+            type: string
+            options:
+              maxlength: 100
+
+          - name: summary_bn
+            label: সংক্ষেপ (বাংলা)
+            type: text
+            description: কাজের ধরনের এক-দুই লাইন। ক্লায়েন্টের নাম বা গোপন তথ্য লিখবেন না।
+            options:
+              maxlength: 300
+
+          - name: summary_en
+            label: সংক্ষেপ (ইংরেজি, ঐচ্ছিক)
+            type: text
+            options:
+              maxlength: 300
+
+          - name: image
+            label: ডেমোর ছবি
+            type: image
+            description: ঐচ্ছিক। শুধু তখনই দিন যখন ক্লায়েন্ট দেখানোর অনুমতি দিয়েছেন।
+            options:
+              media: images
+
+          - name: link
+            label: লিংক
+            type: string
+            description: ঐচ্ছিক। বাইরের লিংক (https://...) বা ভেতরের লিংক (/tools/)।
+
+          - name: link_bn
+            label: লিংকের বোতামের লেখা (বাংলা)
+            type: string
+            description: যেমন "দেখুন"। লিংক থাকলে এটা দিন।
+
+          - name: link_en
+            label: লিংকের বোতামের লেখা (ইংরেজি, ঐচ্ছিক)
+            type: string
