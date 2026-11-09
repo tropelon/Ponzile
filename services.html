@@ -41,13 +41,14 @@ permalink: /services/
   .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;color:#fff;background:var(--grad)}
   .rules{display:grid;gap:10px;padding:0;margin-top:6px}
   .rules li{list-style:none;padding:12px 16px;border-left:3px solid var(--accent);background:rgba(255,255,255,.03);border-radius:0 12px 12px 0;color:var(--muted)}
+  .steps a,.rules a,.svc-hero .lead a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
 </style>
 
 <section class="svc-hero">
   <h1 class="grad-text"><span class="bn">সার্ভিস</span><span class="en">Services</span></h1>
   <p class="lead">
-    <span class="bn">ডকুমেন্ট, স্প্রেডশিট, ভিডিও স্ক্রিপ্ট, গ্রাফিক্স আর ভিডিও এডিটিংয়ের কাজ। কী কী করা যায় আর কীভাবে কাজ হয়, সব এখানে।</span>
-    <span class="en">Documents, spreadsheets, video scripts, graphics and video editing. Here is what can be done and how the work goes.</span>
+    <span class="bn">ডকুমেন্ট, স্প্রেডশিট, ভিডিও স্ক্রিপ্ট, গ্রাফিক্স আর ভিডিও এডিটিংয়ের কাজ আমরা করি। কী কী করা যায়, কীভাবে কাজ হয় আর কত টাকা পড়ে, সব এখানে। <a href="{{ '/pricing/' | relative_url }}">দামের তালিকা দেখুন</a>।</span>
+    <span class="en">We do documents, spreadsheets, video scripts, graphics and video editing. See what we can do, how the work goes and what it costs. <a href="{{ '/pricing/' | relative_url }}">View the price list</a>.</span>
   </p>
 </section>
 
@@ -254,38 +255,47 @@ permalink: /services/
 
 </div>
 
+{% capture rev_s %}{{ site.data.pricing.free_revisions }}{% endcapture %}
 <h2 class="section-title"><span class="bn">কীভাবে কাজ হয়</span><span class="en">How the work goes</span></h2>
 <ol class="steps">
   <li>
     <b><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></b>
-    <span class="meta"><span class="bn">যোগাযোগ পেজের ফর্মে কী লাগবে আর কবে লাগবে লিখে জানান।</span><span class="en">Use the form on the contact page to say what you need and by when.</span></span>
+    <span class="meta"><span class="bn">যোগাযোগ পেজের ফর্মে কী লাগবে আর কবে লাগবে লিখে জানান। জমা দিলেই একটা ট্র্যাকিং কোড পাবেন, সেটা দিয়ে নিজের অগ্রগতি দেখা যায়।</span><span class="en">Use the form on the contact page to say what you need and by when. Once sent you get a tracking code, which lets you follow your own progress.</span></span>
   </li>
   <li>
-    <b><span class="bn">আলোচনা ও পরিধি ঠিক করা</span><span class="en">Discuss and agree the scope</span></b>
-    <span class="meta"><span class="bn">কাজের পরিধি, সময় আর মূল্য ইমেইলে লিখিতভাবে ঠিক হয়।</span><span class="en">Scope, timing and price are agreed in writing by email.</span></span>
+    <b><span class="bn">দাম ও পরিধি ঠিক করা</span><span class="en">Agree the price and scope</span></b>
+    <span class="meta"><span class="bn">কাজ দেখে আমরা ইমেইলে পরিধি, সময় আর চূড়ান্ত দাম লিখে জানাই। <a href="{{ '/pricing/' | relative_url }}">দামের তালিকা</a> শুধু শুরুর হিসাব। আপনি রাজি হয়ে কাজ শুরুর সম্মতি দিলে তবেই কাজ শুরু হয়।</span><span class="en">Once we have seen the job, we email the scope, timing and final price. The <a href="{{ '/pricing/' | relative_url }}">price list</a> is only a starting point. Work begins only after you agree and give the go-ahead.</span></span>
   </li>
   <li>
     <b><span class="bn">কাজ শুরু</span><span class="en">Work begins</span></b>
-    <span class="meta"><span class="bn">শর্ত ঠিক হওয়ার পরই কাজ শুরু হয়, আর কাজের মাঝে অগ্রগতি জানানো হয়।</span><span class="en">Work starts once terms are agreed, with progress updates along the way.</span></span>
+    <span class="meta"><span class="bn">কাজের মাঝে অগ্রগতি আপনার অগ্রগতি পেজে দেখা যায়, আর দরকার হলে আমরা ইমেইলে জানাই।</span><span class="en">Progress shows on your progress page while we work, and we email you when needed.</span></span>
   </li>
   <li>
     <b><span class="bn">যাচাই ও সংশোধন</span><span class="en">Review and revisions</span></b>
-    <span class="meta"><span class="bn">আপনি দেখে মতামত দিন, সেই অনুযায়ী সংশোধন করা হয়।</span><span class="en">You review it and give feedback, and revisions follow.</span></span>
+    <span class="meta"><span class="bn">আপনি দেখে মতামত দিন, সেই অনুযায়ী আমরা সংশোধন করি।{% if rev_s != "" %} কত বার সংশোধন বিনামূল্যে, তা <a href="{{ '/pricing/' | relative_url }}">দামের তালিকায়</a> লেখা আছে।{% endif %}</span><span class="en">You review it and give feedback, and we revise accordingly.{% if rev_s != "" %} How many revisions are free is stated in the <a href="{{ '/pricing/' | relative_url }}">price list</a>.{% endif %}</span></span>
+  </li>
+  <li>
+    <b><span class="bn">পেমেন্ট</span><span class="en">Payment</span></b>
+    <span class="meta"><span class="bn">দাম ঠিক হওয়ার পর আপনার অগ্রগতি পেজ থেকে বিকাশে টাকা দিয়ে Transaction ID জমা দিন। কুপন থাকলে পেমেন্টের আগে বসাতে হয়। আমরা মিলিয়ে নিশ্চিত করলে আপনার ইমেইলে রসিদ যায়। নিয়মগুলো <a href="{{ '/privacy/#payment' | relative_url }}">এখানে</a>।</span><span class="en">Once the price is agreed, pay through bKash from your progress page and submit the Transaction ID. If you have a coupon, apply it before paying. When we confirm it, a receipt goes to your email. The rules are <a href="{{ '/privacy/#payment' | relative_url }}">here</a>.</span></span>
   </li>
   <li>
     <b><span class="bn">চূড়ান্ত ডেলিভারি</span><span class="en">Final delivery</span></b>
-    <span class="meta"><span class="bn">চূড়ান্ত ফাইল আপনাকে পাঠানো হয়।</span><span class="en">The final files are sent to you.</span></span>
+    <span class="meta"><span class="bn">পেমেন্ট নিশ্চিত হওয়ার পর চূড়ান্ত ফাইল আপনাকে পাঠানো হয়।</span><span class="en">After payment is confirmed, the final files are sent to you.</span></span>
   </li>
 </ol>
 
 <h2 class="section-title"><span class="bn">কাজের নিয়ম</span><span class="en">Ground rules</span></h2>
 <ul class="rules">
-  <li><span class="bn">কাজ শুরুর আগে সব শর্ত লিখিতভাবে ঠিক হয়।</span><span class="en">Every term is agreed in writing before work starts.</span></li>
+  <li><span class="bn">কাজ শুরুর আগে দাম, পরিধি আর সময় লিখিতভাবে ঠিক হয়। আপনি কাজ শুরুর সম্মতি দিলে ধরা হয় <a href="{{ '/privacy/#cancel' | relative_url }}">বাতিল ও ফির নিয়ম</a> মেনে নিয়েছেন।</span><span class="en">Price, scope and timing are agreed in writing before work starts. Giving the go-ahead means you accept the <a href="{{ '/privacy/#cancel' | relative_url }}">cancellation and fee rules</a>.</span></li>
+  <li><span class="bn">কাজ অর্ধেক হয়ে গেলে (অগ্রগতি ৫০% বা তার বেশি) অর্ডার আর বাতিল করা যায় না। তখন আপনি কাজটা নিন বা না নিন, ঠিক করা মূল্যের ফি দিতে হয়। আমরা নিজেরা কাজ বন্ধ করলে এই ফি লাগে না।</span><span class="en">Once a job is half done (progress at 50% or more), the order can no longer be cancelled. The agreed fee is then payable whether or not you take the work. If we stop the work ourselves, no fee applies.</span></li>
+  <li><span class="bn">টাকা বিকাশে যায়, এই সাইটে কোনো টাকা কাটা হয় না। আমাদের নম্বর ও QR শুধু আপনার নিজের অগ্রগতি পেজে, দাম ঠিক হওয়ার পর দেখা যায়। আপনার PIN বা OTP আমরা কখনো চাই না।</span><span class="en">Money goes through bKash, and nothing is charged on this site. Our number and QR appear only on your own progress page, after the price is agreed. We never ask for your PIN or OTP.</span></li>
+  <li><span class="bn">কুপনের মেয়াদ ও ব্যবহারের সীমা আছে। বিস্তারিত <a href="{{ '/privacy/#coupon' | relative_url }}">কুপনের নিয়মে</a>।</span><span class="en">Coupons have an expiry and usage limits. Details are in the <a href="{{ '/privacy/#coupon' | relative_url }}">coupon rules</a>.</span></li>
   <li><span class="bn">আপনার ফাইল শুধু ওই কাজের জন্যই ব্যবহার হয়, আপনার অনুমতি ছাড়া কোথাও দেখানো হয় না।</span><span class="en">Your files are used only for that job and never shown anywhere without your permission.</span></li>
-  <li><span class="bn">যে কাজ করা সম্ভব নয়, সেটা আগেই জানিয়ে দেওয়া হয়।</span><span class="en">If something is not possible, you are told up front.</span></li>
+  <li><span class="bn">যে কাজ করা সম্ভব নয়, সেটা আমরা আগেই জানিয়ে দিই।</span><span class="en">If something is not possible, we tell you up front.</span></li>
 </ul>
 
 <p style="margin-top:28px">
   <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">সার্ভিসের অনুরোধ পাঠান</span><span class="en">Request a service</span></a>
+  <a class="btn" href="{{ '/pricing/' | relative_url }}"><span class="bn">দামের তালিকা</span><span class="en">Price list</span></a>
   <a class="btn" href="{{ '/portfolio/' | relative_url }}"><span class="bn">কাজের নমুনা দেখুন</span><span class="en">See sample work</span></a>
 </p>
