@@ -3,69 +3,15 @@ layout: default
 title: দামের তালিকা
 description: কোন কাজে কত টাকা পড়বে, প্রতি পৃষ্ঠা, প্রতি ঘণ্টা বা প্রতি ছবি হিসেবে, আর কীভাবে টাকা দিতে হয় | What each job costs, per page, hour or image, and how payment works
 permalink: /pricing/
-# ====================================================================
-# দাম বসানোর জায়গা। শুধু নিচের "price:" লেখার পর সংখ্যা বসান, টাকায়।
-#   price: 150      <- প্রতি এককের দাম ১৫০ টাকা (বাংলা সংখ্যা ১৫০ লিখলেও চলবে)
-#   price: ""       <- ফাঁকা থাকলে পেজে "আলোচনা সাপেক্ষে" দেখাবে
-# একটাও দাম না বসালে "হিসাব করে দেখুন" অংশটা লুকানো থাকবে।
-# নতুন লাইন যোগ করতে চাইলে যেকোনো একটা লাইন কপি করে বদলে নিন।
-# ====================================================================
-currency: "৳"
-min_order: ""        # ন্যূনতম অর্ডার (টাকা)। ফাঁকা থাকলে দেখানো হবে না
-rush_percent: ""     # জরুরি কাজে বাড়তি কত শতাংশ। ফাঁকা থাকলে দেখানো হবে না
-free_revisions: ""   # বিনামূল্যে কতবার সংশোধন। ফাঁকা থাকলে দেখানো হবে না
-rates:
-  - key: documents
-    bn: ডকুমেন্ট ও PDF
-    en: Documents & PDF
-    items:
-      - {price: "", bn: "Word ফাইলের ফরম্যাটিং ও পেজ সাজানো", en: "Word formatting and page layout", unit_bn: "প্রতি পৃষ্ঠা", unit_en: "per page"}
-      - {price: "", bn: "বাংলা টাইপিং", en: "Bangla typing", unit_bn: "প্রতি পৃষ্ঠা", unit_en: "per page"}
-      - {price: "", bn: "ইউনিকোড ↔ বিজয় লেখা রূপান্তর", en: "Unicode ↔ Bijoy conversion", unit_bn: "প্রতি ১,০০০ অক্ষর", unit_en: "per 1,000 characters"}
-      - {price: "", bn: "PDF তৈরি বা ফরম্যাট বদল", en: "PDF creation or conversion", unit_bn: "প্রতি ফাইল", unit_en: "per file"}
-  - key: spreadsheet
-    bn: স্প্রেডশিট
-    en: Spreadsheets
-    items:
-      - {price: "", bn: "ডেটা এন্ট্রি ও গোছানো শিট", en: "Data entry and tidy sheets", unit_bn: "প্রতি ১০০ সারি", unit_en: "per 100 rows"}
-      - {price: "", bn: "ফর্মুলা ও স্বয়ংক্রিয় হিসাবের শিট", en: "Formula and auto-calculation sheet", unit_bn: "প্রতি শিট", unit_en: "per sheet"}
-      - {price: "", bn: "দৈনন্দিন হিসাবের ট্র্যাকার", en: "Everyday record tracker", unit_bn: "প্রতি ট্র্যাকার", unit_en: "per tracker"}
-      - {price: "", bn: "ঘণ্টার হিসাবে শিটের কাজ", en: "Sheet work by the hour", unit_bn: "প্রতি ঘণ্টা", unit_en: "per hour"}
-  - key: script
-    bn: ভিডিও স্ক্রিপ্ট লেখা
-    en: Video script writing
-    items:
-      - {price: "", bn: "ভিডিও স্ক্রিপ্ট (বাংলা বা ইংরেজি)", en: "Video script (Bangla or English)", unit_bn: "প্রতি মিনিটের ভিডিও", unit_en: "per minute of video"}
-      - {price: "", bn: "লেখা ও বর্ণনা", en: "Writing and narration", unit_bn: "প্রতি ১,০০০ শব্দ", unit_en: "per 1,000 words"}
-  - key: design
-    bn: গ্রাফিক্স ডিজাইন
-    en: Graphic design
-    items:
-      - {price: "", bn: "ইউটিউব থাম্বনেইল", en: "YouTube thumbnail", unit_bn: "প্রতি ছবি", unit_en: "per image"}
-      - {price: "", bn: "সোশ্যাল মিডিয়া পোস্ট বা ব্যানার", en: "Social media post or banner", unit_bn: "প্রতি ডিজাইন", unit_en: "per design"}
-      - {price: "", bn: "পোস্টার বা ফ্লায়ার", en: "Poster or flyer", unit_bn: "প্রতি ডিজাইন", unit_en: "per design"}
-      - {price: "", bn: "দিনের হিসাবে ডিজাইনের কাজ", en: "Design work by the day", unit_bn: "প্রতি দিন", unit_en: "per day"}
-  - key: video
-    bn: ভিডিও এডিটিং
-    en: Video editing
-    items:
-      - {price: "", bn: "কাটছাঁট, ক্লিপ সাজানো ও সাবটাইটেল", en: "Cutting, arranging clips and subtitles", unit_bn: "প্রতি মিনিটের ভিডিও", unit_en: "per minute of video"}
-      - {price: "", bn: "ঘণ্টার হিসাবে এডিটিং", en: "Editing by the hour", unit_bn: "প্রতি ঘণ্টা", unit_en: "per hour"}
-      - {price: "", bn: "দিনের হিসাবে এডিটিং", en: "Editing by the day", unit_bn: "প্রতি দিন", unit_en: "per day"}
-  - key: website
-    bn: ছোট ওয়েবসাইট
-    en: Small websites
-    items:
-      - {price: "", bn: "পোর্টফোলিও বা ল্যান্ডিং পেজ", en: "Portfolio or landing page", unit_bn: "প্রতি সাইট", unit_en: "per site"}
-      - {price: "", bn: "অতিরিক্ত পেজ", en: "Extra page", unit_bn: "প্রতি পেজ", unit_en: "per page"}
-      - {price: "", bn: "ঘণ্টার হিসাবে ওয়েবের কাজ", en: "Web work by the hour", unit_bn: "প্রতি ঘণ্টা", unit_en: "per hour"}
+# দাম এখানে নেই। দাম বসে _data/pricing.yml ফাইলে (Pages CMS-এর "দামের তালিকা" ফর্ম থেকেও বদলানো যায়)।
 ---
-{% assign cur = page.currency | default: "৳" %}
+{% assign pr = site.data.pricing %}
+{% assign cur = pr.currency | default: "৳" %}
 {% assign any_price = false %}
-{% for s in page.rates %}{% for it in s.items %}{% capture pp %}{{ it.price }}{% endcapture %}{% if pp != "" %}{% assign any_price = true %}{% endif %}{% endfor %}{% endfor %}
-{% capture min_s %}{{ page.min_order }}{% endcapture %}
-{% capture rush_s %}{{ page.rush_percent }}{% endcapture %}
-{% capture rev_s %}{{ page.free_revisions }}{% endcapture %}
+{% for s in pr.rates %}{% for it in s.items %}{% capture pp %}{{ it.price }}{% endcapture %}{% if pp != "" %}{% assign any_price = true %}{% endif %}{% endfor %}{% endfor %}
+{% capture min_s %}{{ pr.min_order }}{% endcapture %}
+{% capture rush_s %}{{ pr.rush_percent }}{% endcapture %}
+{% capture rev_s %}{{ pr.free_revisions }}{% endcapture %}
 
 <style>
   [hidden]{display:none!important}
@@ -141,10 +87,10 @@ rates:
       <div>
         <label for="eItem"><span class="bn">কোন কাজ</span><span class="en">Which job</span></label>
         <select id="eItem">
-          {% for s in page.rates %}
-          <optgroup label="{{ s.bn | escape }}" data-bn="{{ s.bn | escape }}" data-en="{{ s.en | escape }}">
+          {% for s in pr.rates %}
+          <optgroup label="{{ s.bn | escape }}" data-bn="{{ s.bn | escape }}" data-en="{{ s.en | default: s.bn | escape }}">
             {% for it in s.items %}{% capture pp %}{{ it.price }}{% endcapture %}
-            <option value="{{ s.key }}-{{ forloop.index }}" data-price="{{ pp | escape }}" data-bn="{{ it.bn | escape }}" data-en="{{ it.en | escape }}" data-ubn="{{ it.unit_bn | escape }}" data-uen="{{ it.unit_en | escape }}"{% if pp == "" %} disabled{% endif %}>{{ it.bn | escape }}</option>
+            <option value="{{ s.key }}-{{ forloop.index }}" data-price="{{ pp | escape }}" data-bn="{{ it.bn | escape }}" data-en="{{ it.en | default: it.bn | escape }}" data-ubn="{{ it.unit_bn | escape }}" data-uen="{{ it.unit_en | default: it.unit_bn | escape }}"{% if pp == "" %} disabled{% endif %}>{{ it.bn | escape }}</option>
             {% endfor %}
           </optgroup>
           {% endfor %}
@@ -173,21 +119,25 @@ rates:
 {% endif %}
 
 <h2 class="pr-h2"><span class="bn">কাজ অনুযায়ী দাম</span><span class="en">Prices by service</span></h2>
+{% if pr.rates == nil or pr.rates.size == 0 %}
+<p class="meta"><span class="bn">দামের তালিকা এখনো সাজানো হয়নি। দাম জানতে <a href="{{ '/contact/' | relative_url }}">অনুরোধ পাঠান</a>।</span><span class="en">The price list is not set up yet. <a href="{{ '/contact/' | relative_url }}">Send a request</a> to get a quote.</span></p>
+{% endif %}
 <div class="pr-grid">
-  {% for s in page.rates %}
-  <section class="pr-card" id="p-{{ s.key }}">
-    <h3><span class="bn">{{ s.bn | escape }}</span><span class="en">{{ s.en | escape }}</span></h3>
+  {% for s in pr.rates %}
+  <section class="pr-card" id="p-{{ forloop.index }}">
+    <h3><span class="bn">{{ s.bn | escape }}</span><span class="en">{{ s.en | default: s.bn | escape }}</span></h3>
     <ul class="pr-rows">
       {% for it in s.items %}{% capture pp %}{{ it.price }}{% endcapture %}
       <li>
-        <span class="nm"><span class="bn">{{ it.bn | escape }}</span><span class="en">{{ it.en | escape }}</span></span>
-        <span class="un"><span class="bn">{{ it.unit_bn | escape }}</span><span class="en">{{ it.unit_en | escape }}</span></span>
+        <span class="nm"><span class="bn">{{ it.bn | escape }}</span><span class="en">{{ it.en | default: it.bn | escape }}</span></span>
+        <span class="un"><span class="bn">{{ it.unit_bn | escape }}</span><span class="en">{{ it.unit_en | default: it.unit_bn | escape }}</span></span>
         {% if pp != "" %}<span class="pv">{{ cur }}<span class="mv" data-v="{{ pp | escape }}">{{ pp }}</span></span>
         {% else %}<span class="pv neg"><span class="bn">আলোচনা সাপেক্ষে</span><span class="en">On request</span></span>{% endif %}
       </li>
       {% endfor %}
     </ul>
-    <a class="btn go" href="{{ '/contact/?service=' | append: s.key | relative_url }}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
+    {% capture sk %}{{ s.key | uri_escape }}{% endcapture %}
+    <a class="btn go" href="{% if sk != "" %}{{ '/contact/?service=' | append: sk | relative_url }}{% else %}{{ '/contact/' | relative_url }}{% endif %}"><span class="bn">অনুরোধ করুন</span><span class="en">Request this</span></a>
   </section>
   {% endfor %}
 </div>
