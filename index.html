@@ -63,7 +63,8 @@ layout: default
 
   /* ---------- ধাপ ---------- */
   .hm-steps{display:grid;gap:12px;padding:0;margin-top:6px;grid-template-columns:1fr}
-  @media (min-width:760px){.hm-steps{grid-template-columns:repeat(4,1fr)}}
+  @media (min-width:760px){.hm-steps{grid-template-columns:repeat(3,1fr)}}
+  .hm-steps a{color:#d8b4fe;text-decoration:underline;text-underline-offset:2px}
   .hm-steps li{list-style:none;position:relative;padding:16px 16px 16px 16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
   .hm-steps li .n{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-weight:800;color:#fff;background:var(--grad);margin-bottom:10px;box-shadow:0 8px 20px -8px rgba(124,58,237,.8)}
   .hm-steps li b{display:block;margin-bottom:4px}
@@ -277,9 +278,11 @@ layout: default
 <h2 class="section-title"><span class="bn">কীভাবে কাজ হয়</span><span class="en">How it works</span></h2>
 <ol class="hm-steps">
   <li><span class="n">1</span><b><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></b><span class="t"><span class="bn">ফর্মে কী লাগবে লিখুন। সঙ্গে একটা ট্র্যাকিং কোড পাবেন।</span><span class="en">Describe what you need in the form. You get a tracking code.</span></span></li>
-  <li><span class="n">2</span><b><span class="bn">দাম আর সময় ঠিক হবে</span><span class="en">Price and timeline agreed</span></b><span class="t"><span class="bn">ইমেইলে লিখিতভাবে সবকিছু জানিয়ে নিয়ে কাজ শুরু।</span><span class="en">Everything is confirmed in writing by email before work starts.</span></span></li>
+  <li><span class="n">2</span><b><span class="bn">দাম আর সময় ঠিক হবে</span><span class="en">Price and timeline agreed</span></b><span class="t"><span class="bn">আমরা ইমেইলে লিখিতভাবে দাম, সময় আর পরিধি জানাই। আপনি রাজি হলে তবেই কাজ শুরু। <a href="{{ '/pricing/' | relative_url }}">দামের তালিকা</a></span><span class="en">We confirm the price, timeline and scope in writing by email. Work starts only once you agree. <a href="{{ '/pricing/' | relative_url }}">Price list</a></span></span></li>
   <li><span class="n">3</span><b><span class="bn">অগ্রগতি নিজে দেখুন</span><span class="en">Follow the progress</span></b><span class="t"><span class="bn">কোড আর ইমেইল দিয়ে ট্র্যাক পেজে কত শতাংশ হলো দেখা যায়।</span><span class="en">Use your code and email on the track page to see how far along the work is.</span></span></li>
-  <li><span class="n">4</span><b><span class="bn">মাঝপথে একবার প্রিভিউ</span><span class="en">A preview midway</span></b><span class="t"><span class="bn">কাজ প্রায় অর্ধেক হলে একবারের জন্য প্রিভিউ দেখা যায়, তারপর সংশোধন আর চূড়ান্ত ফাইল।</span><span class="en">At around halfway you can view a one-time preview, then revisions and the final files.</span></span></li>
+  <li><span class="n">4</span><b><span class="bn">মাঝপথে একবার প্রিভিউ</span><span class="en">A preview midway</span></b><span class="t"><span class="bn">কাজ প্রায় অর্ধেক হলে একবারের জন্য প্রিভিউ দেখা যায়, তারপর আমরা সংশোধন করি।</span><span class="en">At around halfway you can view a one-time preview, then we make the revisions.</span></span></li>
+  <li><span class="n">5</span><b><span class="bn">বিকাশে পেমেন্ট</span><span class="en">Pay with bKash</span></b><span class="t"><span class="bn">অগ্রগতি পেজ থেকে বিকাশে টাকা দিয়ে Transaction ID জমা দিন। কুপন থাকলে আগে বসান।</span><span class="en">Pay with bKash from your progress page and submit the Transaction ID. Apply a coupon first, if you have one.</span></span></li>
+  <li><span class="n">6</span><b><span class="bn">চূড়ান্ত ফাইল</span><span class="en">Final files</span></b><span class="t"><span class="bn">পেমেন্ট নিশ্চিত হলে আমরা চূড়ান্ত ফাইল পাঠাই। কাজ অর্ধেক হওয়ার পর অর্ডার বাতিল করা যায় না, <a href="{{ '/privacy/#cancel' | relative_url }}">নিয়মটা পড়ুন</a>।</span><span class="en">Once payment is confirmed we send the final files. After the halfway point an order cannot be cancelled, <a href="{{ '/privacy/#cancel' | relative_url }}">read the rule</a>.</span></span></li>
 </ol>
 
 <h2 class="section-title"><span class="bn">আপনার তথ্যের নিরাপত্তা</span><span class="en">Your information is safe</span></h2>
@@ -291,13 +294,13 @@ layout: default
   </div>
   <div class="card">
     <div class="hm-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></div>
-    <h3><span class="bn">পাসওয়ার্ড বা ব্যাংক তথ্য চাই না</span><span class="en">No passwords or bank details</span></h3>
-    <p class="meta"><span class="bn">অনুরোধ ফর্মে পাসওয়ার্ড, ব্যাংক বা কার্ডের তথ্য চাওয়া হয় না। পরিশোধ নিয়ে আলাদাভাবে কথা হয়।</span><span class="en">The request form never asks for passwords, bank or card details. Payment is discussed separately.</span></p>
+    <h3><span class="bn">পাসওয়ার্ড, PIN বা OTP চাই না</span><span class="en">No passwords, PINs or OTPs</span></h3>
+    <p class="meta"><span class="bn">অনুরোধ ফর্মে পাসওয়ার্ড, ব্যাংক বা কার্ডের তথ্য চাওয়া হয় না। বিকাশে টাকা দিলে আমরা শুধু Transaction ID নিই, আপনার PIN বা OTP কখনো না।</span><span class="en">The request form never asks for passwords, bank or card details. When you pay by bKash we take only the Transaction ID, never your PIN or OTP.</span></p>
   </div>
   <div class="card">
     <div class="hm-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h4"/></svg></div>
     <h3><span class="bn">খোলাখুলি নিয়ম</span><span class="en">Plain rules</span></h3>
-    <p class="meta"><span class="bn">কী তথ্য রাখা হয় আর কতদিন, সব লেখা আছে গোপনীয়তা পেজে।</span><span class="en">What is kept, and for how long, is written on the privacy page.</span></p>
+    <p class="meta"><span class="bn">আমরা কী তথ্য রাখি আর কতদিন, সব লেখা আছে গোপনীয়তা পেজে।</span><span class="en">What we keep, and for how long, is written on the privacy page.</span></p>
     <a class="hm-more" href="{{ '/privacy/' | relative_url }}"><span class="bn">গোপনীয়তা ও নিয়মাবলি</span><span class="en">Privacy &amp; rules</span></a>
   </div>
 </div>
@@ -337,7 +340,7 @@ layout: default
 
 <section class="hm-cta">
   <h2><span class="bn">কাজটা কী, একবার জানান</span><span class="en">Describe your job</span></h2>
-  <p><span class="bn">যত পরিষ্কার লিখবেন, তত দ্রুত দাম আর সময় জানানো যাবে।</span><span class="en">The clearer you write, the faster a price and timeline can be given.</span></p>
+  <p><span class="bn">যত পরিষ্কার লিখবেন, তত দ্রুত আমরা দাম আর সময় জানাতে পারব।</span><span class="en">The clearer you write, the faster we can give you a price and timeline.</span></p>
   <div class="actions">
     <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}"><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></a>
     <a class="btn" href="{{ '/portfolio/' | relative_url }}"><span class="bn">পোর্টফোলিও দেখুন</span><span class="en">See portfolio</span></a>
