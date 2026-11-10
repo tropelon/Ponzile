@@ -107,15 +107,53 @@ permalink: /contact/
     <p class="mail-line"><a href="mailto:{{ site.data.site.email }}">{{ site.data.site.email }}</a></p>
   </section>
 
+  {% assign soc = site.data.links.social | default: site.data.site.social %}
+  {% capture wa %}{{ site.data.links.whatsapp }}{% endcapture %}
+  {% assign tg = nil %}{% for s in soc %}{% if s.key == 'telegram' %}{% assign tg = s %}{% endif %}{% endfor %}
+  {% if tg or wa != "" %}
+  <section class="card c-card">
+    <h2><span class="bn">মেসেজ করুন</span><span class="en">Message us</span></h2>
+    <p class="meta"><span class="bn">অনুরোধ ফর্ম আর ইমেইলের পাশাপাশি এই মাধ্যমগুলোতেও লিখতে পারেন। কাজের অনুরোধ ফর্মে পাঠালেই সবচেয়ে গোছানো থাকে।</span><span class="en">Besides the request form and email, you can also write to us here. A request sent through the form is the most organised.</span></p>
+    {% if tg %}<p class="mail-line"><span class="bn">Telegram:</span><span class="en">Telegram:</span> <a href="{{ tg.url }}" target="_blank" rel="noopener">{{ tg.url | remove: 'https://' }}</a></p>{% endif %}
+    {% if wa != "" %}
+    <p class="mail-line"><span class="bn">WhatsApp ইউজারনেম:</span><span class="en">WhatsApp username:</span> <b id="waName">@{{ wa | escape }}</b>
+      <button type="button" class="btn" id="waCopy" style="margin-left:8px"><span class="bn">কপি করুন</span><span class="en">Copy</span></button></p>
+    <p class="meta" style="margin-top:6px"><span class="bn">WhatsApp-এ নতুন চ্যাট খুলে এই ইউজারনেম লিখে খুঁজুন। ইউজারনেম দিয়ে মেসেজ করার সুবিধা সব দেশে এখনো আসেনি, না এলে ইমেইল বা ফর্ম ব্যবহার করুন।</span><span class="en">Open a new chat in WhatsApp and search for this username. Messaging by username has not reached every country yet; if it is not available to you, use email or the form.</span></p>
+    <p class="status" id="waStatus" aria-live="polite"></p>
+    {% endif %}
+  </section>
+  {% endif %}
+
   <section class="card c-card">
     <h2><span class="bn">সোশ্যাল মিডিয়া</span><span class="en">Social media</span></h2>
-    <p class="meta"><span class="bn">দ্রুত উত্তরের জন্য Telegram-এ লিখতে পারেন।</span><span class="en">For a quick reply, message us on Telegram.</span></p>
+    <p class="meta"><span class="bn">আমাদের চ্যানেল আর পেজগুলো।</span><span class="en">Our channel and pages.</span></p>
     <div class="socials" style="justify-content:flex-start;margin:12px 0 0">
-      {% for s in site.data.site.social %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
+      {% for s in soc %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
     </div>
   </section>
 
 </div>
+
+<script>
+(function () {
+  var b = document.getElementById('waCopy'), n = document.getElementById('waName'), s = document.getElementById('waStatus');
+  if (!b || !n) return;
+  function say(bn, en) { if (s) s.textContent = document.documentElement.lang === 'en' ? en : bn; }
+  b.addEventListener('click', function () {
+    var txt = n.textContent;
+    function fallback() {
+      try {
+        var r = document.createRange(); r.selectNodeContents(n);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        say('টেক্সট বেছে নেওয়া হয়েছে, এখন কপি করুন।', 'The text is selected, now copy it.');
+      } catch (e) {}
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function () { say('কপি হয়েছে।', 'Copied.'); }, fallback);
+    } else { fallback(); }
+  });
+})();
+</script>
 
 {% raw %}
 <script>
