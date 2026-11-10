@@ -20,6 +20,12 @@ permalink: /pricing/
   .pr-card{border:1px solid var(--line);border-radius:var(--r);padding:20px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
   .pr-card h2,.pr-card h3{font-size:1.15rem;font-weight:800;margin-bottom:4px}
   .pr-h2{font-size:1.25rem;margin:36px 0 12px}
+  .pay-methods{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px}
+  .pm{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;background:rgba(255,255,255,.04)}
+  .pm.on{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);color:#a7f3d0;font-weight:700}
+  .pm.soon{border-style:dashed;opacity:.6;cursor:not-allowed}
+  .pm small{font-size:.74rem;opacity:.9}
+  .pr-h2 + .pay-methods{margin-bottom:14px}
   .pr-grid{display:grid;gap:16px;margin-top:6px}
   @media (min-width:760px){.pr-grid{grid-template-columns:1fr 1fr}}
   .pr-rows{list-style:none;padding:0;margin:12px 0 16px;display:grid;gap:0}
@@ -153,6 +159,11 @@ permalink: /pricing/
 </ul>
 
 <h2 class="pr-h2"><span class="bn">টাকা দেবেন যেভাবে</span><span class="en">How payment works</span></h2>
+<div class="pay-methods" role="list" aria-label="Payment methods">
+  <span class="pm on" role="listitem"><span>bKash</span><small><span class="bn">চালু</span><span class="en">Available</span></small></span>
+  <span class="pm soon" role="listitem" aria-disabled="true"><span>Nagad</span><small><span class="bn">শীঘ্রই আসছে</span><span class="en">Coming soon</span></small></span>
+  <span class="pm soon" role="listitem" aria-disabled="true"><span>Rocket</span><small><span class="bn">শীঘ্রই আসছে</span><span class="en">Coming soon</span></small></span>
+</div>
 <ol class="pr-steps">
   <li><b><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></b><span class="d"><span class="bn"><a href="{{ '/contact/' | relative_url }}">যোগাযোগ পেজের ফর্মে</a> কাজের বিবরণ লিখুন। আপনি একটা ট্র্যাকিং কোড পাবেন।</span><span class="en">Describe the job in the <a href="{{ '/contact/' | relative_url }}">contact form</a>. You get a tracking code.</span></span></li>
   <li><b><span class="bn">আমরা দাম জানাই</span><span class="en">We quote a price</span></b><span class="d"><span class="bn">কাজ দেখে দাম আর সময় জানাই। আপনি রাজি হলে কাজ শুরু হয়।</span><span class="en">We look at the job and send a price and timeline. Work starts when you agree.</span></span></li>
@@ -200,8 +211,8 @@ permalink: /pricing/
     <p><span class="bn">কুপনের মেয়াদ শেষ, ব্যবহারের সীমা শেষ, বা পেমেন্ট জমা দেওয়া হয়ে গেছে, এসবের যেকোনো একটা কারণ হতে পারে। দাম ঠিক হওয়ার আগেও কুপন বসে না। পেজে কারণটা লেখা আসে।</span><span class="en">The coupon may be expired, used up, or a payment may already be submitted. A coupon also cannot be applied before the price is set. The page shows the reason.</span></p>
   </details>
   <details>
-    <summary><span class="bn">অন্য কোনোভাবে (নগদ, ব্যাংক) টাকা দেওয়া যায়?</span><span class="en">Can I pay another way (Nagad, bank)?</span></summary>
-    <p><span class="bn">এখন শুধু বিকাশে নেওয়া হয়। অন্য কোনো পদ্ধতি লাগলে আগে ইমেইলে জানান।</span><span class="en">For now we take bKash only. If you need another method, email us first.</span></p>
+    <summary><span class="bn">অন্য কোনোভাবে (নগদ, রকেট, ব্যাংক) টাকা দেওয়া যায়?</span><span class="en">Can I pay another way (Nagad, Rocket, bank)?</span></summary>
+    <p><span class="bn">এখন শুধু বিকাশে নেওয়া হয়। নগদ ও রকেট শীঘ্রই আসছে, চালু হলে এই পেজে জানানো হবে। অন্য কোনো পদ্ধতি লাগলে আগে ইমেইলে জানান।</span><span class="en">For now we take bKash only. Nagad and Rocket are coming soon, and we will say here when they are available. If you need another method, email us first.</span></p>
   </details>
 </div>
 
