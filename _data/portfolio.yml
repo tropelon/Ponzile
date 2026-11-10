@@ -28,10 +28,10 @@ works:
     service: website
     year: 2026
     public: true
-    title_bn: tropelon.2bd.net
-    title_en: tropelon.2bd.net
-    summary_bn: এই ওয়েবসাইট। দুই ভাষার ইন্টারফেস, মোবাইলে সুবিধাজনক ডার্ক ডিজাইন, GitHub Pages-এ বিনামূল্যে হোস্ট করা।
-    summary_en: This website. A two-language interface, a mobile-friendly dark design, hosted free on GitHub Pages.
+    title_bn: tropelon ওয়েবসাইট
+    title_en: tropelon website
+    summary_bn: এই ওয়েবসাইট। দুই ভাষার ইন্টারফেস, মোবাইলে সুবিধাজনক ডার্ক ডিজাইন, আর কাজের অনুরোধ ও অগ্রগতি দেখার ব্যবস্থা।
+    summary_en: This website. A two-language interface, a mobile-friendly dark design, with a request form and progress tracking.
     link: /
     link_bn: দেখুন
     link_en: View
