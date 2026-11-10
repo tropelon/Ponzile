@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <style>.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:14px}.foot-links a{text-decoration:underline;text-underline-offset:3px}</style>
+  <style>.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:14px}.foot-links a{text-decoration:underline;text-underline-offset:3px}.wa-chip{padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04)}</style>
   <script>try{var l=localStorage.getItem('tp-lang');if(l==='bn'||l==='en')document.documentElement.lang=l}catch(e){}</script>
 </head>
 <body>
@@ -33,9 +33,11 @@
   </main>
 
   <footer class="site-footer">
+    {% assign soc = site.data.links.social | default: site.data.site.social %}
+    {% capture wa %}{{ site.data.links.whatsapp }}{% endcapture %}
     <div class="socials">
-      {% for s in site.data.site.social %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
-      {% if site.data.site.whatsapp != "" %}<a href="{{ site.data.site.whatsapp }}" target="_blank" rel="noopener">WhatsApp</a>{% endif %}
+      {% for s in soc %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
+      {% if wa != "" %}<span class="wa-chip">WhatsApp @{{ wa | escape }}</span>{% endif %}
     </div>
     <p><a href="mailto:{{ site.data.site.email }}">{{ site.data.site.email }}</a></p>
     <p class="foot-links">
