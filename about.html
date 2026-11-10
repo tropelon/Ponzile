@@ -4,6 +4,7 @@ title: পরিচিতি
 description: tropelon একজন কনটেন্ট ক্রিয়েটরের ডিজিটাল সার্ভিস স্টুডিও | tropelon is a digital service studio run by a content creator
 permalink: /about/
 ---
+{% assign soc = site.data.links.social | default: site.data.site.social %}
 <style>
   .ab-hero{text-align:center;padding:28px 0 10px}
   .ab-hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800;margin-top:10px}
@@ -36,12 +37,12 @@ permalink: /about/
   <p class="bn">আমরা একটা বাংলা ইউটিউব চ্যানেল চালাই। সেখানে ডকুমেন্টারি, ভয়ের গল্পের বর্ণনা আর শিক্ষামূলক ভিডিও বানাই। প্রতিটা ভিডিওর জন্য পুরো স্ক্রিপ্ট লেখা আর গুছিয়ে সাজানো আমাদের নিজেদের কাজ।</p>
   <p class="bn">নিজেদের কাজে যে যত্ন লাগে, অন্যের কাজেও সেটাই দিতে চাই। tropelon ছোট একটা স্টুডিও, তাই যার সঙ্গে আপনার কথা হয়, কাজটাও সে-ই করে। মাঝখানে হাত বদল হয় না।</p>
   <p class="bn">আমাদের চ্যানেলে গেলে কাজের ধরন নিজের চোখে দেখতে পারবেন।
-  {% for s in site.data.site.social %}{% if s.key == 'youtube' %}<a href="{{ s.url }}" target="_blank" rel="noopener">YouTube চ্যানেল দেখুন</a>{% endif %}{% endfor %}</p>
+  {% for s in soc %}{% if s.key == 'youtube' %}<a href="{{ s.url }}" target="_blank" rel="noopener">YouTube চ্যানেল দেখুন</a>{% endif %}{% endfor %}</p>
 
   <p class="en">We run a Bangla YouTube channel where we make documentaries, horror narrations and educational videos. Writing a full script for each video and shaping it is our own work.</p>
   <p class="en">We want to give client work the same care we give our own. tropelon is a small studio, so the person you talk to is the person who does the work. Nothing gets handed around in between.</p>
   <p class="en">You can see the kind of work we do on our channel.
-  {% for s in site.data.site.social %}{% if s.key == 'youtube' %}<a href="{{ s.url }}" target="_blank" rel="noopener">Visit the YouTube channel</a>{% endif %}{% endfor %}</p>
+  {% for s in soc %}{% if s.key == 'youtube' %}<a href="{{ s.url }}" target="_blank" rel="noopener">Visit the YouTube channel</a>{% endif %}{% endfor %}</p>
 </div>
 
 <h2 class="section-title"><span class="bn">কাজের ধরন</span><span class="en">How we work</span></h2>
@@ -81,7 +82,7 @@ permalink: /about/
 
 <h2 class="section-title"><span class="bn">আমাদের সাথে থাকুন</span><span class="en">Follow along</span></h2>
 <div class="socials" style="justify-content:flex-start">
-  {% for s in site.data.site.social %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
+  {% for s in soc %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
 </div>
 
 <section class="ab-cta">
