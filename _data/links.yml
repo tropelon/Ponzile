@@ -1,0 +1,28 @@
+# ============================================================
+# লিংক ও যোগাযোগ। এখানে বদলালে ফুটার আর যোগাযোগ পেজে বদলে যায়।
+#
+# whatsapp: WhatsApp-এর ইউজারনেম, @ ছাড়া (যেমন tropelon)।
+# অ্যাপে ইউজারনেমটা নিজের নামে রিজার্ভ করার পরেই এখানে বসান।
+# রিজার্ভ না হওয়া পর্যন্ত ফাঁকা ("") রাখুন, নইলে ক্লায়েন্ট অন্য কারও কাছে পৌঁছাতে পারে।
+# ============================================================
+whatsapp: ""
+
+social:
+  - key: youtube
+    name: YouTube
+    url: "https://www.youtube.com/channel/UCijufPWJQ_Ym5HMDW66GXew"
+  - key: telegram
+    name: Telegram
+    url: "https://t.me/Ponzile"
+  - key: instagram
+    name: Instagram
+    url: "https://www.instagram.com/tropelonBD"
+  - key: x
+    name: X
+    url: "https://x.com/tropelonBD"
+  - key: reddit
+    name: Reddit
+    url: "https://www.reddit.com/user/tropelon"
+  - key: blog
+    name: Blog
+    url: "https://tropelon.blogspot.com"
