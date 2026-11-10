@@ -53,6 +53,11 @@ noindex: true
   .row input{flex:1;min-width:0}
   .row .btn{padding:10px 18px;font-size:.9rem;white-space:nowrap}
   #cpCode,#trxId{text-transform:uppercase;letter-spacing:.06em;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .pay-methods{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px}
+  .pm{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;background:rgba(255,255,255,.04)}
+  .pm.on{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);color:#a7f3d0;font-weight:700}
+  .pm.soon{border-style:dashed;opacity:.6;cursor:not-allowed}
+  .pm small{font-size:.74rem;opacity:.9}
   .pay-steps{margin:8px 0 0;padding-left:1.25em;font-size:.92rem;color:var(--muted)}
   .pay-steps li{margin:4px 0}
   .pay-steps b{color:var(--text)}
@@ -123,8 +128,14 @@ noindex: true
 
       <div class="sub" id="payHow" hidden>
         <h4><span class="bn">কীভাবে পরিশোধ করবেন</span><span class="en">How to pay</span></h4>
+        <div class="pay-methods" role="list" aria-label="Payment methods">
+          <span class="pm on" role="listitem"><span>bKash</span><small><span class="bn">চালু</span><span class="en">Available</span></small></span>
+          <span class="pm soon" role="listitem" aria-disabled="true"><span>Nagad</span><small><span class="bn">শীঘ্রই আসছে</span><span class="en">Coming soon</span></small></span>
+          <span class="pm soon" role="listitem" aria-disabled="true"><span>Rocket</span><small><span class="bn">শীঘ্রই আসছে</span><span class="en">Coming soon</span></small></span>
+        </div>
+        <p class="terms"><span class="bn">এখন শুধু বিকাশে পেমেন্ট নেওয়া হচ্ছে। নগদ ও রকেট চালু হলে এখানে জানানো হবে।</span><span class="en">For now we accept bKash only. We will say here when Nagad and Rocket are available.</span></p>
         <ol class="pay-steps">
-          <li><span class="bn">বিকাশ বা ব্যাংক অ্যাপে “সেন্ড মানি” করে <b id="pDueBn"></b> পাঠান। নিচের QR স্ক্যান করুন, অথবা নম্বরটা কপি করে বসান।</span><span class="en">In the bKash or a bank app choose “Send money” and send <b id="pDueEn"></b>. Scan the QR below, or copy the number.</span></li>
+          <li><span class="bn">বিকাশ অ্যাপে “সেন্ড মানি” করে <b id="pDueBn"></b> পাঠান। নিচের QR স্ক্যান করুন, অথবা নম্বরটা কপি করে বসান।</span><span class="en">In the bKash app choose “Send money” and send <b id="pDueEn"></b>. Scan the QR below, or copy the number.</span></li>
           <li><span class="bn">টাকা পাঠানোর মেসেজ থেকে Transaction ID (TrxID) কপি করুন।</span><span class="en">Copy the Transaction ID (TrxID) from the confirmation message.</span></li>
           <li><span class="bn">নিচের ঘরে সেটা বসিয়ে “পেমেন্ট জমা দিন” চাপুন।</span><span class="en">Paste it below and press “Submit payment”.</span></li>
         </ol>
