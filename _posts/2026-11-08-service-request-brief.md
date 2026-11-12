@@ -4,7 +4,6 @@ title_en: "What to write in a service request: six parts of a good brief"
 date: 2026-11-08 10:00
 tags:
   - গাইড
-  - ব্রিফ
 description: কাজটা ঠিকমতো বুঝিয়ে লিখলে দাম আর সময় দ্রুত জানা যায়, ভুল বোঝাবুঝিও কমে। ছয়টা জিনিস লিখে দিন।
 description_en: A clear brief gets you a price and timeline faster and avoids misunderstandings. Six things to include.
 body_en: |
