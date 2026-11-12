@@ -62,3 +62,29 @@ works:
     link_bn: চ্যানেল দেখুন
     link_en: Visit channel
     image: ""
+
+  - kind: sample
+    service: documents
+    year: 2026
+    public: true
+    title_bn: ডকুমেন্টের আগে ও পরে
+    title_en: Document, before and after
+    summary_bn: এলোমেলো লেখাকে গুছিয়ে পরিষ্কার দামের তালিকায় সাজানো।
+    summary_en: A messy note arranged into a clean, aligned price list.
+    link: "/contact/?service=documents"
+    link_bn: এমন কাজ চাই
+    link_en: Request similar work
+    image: /assets/uploads/images/sample-doc-before-after.png
+
+  - kind: sample
+    service: spreadsheet
+    year: 2026
+    public: true
+    title_bn: মাসিক খরচের ট্র্যাকার
+    title_en: Monthly expense tracker
+    summary_bn: আয়, খরচ আর ব্যালেন্স নিজে নিজে হিসাব হয়। খাত অনুযায়ী সারাংশও আছে।
+    summary_en: Income, spending and balance are worked out automatically, with a summary by category.
+    link: /posts/monthly-expense-tracker-template/
+    link_bn: টেমপ্লেটটা পড়ুন
+    link_en: Read about the template
+    image: /assets/uploads/images/sample-expense-tracker.png
