@@ -88,3 +88,29 @@ works:
     link_bn: টেমপ্লেটটা পড়ুন
     link_en: Read about the template
     image: /assets/uploads/images/sample-expense-tracker.png
+
+  - kind: sample
+    service: script
+    year: 2026
+    public: true
+    title_bn: ৩০ সেকেন্ডের ভিডিওর স্ক্রিপ্ট
+    title_en: A 30-second video script
+    summary_bn: কথা আর দৃশ্য পাশাপাশি সাজানো, সময় ধরে লেখা। ছোট ভিডিওর স্ক্রিপ্টের একটা অংশ।
+    summary_en: Words and visuals side by side, written to the clock. An excerpt from a short-video script.
+    link: /posts/short-video-script-guide/
+    link_bn: লেখার ধাপগুলো পড়ুন
+    link_en: Read the writing steps
+    image: /assets/uploads/images/sample-script-30s.png
+
+  - kind: sample
+    service: design
+    year: 2026
+    public: true
+    title_bn: থাম্বনেইল ও সোশ্যাল পোস্ট
+    title_en: Thumbnail and social post
+    summary_bn: একই রঙ আর লেখার ধাঁচে ভিডিওর থাম্বনেইল এবং পোস্টের ছবি।
+    summary_en: A video thumbnail and a post image in the same colours and lettering.
+    link: "/contact/?service=design"
+    link_bn: এমন কাজ চাই
+    link_en: Request similar work
+    image: /assets/uploads/images/sample-thumbnail-social.jpg
