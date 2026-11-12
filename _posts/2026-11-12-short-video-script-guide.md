@@ -13,7 +13,7 @@ body_en: |
   1. **Fix one message.** Write it in one sentence: "After this video, the viewer should know or do ___." If you try to say two things, nothing sticks.
   2. **Hook in the first three seconds.** Skip the greeting and the introduction. Start with a question, a surprising fact or the problem itself. "Your month ends and you cannot tell where the money went?" works better than "Today we will talk about budgeting."
   3. **Write to the clock.** Read the script aloud and time it with a stopwatch. At a normal pace, roughly 60 to 70 words fit into 30 seconds, but people differ, so measure your own reading. Cut until it fits, not until it feels okay.
-  4. **Write for the eye as well as the ear.** Next to every line, note what the viewer sees. A two-column script (words | visuals) saves a lot of back and forth later in editing.
+  4. **Write for the eye as well as the ear.** Next to every line, note what the viewer sees. A two-column script (words on one side, visuals on the other) saves a lot of back and forth later in editing.
   5. **End with one action.** Save, comment, open the link. Pick one. Three requests at the end become none.
 
   Here is a short example (about 50 words in the Bangla original, leaving room for pauses and visuals):
@@ -31,7 +31,7 @@ body_en: |
 1. **এক বার্তা ঠিক করুন।** এক বাক্যে লিখে ফেলুন: "এই ভিডিও দেখার পর দর্শক ___ জানবে বা করবে।" দুটো কথা বলতে গেলে কোনোটাই মনে থাকে না।
 2. **প্রথম তিন সেকেন্ডেই ধরুন।** সালাম, ভূমিকা বা নাম-পরিচয় বাদ দিন। সরাসরি একটা প্রশ্ন, চমকে দেওয়া তথ্য বা সমস্যাটা দিয়ে শুরু করুন। "আজ আমরা বাজেট নিয়ে কথা বলব" না বলে বলুন "মাসের শেষে টাকা কোথায় গেল, বুঝতে পারেন না?"
 3. **ঘড়ি ধরে লিখুন।** স্ক্রিপ্টটা জোরে পড়ে স্টপওয়াচে সময় মাপুন। সাধারণ গতিতে ৩০ সেকেন্ডে মোটামুটি ৬০ থেকে ৭০টা শব্দ ধরে, তবে মানুষভেদে ফারাক হয়, তাই নিজের পড়ায় মেপে নিন। ঠিকঠাক লাগা পর্যন্ত নয়, সময়ে আঁটা পর্যন্ত ছাঁটুন।
-4. **চোখের জন্যও লিখুন।** প্রতিটা লাইনের পাশে লিখে রাখুন দর্শক তখন কী দেখবে। দুই কলামের স্ক্রিপ্ট (কথা | দৃশ্য) থাকলে এডিটিংয়ে পরে অনেক ঘোরাঘুরি বাঁচে।
+4. **চোখের জন্যও লিখুন।** প্রতিটা লাইনের পাশে লিখে রাখুন দর্শক তখন কী দেখবে। দুই কলামের স্ক্রিপ্ট (একদিকে কথা, অন্যদিকে দৃশ্য) থাকলে এডিটিংয়ে পরে অনেক ঘোরাঘুরি বাঁচে।
 5. **শেষে একটা কাজ দিন।** সেভ করুন, কমেন্ট করুন বা লিংকে যান, যেকোনো একটা বেছে নিন। শেষে তিনটা অনুরোধ থাকলে একটাও কেউ মানে না।
 
 একটা ছোট উদাহরণ, প্রায় ৫০ শব্দের (বিরতি আর দৃশ্যের জন্য জায়গা রেখে):
