@@ -101,6 +101,7 @@ permalink: /portfolio/
         {% else %}<span class="bn">নিজের প্রকল্প</span><span class="en">Own projects</span>
       {% endcase %}
     </h2>
+    {% if kind == "sample" and list.size > 0 %}<p class="meta pf-note"><span class="bn">এগুলো আমাদের নিজেদের বানানো নমুনা। ছবির প্রতিষ্ঠানের নাম ও তথ্য কাল্পনিক, কোনো ক্লায়েন্টের কাজ নয়।</span><span class="en">These are samples we made ourselves. The business names and details in the images are made up, and none of this is client work.</span></p>{% endif %}
     {% if list.size > 0 %}
     <div class="pf-grid">
       {% for w in list %}
