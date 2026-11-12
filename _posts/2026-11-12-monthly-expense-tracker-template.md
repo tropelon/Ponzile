@@ -12,7 +12,7 @@ body_en: |
 
   **Tab 1: "Transactions" (one row per entry)**
 
-  - Columns, in order: Date | Details | Category | Income | Spending | Balance
+  - Columns, from left to right: Date, Details, Category, Income, Spending, Balance
   - Balance, first row (row 2): `=D2-E2`
   - Balance, from row 3 down: `=F2+D3-E3`. Copy it down, and it carries the balance forward.
   - Make the Category column a dropdown: in Google Sheets use Data, then Data validation, then Dropdown; in Excel use Data, then Data Validation, then List. Typing categories by hand leads to spelling differences, and the summary then splits one category in two.
@@ -36,7 +36,7 @@ body_en: |
 
 **প্রথম ট্যাব: "লেনদেন" (প্রতি এন্ট্রিতে একটা সারি)**
 
-- কলামগুলো এই ক্রমে: তারিখ | বিবরণ | খাত | আয় | খরচ | ব্যালেন্স
+- কলামগুলো বাঁ থেকে ডানে এই ক্রমে: তারিখ, বিবরণ, খাত, আয়, খরচ, ব্যালেন্স
 - ব্যালেন্স, প্রথম সারিতে (২ নম্বর সারি): `=D2-E2`
 - ব্যালেন্স, ৩ নম্বর সারি থেকে নিচে: `=F2+D3-E3`। এটা নিচে কপি করলে আগের ব্যালেন্স নিজে থেকে এগিয়ে চলে।
 - খাত কলামটা ড্রপডাউন বানান। Google Sheets-এ Data → Data validation → Dropdown, Excel-এ Data → Data Validation → List। হাতে লিখলে বানানের ফারাক হয়, তখন সারাংশে একটা খাত ভেঙে দুটো হয়ে যায়।
