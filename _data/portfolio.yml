@@ -114,3 +114,29 @@ works:
     link_bn: এমন কাজ চাই
     link_en: Request similar work
     image: /assets/uploads/images/sample-thumbnail-social.jpg
+
+  - kind: sample
+    service: video
+    year: 2026
+    public: true
+    title_bn: ভিডিও এডিটিংয়ের টাইমলাইন
+    title_en: A video editing timeline
+    summary_bn: কাট, সাবটাইটেল, ভয়েস আর মিউজিক এক টাইমলাইনে গোছানো। ৩০ সেকেন্ডের ভিডিওর নমুনা।
+    summary_en: Cuts, subtitles, voice and music arranged on one timeline. A sample for a 30-second video.
+    link: "/contact/?service=video"
+    link_bn: এমন কাজ চাই
+    link_en: Request similar work
+    image: /assets/uploads/images/sample-video-editing.jpg
+
+  - kind: sample
+    service: website
+    year: 2026
+    public: true
+    title_bn: ছোট ব্যবসার ল্যান্ডিং পেজ
+    title_en: A small business landing page
+    summary_bn: কম্পিউটার আর মোবাইল, দুই মাপেই মানানো এক পাতার ওয়েবসাইটের নমুনা।
+    summary_en: A one-page website sample that fits both computer and phone screens.
+    link: "/contact/?service=website"
+    link_bn: এমন কাজ চাই
+    link_en: Request similar work
+    image: /assets/uploads/images/sample-website-landing.jpg
