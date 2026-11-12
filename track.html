@@ -48,6 +48,7 @@ noindex: true
   .pay-note{margin:8px 0 0;padding:9px 12px;border-radius:10px;font-size:.88rem;background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25)}
 
   /* পেমেন্ট */
+  .nw{white-space:nowrap}
   .pay-card{margin-top:16px;padding:16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
   .pay-card h3{font-size:1.05rem;margin-bottom:10px}
   .pay-rows{display:grid;gap:6px;margin:0}
@@ -139,6 +140,10 @@ noindex: true
     </div>
     <p class="acc-done" id="accDone" hidden></p>
 
+    <div class="pay-card" id="priceWait" hidden>
+      <p class="meta"><span class="bn">কাজের দাম এখনো ঠিক হয়নি। দাম ঠিক হলে এখানেই দাম, কুপনের ঘর আর পেমেন্টের তথ্য দেখা যাবে।</span><span class="en">The price for this job has not been set yet. Once it is set, the price, the coupon box and the payment details will appear here.</span></p>
+    </div>
+
     <div class="pay-card" id="payCard" hidden>
       <h3><span class="bn">পেমেন্ট</span><span class="en">Payment</span></h3>
       <dl class="pay-rows">
@@ -216,7 +221,7 @@ noindex: true
       <p class="terms"><a href="{{ '/privacy/#cancel' | relative_url }}"><span class="bn">বাতিল ও ফির নিয়ম</span><span class="en">Cancellation and fee rules</span></a></p>
     </div>
 
-    <p class="dates"><span class="bn">তৈরি: <span id="rCreated"></span> · সর্বশেষ আপডেট: <span id="rUpdated"></span> (ঢাকা সময়)</span><span class="en">Created: <span id="rCreatedE"></span> · Last update: <span id="rUpdatedE"></span> (Dhaka time)</span></p>
+    <p class="dates"><span class="bn">তৈরি: <span class="nw" id="rCreated"></span> · সর্বশেষ আপডেট: <span class="nw" id="rUpdated"></span> (ঢাকা সময়)</span><span class="en">Created: <span class="nw" id="rCreatedE"></span> · Last update: <span class="nw" id="rUpdatedE"></span> (Dhaka time)</span></p>
     <div class="bar">
       <button type="button" class="btn" id="rRefresh"><span class="bn">রিফ্রেশ</span><span class="en">Refresh</span></button>
       <button type="button" class="btn" id="rOther"><span class="bn">অন্য কোড</span><span class="en">Another code</span></button>
@@ -321,7 +326,8 @@ noindex: true
     chip.firstChild.textContent = s[0]; chip.lastChild.textContent = s[1];
 
     var total = d.total > 0 ? d.total : 0, done = Math.max(0, Math.min(d.done || 0, total || (d.done || 0)));
-    var pct = total ? Math.min(100, Math.round(done / total * 100)) : (d.status === 'done' ? 100 : 0);
+    if (d.status === 'done' && total) done = total;
+    var pct = d.status === 'done' ? 100 : (total ? Math.min(100, Math.round(done / total * 100)) : 0);
     $('rFill').style.width = pct + '%';
     $('rBar').setAttribute('aria-valuenow', String(pct));
     $('rCount').textContent = total ? done + ' / ' + total : '';
@@ -390,6 +396,7 @@ noindex: true
   function setMoney(el, n, neg) { var m = money(n, neg); bi(el, m[0], m[1]); }
 
   function clearPay() {
+    $('priceWait').hidden = true;
     $('payCard').hidden = true; $('payHow').hidden = true; $('payLater').hidden = true; $('cpForm').hidden = true;
     $('acceptCard').hidden = true; $('accDone').hidden = true; $('accChk').checked = false; $('accBtn').disabled = true;
     $('pQr').removeAttribute('src'); $('pQr').hidden = true; $('pNum').textContent = '';
@@ -423,7 +430,12 @@ noindex: true
   }
 
   function renderPay(p) {
-    if (!p || !p.quoted) { clearPay(); return; }
+    if (!p || !p.quoted) {
+      clearPay();
+      if (p && lastD && lastD.status !== 'cancelled') $('priceWait').hidden = false;
+      return;
+    }
+    $('priceWait').hidden = true;
     $('payCard').hidden = false;
     setMoney($('pAmount'), p.amount);
     $('pDiscRow').hidden = !(p.discount > 0);
