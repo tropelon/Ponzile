@@ -200,7 +200,7 @@ noindex: true
       <p class="meta"><span class="bn">কাজের একটা নমুনা একবার দেখতে পারবেন। শুরু করলে টাইমার চলবে, আর আবার দেখা যাবে না।</span><span class="en">You can look at a sample of the work once. A timer starts when you begin, and it cannot be opened again.</span></p>
       <div class="bar" id="pvAsk"><button type="button" class="btn btn-primary" id="pvOpen"><span class="bn">প্রিভিউ দেখুন</span><span class="en">View preview</span></button></div>
       <div class="bar" id="pvSure" hidden>
-        <p class="meta" style="width:100%"><span class="bn">নিশ্চিত? <b id="pvSecBn">২ মিনিট</b>ের টাইমার এখনই শুরু হবে।</span><span class="en">Sure? A <b id="pvSecEn">2-minute</b> timer starts right now.</span></p>
+        <p class="meta" style="width:100%"><span class="bn">নিশ্চিত? <b id="pvSecBn">২ মিনিটের</b> টাইমার এখনই শুরু হবে।</span><span class="en">Sure? A <b id="pvSecEn">2-minute</b> timer starts right now.</span></p>
         <button type="button" class="btn btn-primary" id="pvYes"><span class="bn">হ্যাঁ, এখন দেখব</span><span class="en">Yes, view now</span></button>
         <button type="button" class="btn" id="pvNo"><span class="bn">পরে</span><span class="en">Later</span></button>
       </div>
@@ -274,6 +274,7 @@ noindex: true
     not_found: ['কোড আর ইমেইল মেলেনি। অনুরোধ পাঠানোর সময় যে ইমেইল দিয়েছিলেন, ঠিক সেটাই দিন।', 'Code and email do not match. Use exactly the email you gave when you sent the request.'],
     busy: ['এই মুহূর্তে চেষ্টা করা যাচ্ছে না। কিছুক্ষণ পরে আবার দেখুন।', 'Cannot look up right now. Please try again a little later.'],
     preview_unavailable: ['প্রিভিউ এখন পাওয়া যাচ্ছে না।', 'The preview is not available right now.'],
+    preview_failed: ['প্রিভিউর ছবি এখন লোড করা যায়নি। আমাদের জানানো হয়েছে। আপনার একবার দেখার সুযোগ খরচ হয়নি, একটু পরে আবার চেষ্টা করুন।', 'The preview could not be loaded right now. We have been told. Your one-time view has not been used, so please try again a little later.'],
     net: ['সংযোগে সমস্যা হয়েছে। ইন্টারনেট দেখে আবার চেষ্টা করুন।', 'Connection problem. Check your internet and try again.'],
     no_amount: ['এখনো কাজের দাম ঠিক হয়নি।', 'The price has not been set yet.'],
     closed: ['এই অনুরোধ আর খোলা নেই।', 'This request is no longer open.'],
@@ -340,7 +341,7 @@ noindex: true
     $('rUpdated').textContent = $('rUpdatedE').textContent = d.updated || '-';
 
     var secs = d.previewSeconds || 120, mins = Math.round(secs / 60);
-    $('pvSecBn').textContent = secs % 60 === 0 ? mins + ' মিনিট' : secs + ' সেকেন্ড';
+    $('pvSecBn').textContent = secs % 60 === 0 ? mins + ' মিনিটের' : secs + ' সেকেন্ডের';
     $('pvSecEn').textContent = secs % 60 === 0 ? mins + '-minute' : secs + '-second';
     $('pvAvail').hidden = !d.previewAvailable;
     $('pvAsk').hidden = false; $('pvSure').hidden = true;
@@ -596,7 +597,8 @@ noindex: true
       if (res && res.ok && res.images && res.images.length) { say($('rStatusLine'), ''); openViewer(res.images, res.seconds || 120); return; }
       var e = ERR[res && res.error] || ERR.net;
       say($('rStatusLine'), t(e[0], e[1]), true);
-      $('pvAvail').hidden = true;
+      if (res && res.error === 'preview_failed') { $('pvAsk').hidden = false; $('pvSure').hidden = true; }   // সুযোগ খরচ হয়নি, বোতাম থাকুক
+      else $('pvAvail').hidden = true;
     }, function () {
       busy = false; $('pvYes').disabled = false;
       say($('rStatusLine'), t(ERR.net[0], ERR.net[1]), true);
