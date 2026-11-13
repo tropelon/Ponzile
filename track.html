@@ -208,6 +208,7 @@ noindex: true
     </div>
     <p class="meta" id="pvUsed" style="margin-top:14px" hidden><span class="bn">প্রিভিউ একবার দেখা হয়ে গেছে। আবার দেখতে চাইলে ইমেইলে জানান।</span><span class="en">The preview has already been viewed. Email us if you need to see it again.</span></p>
     <p class="meta" id="pvNote" style="margin-top:10px" hidden></p>
+    <p class="meta" id="chk" style="margin-top:10px;font-size:.8rem" hidden></p>
 
     <div class="cancel-box" id="cancelBox" hidden>
       <p class="meta" id="cancelInfo"></p>
@@ -347,7 +348,17 @@ noindex: true
     $('pvAsk').hidden = false; $('pvSure').hidden = true;
     $('pvUsed').hidden = !(d.previewUsed && !d.previewAvailable);
     $('lookCard').hidden = true; $('resCard').hidden = false;
-    lastD = d; renderPay(d.pay); renderAccept(d); renderCancel(d);
+    lastD = d; renderPay(d.pay); renderAccept(d); renderCancel(d); showCheck(d);
+  }
+
+  // শুধু মালিকের জন্য: ঠিকানার শেষে ?check যোগ করলে পেজ আর সার্ভারের কোড-সংস্করণ আর সার্ভার কী কী পাঠাচ্ছে তা দেখা যায়
+  var PAGE_V = 'r35';
+  function showCheck(d) {
+    var el = $('chk');
+    if (!/[?&]check\b/.test(location.search)) { el.hidden = true; return; }
+    el.hidden = false;
+    el.textContent = 'যাচাই: পেজ ' + PAGE_V + ' · সার্ভার ' + (d.v || 'পুরোনো (সংস্করণ-চিহ্ন নেই)') +
+      ' · সার্ভার পাঠাচ্ছে: পেমেন্ট ' + (d.pay ? '✔' : '✗') + ', বাতিল ' + (d.cancel ? '✔' : '✗') + ', রাজি-আছি ' + (d.accept ? '✔' : '✗');
   }
 
   function lookup(code, mail, quiet) {
