@@ -13,7 +13,7 @@ layout: default
   <p class="meta" style="margin-top:8px">{{ page.date | date: "%d-%m-%Y" }}{% if page.author %} · {{ page.author }}{% endif %}</p>
 
   {% if page.tags.size > 0 %}
-  <p style="margin-top:10px">{% for t in page.tags %}<a class="tag" href="{{ '/explore/' | relative_url }}?tag={{ t | url_encode }}">{{ t }}</a>{% endfor %}</p>
+  <p style="margin-top:10px">{% for t in page.tags %}{% assign t_label = site.data.tags[t] %}<a class="tag" href="{{ '/explore/' | relative_url }}?tag={{ t | url_encode }}">{% if t_label %}<span class="bn">{{ t }}</span><span class="en">{{ t_label }}</span>{% else %}{{ t }}{% endif %}</a>{% endfor %}</p>
   {% endif %}
 
   {% if page.image %}
