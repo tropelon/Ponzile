@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Preview maker
-description: ক্লায়েন্টকে দেখানোর জন্য কম রেজোলিউশনের ছাপ-দেওয়া প্রিভিউ ছবি বানান | Make low-resolution, watermarked preview images
+description: ক্লায়েন্টকে দেখানোর জন্য কম রেজোলিউশনের ছাপ-দেওয়া প্রিভিউ ছবি বানান (ছবি, PDF বা ভিডিও থেকে) | Make low-resolution, watermarked preview images from images, PDFs or videos
 permalink: /preview-maker/
 sitemap: false
 noindex: true
@@ -22,18 +22,33 @@ noindex: true
   .out .meta{margin:8px 0}
   .out .btn{padding:8px 16px;font-size:.85rem}
   .ok{color:#a7f3d0}.big{color:#fda4af}
+  .hint{font-size:.8rem;color:var(--muted);margin:4px 0 0}
   [hidden]{display:none!important}
 </style>
 
 <h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">প্রিভিউ মেকার</span><span class="en">Preview maker</span></h1>
-<p class="meta"><span class="bn">কাজের ছবি বা স্ক্রিনশট নিন। এই টুল ছবি ছোট করে, কোনাকুনি “PREVIEW” ছাপ বসিয়ে, ক্লায়েন্টকে দেখানোর উপযোগী করে দেবে। সবকিছু আপনার ফোনের ব্রাউজারেই হয়, কিছু আপলোড হয় না।</span><span class="en">Pick work images or screenshots. This tool shrinks them and stamps a diagonal “PREVIEW” across, ready to show a client. Everything happens in your browser, nothing is uploaded.</span></p>
+<p class="meta"><span class="bn">কাজের ছবি, স্ক্রিনশট, PDF বা ভিডিও নিন। এই টুল সেগুলো থেকে ছোট ছবি বানিয়ে, কোনাকুনি “PREVIEW” ছাপ বসিয়ে ক্লায়েন্টকে দেখানোর উপযোগী করে দেবে। PDF হলে বেছে নেওয়া পেজগুলো, ভিডিও হলে বেছে নেওয়া মুহূর্তের ফ্রেম ছবি হয়ে যায়। সবকিছু আপনার ফোনের ব্রাউজারেই হয়, কিছু আপলোড হয় না।</span><span class="en">Pick work images, screenshots, PDFs or videos. This tool turns them into small images stamped with a diagonal “PREVIEW”, ready to show a client. For a PDF, the pages you choose become images; for a video, the frames at the moments you choose. Everything happens in your browser, nothing is uploaded.</span></p>
+
+<div id="pmCfg" hidden data-pdf="{{ '/assets/js/pdf.min.js' | relative_url }}" data-worker="{{ '/assets/js/pdf.worker.min.js' | relative_url }}"></div>
 
 <div class="stack">
   <section class="card pm-card">
-    <h2><span class="bn">ছবি বাছাই</span><span class="en">Choose images</span></h2>
-    <label for="pmFiles"><span class="bn">ছবি (সর্বোচ্চ ৬টা)</span><span class="en">Images (up to 6)</span></label>
-    <input id="pmFiles" type="file" accept="image/*" multiple>
-    <div class="f2">
+    <h2><span class="bn">ফাইল বাছাই</span><span class="en">Choose files</span></h2>
+    <label for="pmFiles"><span class="bn">ছবি, PDF বা ভিডিও (সব মিলিয়ে সর্বোচ্চ ৬টা প্রিভিউ)</span><span class="en">Images, PDFs or videos (up to 6 previews in total)</span></label>
+    <input id="pmFiles" type="file" accept="image/*,application/pdf,video/*" multiple>
+
+    <div id="pmPdfBox" hidden>
+      <label for="pmPages"><span class="bn">PDF-এর কোন পেজ</span><span class="en">Which PDF pages</span></label>
+      <input id="pmPages" type="text" inputmode="text" autocomplete="off" placeholder="1-5  /  1,3,5">
+      <p class="hint"><span class="bn">যেমন 1-5 বা 1,3,5। ফাঁকা রাখলে প্রথম ৬টা পেজ। এটা বাছা সব PDF-এর জন্য।</span><span class="en">For example 1-5 or 1,3,5. Left empty, the first 6 pages are used. This applies to every PDF you picked.</span></p>
+    </div>
+    <div id="pmVidBox" hidden>
+      <label for="pmTimes"><span class="bn">ভিডিওর কোন কোন সেকেন্ডে ফ্রেম নেবেন</span><span class="en">At which seconds to take frames</span></label>
+      <input id="pmTimes" type="text" inputmode="text" autocomplete="off" placeholder="5, 20, 1:30">
+      <p class="hint"><span class="bn">সেকেন্ড বা মিনিট:সেকেন্ড, কমা দিয়ে। ফাঁকা রাখলে ভিডিওর ২০%, ৫০% ও ৮০% জায়গার তিনটা ফ্রেম। এটা বাছা সব ভিডিওর জন্য।</span><span class="en">Seconds or minutes:seconds, comma separated. Left empty, three frames at 20%, 50% and 80% of the video. This applies to every video you picked.</span></p>
+    </div>
+
+    <div class="f2" style="margin-top:10px">
       <div><label for="pmText"><span class="bn">ছাপের লেখা</span><span class="en">Stamp text</span></label><input id="pmText" type="text" value="PREVIEW" maxlength="24"></div>
       <div><label for="pmWidth"><span class="bn">ছবির চওড়া</span><span class="en">Image width</span></label>
         <select id="pmWidth"><option value="640">640 px</option><option value="800" selected>800 px</option><option value="1000">1000 px</option></select></div>
@@ -46,7 +61,7 @@ noindex: true
 
   <section class="card pm-card">
     <h2><span class="bn">এরপর কী করবেন</span><span class="en">What next</span></h2>
-    <p class="meta"><span class="bn">নামানো ছবিগুলো Google Drive-এর “tropelon previews (PRIVATE)” ফোল্ডারে তুলুন। তারপর শিটে ওই ক্লায়েন্টের সারিতে preview_files ঘরে ছবির লিংক বা ID কমা দিয়ে বসান, আর preview ঘরে YES দিন। প্রতিটা ছবি ৯০০ কিলোবাইটের নিচে হতে হবে, এই টুল সেটা নিজেই সামলায়।</span><span class="en">Upload the downloaded images to the “tropelon previews (PRIVATE)” folder in Google Drive. Then, in that client’s row in the sheet, paste the image links or IDs (comma separated) into preview_files and set preview to YES. Each image must stay under 900 KB, and this tool handles that for you.</span></p>
+    <p class="meta"><span class="bn">নামানো ছবিগুলো (preview-1.jpg, preview-2.jpg… নামে আসে) Google Drive-এর “tropelon previews (PRIVATE)” ফোল্ডারে তুলুন। তারপর শিটে ওই ক্লায়েন্টের সারিতে preview_files ঘরে ছবির লিংক বা ID কমা দিয়ে বসান, অথবা ফোল্ডারের একটা লিংক বসান (ছবি নামের ক্রমে দেখায়)। তারপর preview ঘরে YES দিন। শুধু Google Drive-এর লিংক কাজ করে, অন্য সাইটের লিংক নয়। প্রতিটা ছবি ৯০০ কিলোবাইটের নিচে হতে হবে, এই টুল সেটা নিজেই সামলায়।</span><span class="en">Upload the downloaded images (they come named preview-1.jpg, preview-2.jpg…) to the “tropelon previews (PRIVATE)” folder in Google Drive. Then, in that client’s row in the sheet, paste the image links or IDs (comma separated) into preview_files, or paste one folder link (images show in name order). Then set preview to YES. Only Google Drive links work, not links from other sites. Each image must stay under 900 KB, and this tool handles that itself.</span></p>
   </section>
 </div>
 
@@ -58,17 +73,33 @@ noindex: true
   var isEn = function () { return document.documentElement.lang === 'en'; };
   var t = function (bn, en) { return isEn() ? en : bn; };
   var LIMIT = 880000;   // ব্যাকএন্ডের সীমা ৯০০০০০ বাইটের নিচে
+  var MAXOUT = 6;       // ব্যাকএন্ডে সর্বোচ্চ ৬টা প্রিভিউ ছবি
   var results = [];
 
   function say(m, bad) { $('pmStatus').textContent = m; $('pmStatus').className = 'status' + (bad ? ' err' : ''); }
+  function kind(f) {
+    if (/^image\//.test(f.type)) return 'image';
+    if (f.type === 'application/pdf' || /\.pdf$/i.test(f.name)) return 'pdf';
+    if (/^video\//.test(f.type)) return 'video';
+    return '';
+  }
+  // বাংলা অঙ্ক টাইপ করলেও যেন চলে
+  function digits(s) { return String(s || '').replace(/[০-৯]/g, function (d) { return '০১২৩৪৫৬৭৮৯'.indexOf(d); }); }
+  function mmss(sec) { var m = Math.floor(sec / 60), s = Math.round(sec % 60); return m + ':' + (s < 10 ? '0' : '') + s; }
 
-  function load(file) {
-    return new Promise(function (res, rej) {
-      var url = URL.createObjectURL(file), img = new Image();
-      img.onload = function () { URL.revokeObjectURL(url); res(img); };
-      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error('bad image')); };
-      img.src = url;
-    });
+  // ---------- ফাইলের ধরন অনুযায়ী অপশন দেখানো ----------
+  function refresh() {
+    var ks = [].slice.call($('pmFiles').files || []).map(kind);
+    $('pmPdfBox').hidden = ks.indexOf('pdf') < 0;
+    $('pmVidBox').hidden = ks.indexOf('video') < 0;
+  }
+  $('pmFiles').addEventListener('change', refresh);
+
+  // ---------- ক্যানভাস ও ছাপ ----------
+  function canvas(w, h) {
+    var c = document.createElement('canvas'); c.width = w; c.height = h;
+    var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, h);
+    return c;
   }
   function toBlob(c, q) { return new Promise(function (res) { c.toBlob(res, 'image/jpeg', q); }); }
 
@@ -90,17 +121,95 @@ noindex: true
     ctx.restore();
   }
 
-  async function make(file, width, text) {
-    var img = await load(file);
-    var w = Math.min(width, img.naturalWidth), h = Math.round(w * img.naturalHeight / img.naturalWidth);
-    var c = document.createElement('canvas'); c.width = w; c.height = h;
-    var x = c.getContext('2d');
-    x.fillStyle = '#fff'; x.fillRect(0, 0, w, h);
-    x.drawImage(img, 0, 0, w, h);
-    stamp(x, w, h, text);
+  // আঁকা ক্যানভাসে ছাপ বসিয়ে JPEG করে, ৯০০ KB-র নিচে নামিয়ে আনে
+  async function finish(c, text) {
+    stamp(c.getContext('2d'), c.width, c.height, text);
     var q = 0.62, blob = await toBlob(c, q);
     while (blob && blob.size > LIMIT && q > 0.25) { q -= 0.08; blob = await toBlob(c, q); }
-    return { canvas: c, blob: blob, w: w, h: h };
+    return { canvas: c, blob: blob, w: c.width, h: c.height };
+  }
+
+  // ---------- ছবি ----------
+  function loadImg(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () { URL.revokeObjectURL(url); res(img); };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error('bad image')); };
+      img.src = url;
+    });
+  }
+  async function imageCanvas(file, width) {
+    var img = await loadImg(file);
+    var w = Math.min(width, img.naturalWidth), h = Math.round(w * img.naturalHeight / img.naturalWidth);
+    var c = canvas(w, h); c.getContext('2d').drawImage(img, 0, 0, w, h);
+    return c;
+  }
+
+  // ---------- PDF (pdf.js, এই সাইটেরই ফাইল থেকে লোড হয়, বাইরে থেকে কিছু আসে না) ----------
+  var pdfLoading = null;
+  function loadPdfLib() {
+    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    if (pdfLoading) return pdfLoading;
+    var cfg = $('pmCfg');
+    pdfLoading = new Promise(function (res, rej) {
+      var s = document.createElement('script');
+      s.src = cfg.getAttribute('data-pdf');
+      s.onload = function () {
+        if (!window.pdfjsLib) { pdfLoading = null; return rej(new Error('pdfjs missing')); }
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = cfg.getAttribute('data-worker');
+        res(window.pdfjsLib);
+      };
+      s.onerror = function () { pdfLoading = null; rej(new Error('pdfjs load')); };
+      document.head.appendChild(s);
+    });
+    return pdfLoading;
+  }
+  function parsePages(str, n) {
+    str = digits(str).trim();
+    var out = [], seen = {};
+    function add(p) { if (p >= 1 && p <= n && !seen[p]) { seen[p] = 1; out.push(p); } }
+    if (!str) { for (var i = 1; i <= Math.min(n, MAXOUT); i++) add(i); return out; }
+    str.split(/[,\s]+/).forEach(function (tok) {
+      var m = /^(\d+)-(\d+)$/.exec(tok);
+      if (m) {
+        var a = +m[1], b = +m[2]; if (a > b) { var x = a; a = b; b = x; }
+        for (var p = Math.max(a, 1); p <= Math.min(b, n); p++) add(p);
+      } else if (/^\d+$/.test(tok)) add(+tok);
+    });
+    return out;
+  }
+
+  // ---------- ভিডিও ----------
+  function openVideo(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), v = document.createElement('video');
+      v.muted = true; v.preload = 'auto'; v.setAttribute('playsinline', '');
+      var timer = setTimeout(function () { URL.revokeObjectURL(url); rej(new Error('video timeout')); }, 20000);
+      v.onloadedmetadata = function () { clearTimeout(timer); res({ v: v, url: url }); };
+      v.onerror = function () { clearTimeout(timer); URL.revokeObjectURL(url); rej(new Error('video error')); };
+      v.src = url;
+    });
+  }
+  function seek(v, sec) {
+    return new Promise(function (res, rej) {
+      var done = false;
+      function ok() { if (done) return; done = true; v.removeEventListener('seeked', ok); res(); }
+      v.addEventListener('seeked', ok);
+      setTimeout(function () { if (!done) { done = true; v.removeEventListener('seeked', ok); rej(new Error('seek timeout')); } }, 10000);
+      v.currentTime = sec;
+    });
+  }
+  function parseTimes(str, dur) {
+    str = digits(str).trim();
+    var out = [], seen = {}, last = Math.max(0, dur - 0.2);
+    function add(sec) { sec = Math.min(Math.max(sec, 0), last); sec = Math.round(sec * 10) / 10; if (!seen[sec]) { seen[sec] = 1; out.push(sec); } }
+    if (!str) { [0.2, 0.5, 0.8].forEach(function (f) { add(dur * f); }); return out; }
+    str.split(/[,\s]+/).forEach(function (tok) {
+      var m = /^(\d+):(\d{1,2}(?:\.\d+)?)$/.exec(tok);
+      if (m) add(+m[1] * 60 + parseFloat(m[2]));
+      else if (/^\d+(\.\d+)?$/.test(tok)) add(parseFloat(tok));
+    });
+    return out.sort(function (a, b) { return a - b; });
   }
 
   function download(blob, name) {
@@ -110,32 +219,92 @@ noindex: true
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
   }
 
+  function show(r, label) {
+    var n = results.length;   // r আগেই results-এ ঢুকেছে, তাই এটাই এর ক্রম
+    var box = document.createElement('div'); box.className = 'out';
+    r.canvas.setAttribute('aria-label', 'preview ' + n);
+    var kb = Math.round(r.blob.size / 1024), ok = r.blob.size <= LIMIT;
+    var meta = document.createElement('p'); meta.className = 'meta';
+    var tag = document.createElement('span'); tag.className = ok ? 'ok' : 'big'; tag.textContent = kb + ' KB';
+    meta.appendChild(document.createTextNode(label + ' · ' + r.w + '×' + r.h + ' · ')); meta.appendChild(tag);
+    var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn';
+    btn.textContent = t('নামান', 'Download');
+    btn.addEventListener('click', function () { download(r.blob, 'preview-' + n + '.jpg'); });
+    box.appendChild(r.canvas); box.appendChild(meta); box.appendChild(btn); $('pmOuts').appendChild(box);
+  }
+  function note(text) {
+    var p = document.createElement('p'); p.className = 'meta big'; p.textContent = text; $('pmOuts').appendChild(p);
+  }
+  async function push(c, text, label) {
+    var r = await finish(c, text);
+    if (!r.blob) throw new Error('no blob');
+    results.push(r); show(r, label);
+  }
+
   $('pmGo').addEventListener('click', async function () {
-    var files = [].slice.call($('pmFiles').files || []).filter(function (f) { return /^image\//.test(f.type); });
-    if (!files.length) { say(t('আগে ছবি বাছাই করুন।', 'Choose images first.'), true); return; }
-    if (files.length > 6) { files = files.slice(0, 6); }
+    var files = [].slice.call($('pmFiles').files || []).filter(function (f) { return kind(f); });
+    if (!files.length) { say(t('আগে ফাইল বাছাই করুন (ছবি, PDF বা ভিডিও)।', 'Choose files first (images, PDFs or videos).'), true); return; }
     var text = ($('pmText').value.trim() || 'PREVIEW').toUpperCase(), width = parseInt($('pmWidth').value, 10) || 800;
     $('pmGo').disabled = true; say(t('বানানো হচ্ছে…', 'Working…'));
-    var outs = $('pmOuts'); outs.innerHTML = ''; results = [];
+    $('pmOuts').innerHTML = ''; results = [];
+    var capped = false;
+
     for (var i = 0; i < files.length; i++) {
+      var f = files[i], k = kind(f);
+      if (results.length >= MAXOUT) { capped = true; break; }
       try {
-        var r = await make(files[i], width, text);
-        if (!r.blob) throw new Error('no blob');
-        results.push(r);
-        var kb = Math.round(r.blob.size / 1024), ok = r.blob.size <= LIMIT;
-        var box = document.createElement('div'); box.className = 'out';
-        r.canvas.setAttribute('aria-label', 'preview ' + (i + 1));
-        var meta = document.createElement('p'); meta.className = 'meta';
-        var tag = document.createElement('span'); tag.className = ok ? 'ok' : 'big'; tag.textContent = kb + ' KB';
-        meta.appendChild(document.createTextNode(r.w + '×' + r.h + ' · ')); meta.appendChild(tag);
-        var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn';
-        btn.textContent = t('নামান', 'Download');
-        (function (blob, n) { btn.addEventListener('click', function () { download(blob, 'preview-' + n + '.jpg'); }); })(r.blob, i + 1);
-        box.appendChild(r.canvas); box.appendChild(meta); box.appendChild(btn); outs.appendChild(box);
+        if (k === 'image') {
+          await push(await imageCanvas(f, width), text, f.name);
+        } else if (k === 'pdf') {
+          var lib = await loadPdfLib(), pdf;
+          try {
+            pdf = await lib.getDocument({ data: await f.arrayBuffer(), isEvalSupported: false }).promise;
+          } catch (e) {
+            var pw = e && e.name === 'PasswordException';
+            note(f.name + ': ' + (pw ? t('PDF-এ পাসওয়ার্ড দেওয়া, পড়া যায়নি।', 'this PDF is password protected, it cannot be read.') : t('PDF-টা পড়া যায়নি।', 'could not read this PDF.')));
+            continue;
+          }
+          var pages = parsePages($('pmPages').value, pdf.numPages);
+          if (!pages.length) { note(f.name + ': ' + t('এই পেজ নম্বরগুলো PDF-এ নেই। PDF-এ মোট ' + pdf.numPages + 'টা পেজ আছে।', 'those page numbers are not in the PDF. It has ' + pdf.numPages + ' pages in total.')); await pdf.destroy(); continue; }
+          for (var j = 0; j < pages.length; j++) {
+            if (results.length >= MAXOUT) { capped = true; break; }
+            say(t('PDF পেজ ' + pages[j] + ' হচ্ছে…', 'Rendering PDF page ' + pages[j] + '…'));
+            var page = await pdf.getPage(pages[j]);
+            var v1 = page.getViewport({ scale: 1 }), sc = width / v1.width;
+            var vp = page.getViewport({ scale: sc });
+            var c = canvas(Math.round(vp.width), Math.round(vp.height));
+            await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+            page.cleanup();
+            await push(c, text, f.name + ' · ' + t('পেজ ', 'page ') + pages[j]);
+          }
+          await pdf.destroy();
+        } else if (k === 'video') {
+          var o;
+          try { o = await openVideo(f); }
+          catch (e) { note(f.name + ': ' + t('ভিডিওটা এই ব্রাউজারে খোলা গেল না। সাধারণ MP4 (H.264) বা WebM হলে চলে।', 'this video could not be opened in this browser. A common MP4 (H.264) or WebM works.')); continue; }
+          var vv = o.v;
+          if (!vv.videoWidth || !isFinite(vv.duration)) { note(f.name + ': ' + t('ভিডিওর মাপ বা দৈর্ঘ্য পাওয়া যায়নি।', 'could not read the size or length of this video.')); URL.revokeObjectURL(o.url); continue; }
+          var times = parseTimes($('pmTimes').value, vv.duration);
+          var vw = Math.min(width, vv.videoWidth), vh = Math.round(vw * vv.videoHeight / vv.videoWidth);
+          for (var q = 0; q < times.length; q++) {
+            if (results.length >= MAXOUT) { capped = true; break; }
+            say(t('ভিডিওর ' + mmss(times[q]) + ' হচ্ছে…', 'Taking the frame at ' + mmss(times[q]) + '…'));
+            try {
+              await seek(vv, times[q]);
+              var vc = canvas(vw, vh); vc.getContext('2d').drawImage(vv, 0, 0, vw, vh);
+              await push(vc, text, f.name + ' · ' + mmss(times[q]));
+            } catch (e) { note(f.name + ' · ' + mmss(times[q]) + ': ' + t('এই মুহূর্তের ফ্রেম নেওয়া যায়নি।', 'could not take the frame at this moment.')); }
+          }
+          vv.removeAttribute('src'); vv.load(); URL.revokeObjectURL(o.url);
+        }
       } catch (e) {
-        var p = document.createElement('p'); p.className = 'meta big'; p.textContent = files[i].name + ': ' + t('ছবিটা পড়া যায়নি।', 'could not read this image.'); outs.appendChild(p);
+        var msg = (k === 'pdf' && String(e && e.message).indexOf('pdfjs') === 0)
+          ? t('PDF সাপোর্ট লোড হয়নি। পেজটা রিফ্রেশ করে আবার চেষ্টা করুন।', 'PDF support did not load. Refresh the page and try again.')
+          : t('ফাইলটা পড়া যায়নি।', 'could not read this file.');
+        note(f.name + ': ' + msg);
       }
     }
+    if (capped) note(t('সর্বোচ্চ ' + MAXOUT + 'টা প্রিভিউ নেওয়া হয়েছে, বাকিগুলো বাদ গেছে। বাকিগুলোর জন্য আলাদা করে আবার বানান।', 'The limit of ' + MAXOUT + ' previews was reached and the rest were left out. Make the others in a separate run.'));
     $('pmGo').disabled = false;
     $('pmAllBar').hidden = !results.length;
     say(results.length ? t('তৈরি। এবার ছবিগুলো নামান।', 'Done. Now download the images.') : t('কোনো ছবি তৈরি হয়নি।', 'No image was made.'), !results.length);
