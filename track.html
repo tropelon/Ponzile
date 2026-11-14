@@ -45,41 +45,24 @@ noindex: true
   .acc-check a{color:var(--accent);text-decoration:underline}
   .acc-card .btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none;filter:grayscale(.4)}
   .acc-done{margin-top:14px;font-size:.88rem;color:#a7f3d0}
-  .pay-note{margin:8px 0 0;padding:9px 12px;border-radius:10px;font-size:.88rem;background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25)}
 
-  /* পেমেন্ট */
+  /* পেমেন্ট স্ট্যাটাস (পুরো পেমেন্ট আলাদা /pay/ পেজে) */
   .nw{white-space:nowrap}
   .pay-card{margin-top:16px;padding:16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
-  .pay-card h3{font-size:1.05rem;margin-bottom:10px}
-  .pay-rows{display:grid;gap:6px;margin:0}
-  .pay-rows>div{display:flex;justify-content:space-between;gap:12px;font-size:.93rem}
-  .pay-rows dt{color:var(--muted)}
-  .pay-rows dt small{font-family:ui-monospace,Menlo,Consolas,monospace;color:#d8b4fe;margin-left:4px}
-  .pay-rows dd{margin:0;font-weight:700;text-align:right}
-  .pay-rows .due{border-top:1px dashed var(--line);padding-top:8px;margin-top:2px;font-size:1.08rem}
-  .pay-rows .due dd{color:#f5d0fe}
-  .pay-state{margin-top:12px;padding:10px 12px;border-radius:12px;font-size:.9rem;background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25)}
-  .pay-state.ok{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.35);color:#a7f3d0}
-  .pay-state.bad{background:rgba(244,63,94,.12);border-color:rgba(244,63,94,.35);color:#fecdd3}
-  .sub{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-  .sub h4{font-size:.95rem;margin-bottom:4px}
-  .row{display:flex;gap:8px;align-items:stretch}
-  .row input{flex:1;min-width:0}
-  .row .btn{padding:10px 18px;font-size:.9rem;white-space:nowrap}
-  #cpCode,#trxId{text-transform:uppercase;letter-spacing:.06em;font-family:ui-monospace,Menlo,Consolas,monospace}
-  .pay-methods{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px}
-  .pm{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;background:rgba(255,255,255,.04)}
-  .pm.on{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);color:#a7f3d0;font-weight:700}
-  .pm.soon{border-style:dashed;opacity:.6;cursor:not-allowed}
-  .pm small{font-size:.74rem;opacity:.9}
-  .pay-steps{margin:8px 0 0;padding-left:1.25em;font-size:.92rem;color:var(--muted)}
-  .pay-steps li{margin:4px 0}
-  .pay-steps b{color:var(--text)}
-  .pay-box{display:grid;gap:12px;justify-items:center;margin:14px 0;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
-  .pay-box img{display:block;width:min(260px,70vw);height:auto;aspect-ratio:1;border-radius:12px;background:#fff;padding:8px;image-rendering:pixelated}
-  .pay-num{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
-  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.3rem;font-weight:800;letter-spacing:.04em}
-  .pay-box .btn{padding:8px 16px;font-size:.85rem}
+  .pbox{--pc:var(--line);--pb:rgba(255,255,255,.04);--pf:rgba(255,255,255,.1);--pt:var(--text);margin-top:16px;padding:14px 16px;border-radius:16px;border:1px solid var(--pc);background:var(--pb)}
+  .pbox.ps-unpaid{--pc:rgba(251,146,60,.6);--pb:rgba(251,146,60,.09);--pf:rgba(251,146,60,.22);--pt:#fed7aa}
+  .pbox.ps-partial{--pc:rgba(251,191,36,.55);--pb:rgba(251,191,36,.08);--pf:rgba(251,191,36,.2);--pt:#fde68a}
+  .pbox.ps-submitted{--pc:rgba(96,165,250,.55);--pb:rgba(96,165,250,.09);--pf:rgba(96,165,250,.22);--pt:#bfdbfe}
+  .pbox.ps-paid{--pc:rgba(52,211,153,.55);--pb:rgba(52,211,153,.09);--pf:rgba(52,211,153,.22);--pt:#a7f3d0}
+  .pbox.ps-rejected{--pc:rgba(244,63,94,.55);--pb:rgba(244,63,94,.09);--pf:rgba(244,63,94,.22);--pt:#fecdd3}
+  .pbox.ps-refunded{--pc:rgba(148,163,184,.45);--pb:rgba(148,163,184,.08);--pf:rgba(148,163,184,.2);--pt:#cbd5e1}
+  .pbox .ph{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+  .pbox h3{font-size:1.02rem;margin:0}
+  .pstat{display:inline-block;padding:6px 14px;border-radius:999px;font-size:.88rem;font-weight:800;background:var(--pf);color:var(--pt);border:1px solid var(--pc)}
+  .pline{margin:10px 0 0;font-size:.93rem}
+  .nudge{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.55);color:#ff6b81;font-weight:800;font-size:.92rem;line-height:1.6}
+  .pv-ask{display:block;margin-top:8px;color:#fde68a}
+  .pay-note{margin:8px 0 0;padding:9px 12px;border-radius:10px;font-size:.88rem;background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25)}
   .cancel-box{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
   .cancel-box textarea{min-height:76px}
   .terms a,.meta a{text-decoration:underline;text-underline-offset:3px}
@@ -128,7 +111,7 @@ noindex: true
       <p class="meta"><span class="bn">কাজের দাম <b id="accAmountBn"></b>। কাজ শুরুর আগে তিনটা কথা জেনে নিন:</span><span class="en">The price is <b id="accAmountEn"></b>. Before we start, please read three things:</span></p>
       <ul class="acc-list">
         <li><span class="bn">কাজ <b class="lockBn"></b>% হলে বা প্রিভিউ দেখানো হলে অর্ডার আর বাতিল করা যায় না। তখন কাজের ফি দিতে হয়।</span><span class="en">Once the work is <b class="lockEn"></b>% done, or a preview has been shown, the order can no longer be cancelled and the work fee is payable.</span></li>
-        <li><span class="bn">প্রিভিউ দেখানোর সময় (বা কাজ <b class="lockBn"></b>% হলে) এই পেজেই বিকাশে পেমেন্ট খোলে। তার আগে টাকা পাঠাতে হয় না।</span><span class="en">Payment opens on this page when we show a preview (or the work reaches <b class="lockEn"></b>%). You do not pay before that.</span></li>
+        <li><span class="bn">পেমেন্ট বিকাশে, আলাদা পেমেন্ট পেজে করতে হয়। প্রিভিউ দেখার পর পেমেন্ট করলে বাকি কাজ সম্পূর্ণ করা হয়।</span><span class="en">Payment is made with bKash on a separate payment page. Once you pay after the preview, the rest of the work is completed.</span></li>
         <li><span class="bn">পেমেন্ট নিশ্চিত হওয়ার পর আমরা চূড়ান্ত ফাইল পাঠাই।</span><span class="en">We send the final files after payment is confirmed.</span></li>
       </ul>
       <label class="acc-check" for="accChk">
@@ -141,58 +124,18 @@ noindex: true
     <p class="acc-done" id="accDone" hidden></p>
 
     <div class="pay-card" id="priceWait" hidden>
-      <p class="meta"><span class="bn">কাজের দাম এখনো ঠিক হয়নি। দাম ঠিক হলে এখানেই দাম, কুপনের ঘর আর পেমেন্টের তথ্য দেখা যাবে।</span><span class="en">The price for this job has not been set yet. Once it is set, the price, the coupon box and the payment details will appear here.</span></p>
+      <p class="meta"><span class="bn">কাজের দাম এখনো ঠিক হয়নি। দাম ঠিক হলে এখানে পেমেন্ট স্ট্যাটাস আর পেমেন্ট করার বোতাম আসবে।</span><span class="en">The price for this job has not been set yet. Once it is set, the payment status and the payment button will appear here.</span></p>
     </div>
 
-    <div class="pay-card" id="payCard" hidden>
-      <h3><span class="bn">পেমেন্ট</span><span class="en">Payment</span></h3>
-      <dl class="pay-rows">
-        <div><dt><span class="bn">কাজের দাম</span><span class="en">Price</span></dt><dd id="pAmount"></dd></div>
-        <div id="pDiscRow" hidden><dt><span class="bn">কুপনের ছাড়</span><span class="en">Coupon discount</span><small id="pCode"></small></dt><dd id="pDisc"></dd></div>
-        <div><dt><span class="bn">মোট পাওনা</span><span class="en">Total to pay</span></dt><dd id="pPayable"></dd></div>
-        <div id="pPaidRow" hidden><dt><span class="bn">পাওয়া গেছে</span><span class="en">Received</span></dt><dd id="pPaid"></dd></div>
-        <div class="due"><dt><span class="bn">বাকি</span><span class="en">Balance due</span></dt><dd id="pDue"></dd></div>
-      </dl>
-      <p class="pay-state" id="pState" hidden></p>
-
-      <form class="sub" id="cpForm" hidden novalidate>
-        <h4><span class="bn">কুপন কোড আছে?</span><span class="en">Have a coupon code?</span></h4>
-        <div class="row"><input id="cpCode" type="text" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Coupon code"><button type="submit" class="btn" id="cpBtn"><span class="bn">বসান</span><span class="en">Apply</span></button></div>
-        <p class="status" id="cpStatus" aria-live="polite"></p>
-        <p class="terms"><span class="bn">এক অনুরোধে একটাই কুপন, আর পেমেন্ট জমা দেওয়ার আগে বসাতে হয়। বসালে সেটা ব্যবহার হয়ে গেছে ধরা হয়। <a href="{{ '/privacy/#coupon' | relative_url }}">কুপনের নিয়ম</a></span><span class="en">One coupon per request, and it must be applied before you submit a payment. Once applied it counts as used. <a href="{{ '/privacy/#coupon' | relative_url }}">Coupon rules</a></span></p>
-      </form>
-
-      <div class="sub" id="payLater" hidden>
-        <h4><span class="bn">পেমেন্ট কখন করবেন</span><span class="en">When to pay</span></h4>
-        <p class="meta"><span class="bn">এখনই টাকা পাঠাতে হবে না। কাজের একটা প্রিভিউ দেখানোর সময় (বা কাজ <b class="lockBn"></b>% হলে) এই পেজেই বিকাশের নির্দেশ আর QR আসবে। তার আগে টাকা পাঠাবেন না।</span><span class="en">You do not need to pay yet. When we show a preview (or the work reaches <b class="lockEn"></b>%), the bKash instructions and QR will appear on this page. Please do not send money before that.</span></p>
+    <div class="pbox" id="payBox" hidden>
+      <div class="ph">
+        <h3><span class="bn">পেমেন্ট স্ট্যাটাস</span><span class="en">Payment status</span></h3>
+        <span class="pstat" id="pChip"></span>
       </div>
-
-      <div class="sub" id="payHow" hidden>
-        <h4><span class="bn">কীভাবে পরিশোধ করবেন</span><span class="en">How to pay</span></h4>
-        <p class="pay-note"><span class="bn">পেমেন্ট নিশ্চিত হওয়ার পর আমরা চূড়ান্ত ফাইল পাঠাই।</span><span class="en">We send the final files after payment is confirmed.</span></p>
-        <div class="pay-methods" role="list" aria-label="Payment methods">
-          <span class="pm on" role="listitem"><span>bKash</span><small><span class="bn">চালু</span><span class="en">Available</span></small></span>
-          <span class="pm soon" role="listitem" aria-disabled="true"><span>Nagad</span><small><span class="bn">শীঘ্রই আসছে</span><span class="en">Coming soon</span></small></span>
-          <span class="pm soon" role="listitem" aria-disabled="true"><span>Rocket</span><small><span class="bn">শীঘ্রই আসছে</span><span class="en">Coming soon</span></small></span>
-        </div>
-        <p class="terms"><span class="bn">এখন শুধু বিকাশে পেমেন্ট নেওয়া হচ্ছে। নগদ ও রকেট চালু হলে এখানে জানানো হবে।</span><span class="en">For now we accept bKash only. We will say here when Nagad and Rocket are available.</span></p>
-        <ol class="pay-steps">
-          <li><span class="bn">বিকাশ অ্যাপে “সেন্ড মানি” করে <b id="pDueBn"></b> পাঠান। নিচের QR স্ক্যান করুন, অথবা নম্বরটা কপি করে বসান।</span><span class="en">In the bKash app choose “Send money” and send <b id="pDueEn"></b>. Scan the QR below, or copy the number.</span></li>
-          <li><span class="bn">টাকা পাঠানোর মেসেজ থেকে Transaction ID (TrxID) কপি করুন।</span><span class="en">Copy the Transaction ID (TrxID) from the confirmation message.</span></li>
-          <li><span class="bn">নিচের ঘরে সেটা বসিয়ে “পেমেন্ট জমা দিন” চাপুন।</span><span class="en">Paste it below and press “Submit payment”.</span></li>
-        </ol>
-        <div class="pay-box">
-          <img id="pQr" alt="bKash QR" width="260" height="260" hidden>
-          <div class="pay-num"><span class="mono" id="pNum"></span><button type="button" class="btn" id="pCopy"><span class="bn">নম্বর কপি</span><span class="en">Copy number</span></button></div>
-          <button type="button" class="btn" id="pSave"><span class="bn">QR ছবি সংরক্ষণ</span><span class="en">Save QR image</span></button>
-        </div>
-        <form id="trxForm" novalidate>
-          <label for="trxId"><span class="bn">বিকাশ Transaction ID (TrxID)</span><span class="en">bKash Transaction ID (TrxID)</span></label>
-          <div class="row"><input id="trxId" type="text" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="BH71K2L3M4"><button type="submit" class="btn btn-primary" id="trxBtn"><span class="bn">পেমেন্ট জমা দিন</span><span class="en">Submit payment</span></button></div>
-          <p class="status" id="trxStatus" aria-live="polite"></p>
-        </form>
-        <p class="terms"><span class="bn">শুধু TrxID লাগে। আপনার বিকাশ নম্বর, PIN বা OTP কখনো চাওয়া হয় না, আর কাউকে দেবেন না। জমা দেওয়ার পর আমরা মিলিয়ে নিশ্চিত করি, আর ইমেইলে রসিদ যায়। <a href="{{ '/privacy/#payment' | relative_url }}">পেমেন্টের নিয়ম</a></span><span class="en">Only the TrxID is needed. We never ask for your bKash number, PIN or OTP, and you should never share them. After you submit, we check and confirm it, and a receipt is emailed. <a href="{{ '/privacy/#payment' | relative_url }}">Payment rules</a></span></p>
-      </div>
+      <p class="pline" id="pLine"></p>
+      <p class="nudge" id="pNudge" role="alert" hidden></p>
+      <p class="meta" id="pNote" style="margin-top:10px" hidden></p>
+      <div class="bar"><a class="btn btn-primary" id="payGo" href="{{ '/pay/' | relative_url }}" hidden><span class="bn">এখনই পেমেন্ট করুন</span><span class="en">Pay now</span></a></div>
     </div>
 
     <div class="pv-card" id="pvAvail" hidden>
@@ -206,7 +149,7 @@ noindex: true
       </div>
       <p class="terms"><span class="bn">প্রিভিউ শুধু দেখার জন্য। এটা কম রেজোলিউশনের, আর প্রতিটি পাতায় আপনার কোড, ইমেইল ও সময় লেখা থাকে। স্ক্রিনশট বা রেকর্ডিং নিয়ে ব্যবহার করা বা ছড়ানো শর্ত লঙ্ঘন।</span><span class="en">The preview is for viewing only. It is low resolution and every page carries your code, email and time. Taking screenshots or recordings to use or share it breaks the terms.</span></p>
     </div>
-    <p class="meta" id="pvUsed" style="margin-top:14px" hidden><span class="bn">প্রিভিউ একবার দেখা হয়ে গেছে। আবার দেখতে চাইলে ইমেইলে জানান।</span><span class="en">The preview has already been viewed. Email us if you need to see it again.</span></p>
+    <p class="meta" id="pvUsed" style="margin-top:14px" hidden><span class="bn">প্রিভিউ একবার দেখা হয়ে গেছে। আবার দেখতে চাইলে ইমেইলে জানান।</span><span class="en">The preview has already been viewed. Email us if you need to see it again.</span><span class="pv-ask" id="pvPayAsk" hidden><span class="bn"><b>এখন আপনি পেমেন্ট করলে বাকি কাজ সম্পূর্ণ করা হবে। আপনার আশায় রইলাম।</b></span><span class="en"><b>If you pay now, we will complete the rest of the work. We look forward to your payment.</b></span></span></p>
     <p class="meta" id="pvNote" style="margin-top:10px" hidden></p>
     <p class="meta" id="chk" style="margin-top:10px;font-size:.8rem" hidden></p>
 
@@ -279,19 +222,7 @@ noindex: true
     net: ['সংযোগে সমস্যা হয়েছে। ইন্টারনেট দেখে আবার চেষ্টা করুন।', 'Connection problem. Check your internet and try again.'],
     no_amount: ['এখনো কাজের দাম ঠিক হয়নি।', 'The price has not been set yet.'],
     closed: ['এই অনুরোধ আর খোলা নেই।', 'This request is no longer open.'],
-    coupon_invalid: ['কুপনটি সঠিক নয়, এখন চালু নেই, বা আপনার ইমেইলের জন্য নয়।', 'This coupon is not valid, is not active, or is not for your email.'],
-    coupon_expired: ['এই কুপনের মেয়াদ শেষ হয়ে গেছে।', 'This coupon has expired.'],
-    coupon_used_up: ['এই কুপনের ব্যবহারের সীমা শেষ।', 'This coupon has reached its usage limit.'],
-    coupon_limit: ['এই কুপন আপনি আগেই সর্বোচ্চবার ব্যবহার করেছেন।', 'You have already used this coupon the maximum number of times.'],
-    coupon_already: ['এই অনুরোধে ইতিমধ্যে একটা কুপন বসানো আছে।', 'A coupon is already applied to this request.'],
-    pay_started: ['পেমেন্ট শুরু হয়ে যাওয়ায় আর কুপন বসানো যায় না।', 'A coupon can no longer be applied because payment has started.'],
-    trx_format: ['TrxID ৮ থেকে ১২টা ইংরেজি অক্ষর ও সংখ্যার হয়, যেমন BH71K2L3M4। বিকাশের মেসেজ থেকে ঠিক করে কপি করুন।', 'A TrxID is 8 to 12 letters and digits, like BH71K2L3M4. Copy it exactly from the confirmation message.'],
-    trx_used: ['এই TrxID আগেই জমা পড়েছে। ঠিক ID দিন, না হলে ইমেইলে জানান।', 'This TrxID has already been submitted. Enter the correct one, or email us.'],
-    trx_limit: ['TrxID জমা দেওয়ার সর্বোচ্চ সীমা শেষ। ইমেইলে জানান।', 'The limit for submitting TrxIDs is reached. Please email us.'],
-    pay_pending: ['একটা TrxID এখনো যাচাই বাকি আছে।', 'A TrxID is still waiting to be checked.'],
-    already_paid: ['পুরো টাকা পাওয়া গেছে।', 'The full amount has been received.'],
     cancel_locked: ['কাজ অর্ধেক পার হয়ে যাওয়ায় আর বাতিল করা যায় না।', 'The work is past the halfway point, so it can no longer be cancelled.'],
-    not_open: ['এখনো পেমেন্টের সময় হয়নি। প্রিভিউ দেখানোর সময় বা কাজ অর্ধেক হলে এখানে নির্দেশ আসবে।', 'It is not payment time yet. The instructions appear when we show a preview or the work is halfway.'],
     accept_needed: ['আগে টিক দিয়ে দাম ও শর্তে সম্মতি দিন।', 'Please tick the box to accept the price and terms first.']
   };
 
@@ -352,7 +283,7 @@ noindex: true
   }
 
   // শুধু মালিকের জন্য: ঠিকানার শেষে ?check যোগ করলে পেজ আর সার্ভারের কোড-সংস্করণ আর সার্ভার কী কী পাঠাচ্ছে তা দেখা যায়
-  var PAGE_V = 'r35';
+  var PAGE_V = 'r36';
   function showCheck(d) {
     var el = $('chk');
     if (!/[?&]check\b/.test(location.search)) { el.hidden = true; return; }
@@ -386,7 +317,7 @@ noindex: true
   });
   $('rRefresh').addEventListener('click', function () { if (cur) lookup(cur.code, cur.email, true); });
   $('rOther').addEventListener('click', function () {
-    cur = null; lastD = null; clearPay(); $('tMail').value = ''; $('tCode').value = '';
+    cur = null; lastD = null; clearPay(); try { sessionStorage.removeItem('tp_pay'); } catch (x) {} $('tMail').value = ''; $('tCode').value = '';
     $('resCard').hidden = true; $('lookCard').hidden = false; $('pvNote').hidden = true; $('tCode').focus();
   });
 
@@ -405,15 +336,13 @@ noindex: true
     el.appendChild(a); el.appendChild(b);
   }
   function money(n, neg) { var x = (neg ? '−' : '') + '৳' + group(n); return [bd(x), x]; }
-  function setMoney(el, n, neg) { var m = money(n, neg); bi(el, m[0], m[1]); }
 
   function clearPay() {
     $('priceWait').hidden = true;
-    $('payCard').hidden = true; $('payHow').hidden = true; $('payLater').hidden = true; $('cpForm').hidden = true;
+    $('payBox').hidden = true; $('payGo').hidden = true; $('pNudge').hidden = true; $('pNote').hidden = true; $('pvPayAsk').hidden = true;
     $('acceptCard').hidden = true; $('accDone').hidden = true; $('accChk').checked = false; $('accBtn').disabled = true;
-    $('pQr').removeAttribute('src'); $('pQr').hidden = true; $('pNum').textContent = '';
-    $('trxId').value = ''; $('cpCode').value = ''; $('cancelReason').value = '';
-    say($('cpStatus'), ''); say($('trxStatus'), ''); say($('cancelStatus'), ''); say($('accStatus'), '');
+    $('cancelReason').value = '';
+    say($('cancelStatus'), ''); say($('accStatus'), '');
   }
 
   function setLock(n) {
@@ -441,51 +370,72 @@ noindex: true
     card.hidden = false;
   }
 
+  // পেমেন্টের অবস্থা → [লেখা bn, en, রঙের class]
+  var PS = {
+    unpaid: ['বাকি আছে', 'Payment due', 'ps-unpaid'],
+    partial: ['আংশিক পাওয়া গেছে', 'Partly paid', 'ps-partial'],
+    submitted: ['যাচাই চলছে', 'Being checked', 'ps-submitted'],
+    paid: ['পরিশোধিত ✓', 'Paid ✓', 'ps-paid'],
+    rejected: ['TrxID মেলেনি', 'TrxID did not match', 'ps-rejected'],
+    refunded: ['ফেরত দেওয়া হয়েছে', 'Refunded', 'ps-refunded']
+  };
+  var NUDGE = {
+    work: ['পেমেন্ট না করলে বাকি কাজ করানো সম্ভব হবে না। তাই কাজ এগিয়ে নিয়ে যাওয়ার জন্য পেমেন্ট করুন।',
+      'Without payment we cannot carry on with the rest of the work. Please pay so the work can move forward.'],
+    final: ['কাজ শেষ হয়েছে। পেমেন্ট নিশ্চিত হলে আমরা চূড়ান্ত ফাইল পাঠাব, তাই পেমেন্ট করুন।',
+      'The work is finished. We send the final files once payment is confirmed, so please pay.']
+  };
+
+  // পেমেন্ট স্ট্যাটাস বক্স + “এখনই পেমেন্ট করুন” বোতাম। টাকা পাঠানোর পুরো তথ্য আলাদা /pay/ পেজে।
   function renderPay(p) {
+    $('pvPayAsk').hidden = true;
     if (!p || !p.quoted) {
       clearPay();
       if (p && lastD && lastD.status !== 'cancelled') $('priceWait').hidden = false;
       return;
     }
     $('priceWait').hidden = true;
-    $('payCard').hidden = false;
-    setMoney($('pAmount'), p.amount);
-    $('pDiscRow').hidden = !(p.discount > 0);
-    if (p.discount > 0) { setMoney($('pDisc'), p.discount, true); $('pCode').textContent = p.coupon ? ' ' + p.coupon : ''; }
-    setMoney($('pPayable'), p.payable);
-    $('pPaidRow').hidden = !(p.paid > 0);
-    if (p.paid > 0) setMoney($('pPaid'), p.paid);
-    setMoney($('pDue'), p.due);
+    var box = $('payBox');
+    if (lastD && lastD.status === 'cancelled' && p.state === 'unpaid') { box.hidden = true; return; }
+    var ps = PS[p.state] || PS.unpaid;
+    box.className = 'pbox ' + ps[2];
+    bi($('pChip'), ps[0], ps[1]);
+    var a = money(p.payable), b = money(p.paid), c = money(p.due);
+    bi($('pLine'),
+      'মোট পাওনা ' + a[0] + ' · পাওয়া গেছে ' + b[0] + ' · বাকি ' + c[0],
+      'Total ' + a[1] + ' · Received ' + b[1] + ' · Balance ' + c[1]);
 
-    var st = $('pState'), msg = null, cls = 'pay-state';
+    var nd = NUDGE[p.nudge], nEl = $('pNudge');
+    if (nd) { bi(nEl, nd[0], nd[1]); nEl.hidden = false; } else { nEl.hidden = true; }
+
+    var note = null;
     if (p.state === 'submitted') {
-      msg = ['আপনার TrxID (' + p.trxLast + ') পাওয়া গেছে। আমরা মিলিয়ে দেখে নিশ্চিত করব। এর মধ্যে আবার টাকা পাঠাবেন না।',
+      note = ['আপনার TrxID (' + p.trxLast + ') পাওয়া গেছে। আমরা মিলিয়ে দেখে নিশ্চিত করব। এর মধ্যে আবার টাকা পাঠাবেন না।',
         'We received your TrxID (' + p.trxLast + '). We will check it and confirm. Please do not send the money again meanwhile.'];
     } else if (p.state === 'paid') {
-      msg = ['পেমেন্ট সম্পূর্ণ হয়েছে। ধন্যবাদ। রসিদ ইমেইলে গেছে। চূড়ান্ত ফাইল আমরা ইমেইলে পাঠাব।', 'Payment complete. Thank you. A receipt was emailed. We will email the final files.']; cls += ' ok';
+      note = ['পেমেন্ট সম্পূর্ণ হয়েছে। ধন্যবাদ। রসিদ ইমেইলে গেছে। চূড়ান্ত ফাইল আমরা ইমেইলে পাঠাব।', 'Payment complete. Thank you. A receipt was emailed. We will email the final files.'];
     } else if (p.state === 'partial') {
-      msg = ['আংশিক টাকা পাওয়া গেছে। বাকি অংশ নিচ থেকে পাঠাতে পারেন।', 'A partial payment was received. You can send the remaining amount below.'];
+      note = ['আংশিক টাকা পাওয়া গেছে। বাকি অংশ পেমেন্ট পেজ থেকে পাঠাতে পারবেন।', 'A partial payment was received. You can send the rest from the payment page.'];
     } else if (p.state === 'rejected') {
-      msg = ['আপনার দেওয়া TrxID মেলেনি। টাকার অঙ্ক আর ID ঠিক আছে কিনা দেখে আবার জমা দিন, বা ইমেইলে জানান।', 'The TrxID you gave did not match. Check the amount and the ID and submit again, or email us.']; cls += ' bad';
+      note = p.canPay
+        ? ['আপনার দেওয়া TrxID মেলেনি। পেমেন্ট পেজে ঠিক ID দিয়ে আবার জমা দিন, বা ইমেইলে জানান।', 'The TrxID you gave did not match. Submit the correct one on the payment page, or email us.']
+        : ['আপনার দেওয়া TrxID মেলেনি, আর জমা দেওয়ার সীমা শেষ। ইমেইলে জানান।', 'The TrxID you gave did not match, and the limit for submitting is reached. Please email us.'];
     } else if (p.state === 'refunded') {
-      msg = ['টাকা ফেরত দেওয়া হয়েছে।', 'The payment has been refunded.'];
+      note = ['টাকা ফেরত দেওয়া হয়েছে।', 'The payment has been refunded.'];
     }
-    if (msg) { bi(st, msg[0], msg[1]); st.className = cls; st.hidden = false; } else { st.hidden = true; }
+    var nt = $('pNote');
+    if (note) { bi(nt, note[0], note[1]); nt.hidden = false; } else { nt.hidden = true; }
 
-    $('cpForm').hidden = !p.canCoupon;
-    $('payLater').hidden = !(p.open === false && p.state === 'unpaid');
-    if (!$('payLater').hidden) setLock((lastD && lastD.cancel && lastD.cancel.lockPercent) || 50);
-    var how = $('payHow');
-    how.hidden = !p.canPay;
-    var qr = $('pQr');
-    if (p.canPay && /^data:image\/(svg\+xml|png);base64,[A-Za-z0-9+\/=]+$/.test(p.qr || '') && /^[0-9+\- ]{6,20}$/.test(p.number || '')) {
-      qr.src = p.qr; qr.hidden = false; $('pNum').textContent = p.number;
-      var m = money(p.due); $('pDueBn').textContent = m[0]; $('pDueEn').textContent = m[1];
-    } else {
-      qr.removeAttribute('src'); qr.hidden = true; $('pNum').textContent = '';
-      if (p.canPay) how.hidden = true;
-    }
+    $('payGo').hidden = !p.canPay;
+    $('pvPayAsk').hidden = !p.canPay;
+    box.hidden = false;
   }
+
+  // বোতাম চাপলে কোড+ইমেইল শুধু এই ট্যাবের সেশনে রাখা হয় (ট্যাব বন্ধ করলে মুছে যায়), যাতে /pay/ পেজে আবার লিখতে না হয়
+  $('payGo').addEventListener('click', function () {
+    if (!cur) return;
+    try { sessionStorage.setItem('tp_pay', JSON.stringify({ c: cur.code, e: cur.email, t: Date.now() })); } catch (x) {}
+  });
 
   function renderCancel(d) {
     var box = $('cancelBox'), c = d.cancel;
@@ -508,14 +458,10 @@ noindex: true
 
   function errText(res) {
     var k = res && res.error, e = ERR[k] || ERR.net;
-    if (k === 'coupon_min' && res.min) {
-      var m = money(res.min);
-      return t('এই কুপনের জন্য কাজের দাম কমপক্ষে ' + m[0] + ' হতে হয়।', 'This coupon needs a price of at least ' + m[1] + '.');
-    }
     return t(e[0], e[1]);
   }
 
-  var STALE = { closed: 1, pay_started: 1, cancel_locked: 1, coupon_already: 1, pay_pending: 1, already_paid: 1, trx_limit: 1, not_open: 1 };
+  var STALE = { closed: 1, cancel_locked: 1 };
   function act(action, extra, line, btn, done) {
     if (!cur || busy) return;
     busy = true; if (btn) btn.disabled = true;
@@ -538,56 +484,10 @@ noindex: true
     });
   }
 
-  $('cpForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var code = $('cpCode').value.trim().toUpperCase().replace(/\s+/g, '');
-    if (!/^[A-Z0-9][A-Z0-9-]{2,19}$/.test(code)) { say($('cpStatus'), t('কুপন কোডটা ইংরেজি অক্ষর, সংখ্যা ও - দিয়ে লিখুন।', 'Write the coupon code using letters, digits and -.'), true); return; }
-    act('coupon', { coupon: code }, $('cpStatus'), $('cpBtn'));
-  });
-
   $('accChk').addEventListener('change', function () { $('accBtn').disabled = !this.checked; say($('accStatus'), ''); });
   $('accBtn').addEventListener('click', function () {
     if (!$('accChk').checked) { say($('accStatus'), t(ERR.accept_needed[0], ERR.accept_needed[1]), true); return; }
     act('accept', { agree: true }, $('accStatus'), $('accBtn'), function () { $('accChk').checked = false; });
-  });
-
-  $('trxId').addEventListener('input', function () {
-    var v = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-    if (v !== this.value) this.value = v;
-  });
-  $('trxForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var trx = $('trxId').value.trim().toUpperCase().replace(/[\s-]+/g, '');
-    if (!/^[A-Z0-9]{8,12}$/.test(trx)) { say($('trxStatus'), t(ERR.trx_format[0], ERR.trx_format[1]), true); $('trxId').focus(); return; }
-    act('pay', { trx: trx }, $('trxStatus'), $('trxBtn'), function () { $('trxId').value = ''; });
-  });
-
-  function copyText(text, btn) {
-    var label = btn.innerHTML;
-    function ok() { bi(btn, 'কপি হয়েছে', 'Copied'); setTimeout(function () { btn.innerHTML = label; }, 1600); }
-    function fallback() {
-      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
-      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); ok(); } catch (x) {}
-      document.body.removeChild(ta);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
-  }
-  $('pCopy').addEventListener('click', function () { var n = $('pNum').textContent; if (n) copyText(n, this); });
-
-  $('pSave').addEventListener('click', function () {
-    var img = $('pQr');
-    if (!img.src || img.hidden) return;
-    var c = document.createElement('canvas'); c.width = c.height = 900;
-    var x = c.getContext('2d');
-    x.fillStyle = '#fff'; x.fillRect(0, 0, 900, 900); x.imageSmoothingEnabled = false;
-    x.drawImage(img, 0, 0, 900, 900);
-    c.toBlob(function (b) {
-      if (!b) return;
-      var u = URL.createObjectURL(b), a = document.createElement('a');
-      a.href = u; a.download = 'tropelon-bkash-qr.png'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
-    }, 'image/png');
   });
 
   $('cancelOpen').addEventListener('click', function () { $('cancelAsk').hidden = true; $('cancelForm').hidden = false; $('cancelReason').focus(); });
