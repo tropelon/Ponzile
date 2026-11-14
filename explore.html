@@ -16,8 +16,14 @@ permalink: /explore/
 
 <div class="chips" id="chips">
   <button type="button" class="chip on" data-tag=""><span class="bn">সব</span><span class="en">All</span></button>
+  {% comment %} আগে _data/tags.yml-এর তালিকার ক্রমে (যে ট্যাগে লেখা আছে শুধু সেগুলো), তারপর বাকি ট্যাগ {% endcomment %}
+  {% for k in site.data.tags %}
+    {% assign kn = k[0] %}{% assign cnt = site.tags[kn] | size %}
+    {% if cnt > 0 %}<button type="button" class="chip" data-tag="{{ kn | escape }}"><span class="bn">{{ kn }}</span><span class="en">{{ k[1] }}</span></button>{% endif %}
+  {% endfor %}
   {% for t in site.tags %}
-  <button type="button" class="chip" data-tag="{{ t[0] | escape }}">{{ t[0] }}</button>
+    {% assign kn = t[0] %}
+    {% unless site.data.tags[kn] %}<button type="button" class="chip" data-tag="{{ kn | escape }}">{{ kn }}</button>{% endunless %}
   {% endfor %}
 </div>
 
@@ -30,7 +36,7 @@ permalink: /explore/
     {% assign t_en = post.title_en | default: post.title %}
     {% assign d_bn = post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 100 %}
     {% assign d_en = post.description_en | default: post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 100 %}
-    {% capture hay %}{{ post.title }} {{ post.title_en }} {{ post.description }} {{ post.description_en }} {{ post.tags | join: ' ' }}{% endcapture %}
+    {% capture hay %}{{ post.title }} {{ post.title_en }} {{ post.description }} {{ post.description_en }} {{ post.tags | join: ' ' }}{% for pt in post.tags %} {{ site.data.tags[pt] }}{% endfor %}{% endcapture %}
     <a class="card post-card" href="{{ post.url | relative_url }}" data-text="{{ hay | strip_newlines | downcase | escape }}" data-tags="{{ post.tags | join: '|' | escape }}">
       {% if img %}<img src="{{ img }}" alt="" loading="lazy">{% else %}<div style="aspect-ratio:16/9;background:var(--grad);opacity:.35"></div>{% endif %}
       <div class="body">
