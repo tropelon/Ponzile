@@ -1,0 +1,458 @@
+---
+layout: default
+title: Payment
+description: কাজের পেমেন্ট | Pay for your request
+permalink: /pay/
+sitemap: false
+noindex: true
+---
+<style>
+  .t-card:hover{transform:none;border-color:var(--line)}
+  .t-card h2{font-size:1.15rem;margin-bottom:6px}
+  .stack{display:grid;gap:14px;margin-top:6px}
+  .f2{display:grid;gap:0 12px;grid-template-columns:1fr}
+  @media (min-width:560px){.f2{grid-template-columns:1fr 1fr}}
+  #tCode{text-transform:uppercase;letter-spacing:.06em;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .bar .btn{padding:10px 20px;font-size:.92rem}
+  .status{min-height:1.4em;font-size:.85rem;color:#d8b4fe;margin-top:10px}
+  .status.err{color:#fda4af}
+  [hidden]{display:none!important}
+  .r-head{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+  .terms{margin-top:10px;font-size:.8rem;color:var(--muted)}
+  .terms a,.meta a{text-decoration:underline;text-underline-offset:3px}
+  .nw{white-space:nowrap}
+
+  /* পেমেন্ট স্ট্যাটাসের রঙ (track পেজের সঙ্গে একই) */
+  .pstat{--pc:var(--line);--pf:rgba(255,255,255,.1);--pt:var(--text);display:inline-block;padding:6px 14px;border-radius:999px;font-size:.88rem;font-weight:800;background:var(--pf);color:var(--pt);border:1px solid var(--pc)}
+  .pstat.ps-unpaid{--pc:rgba(251,146,60,.6);--pf:rgba(251,146,60,.22);--pt:#fed7aa}
+  .pstat.ps-partial{--pc:rgba(251,191,36,.55);--pf:rgba(251,191,36,.2);--pt:#fde68a}
+  .pstat.ps-submitted{--pc:rgba(96,165,250,.55);--pf:rgba(96,165,250,.22);--pt:#bfdbfe}
+  .pstat.ps-paid{--pc:rgba(52,211,153,.55);--pf:rgba(52,211,153,.22);--pt:#a7f3d0}
+  .pstat.ps-rejected{--pc:rgba(244,63,94,.55);--pf:rgba(244,63,94,.22);--pt:#fecdd3}
+  .pstat.ps-refunded{--pc:rgba(148,163,184,.45);--pf:rgba(148,163,184,.2);--pt:#cbd5e1}
+  .nudge{margin:14px 0 0;padding:10px 12px;border-radius:12px;background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.55);color:#ff6b81;font-weight:800;font-size:.92rem;line-height:1.6}
+  .hint{margin:14px 0 0;padding:9px 12px;border-radius:10px;font-size:.88rem;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.35);color:#fde68a}
+
+  .pay-card{margin-top:16px;padding:16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
+  .pay-rows{display:grid;gap:6px;margin:14px 0 0}
+  .pay-rows>div{display:flex;justify-content:space-between;gap:12px;font-size:.93rem}
+  .pay-rows dt{color:var(--muted)}
+  .pay-rows dt small{font-family:ui-monospace,Menlo,Consolas,monospace;color:#d8b4fe;margin-left:4px}
+  .pay-rows dd{margin:0;font-weight:700;text-align:right}
+  .pay-rows .due{border-top:1px dashed var(--line);padding-top:8px;margin-top:2px;font-size:1.08rem}
+  .pay-rows .due dd{color:#f5d0fe}
+  .pay-state{margin-top:12px;padding:10px 12px;border-radius:12px;font-size:.9rem;background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25)}
+  .pay-state.ok{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.35);color:#a7f3d0}
+  .pay-state.bad{background:rgba(244,63,94,.12);border-color:rgba(244,63,94,.35);color:#fecdd3}
+  .pay-note{margin:8px 0 0;padding:9px 12px;border-radius:10px;font-size:.88rem;background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25)}
+  .sub{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+  .sub h4{font-size:.95rem;margin-bottom:4px}
+  .row{display:flex;gap:8px;align-items:stretch}
+  .row input{flex:1;min-width:0}
+  .row .btn{padding:10px 18px;font-size:.9rem;white-space:nowrap}
+  #cpCode,#trxId{text-transform:uppercase;letter-spacing:.06em;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .pay-methods{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px}
+  .pm{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;background:rgba(255,255,255,.04)}
+  .pm.on{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);color:#a7f3d0;font-weight:700}
+  .pm.soon{border-style:dashed;opacity:.6;cursor:not-allowed}
+  .pm small{font-size:.74rem;opacity:.9}
+  .pay-steps{margin:8px 0 0;padding-left:1.25em;font-size:.92rem;color:var(--muted)}
+  .pay-steps li{margin:4px 0}
+  .pay-steps b{color:var(--text)}
+  .pay-box{display:grid;gap:12px;justify-items:center;margin:14px 0;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+  .pay-box img{display:block;width:min(260px,70vw);height:auto;aspect-ratio:1;border-radius:12px;background:#fff;padding:8px;image-rendering:pixelated}
+  .pay-num{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.3rem;font-weight:800;letter-spacing:.04em}
+  .pay-box .btn{padding:8px 16px;font-size:.85rem}
+  @media print{.t-card{display:none!important}}
+</style>
+
+<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">পেমেন্ট</span><span class="en">Payment</span></h1>
+<p class="meta"><span class="bn">এখানে কুপন বসানো, বিকাশে টাকা পাঠানো আর TrxID জমা দেওয়া যায়। অনুরোধের কোড আর ইমেইল দিয়ে খুলুন।</span><span class="en">Here you can apply a coupon, send money with bKash and submit the TrxID. Open it with your request code and email.</span></p>
+
+<div class="stack" id="tRoot" data-api="{{ site.data.site.client_api }}">
+
+  <section class="card t-card" id="lookCard">
+    <h2><span class="bn">আপনার অনুরোধ খুঁজুন</span><span class="en">Find your request</span></h2>
+    <form id="tForm" novalidate>
+      <div class="f2">
+        <div><label for="tCode"><span class="bn">ট্র্যাকিং কোড</span><span class="en">Tracking code</span></label><input id="tCode" type="text" placeholder="TP-XXXXXXXX" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false"></div>
+        <div><label for="tMail"><span class="bn">ইমেইল</span><span class="en">Email</span></label><input id="tMail" type="email" autocomplete="email" inputmode="email" maxlength="120"></div>
+      </div>
+      <div class="bar"><button type="submit" class="btn btn-primary" id="tGo"><span class="bn">খুলুন</span><span class="en">Open</span></button></div>
+      <p class="status" id="tStatus" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <p class="meta" id="loading" hidden><span class="bn">খোলা হচ্ছে…</span><span class="en">Opening…</span></p>
+
+  <section class="card t-card" id="payPage" hidden>
+    <div class="r-head">
+      <h2 id="rService" style="margin:0"></h2>
+      <span class="pstat" id="pChip" hidden></span>
+    </div>
+    <p class="meta" id="rCode" style="margin-top:4px"></p>
+
+    <p class="pay-card meta" id="payNone" hidden></p>
+
+    <div id="payMain" hidden>
+      <dl class="pay-rows">
+        <div><dt><span class="bn">কাজের দাম</span><span class="en">Price</span></dt><dd id="pAmount"></dd></div>
+        <div id="pDiscRow" hidden><dt><span class="bn">কুপনের ছাড়</span><span class="en">Coupon discount</span><small id="pCode"></small></dt><dd id="pDisc"></dd></div>
+        <div><dt><span class="bn">মোট পাওনা</span><span class="en">Total to pay</span></dt><dd id="pPayable"></dd></div>
+        <div id="pPaidRow" hidden><dt><span class="bn">পাওয়া গেছে</span><span class="en">Received</span></dt><dd id="pPaid"></dd></div>
+        <div class="due"><dt><span class="bn">বাকি</span><span class="en">Balance due</span></dt><dd id="pDue"></dd></div>
+      </dl>
+      <p class="nudge" id="pNudge" role="alert" hidden></p>
+      <p class="pay-state" id="pState" hidden></p>
+      <p class="hint" id="accHint" hidden><span class="bn">আপনি এখনো দাম ও শর্তে সম্মতি দেননি। ট্র্যাক পেজে সম্মতি দিলে কাজ শুরু হয়।</span><span class="en">You have not accepted the price and terms yet. The work starts once you accept them on the tracking page.</span></p>
+
+      <form class="sub" id="cpForm" hidden novalidate>
+        <h4><span class="bn">কুপন কোড আছে?</span><span class="en">Have a coupon code?</span></h4>
+        <div class="row"><input id="cpCode" type="text" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Coupon code"><button type="submit" class="btn" id="cpBtn"><span class="bn">বসান</span><span class="en">Apply</span></button></div>
+        <p class="status" id="cpStatus" aria-live="polite"></p>
+        <p class="terms"><span class="bn">এক অনুরোধে একটাই কুপন, আর পেমেন্ট জমা দেওয়ার আগে বসাতে হয়। বসালে সেটা ব্যবহার হয়ে গেছে ধরা হয়। <a href="{{ '/privacy/#coupon' | relative_url }}">কুপনের নিয়ম</a></span><span class="en">One coupon per request, and it must be applied before you submit a payment. Once applied it counts as used. <a href="{{ '/privacy/#coupon' | relative_url }}">Coupon rules</a></span></p>
+      </form>
+
+      <div class="sub" id="payHow" hidden>
+        <h4><span class="bn">কীভাবে পরিশোধ করবেন</span><span class="en">How to pay</span></h4>
+        <p class="pay-note"><span class="bn">পেমেন্ট নিশ্চিত হওয়ার পর আমরা চূড়ান্ত ফাইল পাঠাই।</span><span class="en">We send the final files after payment is confirmed.</span></p>
+        <div class="pay-methods" role="list" aria-label="Payment methods">
+          <span class="pm on" role="listitem"><span>bKash</span><small><span class="bn">চালু</span><span class="en">Available</span></small></span>
+          <span class="pm soon" role="listitem" aria-disabled="true"><span>Nagad</span><small><span class="bn">শীঘ্রই আসছে</span><span class="en">Coming soon</span></small></span>
+          <span class="pm soon" role="listitem" aria-disabled="true"><span>Rocket</span><small><span class="bn">শীঘ্রই আসছে</span><span class="en">Coming soon</span></small></span>
+        </div>
+        <p class="terms"><span class="bn">এখন শুধু বিকাশে পেমেন্ট নেওয়া হচ্ছে। নগদ ও রকেট চালু হলে এখানে জানানো হবে।</span><span class="en">For now we accept bKash only. We will say here when Nagad and Rocket are available.</span></p>
+        <ol class="pay-steps">
+          <li><span class="bn">বিকাশ অ্যাপে “সেন্ড মানি” করে <b id="pDueBn"></b> পাঠান। নিচের QR স্ক্যান করুন, অথবা নম্বরটা কপি করে বসান।</span><span class="en">In the bKash app choose “Send money” and send <b id="pDueEn"></b>. Scan the QR below, or copy the number.</span></li>
+          <li><span class="bn">টাকা পাঠানোর মেসেজ থেকে Transaction ID (TrxID) কপি করুন।</span><span class="en">Copy the Transaction ID (TrxID) from the confirmation message.</span></li>
+          <li><span class="bn">নিচের ঘরে সেটা বসিয়ে “পেমেন্ট জমা দিন” চাপুন।</span><span class="en">Paste it below and press “Submit payment”.</span></li>
+        </ol>
+        <div class="pay-box">
+          <img id="pQr" alt="bKash QR" width="260" height="260" hidden>
+          <div class="pay-num"><span class="mono" id="pNum"></span><button type="button" class="btn" id="pCopy"><span class="bn">নম্বর কপি</span><span class="en">Copy number</span></button></div>
+          <button type="button" class="btn" id="pSave"><span class="bn">QR ছবি সংরক্ষণ</span><span class="en">Save QR image</span></button>
+        </div>
+        <form id="trxForm" novalidate>
+          <label for="trxId"><span class="bn">বিকাশ Transaction ID (TrxID)</span><span class="en">bKash Transaction ID (TrxID)</span></label>
+          <div class="row"><input id="trxId" type="text" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="BH71K2L3M4"><button type="submit" class="btn btn-primary" id="trxBtn"><span class="bn">পেমেন্ট জমা দিন</span><span class="en">Submit payment</span></button></div>
+          <p class="status" id="trxStatus" aria-live="polite"></p>
+        </form>
+        <p class="terms"><span class="bn">শুধু TrxID লাগে। আপনার বিকাশ নম্বর, PIN বা OTP কখনো চাওয়া হয় না, আর কাউকে দেবেন না। জমা দেওয়ার পর আমরা মিলিয়ে নিশ্চিত করি, আর ইমেইলে রসিদ যায়। <a href="{{ '/privacy/#payment' | relative_url }}">পেমেন্টের নিয়ম</a></span><span class="en">Only the TrxID is needed. We never ask for your bKash number, PIN or OTP, and you should never share them. After you submit, we check and confirm it, and a receipt is emailed. <a href="{{ '/privacy/#payment' | relative_url }}">Payment rules</a></span></p>
+      </div>
+    </div>
+
+    <div class="bar">
+      <a class="btn" id="backTrack" href="{{ '/track/' | relative_url }}"><span class="bn">← ট্র্যাক পেজ</span><span class="en">← Tracking page</span></a>
+      <button type="button" class="btn" id="rRefresh"><span class="bn">রিফ্রেশ</span><span class="en">Refresh</span></button>
+      <button type="button" class="btn" id="rOther"><span class="bn">অন্য কোড</span><span class="en">Another code</span></button>
+    </div>
+    <p class="status" id="rStatusLine" aria-live="polite"></p>
+  </section>
+
+  <section class="card t-card" id="noApi" hidden>
+    <h2><span class="bn">এই সুবিধা এখনো চালু হয়নি</span><span class="en">This feature is not switched on yet</span></h2>
+    <p class="meta"><span class="bn">পেমেন্টের বিষয়ে সরাসরি ইমেইল করুন: <a href="mailto:{{ site.data.site.email }}" style="text-decoration:underline">{{ site.data.site.email }}</a></span><span class="en">For payment questions, email us: <a href="mailto:{{ site.data.site.email }}" style="text-decoration:underline">{{ site.data.site.email }}</a></span></p>
+  </section>
+
+</div>
+
+{% raw %}
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var isEn = function () { return document.documentElement.lang === 'en'; };
+  var t = function (bn, en) { return isEn() ? en : bn; };
+  var api = ($('tRoot').getAttribute('data-api') || '').trim();
+  var useApi = /^https:\/\/script\.google\.com\//.test(api);
+  var cur = null;       // বর্তমান কোড+ইমেইল
+  var busy = false;
+  var lastD = null;     // সর্বশেষ পাওয়া অবস্থা
+  var KEY = 'tp_pay', MAXAGE = 2 * 60 * 60 * 1000;
+
+  if (!useApi) { $('lookCard').hidden = true; $('noApi').hidden = false; return; }
+
+  var SERVICE = {
+    'Documents & PDF': 'ডকুমেন্ট ও PDF', 'Spreadsheet': 'স্প্রেডশিট', 'Video script': 'ভিডিও স্ক্রিপ্ট লেখা',
+    'Graphic design': 'গ্রাফিক্স ডিজাইন', 'Video editing': 'ভিডিও এডিটিং', 'Small website': 'ছোট ওয়েবসাইট', 'Other': 'অন্য কিছু'
+  };
+  var ERR = {
+    not_found: ['কোড আর ইমেইল মেলেনি। অনুরোধ পাঠানোর সময় যে ইমেইল দিয়েছিলেন, ঠিক সেটাই দিন।', 'Code and email do not match. Use exactly the email you gave when you sent the request.'],
+    busy: ['এই মুহূর্তে চেষ্টা করা যাচ্ছে না। কিছুক্ষণ পরে আবার দেখুন।', 'Cannot look up right now. Please try again a little later.'],
+    net: ['সংযোগে সমস্যা হয়েছে। ইন্টারনেট দেখে আবার চেষ্টা করুন।', 'Connection problem. Check your internet and try again.'],
+    old: ['পেমেন্টের তথ্য এখন আনা যাচ্ছে না। একটু পরে আবার চেষ্টা করুন, না হলে ইমেইলে জানান।', 'The payment details cannot be loaded right now. Please try again a little later, or email us.'],
+    no_amount: ['এখনো কাজের দাম ঠিক হয়নি।', 'The price has not been set yet.'],
+    closed: ['এই অনুরোধ আর খোলা নেই।', 'This request is no longer open.'],
+    coupon_invalid: ['কুপনটি সঠিক নয়, এখন চালু নেই, বা আপনার ইমেইলের জন্য নয়।', 'This coupon is not valid, is not active, or is not for your email.'],
+    coupon_expired: ['এই কুপনের মেয়াদ শেষ হয়ে গেছে।', 'This coupon has expired.'],
+    coupon_used_up: ['এই কুপনের ব্যবহারের সীমা শেষ।', 'This coupon has reached its usage limit.'],
+    coupon_limit: ['এই কুপন আপনি আগেই সর্বোচ্চবার ব্যবহার করেছেন।', 'You have already used this coupon the maximum number of times.'],
+    coupon_already: ['এই অনুরোধে ইতিমধ্যে একটা কুপন বসানো আছে।', 'A coupon is already applied to this request.'],
+    pay_started: ['পেমেন্ট শুরু হয়ে যাওয়ায় আর কুপন বসানো যায় না।', 'A coupon can no longer be applied because payment has started.'],
+    trx_format: ['TrxID ৮ থেকে ১২টা ইংরেজি অক্ষর ও সংখ্যার হয়, যেমন BH71K2L3M4। বিকাশের মেসেজ থেকে ঠিক করে কপি করুন।', 'A TrxID is 8 to 12 letters and digits, like BH71K2L3M4. Copy it exactly from the confirmation message.'],
+    trx_used: ['এই TrxID আগেই জমা পড়েছে। ঠিক ID দিন, না হলে ইমেইলে জানান।', 'This TrxID has already been submitted. Enter the correct one, or email us.'],
+    trx_limit: ['TrxID জমা দেওয়ার সর্বোচ্চ সীমা শেষ। ইমেইলে জানান।', 'The limit for submitting TrxIDs is reached. Please email us.'],
+    pay_pending: ['একটা TrxID এখনো যাচাই বাকি আছে।', 'A TrxID is still waiting to be checked.'],
+    already_paid: ['পুরো টাকা পাওয়া গেছে।', 'The full amount has been received.']
+  };
+  var STALE = { closed: 1, pay_started: 1, coupon_already: 1, pay_pending: 1, already_paid: 1, trx_limit: 1 };
+
+  function say(el, msg, bad) { el.textContent = msg; el.className = 'status' + (bad ? ' err' : ''); }
+
+  function post(payload, ms) {
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function () { ctl.abort(); }, ms || 30000) : null;
+    return fetch(api, {
+      method: 'POST', redirect: 'follow', referrerPolicy: 'no-referrer', cache: 'no-store',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload), signal: ctl ? ctl.signal : undefined
+    }).then(function (r) { return r.text(); }).then(function (txt) {
+      if (timer) clearTimeout(timer);
+      return JSON.parse(txt);
+    }, function (e) { if (timer) clearTimeout(timer); throw e; });
+  }
+
+  var BNDIG = '০১২৩৪৫৬৭৮৯';
+  function bd(x) { return String(x).replace(/[0-9]/g, function (d) { return BNDIG.charAt(+d); }); }
+  function group(n) {
+    var p = String(Math.round(n * 100) / 100).split('.');
+    p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return p.join('.');
+  }
+  function bi(el, bn, en) {
+    el.textContent = '';
+    var a = document.createElement('span'); a.className = 'bn'; a.textContent = bn;
+    var b = document.createElement('span'); b.className = 'en'; b.textContent = en;
+    el.appendChild(a); el.appendChild(b);
+  }
+  function money(n, neg) { var x = (neg ? '−' : '') + '৳' + group(n); return [bd(x), x]; }
+  function setMoney(el, n, neg) { var m = money(n, neg); bi(el, m[0], m[1]); }
+
+  function saveCreds() { try { sessionStorage.setItem(KEY, JSON.stringify({ c: cur.code, e: cur.email, t: Date.now() })); } catch (x) {} }
+  function dropCreds() { try { sessionStorage.removeItem(KEY); } catch (x) {} }
+  function readCreds() {
+    try {
+      var o = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+      if (o && /^TP-[A-Z0-9]{8}$/.test(o.c || '') && typeof o.e === 'string' && o.e && Date.now() - (o.t || 0) < MAXAGE) return o;
+    } catch (x) {}
+    return null;
+  }
+
+  // ?code= থেকে কোড বসানো, তারপর ঠিকানা থেকে মুছে ফেলা
+  try {
+    var qc = new URLSearchParams(location.search).get('code');
+    if (qc) { $('tCode').value = qc.toUpperCase().slice(0, 14); history.replaceState(null, '', location.pathname); }
+  } catch (e) {}
+
+  var PS = {
+    unpaid: ['বাকি আছে', 'Payment due', 'ps-unpaid'],
+    partial: ['আংশিক পাওয়া গেছে', 'Partly paid', 'ps-partial'],
+    submitted: ['যাচাই চলছে', 'Being checked', 'ps-submitted'],
+    paid: ['পরিশোধিত ✓', 'Paid ✓', 'ps-paid'],
+    rejected: ['TrxID মেলেনি', 'TrxID did not match', 'ps-rejected'],
+    refunded: ['ফেরত দেওয়া হয়েছে', 'Refunded', 'ps-refunded']
+  };
+  var NUDGE = {
+    work: ['পেমেন্ট না করলে বাকি কাজ করানো সম্ভব হবে না। তাই কাজ এগিয়ে নিয়ে যাওয়ার জন্য পেমেন্ট করুন।',
+      'Without payment we cannot carry on with the rest of the work. Please pay so the work can move forward.'],
+    final: ['কাজ শেষ হয়েছে। পেমেন্ট নিশ্চিত হলে আমরা চূড়ান্ত ফাইল পাঠাব, তাই পেমেন্ট করুন।',
+      'The work is finished. We send the final files once payment is confirmed, so please pay.']
+  };
+
+  function none(msgBn, msgEn) {
+    $('payMain').hidden = true; $('pChip').hidden = true;
+    bi($('payNone'), msgBn, msgEn); $('payNone').hidden = false;
+  }
+
+  function clearForms() {
+    $('pQr').removeAttribute('src'); $('pQr').hidden = true; $('pNum').textContent = '';
+    $('trxId').value = ''; $('cpCode').value = '';
+    say($('cpStatus'), ''); say($('trxStatus'), '');
+  }
+
+  function renderPay(d) {
+    var p = d.pay;
+    $('payNone').hidden = true;
+    if (!p) { clearForms(); none(ERR.old[0], ERR.old[1]); return; }               // সার্ভারের কোড পুরোনো থাকলে
+    if (d.status === 'cancelled') { clearForms(); none(ERR.closed[0], ERR.closed[1]); return; }
+    if (!p.quoted) {
+      clearForms();
+      none('কাজের দাম এখনো ঠিক হয়নি। দাম ঠিক হলে এখানে কুপন, বিকাশের নম্বর আর TrxID জমার ঘর আসবে।',
+        'The price for this job has not been set yet. Once it is set, the coupon box, the bKash number and the TrxID box will appear here.');
+      return;
+    }
+    $('payMain').hidden = false;
+    var ps = PS[p.state] || PS.unpaid, chip = $('pChip');
+    chip.className = 'pstat ' + ps[2]; bi(chip, ps[0], ps[1]); chip.hidden = false;
+
+    setMoney($('pAmount'), p.amount);
+    $('pDiscRow').hidden = !(p.discount > 0);
+    if (p.discount > 0) { setMoney($('pDisc'), p.discount, true); $('pCode').textContent = p.coupon ? ' ' + p.coupon : ''; }
+    setMoney($('pPayable'), p.payable);
+    $('pPaidRow').hidden = !(p.paid > 0);
+    if (p.paid > 0) setMoney($('pPaid'), p.paid);
+    setMoney($('pDue'), p.due);
+
+    var nd = NUDGE[p.nudge], nEl = $('pNudge');
+    if (nd) { bi(nEl, nd[0], nd[1]); nEl.hidden = false; } else { nEl.hidden = true; }
+    $('accHint').hidden = !(d.accept && d.accept.can);
+
+    var st = $('pState'), msg = null, cls = 'pay-state';
+    if (p.state === 'submitted') {
+      msg = ['আপনার TrxID (' + p.trxLast + ') পাওয়া গেছে। আমরা মিলিয়ে দেখে নিশ্চিত করব। এর মধ্যে আবার টাকা পাঠাবেন না।',
+        'We received your TrxID (' + p.trxLast + '). We will check it and confirm. Please do not send the money again meanwhile.'];
+    } else if (p.state === 'paid') {
+      msg = ['পেমেন্ট সম্পূর্ণ হয়েছে। ধন্যবাদ। রসিদ ইমেইলে গেছে। চূড়ান্ত ফাইল আমরা ইমেইলে পাঠাব।', 'Payment complete. Thank you. A receipt was emailed. We will email the final files.']; cls += ' ok';
+    } else if (p.state === 'partial') {
+      msg = ['আংশিক টাকা পাওয়া গেছে। বাকি অংশ নিচ থেকে পাঠাতে পারেন।', 'A partial payment was received. You can send the remaining amount below.'];
+    } else if (p.state === 'rejected') {
+      msg = p.canPay
+        ? ['আপনার দেওয়া TrxID মেলেনি। টাকার অঙ্ক আর ID ঠিক আছে কিনা দেখে আবার জমা দিন, বা ইমেইলে জানান।', 'The TrxID you gave did not match. Check the amount and the ID and submit again, or email us.']
+        : ['আপনার দেওয়া TrxID মেলেনি, আর জমা দেওয়ার সীমা শেষ। ইমেইলে জানান।', 'The TrxID you gave did not match, and the limit for submitting is reached. Please email us.'];
+      cls += ' bad';
+    } else if (p.state === 'refunded') {
+      msg = ['টাকা ফেরত দেওয়া হয়েছে।', 'The payment has been refunded.'];
+    }
+    if (msg) { bi(st, msg[0], msg[1]); st.className = cls; st.hidden = false; } else { st.hidden = true; }
+
+    $('cpForm').hidden = !p.canCoupon;
+    var how = $('payHow'), qr = $('pQr');
+    how.hidden = !p.canPay;
+    if (p.canPay && /^data:image\/(svg\+xml|png);base64,[A-Za-z0-9+\/=]+$/.test(p.qr || '') && /^[0-9+\- ]{6,20}$/.test(p.number || '')) {
+      qr.src = p.qr; qr.hidden = false; $('pNum').textContent = p.number;
+      var m = money(p.due); $('pDueBn').textContent = m[0]; $('pDueEn').textContent = m[1];
+    } else {
+      qr.removeAttribute('src'); qr.hidden = true; $('pNum').textContent = '';
+      if (p.canPay) how.hidden = true;
+    }
+  }
+
+  function render(d) {
+    var sv = d.service || '';
+    $('rService').innerHTML = '<span class="bn"></span><span class="en"></span>';
+    $('rService').firstChild.textContent = SERVICE[sv] || sv;
+    $('rService').lastChild.textContent = sv;
+    bi($('rCode'), 'কোড: ' + cur.code, 'Code: ' + cur.code);
+    $('lookCard').hidden = true; $('loading').hidden = true; $('payPage').hidden = false;
+    lastD = d; renderPay(d);
+  }
+
+  function lookup(code, mail, quiet) {
+    if (busy) return;
+    busy = true; $('tGo').disabled = true;
+    var line = quiet ? $('rStatusLine') : $('tStatus');
+    say(line, t('খোঁজা হচ্ছে…', 'Looking up…'));
+    post({ action: 'status', code: code, email: mail }).then(function (res) {
+      busy = false; $('tGo').disabled = false;
+      if (res && res.ok) { cur = { code: code, email: mail }; saveCreds(); say($('tStatus'), ''); say($('rStatusLine'), ''); render(res); return; }
+      var e = ERR[res && res.error] || ERR.net;
+      if (!quiet) { $('loading').hidden = true; $('lookCard').hidden = false; }
+      say(line, t(e[0], e[1]), true);
+      if (res && res.error === 'not_found') dropCreds();
+    }, function () {
+      busy = false; $('tGo').disabled = false;
+      if (!quiet) { $('loading').hidden = true; $('lookCard').hidden = false; }
+      say(line, t(ERR.net[0], ERR.net[1]), true);
+    });
+  }
+
+  $('tForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var code = $('tCode').value.trim().toUpperCase(), mail = $('tMail').value.trim();
+    if (!/^TP-[A-Z0-9]{8}$/.test(code)) { say($('tStatus'), t('কোডটা TP-XXXXXXXX ধরনের হতে হবে।', 'The code should look like TP-XXXXXXXX.'), true); $('tCode').focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) { say($('tStatus'), t('সঠিক ইমেইল ঠিকানা দিন।', 'Please enter a valid email address.'), true); $('tMail').focus(); return; }
+    lookup(code, mail, false);
+  });
+  $('rRefresh').addEventListener('click', function () { if (cur) lookup(cur.code, cur.email, true); });
+  $('rOther').addEventListener('click', function () {
+    cur = null; lastD = null; dropCreds(); clearForms();
+    $('tMail').value = ''; $('tCode').value = '';
+    $('payPage').hidden = true; $('lookCard').hidden = false; $('tCode').focus();
+  });
+
+  // ট্র্যাক পেজ থেকে এসে থাকলে ব্রাউজারের “ফিরে যাওয়া” দিয়েই ফেরা, তাহলে সেখানে আবার কোড লিখতে হয় না
+  $('backTrack').addEventListener('click', function (e) {
+    try {
+      if (document.referrer && new URL(document.referrer).origin === location.origin && /\/track\/?$/.test(new URL(document.referrer).pathname) && history.length > 1) {
+        e.preventDefault(); history.back();
+      }
+    } catch (x) {}
+  });
+
+  function act(action, extra, line, btn, done) {
+    if (!cur || busy) return;
+    busy = true; if (btn) btn.disabled = true;
+    say(line, t('অপেক্ষা করুন…', 'Please wait…'));
+    var payload = { action: action, code: cur.code, email: cur.email, lang: isEn() ? 'en' : 'bn' };
+    for (var k in extra) payload[k] = extra[k];
+    post(payload).then(function (res) {
+      busy = false; if (btn) btn.disabled = false;
+      if (res && res.ok) {
+        say(line, '');
+        if (lastD && res.pay) { lastD.pay = res.pay; if (res.accept) lastD.accept = res.accept; renderPay(lastD); }
+        if (done) done(res);
+        return;
+      }
+      var k2 = res && res.error, e = ERR[k2] || ERR.net;
+      say(line, t(e[0], e[1]), true);
+      if (res && STALE[k2]) setTimeout(function () { if (cur) lookup(cur.code, cur.email, true); }, 1500);
+    }, function () {
+      busy = false; if (btn) btn.disabled = false;
+      say(line, t(ERR.net[0], ERR.net[1]), true);
+    });
+  }
+
+  $('cpForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var code = $('cpCode').value.trim().toUpperCase().replace(/\s+/g, '');
+    if (!/^[A-Z0-9][A-Z0-9-]{2,19}$/.test(code)) { say($('cpStatus'), t('কুপন কোডটা ইংরেজি অক্ষর, সংখ্যা ও - দিয়ে লিখুন।', 'Write the coupon code using letters, digits and -.'), true); return; }
+    act('coupon', { coupon: code }, $('cpStatus'), $('cpBtn'));
+  });
+
+  $('trxId').addEventListener('input', function () {
+    var v = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (v !== this.value) this.value = v;
+  });
+  $('trxForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var trx = $('trxId').value.trim().toUpperCase().replace(/[\s-]+/g, '');
+    if (!/^[A-Z0-9]{8,12}$/.test(trx)) { say($('trxStatus'), t(ERR.trx_format[0], ERR.trx_format[1]), true); $('trxId').focus(); return; }
+    act('pay', { trx: trx }, $('trxStatus'), $('trxBtn'), function () { $('trxId').value = ''; });
+  });
+
+  function copyText(text, btn) {
+    var label = btn.innerHTML;
+    function ok() { bi(btn, 'কপি হয়েছে', 'Copied'); setTimeout(function () { btn.innerHTML = label; }, 1600); }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); ok(); } catch (x) {}
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
+  }
+  $('pCopy').addEventListener('click', function () { var n = $('pNum').textContent; if (n) copyText(n, this); });
+
+  $('pSave').addEventListener('click', function () {
+    var img = $('pQr');
+    if (!img.src || img.hidden) return;
+    var c = document.createElement('canvas'); c.width = c.height = 900;
+    var x = c.getContext('2d');
+    x.fillStyle = '#fff'; x.fillRect(0, 0, 900, 900); x.imageSmoothingEnabled = false;
+    x.drawImage(img, 0, 0, 900, 900);
+    c.toBlob(function (b) {
+      if (!b) return;
+      var u = URL.createObjectURL(b), a = document.createElement('a');
+      a.href = u; a.download = 'tropelon-bkash-qr.png'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
+    }, 'image/png');
+  });
+
+  // ট্র্যাক পেজ থেকে বা আগের খোলা থেকে কোড+ইমেইল থাকলে নিজে থেকেই খুলে যাবে
+  var saved = readCreds();
+  if (saved) { $('lookCard').hidden = true; $('loading').hidden = false; $('tCode').value = saved.c; $('tMail').value = saved.e; lookup(saved.c, saved.e, false); }
+})();
+</script>
+{% endraw %}
