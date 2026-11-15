@@ -52,6 +52,8 @@
 
   {% include nav.html mode="bottom" %}
 
+  {% if site.data.chat.enabled != false and page.chat != false %}{% unless page.url contains '/preview-maker' %}{% include chat.html %}{% endunless %}{% endif %}
+
   <script>
     document.getElementById('langBtn').addEventListener('click',function(){
       var n=document.documentElement.lang==='bn'?'en':'bn';
