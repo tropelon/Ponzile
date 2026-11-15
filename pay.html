@@ -69,7 +69,7 @@ noindex: true
 </style>
 
 <h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">পেমেন্ট</span><span class="en">Payment</span></h1>
-<p class="meta"><span class="bn">এখানে কুপন বসানো, বিকাশে টাকা পাঠানো আর TrxID জমা দেওয়া যায়। অনুরোধের কোড আর ইমেইল দিয়ে খুলুন।</span><span class="en">Here you can apply a coupon, send money with bKash and submit the TrxID. Open it with your request code and email.</span></p>
+<p class="meta" id="payIntro"><span class="bn">এখানে কুপন বসানো, বিকাশে টাকা পাঠানো আর TrxID জমা দেওয়া যায়। অনুরোধের কোড আর ইমেইল দিয়ে খুলুন।</span><span class="en">Here you can apply a coupon, send money with bKash and submit the TrxID. Open it with your request code and email.</span></p>
 
 <div class="stack" id="tRoot" data-api="{{ site.data.site.client_api }}">
 
@@ -335,7 +335,7 @@ noindex: true
     $('rService').firstChild.textContent = SERVICE[sv] || sv;
     $('rService').lastChild.textContent = sv;
     bi($('rCode'), 'কোড: ' + cur.code, 'Code: ' + cur.code);
-    $('lookCard').hidden = true; $('loading').hidden = true; $('payPage').hidden = false;
+    $('lookCard').hidden = true; $('loading').hidden = true; $('payIntro').hidden = true; $('payPage').hidden = false;
     lastD = d; renderPay(d);
   }
 
@@ -369,7 +369,7 @@ noindex: true
   $('rOther').addEventListener('click', function () {
     cur = null; lastD = null; dropCreds(); clearForms();
     $('tMail').value = ''; $('tCode').value = '';
-    $('payPage').hidden = true; $('lookCard').hidden = false; $('tCode').focus();
+    $('payPage').hidden = true; $('lookCard').hidden = false; $('payIntro').hidden = false; $('tCode').focus();
   });
 
   // ট্র্যাক পেজ থেকে এসে থাকলে ব্রাউজারের “ফিরে যাওয়া” দিয়েই ফেরা, তাহলে সেখানে আবার কোড লিখতে হয় না
