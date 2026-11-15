@@ -1,0 +1,360 @@
+<style>
+  .tpc{--tpc-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px)}
+  .tpc .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .tpc-fab{position:fixed;right:14px;bottom:var(--tpc-bottom);z-index:42;width:54px;height:54px;border-radius:50%;border:0;padding:0;cursor:pointer;color:#fff;background:var(--grad);box-shadow:0 10px 28px -6px rgba(124,58,237,.75),0 0 0 1px rgba(255,255,255,.12) inset;display:grid;place-items:center}
+  .tpc-fab:active{transform:scale(.95)}
+  .tpc-fab:focus-visible,.tpc-panel button:focus-visible,.tpc-panel a:focus-visible,.tpc-panel input:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .tpc-fab svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .tpc-fab .ic-x{display:none}
+  .tpc-fab[aria-expanded=true] .ic-chat{display:none}
+  .tpc-fab[aria-expanded=true] .ic-x{display:block}
+  .tpc-panel{position:fixed;right:14px;bottom:calc(var(--tpc-bottom) + 66px);z-index:41;width:min(380px,calc(100vw - 28px));max-height:calc(100vh - var(--nav-h) - 190px);max-height:calc(100dvh - var(--nav-h) - 190px);min-height:300px;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 60px -12px rgba(0,0,0,.7);overflow:hidden}
+  .tpc-panel[hidden]{display:none}
+  .tpc-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.03)}
+  .tpc-head h2{font-size:1rem;line-height:1.3;margin:0;flex:1}
+  .tpc-head small{display:block;color:var(--muted);font-weight:400;font-size:.74rem}
+  .tpc-x{border:0;background:transparent;color:var(--muted);font-size:1.5rem;line-height:1;cursor:pointer;padding:4px 8px;border-radius:8px}
+  .tpc-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+  .tpc-tab{border:0;background:transparent;color:var(--muted);font:inherit;font-size:.86rem;font-weight:600;padding:11px 6px;cursor:pointer;border-bottom:2px solid transparent}
+  .tpc-tab[aria-selected=true]{color:var(--text);border-bottom-color:var(--accent)}
+  .tpc-pane{display:flex;flex-direction:column;flex:1;min-height:0}
+  .tpc-pane[hidden]{display:none}
+  .tpc-log{flex:1;overflow-y:auto;padding:12px 12px 4px;display:flex;flex-direction:column;gap:8px;overscroll-behavior:contain}
+  .tpc-msg{max-width:90%;padding:9px 12px;border-radius:14px;font-size:.88rem;line-height:1.6;overflow-wrap:anywhere}
+  .tpc-msg.bot{align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid var(--line)}
+  .tpc-msg.me{align-self:flex-end;background:var(--grad);color:#fff}
+  .tpc-links,.tpc-chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}
+  .tpc-chip,.tpc-link{font:inherit;font-size:.8rem;line-height:1.3;padding:8px 12px;min-height:36px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;text-align:left}
+  .tpc-link{border-color:rgba(192,132,252,.45);color:#e9d5ff;text-decoration:none;display:inline-flex;align-items:center}
+  .tpc-chip-go{border-color:rgba(37,211,102,.55);color:#bbf7d0}
+  .tpc-form{display:flex;gap:8px;padding:10px 12px 6px}
+  .tpc-form input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;padding:9px 14px}
+  .tpc-send{font:inherit;font-weight:700;font-size:.85rem;border:0;border-radius:999px;padding:0 16px;color:#fff;background:var(--grad);cursor:pointer}
+  .tpc-foot{display:flex;justify-content:space-between;gap:8px;padding:0 14px 10px;font-size:.72rem;color:var(--muted)}
+  .tpc-foot button{white-space:nowrap;border:0;background:transparent;color:#bbf7d0;font:inherit;font-size:.72rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0}
+  .tpc-human{padding:16px 14px;overflow-y:auto;font-size:.88rem;line-height:1.65}
+  .tpc-human p{margin:0 0 12px}
+  .tpc-human .note{color:var(--muted);font-size:.8rem}
+  .tpc-wa{display:flex;justify-content:center;align-items:center;gap:8px;text-align:center;text-decoration:none;font-weight:700;color:#052e16;background:#4ade80;border-radius:999px;padding:12px 18px;margin:14px 0 10px}
+  .tpc-wa[hidden]{display:none}
+  @media (min-width:768px){
+    .tpc{--tpc-bottom:24px}
+    .tpc-fab{right:24px}
+    .tpc-panel{right:24px;max-height:calc(100vh - 190px);max-height:calc(100dvh - 190px)}
+  }
+  @media print{.tpc{display:none}}
+</style>
+
+<div class="tpc" id="tpc" data-base="{{ site.baseurl | escape }}" data-email="{{ site.data.site.email | escape }}">
+  <button type="button" class="tpc-fab" id="tpcFab" aria-expanded="false" aria-controls="tpcPanel">
+    <svg class="ic-chat" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3.5 20.5l1.5-4.7A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
+    <svg class="ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    <span class="sr bn">সাহায্য ও চ্যাট খুলুন</span><span class="sr en">Open help and chat</span>
+  </button>
+
+  <section class="tpc-panel" id="tpcPanel" role="dialog" aria-modal="false" aria-labelledby="tpcTitle" tabindex="-1" hidden>
+    <div class="tpc-head">
+      <h2 id="tpcTitle"><span class="bn">সাহায্য</span><span class="en">Help</span>
+        <small><span class="bn">tropelon-এর সঙ্গে কথা বলুন</span><span class="en">Talk to tropelon</span></small></h2>
+      <button type="button" class="tpc-x" id="tpcClose"><span aria-hidden="true">×</span><span class="sr bn">বন্ধ করুন</span><span class="sr en">Close</span></button>
+    </div>
+    <div class="tpc-tabs" role="tablist">
+      <button type="button" class="tpc-tab" role="tab" id="tpcTabBot" aria-controls="tpcPaneBot" aria-selected="true"><span class="bn">তাৎক্ষণিক উত্তর</span><span class="en">Instant answers</span></button>
+      <button type="button" class="tpc-tab" role="tab" id="tpcTabHuman" aria-controls="tpcPaneHuman" aria-selected="false" tabindex="-1"><span class="bn">সরাসরি মানুষ</span><span class="en">Talk to a person</span></button>
+    </div>
+
+    <div class="tpc-pane" id="tpcPaneBot" role="tabpanel" aria-labelledby="tpcTabBot">
+      <div class="tpc-log" id="tpcLog" role="log" aria-live="polite"></div>
+      <form class="tpc-form" id="tpcForm" autocomplete="off">
+        <input type="text" id="tpcIn" maxlength="200" enterkeyhint="send" data-ph-bn="আপনার প্রশ্ন লিখুন…" data-ph-en="Type your question…" aria-label="Your question">
+        <button type="submit" class="tpc-send"><span class="bn">পাঠান</span><span class="en">Send</span></button>
+      </form>
+      <div class="tpc-foot">
+        <span><span class="bn">স্বয়ংক্রিয় উত্তর, আপনার লেখা কোথাও জমা হয় না।</span><span class="en">Automatic answers. Nothing you type is stored.</span></span>
+        <button type="button" id="tpcToHuman"><span class="bn">মানুষের সঙ্গে কথা</span><span class="en">Talk to a person</span></button>
+      </div>
+    </div>
+
+    <div class="tpc-pane tpc-human" id="tpcPaneHuman" role="tabpanel" aria-labelledby="tpcTabHuman" hidden>
+      <p><span class="bn">এখানে কোনো বট নেই। আপনার মেসেজ আমরা (মানুষ) নিজে পড়ি।</span><span class="en">There is no bot here. Your message is read by us, people.</span></p>
+      <a class="tpc-wa" id="tpcWa" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="bn">WhatsApp-এ মেসেজ করুন</span><span class="en">Message us on WhatsApp</span></a>
+      <p><span class="bn">অথবা ইমেইল করুন: <a href="mailto:{{ site.data.site.email }}">{{ site.data.site.email }}</a></span><span class="en">Or write by email: <a href="mailto:{{ site.data.site.email }}">{{ site.data.site.email }}</a></span></p>
+      <p class="note"><span class="bn">WhatsApp-এ মেসেজ করলে আপনার ফোন নম্বর আমরা দেখতে পাব। কখন উত্তর দিতে পারব, সেটা আগে থেকে নিশ্চিত করে বলা যায় না। কাজের অনুরোধ করতে চাইলে <a href="{{ '/contact/' | relative_url }}">যোগাযোগ পেজের ফর্ম</a> ব্যবহার করুন, তাতে কাজের হিসাব রাখা সহজ হয়।</span><span class="en">If you message us on WhatsApp, we can see your phone number. We cannot promise in advance when we will be able to reply. To request work, please use the <a href="{{ '/contact/' | relative_url }}">form on the contact page</a>, which keeps the work organised.</span></p>
+    </div>
+  </section>
+
+  <div id="tpcData" data-json="{{ site.data.chat | jsonify | escape }}" hidden></div>
+  <div id="tpcPrice" data-json="{{ site.data.pricing | jsonify | escape }}" hidden></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.getElementById('tpc');
+  if (!root) return;
+  var D, PR;
+  try {
+    D = JSON.parse(document.getElementById('tpcData').getAttribute('data-json'));
+    PR = JSON.parse(document.getElementById('tpcPrice').getAttribute('data-json')) || {};
+  } catch (e) { return; }
+  if (!D || !D.topics) return;
+  var BASE = (root.getAttribute('data-base') || '').replace(/\/$/, '');
+  var EMAIL = root.getAttribute('data-email') || '';
+  var $ = function (id) { return document.getElementById(id); };
+  var lang = function () { return document.documentElement.lang === 'en' ? 'en' : 'bn'; };
+  var TOPICS = D.topics || [], BY = {};
+  TOPICS.forEach(function (t) { BY[t.id] = t; });
+
+  // ---------- লেখা ঠিকঠাক করা ----------
+  var BN_DIG = '০১২৩৪৫৬৭৮৯';
+  function bnDigits(s) { return String(s).replace(/[0-9]/g, function (d) { return BN_DIG.charAt(+d); }); }
+  function num(n, l) { var s = Number(n).toLocaleString('en-US'); return l === 'bn' ? bnDigits(s) : s; }
+  function cur() { return PR.currency || '৳'; }
+  function norm(s) {
+    s = String(s || '').toLowerCase().replace(/[০-৯]/g, function (d) { return BN_DIG.indexOf(d); });
+    s = s.replace(/[“”"'‘’.,!?;:()\[\]{}|\\\/\-–—_]+/g, ' ').replace(/\s+/g, ' ').trim();
+    return ' ' + s + ' ';
+  }
+
+  // ---------- কিওয়ার্ড মিল ----------
+  var LATIN = /^[a-z0-9 ]+$/;
+  function keyHit(q, key) {
+    key = norm(key).trim();
+    if (!key) return 0;
+    if (LATIN.test(key)) return (q.indexOf(' ' + key + ' ') >= 0 || q.indexOf(' ' + key + 's ') >= 0) ? key.length : 0;
+    return q.indexOf(key) >= 0 ? key.length : 0;
+  }
+  function score(t, q) {
+    var s = 0;
+    String(t.keys || '').split('|').forEach(function (k) {
+      var h = keyHit(q, k);
+      if (h) s += 1 + Math.min(h, 12) / 24;
+    });
+    return s * (t.w || 1);
+  }
+  function pick(q) {
+    var best = null, bs = 0;
+    TOPICS.forEach(function (t) { var s = score(t, q); if (s > bs) { bs = s; best = t; } });
+    return best;
+  }
+
+  // ---------- দামের তালিকা থেকে উত্তর ----------
+  var STOP = {};
+  ('দাম কত টাকা রেট খরচ ফি লাগে লাগবে হবে কি কী করে করতে এর জন্য আমি আপনারা আপনি আমার প্রতি ' +
+   'এর এই ও আর the a an of for how much does is do you what price cost rate per to and or in my i me it can').split(' ').forEach(function (w) { STOP[w] = 1; });
+  var GENERIC = {};
+  ('ফাইল ফাইলের পেজ ভিডিও লেখা লেখার শিট file files page video sheet').split(' ').forEach(function (w) { GENERIC[w] = 1; });
+  function price1(it) {
+    var p = parseFloat(String(it.price == null ? '' : it.price).replace(/,/g, ''));
+    return isNaN(p) ? null : p;
+  }
+  function itemLine(it, l) {
+    var p = price1(it), name = it[l] || it.bn || it.en || '';
+    var unit = it['unit_' + l] || '';
+    if (p === null) return '• ' + name + ': ' + (l === 'bn' ? 'আলোচনা সাপেক্ষে' : 'on request');
+    return '• ' + name + ': ' + cur() + num(p, l) + (unit ? ' (' + unit + ')' : '');
+  }
+  function hits(tok, hay) {
+    for (var i = 0; i < hay.length; i++) {
+      var h = hay[i];
+      if (h.length < 3) continue;
+      if (tok.indexOf(h) === 0 || (tok.length >= 4 && h.indexOf(tok) === 0)) return true;
+    }
+    return false;
+  }
+  var PRICE_TOK = {};
+  ('কত দাম রেট খরচ টাকা price cost rate much charge fee fees').split(' ').forEach(function (w) { PRICE_TOK[w] = 1; });
+  function itemAnswer(q, t) {
+    var toks = q.trim().split(' ').filter(function (t) { return t.length >= 2 && !STOP[t]; });
+    var strong = toks.filter(function (t) { return !GENERIC[t]; });
+    if (!strong.length) return null;
+    var best = [], bs = 0, catBest = null, cs = 0;
+    (PR.rates || []).forEach(function (cat) {
+      var catHay = norm((cat.bn || '') + ' ' + (cat.en || '')).trim().split(' ');
+      var cscore = strong.filter(function (t) { return hits(t, catHay); }).length;
+      if (cscore > cs) { cs = cscore; catBest = cat; }
+      (cat.items || []).forEach(function (it) {
+        var hay = norm((it.bn || '') + ' ' + (it.en || '')).trim().split(' ');
+        var s = strong.filter(function (t) { return hits(t, hay); }).length;
+        if (s > bs) { bs = s; best = [it]; } else if (s === bs && s > 0) best.push(it);
+      });
+    });
+    var priceAsked = score(BY.price || { keys: '' }, q) > 0 || q.trim().split(' ').some(function (w) { return PRICE_TOK[w]; });
+    var wants = priceAsked || !t;
+    if (wants && cs > 0 && cs >= bs && catBest) return { items: (catBest.items || []).slice(0, 6), cat: catBest };
+    if (wants && bs > 0 && best.length <= 4) return { items: best };
+    return null;
+  }
+  function priceList(l) {
+    return (PR.rates || []).map(function (cat) {
+      var ps = (cat.items || []).map(price1).filter(function (p) { return p !== null; });
+      var name = cat[l] || cat.bn || cat.en || '';
+      if (!ps.length) return '• ' + name + ': ' + (l === 'bn' ? 'আলোচনা সাপেক্ষে' : 'on request');
+      var m = Math.min.apply(null, ps);
+      return '• ' + name + ': ' + cur() + num(m, l) + (l === 'bn' ? ' থেকে' : ' and up');
+    }).join('\n');
+  }
+  function lines(l) {
+    var min = parseFloat(PR.min_order), rush = parseFloat(PR.rush_percent), rev = parseFloat(PR.free_revisions);
+    return {
+      min_line: isNaN(min) ? '' : (l === 'bn' ? 'ন্যূনতম অর্ডার ' + cur() + num(min, l) + '। ' : 'Minimum order ' + cur() + num(min, l) + '. '),
+      rush_line: isNaN(rush) ? '' : (l === 'bn' ? 'খুব অল্প সময়ে চাইলে (জরুরি কাজ) দাম ' + num(rush, l) + '% বেশি। ' : 'Rush jobs (needed in very little time) cost ' + num(rush, l) + '% more. '),
+      rev_line: isNaN(rev)
+        ? (l === 'bn' ? 'সংশোধনের নিয়ম কাজ শুরুর আগে আপনার সঙ্গে ঠিক হয়।' : 'The rules on corrections are agreed with you before work starts.')
+        : (l === 'bn' ? 'কাজ দেখার পর ' + num(rev, l) + ' বার সংশোধন বিনামূল্যে। এর বেশি বা পুরো নতুনভাবে বদলাতে হলে আলাদা হিসাব হয়।'
+                      : num(rev, l) + ' round(s) of corrections after you see the work are free. More than that, or a complete redo, is charged separately.')
+    };
+  }
+  function fill(text, l) {
+    var L = lines(l);
+    return String(text || '')
+      .replace('{price_list}', priceList(l)).replace('{min_line}', L.min_line).replace('{rush_line}', L.rush_line)
+      .replace('{rev_line}', L.rev_line).replace('{email}', EMAIL).replace(/[ \t]+\n/g, '\n').trim();
+  }
+
+  // ---------- ছবি/বাক্য আঁকা ----------
+  var log = $('tpcLog');
+  function span(cls, text) {
+    var s = document.createElement('span'); s.className = cls;
+    String(text).split('\n').forEach(function (ln, i) {
+      if (i) s.appendChild(document.createElement('br'));
+      s.appendChild(document.createTextNode(ln));
+    });
+    return s;
+  }
+  function scrollEnd() { log.scrollTop = log.scrollHeight; }
+  function clearChips() { [].slice.call(log.querySelectorAll('.tpc-chips')).forEach(function (n) { n.parentNode.removeChild(n); }); }
+  function userSay(text) {
+    var d = document.createElement('div'); d.className = 'tpc-msg me'; d.textContent = text;
+    clearChips(); log.appendChild(d); scrollEnd();
+  }
+  function botSay(bn, en, links, next, goHuman) {
+    clearChips();
+    var d = document.createElement('div'); d.className = 'tpc-msg bot';
+    d.appendChild(span('bn', bn)); d.appendChild(span('en', en));
+    log.appendChild(d);
+    if (links && links.length) {
+      var w = document.createElement('div'); w.className = 'tpc-links';
+      links.forEach(function (k) {
+        var a = document.createElement('a'); a.className = 'tpc-link'; a.href = BASE + k.href;
+        a.appendChild(span('bn', k.bn)); a.appendChild(span('en', k.en)); w.appendChild(a);
+      });
+      log.appendChild(w);
+    }
+    chips(next, goHuman);
+    scrollEnd();
+  }
+  function chips(ids, goHuman) {
+    var w = document.createElement('div'); w.className = 'tpc-chips';
+    if (goHuman) {
+      var g = document.createElement('button'); g.type = 'button'; g.className = 'tpc-chip tpc-chip-go';
+      g.appendChild(span('bn', 'WhatsApp-এ মানুষের সঙ্গে কথা')); g.appendChild(span('en', 'Talk to a person on WhatsApp'));
+      g.addEventListener('click', function () { tab('human'); });
+      w.appendChild(g);
+    }
+    (ids || []).forEach(function (id) {
+      var t = BY[id]; if (!t) return;
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'tpc-chip';
+      b.appendChild(span('bn', t.q.bn)); b.appendChild(span('en', t.q.en));
+      b.addEventListener('click', function () { ask(t.q[lang()], t.id); });
+      w.appendChild(b);
+    });
+    if (w.childNodes.length) log.appendChild(w);
+  }
+
+  // ---------- প্রশ্ন-উত্তর ----------
+  function answerTopic(t) {
+    botSay(fill(t.a.bn, 'bn'), fill(t.a.en, 'en'), t.links, t.next, t.action === 'human');
+  }
+  function ask(text, topicId) {
+    text = String(text || '').trim();
+    if (!text) return;
+    userSay(text);
+    if (topicId && BY[topicId]) { answerTopic(BY[topicId]); return; }
+    var q = norm(text);
+    var t = pick(q);
+    var items = (!t || t.id === 'price' || t.id === 'payment') ? itemAnswer(q, t) : null;
+    if (items) {
+      var hd = function (l) { return items.cat ? (items.cat[l] || '') + ':\n' : ''; };
+      botSay(hd('bn') + items.items.map(function (i) { return itemLine(i, 'bn'); }).join('\n') + '\n' + ((D.price_item || {}).bn || ''),
+             hd('en') + items.items.map(function (i) { return itemLine(i, 'en'); }).join('\n') + '\n' + ((D.price_item || {}).en || ''),
+             [{ href: '/pricing/', bn: 'দামের তালিকা', en: 'Price list' }], ['order', 'time', 'coupon'], false);
+      return;
+    }
+    if (t) { answerTopic(t); return; }
+    var f = D.fallback || {};
+    botSay(f.bn || '', f.en || '', null, D.quick, true);
+  }
+
+  // ---------- ট্যাব ও খোলা-বন্ধ ----------
+  var fab = $('tpcFab'), panel = $('tpcPanel');
+  var tBot = $('tpcTabBot'), tHum = $('tpcTabHuman'), pBot = $('tpcPaneBot'), pHum = $('tpcPaneHuman');
+  function tab(which) {
+    var h = which === 'human';
+    tBot.setAttribute('aria-selected', h ? 'false' : 'true'); tHum.setAttribute('aria-selected', h ? 'true' : 'false');
+    tBot.tabIndex = h ? -1 : 0; tHum.tabIndex = h ? 0 : -1;
+    pBot.hidden = h; pHum.hidden = !h;
+    if (h) waLink();
+  }
+  [tBot, tHum].forEach(function (b, i) {
+    b.addEventListener('click', function () { tab(i ? 'human' : 'bot'); });
+    b.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = i ? tBot : tHum; tab(i ? 'bot' : 'human'); n.focus(); e.preventDefault(); }
+    });
+  });
+  $('tpcToHuman').addEventListener('click', function () { tab('human'); });
+
+  // WhatsApp লিংক: শুধু ঠিক ধরনের ঠিকানা হলে বোতাম দেখায়
+  var WA_OK = /^https:\/\/(wa\.me|api\.whatsapp\.com)\//;
+  function waLink() {
+    var a = $('tpcWa'), base = String(D.whatsapp_url || '');
+    if (!WA_OK.test(base)) { a.hidden = true; return; }
+    var msg = D['whatsapp_text_' + lang()] || '';
+    a.href = base + (msg ? (base.indexOf('?') < 0 ? '?' : '&') + 'text=' + encodeURIComponent(msg) : '');
+    a.hidden = false;
+  }
+
+  var started = false;
+  function open() {
+    panel.hidden = false; fab.setAttribute('aria-expanded', 'true');
+    if (!started) {
+      started = true;
+      var w = D.welcome || {};
+      botSay(w.bn || '', w.en || '', null, D.quick, false);
+    }
+    waLink(); fit(); scrollEnd();
+    try { panel.focus({ preventScroll: true }); } catch (e) { panel.focus(); }
+  }
+  function close() { panel.hidden = true; fab.setAttribute('aria-expanded', 'false'); panel.style.bottom = ''; panel.style.maxHeight = ''; fab.focus(); }
+  fab.addEventListener('click', function () { if (panel.hidden) open(); else close(); });
+  $('tpcClose').addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
+
+  $('tpcForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var inp = $('tpcIn'), v = inp.value; inp.value = '';
+    ask(v);
+  });
+
+  // ---------- ভাষা বদলালে ----------
+  function applyLang() {
+    var l = lang(), inp = $('tpcIn');
+    inp.placeholder = inp.getAttribute('data-ph-' + l) || '';
+    if (!panel.hidden) waLink();
+  }
+  applyLang();
+  new MutationObserver(applyLang).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+  // ---------- ফোনের কিবোর্ড খুললে প্যানেল যেন ঢেকে না যায় ----------
+  var vv = window.visualViewport;
+  function fit() {
+    if (!vv || panel.hidden) return;
+    var kb = window.innerHeight - vv.height - vv.offsetTop;
+    if (kb > 80) {
+      panel.style.bottom = (kb + 8) + 'px';
+      panel.style.maxHeight = Math.max(240, vv.height - 24) + 'px';
+    } else { panel.style.bottom = ''; panel.style.maxHeight = ''; }
+  }
+  if (vv) { vv.addEventListener('resize', fit); vv.addEventListener('scroll', fit); }
+})();
+</script>
