@@ -1,0 +1,200 @@
+# সাইটের ডান নিচের চ্যাট বোতামের সব লেখা আর সেটিংস।
+# enabled: false করলে বোতামটা সব পেজ থেকে সরে যায়।
+# whatsapp_url: "সরাসরি মানুষ" ট্যাবের WhatsApp লিংক। শুধু https://wa.me/ বা https://api.whatsapp.com/ দিয়ে শুরু হওয়া লিংক কাজ করে।
+#   নম্বরের বদলে WhatsApp-এর ইউজারনেম-লিংক পেলে এখানে সেটাই বসান, তাহলে ফোন নম্বর আর খোলা থাকবে না।
+# প্রতিটা topic-এ: q = বোতামে যে প্রশ্ন দেখায়, keys = যেসব শব্দ থাকলে এই উত্তর দেওয়া হবে ( | দিয়ে আলাদা),
+#   a = উত্তর, links = নিচের বোতাম, next = উত্তরের পর যেসব প্রশ্ন দেখাবে।
+# উত্তরে {min_line} {rush_line} {rev_line} {price_list} {email} বসালে সাইটের দামের তালিকা আর ইমেইল থেকে নিজে ভরে যায়।
+# দাম এখানে আলাদা করে লিখতে হয় না। দামের তালিকা (_data/pricing.yml) বদলালে বটের উত্তরও নিজে বদলে যায়।
+enabled: true
+whatsapp_url: "https://wa.me/8801331591975"
+whatsapp_text_bn: "হ্যালো tropelon, আপনাদের সাইট থেকে লিখছি।"
+whatsapp_text_en: "Hello tropelon, I am writing from your website."
+
+welcome:
+  bn: "হ্যালো! আমি tropelon-এর স্বয়ংক্রিয় সহায়ক (বট), মানুষ নই। আগে থেকে লেখা উত্তর থেকে আপনার প্রশ্নের সবচেয়ে কাছেরটা বেছে দিই। নিচের প্রশ্নে চাপ দিন, বা নিজের প্রশ্ন লিখুন।"
+  en: "Hello! I am tropelon's automatic helper (a bot), not a person. I pick the closest ready-made answer to your question. Tap a question below, or type your own."
+fallback:
+  bn: "এই প্রশ্নের ঠিক উত্তর আমার কাছে নেই। নিচের প্রশ্নগুলো দেখতে পারেন, অথবা সরাসরি মানুষের সঙ্গে কথা বলুন।"
+  en: "I do not have an exact answer to this. You can try one of the questions below, or talk to a person directly."
+price_item:
+  bn: "তালিকার দাম। চূড়ান্ত দাম, পরিধি আর সময় কাজ শুরুর আগে আপনার সঙ্গে ঠিক হয়।"
+  en: "These are the listed prices. The final price, scope and time are agreed with you before work starts."
+
+quick: [services, price, order, payment, cancel, track]
+
+topics:
+  - id: services
+    q: { bn: "আপনারা কী কী কাজ করেন?", en: "What services do you offer?" }
+    keys: "কী কী|কি কি|সার্ভিস|সেবা|service|services|offer|what do you"
+    a:
+      bn: "আমরা ছয় ধরনের ডিজিটাল কাজ করি: ডকুমেন্ট ও PDF, স্প্রেডশিট, ভিডিও স্ক্রিপ্ট লেখা, গ্রাফিক্স ডিজাইন, ভিডিও এডিটিং আর ছোট ওয়েবসাইট। প্রতিটার বিস্তারিত সার্ভিস পেজে আছে।"
+      en: "We do six kinds of digital work: documents and PDF, spreadsheets, video script writing, graphic design, video editing and small websites. The services page has the details of each."
+    links:
+      - { href: "/services/", bn: "সার্ভিসগুলো দেখুন", en: "See services" }
+      - { href: "/portfolio/", bn: "নমুনা কাজ", en: "Sample work" }
+    next: [price, order]
+
+  - id: price
+    q: { bn: "দাম কত?", en: "How much does it cost?" }
+    keys: "দাম|মূল্য|রেট|কত টাকা|কত লাগ|খরচ|ন্যূনতম|price|prices|pricing|cost|rate|rates|how much|charge|minimum"
+    a:
+      bn: "সার্ভিস অনুযায়ী দামের শুরু:\n{price_list}\n{min_line}{rush_line}{rev_line}\nচূড়ান্ত দাম, পরিধি আর সময় কাজ শুরুর আগে আপনার সঙ্গে ঠিক হয়। নির্দিষ্ট কাজের দাম জানতে কাজের নাম লিখুন, যেমন “থাম্বনেইল”।"
+      en: "Prices start from:\n{price_list}\n{min_line}{rush_line}{rev_line}\nThe final price, scope and time are agreed with you before work starts. To get the price of a specific job, type its name, for example “thumbnail”."
+    links:
+      - { href: "/pricing/", bn: "দামের তালিকা", en: "Price list" }
+    next: [order, time, coupon]
+
+  - id: order
+    q: { bn: "কীভাবে কাজের অনুরোধ করব?", en: "How do I place a request?" }
+    keys: "অর্ডার|অনুরোধ|কাজ দিতে|কাজ করাতে|শুরু করব|শুরু করতে|কীভাবে শুরু|কিভাবে শুরু|কীভাবে কাজ|কিভাবে কাজ|order|place an order|get started|hire|how to start"
+    a:
+      bn: "১) যোগাযোগ পেজের ফর্মে কাজের বিবরণ আর আপনার ডেডলাইন লিখে অনুরোধ পাঠান।\n২) ইমেইলে একটা ট্র্যাকিং কোড (TP-…) পাবেন।\n৩) আমরা দেখে দাম আর সময় জানাই। কাজের অগ্রগতি পেজে কোড আর ইমেইল দিয়ে ঢুকে “দাম ও শর্ত মেনে কাজ শুরু করুন” চাপলে কাজ শুরু হয়।\n৪) কাজ এগোলে প্রিভিউ দেখানো হয়। ভালো লাগলে বিকাশে পেমেন্ট করুন, তারপর চূড়ান্ত ফাইল ইমেইলে পাঠানো হয়।"
+      en: "1) Send a request through the form on the contact page, with the details of the work and your deadline.\n2) You will get a tracking code (TP-…) by email.\n3) We look at it and tell you the price and time. Open the progress page with your code and email and press “Accept and start the work”, and the work begins.\n4) As the work moves on, a preview is shown. If you like it, pay through bKash, and the final files are then emailed to you."
+    links:
+      - { href: "/contact/", bn: "অনুরোধ পাঠান", en: "Send a request" }
+      - { href: "/track/", bn: "কাজের অগ্রগতি", en: "Track a request" }
+    next: [payment, time, track]
+
+  - id: payment
+    q: { bn: "পেমেন্ট কীভাবে করব?", en: "How do I pay?" }
+    keys: "পেমেন্ট|বিকাশ|নগদ|রকেট|টাকা পাঠ|টাকা দিতে|টাকা দেব|পরিশোধ|অগ্রিম|ভুয়া|প্রতারণা|trxid|transaction|bkash|nagad|rocket|payment|pay|paying|advance|prepay|upfront|scam|fake"
+    a:
+      bn: "কাজ শুরুর আগে কিছু দিতে হয় না। দাম ঠিক হওয়ার পর অগ্রগতি পেজের “এখনই পেমেন্ট করুন” বোতামে আলাদা পেমেন্ট পেজ খোলে। সেখানে কুপন থাকলে বসিয়ে বিকাশে টাকা পাঠান, তারপর বিকাশের মেসেজের TrxID জমা দিন।\nআমরা মিলিয়ে নিশ্চিত করলে ইমেইলে রসিদ যায়, আর তারপর চূড়ান্ত ফাইল ইমেইলে পাঠানো হয়।\nএখন শুধু বিকাশ চলে, নগদ ও রকেট শীঘ্রই আসছে।\nনিরাপত্তা: আপনার নম্বর, PIN বা OTP আমরা কখনো চাই না। আমাদের বিকাশ নম্বর শুধু আপনার নিজের পেমেন্ট পেজে দেখা যায়, কোড আর ইমেইল মেলানোর পর।\nপ্রিভিউ দেখার পর বা কাজ ৫০% হলে পেমেন্টের অনুস্মারক আসে, আর পেমেন্ট না হলে বাকি কাজ এগোয় না।"
+      en: "Nothing has to be paid before work starts. Once the price is set, the “Pay now” button on your progress page opens a separate payment page. Apply a coupon there if you have one, pay through bKash, then submit the TrxID from the bKash message.\nWhen we confirm it, a receipt goes to your email, and then the final files are emailed to you.\nOnly bKash works for now. Nagad and Rocket are coming soon.\nSafety: we never ask for your number, PIN or OTP. Our bKash number appears only on your own payment page, after your code and email match.\nAfter a preview, or when the work reaches 50%, a payment reminder appears, and the rest of the work cannot go ahead without payment."
+    links:
+      - { href: "/privacy/#payment", bn: "পেমেন্টের নিয়ম", en: "Payment rules" }
+    next: [cancel, coupon, files]
+
+  - id: cancel
+    q: { bn: "বাতিল করলে টাকা ফেরত পাব?", en: "If I cancel, do I get a refund?" }
+    keys: "বাতিল|ফেরত|রিফান্ড|ক্যানসেল|cancel|cancellation|refund|money back"
+    w: 1.5
+    a:
+      bn: "কাজ ৫০%-এর কম হলে আর আপনাকে প্রিভিউ দেখানো না হয়ে থাকলে অগ্রগতি পেজ থেকে বাতিলের অনুরোধ করা যায়। আমরা দেখে ইমেইলে সিদ্ধান্ত জানাই। আগে টাকা পাঠিয়ে থাকলে, যতটুকু কাজ হয়েছে তার অংশ রেখে বাকিটা ফেরত দেওয়া হয়।\nকাজ ৫০% বা তার বেশি হলে, বা প্রিভিউ একবার দেখানো হয়ে গেলে, আর বাতিল করা যায় না, তখন ফি দিতে হয়। আমরা নিজেরা কাজ করতে না পারলে আপনার পাঠানো টাকা ফেরত দেওয়া হয়।"
+      en: "If the work is below 50% and no preview has been shown to you, you can send a cancellation request from the progress page. We look at it and tell you our decision by email. If you already paid, the part for the work done is kept and the rest is refunded.\nOnce the work reaches 50%, or a preview has been shown to you once, it can no longer be cancelled and the fee is payable. If we ourselves cannot do the work, the money you sent is refunded."
+    links:
+      - { href: "/privacy/#cancel", bn: "বাতিল ও ফি-র নিয়ম", en: "Cancellation and fee rules" }
+    next: [payment, preview]
+
+  - id: track
+    q: { bn: "আমার কাজের অবস্থা কীভাবে দেখব?", en: "How do I see my work status?" }
+    keys: "অগ্রগতি|অবস্থা|ট্র্যাক|ট্র্যাকিং|অনুরোধের কোড|ট্র্যাকিং কোড|কাজের কোড|কতদূর|track|tracking|status|progress|my code|where is"
+    a:
+      bn: "কাজের অগ্রগতি পেজে অনুরোধের কোড (TP-…) আর অনুরোধে দেওয়া ইমেইল দিন। সেখানে কাজের শতাংশ, দাম, প্রিভিউ আর পেমেন্টের অবস্থা দেখা যায়। কোডটা অনুরোধ পাঠানোর পর পাওয়া ইমেইলে আছে। কোডটা গোপন রাখবেন।"
+      en: "On the progress page, enter your request code (TP-…) and the email you used for the request. It shows the work percentage, price, preview and payment status. The code is in the email you got after sending the request. Please keep the code private."
+    links:
+      - { href: "/track/", bn: "কাজের অগ্রগতি দেখুন", en: "Open the progress page" }
+    next: [payment, preview]
+
+  - id: coupon
+    q: { bn: "কুপন কীভাবে বসাব?", en: "How do I use a coupon?" }
+    keys: "কুপন|ছাড়|ডিসকাউন্ট|অফার|coupon|discount|promo|voucher|offer"
+    a:
+      bn: "কুপন থাকলে দাম ঠিক হওয়ার পর, পেমেন্ট জমা দেওয়ার আগে পেমেন্ট পেজে বসান। এক অনুরোধে একটা কুপনই বসে, আর পেমেন্ট জমা দেওয়ার পর কুপন বসানো বা বদলানো যায় না। কুপনের মেয়াদ বা ব্যবহারের সীমা থাকতে পারে, বসাতে না পারলে পেজেই কারণ জানানো হয়। কুপন আমরা বিক্রি করি না, আর সেটা টাকায় ভাঙানো যায় না।"
+      en: "If you have a coupon, apply it on the payment page once the price is set and before you submit the payment. Only one coupon applies per request, and after the payment is submitted a coupon can no longer be applied or changed. A coupon may have an expiry or usage limit, and if it cannot be applied the page tells you why. We do not sell coupons, and a coupon cannot be exchanged for money."
+    links:
+      - { href: "/privacy/#coupon", bn: "কুপনের নিয়ম", en: "Coupon rules" }
+    next: [payment, price]
+
+  - id: time
+    q: { bn: "কাজ শেষ হতে কত সময় লাগে?", en: "How long does a job take?" }
+    keys: "সময়|কতদিন|কত দিন|কবে|ডেডলাইন|জরুরি|দ্রুত|কত ঘণ্টা|time|deadline|urgent|rush|how long|days|fast|quick|turnaround"
+    a:
+      bn: "সময় কাজের ধরন আর পরিমাণের ওপর নির্ভর করে। অনুরোধের ফর্মে আপনার ডেডলাইন লিখে দিন। আমরা দেখে দাম আর সময় একসঙ্গে জানাই, আর সেটা কাজ শুরুর আগে আপনার সঙ্গে ঠিক হয়। {rush_line}"
+      en: "The time depends on the kind and amount of work. Write your deadline in the request form. We look at it and tell you the price and time together, and it is agreed with you before work starts. {rush_line}"
+    links:
+      - { href: "/contact/", bn: "অনুরোধ পাঠান", en: "Send a request" }
+    next: [price, order]
+
+  - id: revisions
+    q: { bn: "কাজ পছন্দ না হলে সংশোধন করানো যায়?", en: "Can I ask for corrections?" }
+    keys: "সংশোধন|রিভিশন|বদলাতে|বদল|পরিবর্তন|পছন্দ না|revision|revisions|corrections|changes|modify|dont like|don't like"
+    a:
+      bn: "{rev_line}"
+      en: "{rev_line}"
+    next: [price, cancel]
+
+  - id: files
+    q: { bn: "চূড়ান্ত ফাইল কীভাবে পাব?", en: "How do I get the final files?" }
+    keys: "ফাইল|ডেলিভারি|চূড়ান্ত|হাতে পেতে|হাতে পাব|deliver|delivery|final|files|receive|download"
+    a:
+      bn: "পেমেন্ট নিশ্চিত হওয়ার পর চূড়ান্ত ফাইল আপনার ইমেইলে পাঠানো হয়। প্রিভিউ আসল ফাইল নয়, ওটা কম রেজোলিউশনের আর “PREVIEW” ছাপ দেওয়া।"
+      en: "After payment is confirmed, the final files are emailed to you. A preview is not the real file: it is low resolution and stamped “PREVIEW”."
+    next: [payment, preview]
+
+  - id: preview
+    q: { bn: "প্রিভিউ কী, কীভাবে দেখা যায়?", en: "What is the preview?" }
+    keys: "প্রিভিউ|ছাপ|স্ক্রিনশট|preview|previews|watermark|screenshot"
+    a:
+      bn: "কাজ এগোলে আপনাকে একটা এক নজর প্রিভিউ দেখানো হয়। সেটা কম রেজোলিউশনের, “PREVIEW” ছাপ দেওয়া, আর একবারই অল্প সময়ের জন্য খোলা যায়। প্রতিটা পাতায় আপনার কোড, ইমেইল ও সময় লেখা থাকে। প্রিভিউর স্ক্রিনশট বা রেকর্ডিং নিয়ে ব্যবহার বা বিলি করা সেবার শর্ত লঙ্ঘন। প্রিভিউ একবার দেখানো হয়ে গেলে আর বাতিল করা যায় না, তাই ভালো করে দেখে নিন।"
+      en: "As the work moves on, you are shown a one-look preview. It is low resolution, stamped “PREVIEW”, and can be opened only once, for a short time. Every page carries your code, email and the time. Taking a screenshot or recording of the preview and using or sharing it breaks the terms of the service. Once a preview has been shown to you, the order can no longer be cancelled, so please look at it carefully."
+    links:
+      - { href: "/privacy/", bn: "প্রিভিউর নিয়ম", en: "Preview rules" }
+    next: [cancel, payment]
+
+  - id: privacy
+    q: { bn: "আমার তথ্য কি নিরাপদ?", en: "Is my information safe?" }
+    keys: "গোপনীয়তা|তথ্য|ডেটা|নিরাপদ|নিরাপত্তা|সুরক্ষ|প্রাইভেসি|privacy|data|safe|secure|security|personal|information"
+    a:
+      bn: "আপনার নাম, ইমেইল, যোগাযোগ আর কাজের বিবরণ শুধু আপনার অনুরোধ সামলাতে ব্যবহার হয়, বিক্রি বা বিজ্ঞাপনের জন্য নয়। কাজ শেষের পর সাধারণত ১২ মাস রাখা হয়, তারপর মুছে ফেলা হয়, আর আগে মুছতে বললে মুছে দেওয়া হয়। পাসওয়ার্ড, কার্ড বা ব্যাংকের তথ্য, NID নম্বর আমাদের কখনো লাগে না, পাঠাবেন না।\nএই চ্যাট আপনার প্রশ্ন কোথাও পাঠায় না বা জমা রাখে না, সবকিছু আপনার ব্রাউজারেই হয়।"
+      en: "Your name, email, contact and work details are used only to handle your request, never sold or used for ads. They are usually kept for 12 months after the work is done and then deleted, or earlier if you ask. We never need passwords, card or bank details or an NID number, so please do not send them.\nThis chat does not send your questions anywhere or store them. Everything happens in your browser."
+    links:
+      - { href: "/privacy/", bn: "গোপনীয়তা ও নিয়মাবলি", en: "Privacy and rules" }
+    next: [payment, order]
+
+  - id: tools
+    q: { bn: "ফ্রি টুল কী কী আছে?", en: "What free tools do you have?" }
+    keys: "টুল|টুলস|কনভার্টার|বিজয়|ইউনিকোড|বায়ান্ন|ফ্রি|free|tool|tools|converter|bijoy|unicode"
+    a:
+      bn: "আমাদের কয়েকটা ফ্রি টুল আছে: ইউনিকোড ↔ বিজয় কনভার্টার, ছবি কনভার্টার আর ইউনিট কনভার্টার। সব আপনার ব্রাউজারেই চলে, আপনার লেখা বা ছবি কোথাও আপলোড হয় না।"
+      en: "We have a few free tools: a Unicode ↔ Bijoy converter, an image converter and a unit converter. They all run in your browser, and your text or images are not uploaded anywhere."
+    links:
+      - { href: "/tools/", bn: "ফ্রি টুলস", en: "Free tools" }
+    next: [services, order]
+
+  - id: portfolio
+    q: { bn: "আগের কাজের নমুনা দেখা যাবে?", en: "Can I see sample work?" }
+    keys: "পোর্টফোলিও|নমুনা|আগের কাজ|উদাহরণ|portfolio|sample|samples|examples|previous work"
+    a:
+      bn: "পোর্টফোলিও পেজে আমাদের কাজের ধরনের নমুনা দেখতে পারবেন।"
+      en: "On the portfolio page you can see samples of the kind of work we do."
+    links:
+      - { href: "/portfolio/", bn: "পোর্টফোলিও", en: "Portfolio" }
+    next: [services, price]
+
+  - id: human
+    q: { bn: "মানুষের সঙ্গে কথা বলতে চাই", en: "I want to talk to a person" }
+    keys: "মানুষ|যোগাযোগ|কথা বলতে|কথা বলব|ফোন|নম্বর|হোয়াটসঅ্যাপ|সাপোর্ট|এজেন্ট|whatsapp|call|phone|human|person|agent|talk|speak|contact|support"
+    action: human
+    a:
+      bn: "মানুষের সঙ্গে সরাসরি কথা বলতে “সরাসরি মানুষ” ট্যাবে WhatsApp-এ মেসেজ করুন। ইমেইলেও লিখতে পারেন: {email}"
+      en: "To talk to a person directly, use the “Talk to a person” tab and message us on WhatsApp. You can also write by email: {email}"
+    next: [order, price]
+
+  - id: bot
+    q: { bn: "তুমি কি মানুষ?", en: "Are you a person?" }
+    keys: "বট|রোবট|এআই|কৃত্রিম|তুমি কে|আপনি কে|bot|robot|are you|who are you|ai|chatgpt"
+    a:
+      bn: "না, আমি একটা স্বয়ংক্রিয় সহায়ক (বট)। এআই নই, আগে থেকে লেখা উত্তর থেকে প্রশ্নের কাছের উত্তরটা বেছে দিই, নিজে কিছু ভাবি না বা মনে রাখি না। মানুষের সঙ্গে কথা বলতে চাইলে “সরাসরি মানুষ” ট্যাবে WhatsApp আছে।"
+      en: "No, I am an automatic helper (a bot). I am not an AI: I pick the closest ready-made answer to your question, and I do not think for myself or remember anything. If you want a person, the “Talk to a person” tab has WhatsApp."
+    action: human
+    next: [services, price]
+
+  - id: thanks
+    w: 0.5
+    q: { bn: "ধন্যবাদ", en: "Thanks" }
+    keys: "ধন্যবাদ|থ্যাংক|শুকরিয়া|thanks|thank"
+    a:
+      bn: "আপনাকেও ধন্যবাদ! আর কিছু জানার থাকলে লিখুন।"
+      en: "Thank you too! Write again if there is anything else you want to know."
+    next: [price, order]
+
+  - id: hello
+    w: 0.5
+    q: { bn: "হ্যালো", en: "Hello" }
+    keys: "হ্যালো|হাই|হেলো|সালাম|আসসালামু|নমস্কার|hello|hi|hey|salam"
+    a:
+      bn: "হ্যালো! কীভাবে সাহায্য করতে পারি? নিচের প্রশ্নে চাপ দিন, বা নিজের প্রশ্ন লিখুন।"
+      en: "Hello! How can I help? Tap a question below, or type your own."
+    next: [services, price, order]
