@@ -55,6 +55,7 @@ noindex: true
     </div>
     <div class="bar"><button type="button" class="btn btn-primary" id="pmGo"><span class="bn">প্রিভিউ বানান</span><span class="en">Make previews</span></button></div>
     <p class="status" id="pmStatus" aria-live="polite"></p>
+    <p class="hint" id="pmLibNote" hidden><span class="bn">PDF পড়ার লাইব্রেরি (pdf.js, নির্দিষ্ট সংস্করণ) এবার jsDelivr নামের পাবলিক সোর্স থেকে এসেছে। শুধু লাইব্রেরির কোড এসেছে, আপনার PDF কোথাও যায়নি।</span><span class="en">The PDF-reading library (pdf.js, a fixed version) came from a public source called jsDelivr this time. Only the library code was fetched, your PDF went nowhere.</span></p>
     <div class="outs" id="pmOuts"></div>
     <div class="bar" id="pmAllBar" hidden><button type="button" class="btn" id="pmAll"><span class="bn">সবগুলো নামান</span><span class="en">Download all</span></button></div>
   </section>
@@ -146,22 +147,50 @@ noindex: true
   }
 
   // ---------- PDF (pdf.js, এই সাইটেরই ফাইল থেকে লোড হয়, বাইরে থেকে কিছু আসে না) ----------
+  // pdf.js লাইব্রেরি: আগে এই সাইটের নিজের ফাইল, ঠিকঠাক না থাকলে (না থাকলে বা অর্ধেক কাটা হলে) পাবলিক CDN (jsDelivr)।
+  // দুই ক্ষেত্রেই ফাইলের SHA-384 ছাপ মিলিয়ে নেওয়া হয়, মিলল না তো ব্যবহারই হয় না।
+  var PDFJS_VERSION = '3.11.174';
+  var SRI_PDF = 'sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e';
+  var SRI_WORKER = 'sha384-SnzOobpRMLXZ52iJvZm/C0fYw0OQemTXzTjIsdsfMcrCtCEe9qgzxTd3RSklO5x2';
+  var CDN = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@' + PDFJS_VERSION + '/build/';
   var pdfLoading = null;
+
+  async function verified(url, sri) {
+    var r = await fetch(url, { integrity: sri });
+    if (!r.ok) throw new Error('http ' + r.status);
+    return new Blob([await r.arrayBuffer()], { type: 'text/javascript' });
+  }
+  async function fromSource(pdfUrl, workerUrl) {
+    var libBlob = await verified(pdfUrl, SRI_PDF);
+    var workerBlob = await verified(workerUrl, SRI_WORKER);
+    var libUrl = URL.createObjectURL(libBlob), wUrl = URL.createObjectURL(workerBlob);
+    await new Promise(function (res, rej) {
+      var s = document.createElement('script');
+      s.src = libUrl; s.onload = res; s.onerror = function () { rej(new Error('script error')); };
+      document.head.appendChild(s);
+    });
+    if (!window.pdfjsLib) throw new Error('lib missing');
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = wUrl;
+    return window.pdfjsLib;
+  }
   function loadPdfLib() {
     if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
     if (pdfLoading) return pdfLoading;
     var cfg = $('pmCfg');
-    pdfLoading = new Promise(function (res, rej) {
-      var s = document.createElement('script');
-      s.src = cfg.getAttribute('data-pdf');
-      s.onload = function () {
-        if (!window.pdfjsLib) { pdfLoading = null; return rej(new Error('pdfjs missing')); }
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = cfg.getAttribute('data-worker');
-        res(window.pdfjsLib);
-      };
-      s.onerror = function () { pdfLoading = null; rej(new Error('pdfjs load')); };
-      document.head.appendChild(s);
-    });
+    pdfLoading = (async function () {
+      try {
+        return await fromSource(cfg.getAttribute('data-pdf'), cfg.getAttribute('data-worker'));
+      } catch (e1) {
+        try {
+          var lib = await fromSource(CDN + 'pdf.min.js', CDN + 'pdf.worker.min.js');
+          $('pmLibNote').hidden = false;
+          return lib;
+        } catch (e2) {
+          pdfLoading = null;
+          throw new Error('pdfjs load');
+        }
+      }
+    })();
     return pdfLoading;
   }
   function parsePages(str, n) {
@@ -299,7 +328,7 @@ noindex: true
         }
       } catch (e) {
         var msg = (k === 'pdf' && String(e && e.message).indexOf('pdfjs') === 0)
-          ? t('PDF সাপোর্ট লোড হয়নি। পেজটা রিফ্রেশ করে আবার চেষ্টা করুন।', 'PDF support did not load. Refresh the page and try again.')
+          ? t('PDF পড়ার লাইব্রেরি লোড হয়নি। ইন্টারনেট চালু আছে কিনা দেখে পেজটা রিফ্রেশ করুন, তারপর আবার চেষ্টা করুন।', 'The PDF-reading library did not load. Check your internet connection, refresh the page and try again.')
           : t('ফাইলটা পড়া যায়নি।', 'could not read this file.');
         note(f.name + ': ' + msg);
       }
