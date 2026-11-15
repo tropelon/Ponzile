@@ -174,10 +174,12 @@ topics:
 
   - id: bot
     q: { bn: "তুমি কি মানুষ?", en: "Are you a person?" }
-    keys: "বট|রোবট|এআই|কৃত্রিম|তুমি কে|আপনি কে|bot|robot|are you|who are you|ai|chatgpt"
+    keys: "বট|রোবট|এআই|কৃত্রিম|তুমি কে|আপনি কে|তুমি কি মানুষ|আপনি কি মানুষ|তুমি কী মানুষ|আপনি কী মানুষ|মানুষ নাকি|bot|robot|are you|who are you|ai|chatgpt"
     a:
       bn: "না, আমি একটা স্বয়ংক্রিয় সহায়ক (বট)। এআই নই, আগে থেকে লেখা উত্তর থেকে প্রশ্নের কাছের উত্তরটা বেছে দিই, নিজে কিছু ভাবি না বা মনে রাখি না। মানুষের সঙ্গে কথা বলতে চাইলে “সরাসরি মানুষ” ট্যাবে WhatsApp আছে।"
       en: "No, I am an automatic helper (a bot). I am not an AI: I pick the closest ready-made answer to your question, and I do not think for myself or remember anything. If you want a person, the “Talk to a person” tab has WhatsApp."
+    links:
+      - { href: "/privacy/#chat", bn: "চ্যাটে লেখা কোথায় যায়", en: "Where chat text goes" }
     action: human
     next: [services, price]
 
