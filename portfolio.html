@@ -11,6 +11,9 @@ permalink: /portfolio/
 {%- assign keys = "documents,spreadsheet,script,design,video,website,other" | split: "," -%}
 {%- assign names_bn = "ডকুমেন্ট ও PDF|স্প্রেডশিট|ভিডিও স্ক্রিপ্ট|গ্রাফিক্স ডিজাইন|ভিডিও এডিটিং|ছোট ওয়েবসাইট|অন্যান্য" | split: "|" -%}
 {%- assign names_en = "Documents & PDF|Spreadsheets|Video scripts|Graphic design|Video editing|Small websites|Other" | split: "|" -%}
+{%- comment -%} ক্লায়েন্টের মতামত: শুধু যেগুলোতে consent টিক আর বাংলা লেখা আছে সেগুলোই গোনা ও দেখানো হয় {%- endcomment -%}
+{%- assign n_rev = 0 -%}
+{%- for r in site.data.reviews.reviews -%}{%- if r.consent == true and r.text_bn and r.text_bn != '' -%}{%- assign n_rev = n_rev | plus: 1 -%}{%- endif -%}{%- endfor -%}
 <style>
   .pf-hero{padding:28px 0 6px}
   .pf-hero h1{font-size:clamp(1.9rem,6.5vw,2.8rem);font-weight:800}
@@ -54,6 +57,19 @@ permalink: /portfolio/
   .p-video{background:radial-gradient(110% 100% at 50% 0%,rgba(192,132,252,.38),transparent 60%),radial-gradient(100% 100% at 100% 100%,rgba(56,189,248,.16),transparent 55%),#130a25}
   .p-web{background:radial-gradient(110% 100% at 100% 0%,rgba(124,58,237,.50),transparent 60%),radial-gradient(100% 100% at 0% 100%,rgba(192,132,252,.22),transparent 60%),#140b26}
 
+  .rv-sec[hidden],.rv[hidden]{display:none}
+  .rv-note{margin:-6px 0 14px}
+  .rv-grid{display:grid;gap:14px;grid-template-columns:1fr}
+  @media (min-width:700px){.rv-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1000px){.rv-grid{grid-template-columns:repeat(3,1fr)}}
+  .rv{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:var(--r);padding:18px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
+  .rv blockquote{position:relative;margin:0;padding-top:22px;font-size:.98rem;line-height:1.75;white-space:pre-line;overflow-wrap:anywhere}
+  .rv blockquote::before{content:"\201C";position:absolute;left:-2px;top:-8px;font-size:3rem;line-height:1;color:var(--accent);opacity:.6}
+  .rv footer{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:.85rem}
+  .rv-name{font-weight:700}
+  .rv footer .tag{margin:0}
+  .rv-yr{margin-left:auto;font-size:.75rem;color:var(--muted)}
+  .rv .btn{align-self:flex-start;padding:7px 14px;font-size:.82rem}
   .pf-rules{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:6px}
   .pf-rule{border:1px solid var(--line);border-radius:16px;padding:16px;background:rgba(255,255,255,.03)}
   .pf-rule h3{font-size:1rem;margin-bottom:4px}
@@ -169,6 +185,34 @@ permalink: /portfolio/
   </section>
 {% endfor %}
 
+{% if n_rev > 0 %}
+<section class="rv-sec" id="reviews">
+  <h2 class="section-title"><span class="bn">ক্লায়েন্টরা কী বলেছেন</span><span class="en">What clients say</span></h2>
+  <p class="meta rv-note"><span class="bn">ক্লায়েন্টের নিজের কথা, তাঁর অনুমতি নিয়ে দেখানো হয়। ক্লায়েন্ট পরে চাইলে সরিয়ে দেওয়া হয়।</span><span class="en">These are the clients' own words, shown with their permission. If a client asks later, theirs is taken down.</span></p>
+  <div class="rv-grid">
+    {% for r in site.data.reviews.reviews %}
+      {% if r.consent == true and r.text_bn and r.text_bn != '' %}
+        {% assign si = 6 %}
+        {% for k in keys %}{% if k == r.service %}{% assign si = forloop.index0 %}{% endif %}{% endfor %}
+        {% assign rl1 = r.link | slice: 0, 1 %}{% assign rl2 = r.link | slice: 0, 2 %}{% assign rl7 = r.link | slice: 0, 7 %}{% assign rl8 = r.link | slice: 0, 8 %}
+        <article class="rv" data-service="{{ keys[si] }}">
+          <blockquote><span class="bn">{{ r.text_bn | escape }}</span><span class="en">{{ r.text_en | default: r.text_bn | escape }}</span></blockquote>
+          <footer>
+            {% if r.name and r.name != '' %}<span class="rv-name">{{ r.name | escape }}</span>{% endif %}
+            <span class="tag"><span class="bn">{{ names_bn[si] }}</span><span class="en">{{ names_en[si] }}</span></span>
+            {% if r.year %}<span class="rv-yr">{{ r.year }}</span>{% endif %}
+          </footer>
+          {%- comment -%} ঐচ্ছিক মূল লিংক: শুধু https:// বা http:// লিংক চলে {%- endcomment -%}
+          {% if rl8 == 'https://' or rl7 == 'http://' %}
+            <a class="btn" href="{{ r.link | escape }}" target="_blank" rel="noopener noreferrer"><span class="bn">মূল মতামত দেখুন</span><span class="en">See the original</span></a>
+          {% endif %}
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
 <h2 class="section-title"><span class="bn">প্রকাশের নিয়ম</span><span class="en">How work is shown</span></h2>
 <div class="pf-rules">
   <div class="pf-rule">
@@ -224,6 +268,9 @@ permalink: /portfolio/
   function apply(f) {
     [].forEach.call(bar.querySelectorAll('.pf-f'), function (b) { b.classList.toggle('on', b.getAttribute('data-f') === f); });
     [].forEach.call(document.querySelectorAll('.pf-card'), function (c) { c.hidden = !(f === 'all' || c.getAttribute('data-service') === f); });
+    [].forEach.call(document.querySelectorAll('.rv'), function (c) { c.hidden = !(f === 'all' || c.getAttribute('data-service') === f); });
+    var rs = document.querySelector('.rv-sec');
+    if (rs) rs.hidden = f !== 'all' && !rs.querySelector('.rv:not([hidden])');
     [].forEach.call(document.querySelectorAll('.pf-sec'), function (s) {
       var anyCard = s.querySelector('.pf-card');
       var visible = s.querySelector('.pf-card:not([hidden])');
