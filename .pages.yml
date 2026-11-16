@@ -69,6 +69,16 @@ content:
         options:
           media: images
 
+      - name: gallery
+        label: অতিরিক্ত ছবি (দুই ভাষাতেই দেখাবে)
+        type: image
+        description: লেখার নিচে দেখাবে। এখানে একবার দিলেই বাংলা ও English দুই ভাষাতেই একই ছবি আসবে, লেখার ভেতরে আলাদা করে ছবি বসাতে হবে না। একসঙ্গে একাধিক দেওয়া যায় (সর্বোচ্চ ৬টি)। ফাঁকা রাখলেও চলবে।
+        options:
+          media: images
+          multiple:
+            max: 6
+          unique: true
+
       - name: video
         label: ভিডিও লিংক
         type: string
