@@ -70,6 +70,16 @@ layout: default
     <p class="meta en" style="margin-top:10px">This article is written in Bangla only.</p>
   {% endif %}
 
+  {%- comment -%}
+    অতিরিক্ত ছবি (gallery): CMS-এর "অতিরিক্ত ছবি" ঘরে একবার দিলে বাংলা ও ইংরেজি দুই ভাষাতেই লেখার নিচে একই ছবি দেখায়।
+    একটা ছবি হোক বা কয়েকটা, দুই ক্ষেত্রেই চলে। ফাঁকা থাকলে কিছুই দেখায় না।
+  {%- endcomment -%}
+  {% assign gal = page.gallery | join: '||' | split: '||' %}
+  {% for g in gal %}{% assign g1 = g | strip %}{% if g1 != '' %}
+    {% if g1 contains '://' %}{% assign gsrc = g1 %}{% else %}{% assign gsrc = g1 | relative_url %}{% endif %}
+    <img class="post-gallery-img" src="{{ gsrc | escape }}" alt="{{ page.title | escape }}" loading="lazy" style="display:block;width:auto;height:auto;max-width:100%;max-height:75vh;border-radius:14px;margin:18px auto 0">
+  {% endif %}{% endfor %}
+
   {%- comment -%} ঐচ্ছিক service: documents, spreadsheet, script, design, video, website (দামের তালিকার সার্ভিস-কী)। দিলে নিচের বোতাম ওই সার্ভিস বাছাই করা ফর্মে নিয়ে যায়। {%- endcomment -%}
   {% assign svc_key = '' %}{% assign svc_bn = '' %}{% assign svc_en = '' %}
   {% if page.service %}{% for c in site.data.pricing.rates %}{% if c.key == page.service %}{% assign svc_key = c.key %}{% assign svc_bn = c.bn %}{% assign svc_en = c.en %}{% endif %}{% endfor %}{% endif %}
