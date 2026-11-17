@@ -8,7 +8,22 @@
   {% unless page.image %}<meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}">{% endunless %}
   {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
   {% feed_meta %}
+  {%- comment -%} ফ্যাভিকন: Google সার্চের ফলাফলে SVG দেখায় না, তাই PNG আগে। ব্রাউজারের ট্যাবে SVG-ই দেখাবে। {%- endcomment -%}
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ '/assets/icon-192.png' | relative_url }}">
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/logo.svg' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/icon-192.png' | relative_url }}">
+  {%- comment -%} শুধু হোমপেজে: ব্র্যান্ডের পরিচয় (সার্চ ইঞ্জিনকে জানায় tropelon কী, আর কোন প্রোফাইলগুলো এর নিজের)। {%- endcomment -%}
+  {% if page.url == '/' %}
+  {% assign soc_ld = site.data.links.social | default: site.data.site.social %}
+  {% assign same_as = soc_ld | map: 'url' | jsonify %}
+  {% assign home_abs = '/' | absolute_url %}
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"Organization","@id":{{ home_abs | append: '#org' | jsonify }},"name":"tropelon","alternateName":["tropelon BD","ট্রোপেলন"],"url":{{ home_abs | jsonify }},"logo":{{ '/assets/icon-192.png' | absolute_url | jsonify }},"email":{{ site.data.site.email | jsonify }},"description":{{ site.description | jsonify }},"sameAs":{{ same_as }}},
+    {"@type":"WebSite","@id":{{ home_abs | append: '#website' | jsonify }},"url":{{ home_abs | jsonify }},"name":"tropelon","alternateName":["tropelon BD","ট্রোপেলন"],"inLanguage":["bn","en"],"publisher":{"@id":{{ home_abs | append: '#org' | jsonify }}}}
+  ]}
+  </script>
+  {% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
