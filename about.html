@@ -1,48 +1,47 @@
 ---
 layout: default
 title: পরিচিতি
-description: tropelon একজন কনটেন্ট ক্রিয়েটরের ডিজিটাল সার্ভিস স্টুডিও | tropelon is a digital service studio run by a content creator
+description: ডকুমেন্ট, প্রশ্নপত্র, স্প্রেডশিট, ভিডিও স্ক্রিপ্ট, ডিজাইন ও ভিডিও এডিটিংয়ের কাজ অনলাইনে করিয়ে নেওয়ার সার্ভিস। কীভাবে কাজ হয়, এখানে জানুন। | tropelon is an online service for documents, question papers, spreadsheets, video scripts, design and video editing. See how it works.
 permalink: /about/
 ---
-{% assign soc = site.data.links.social | default: site.data.site.social %}
 <style>
   .ab-hero{text-align:center;padding:28px 0 10px}
-  .ab-hero h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800;margin-top:10px}
+  .ab-hero h1{font-size:clamp(1.9rem,6vw,2.7rem);font-weight:800;margin-top:10px;color:var(--text)}
   .ab-hero .lead{margin-inline:auto}
   .ab-card:hover{transform:none;border-color:var(--line)}
-  .ab-card h3{font-size:1.05rem;margin-bottom:6px}
-  .ab-ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:12px;background:rgba(192,132,252,.14);border:1px solid rgba(192,132,252,.28)}
-  .ab-ico svg{width:24px;height:24px;fill:none;stroke:#d8b4fe;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-  .ab-story{padding:20px}
-  .ab-story p{color:var(--text);font-size:1.02rem;margin:0 0 .9em}
+  .ab-card h3{font-size:1.15rem;margin-bottom:6px}
+  .ab-ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:12px;background:transparent;border:1px solid var(--line)}
+  .ab-ico svg{width:26px;height:26px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .ab-story{padding:22px}
+  .ab-story p{color:var(--text);font-size:1.1rem;line-height:1.75;margin:0 0 1em}
   .ab-story p:last-child{margin-bottom:0}
-  .ab-story a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
-  .ab-cta{margin-top:34px;text-align:center;padding:26px 18px;border-radius:var(--r);border:1px solid rgba(192,132,252,.35);background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(236,72,153,.10))}
-  .ab-cta h2{font-size:1.3rem}
+  .ab-story a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;font-weight:600}
+  .ab-cta{margin-top:34px;text-align:center;padding:28px 18px;border-radius:var(--r);border:1px solid var(--line);background:var(--card)}
+  .ab-cta h2{font-size:1.4rem}
   .ab-cta p{color:var(--muted);margin:8px auto 0;max-width:52ch}
   .ab-cta .actions{justify-content:center}
 </style>
 
 <section class="ab-hero">
-  <img src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="64" height="76" style="filter:drop-shadow(0 0 18px rgba(168,85,247,.55))">
-  <h1 class="grad-text">tropelon</h1>
+  <img src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="64" height="76">
+  <h1>tropelon</h1>
   <p class="lead">
-    <span class="bn">একজন কনটেন্ট ক্রিয়েটরের চালানো ডিজিটাল সার্ভিস স্টুডিও। ডকুমেন্ট, স্প্রেডশিট, ভিডিও স্ক্রিপ্ট, ডিজাইন, ভিডিও এডিটিং আর ছোট ওয়েবসাইট।</span>
-    <span class="en">A digital service studio run by a content creator. Documents, spreadsheets, video scripts, design, video editing and small websites.</span>
+    <span class="bn">ডকুমেন্ট ও PDF, স্প্রেডশিট, প্রশ্নপত্র, ভিডিও স্ক্রিপ্ট, ডিজাইন, ভিডিও এডিটিং আর ছোট ওয়েবসাইটের কাজ অনলাইনে করিয়ে নেওয়ার জায়গা।</span>
+    <span class="en">A place to get documents and PDFs, spreadsheets, question papers, video scripts, design, video editing and small websites done online.</span>
   </p>
 </section>
 
 <h2 class="section-title"><span class="bn">আমাদের কথা</span><span class="en">About us</span></h2>
 <div class="card ab-card ab-story">
-  <p class="bn">আমরা একটা বাংলা ইউটিউব চ্যানেল চালাই। সেখানে ডকুমেন্টারি, ভয়ের গল্পের বর্ণনা আর শিক্ষামূলক ভিডিও বানাই। প্রতিটা ভিডিওর জন্য পুরো স্ক্রিপ্ট লেখা আর গুছিয়ে সাজানো আমাদের নিজেদের কাজ।</p>
-  <p class="bn">নিজেদের কাজে যে যত্ন লাগে, অন্যের কাজেও সেটাই দিতে চাই। tropelon ছোট একটা স্টুডিও, তাই যার সঙ্গে আপনার কথা হয়, কাজটাও সে-ই করে। মাঝখানে হাত বদল হয় না।</p>
-  <p class="bn">আমাদের চ্যানেলে গেলে কাজের ধরন নিজের চোখে দেখতে পারবেন।
-  {% for s in soc %}{% if s.key == 'youtube' %}<a href="{{ s.url }}" target="_blank" rel="noopener">YouTube চ্যানেল দেখুন</a>{% endif %}{% endfor %}</p>
+  <p class="bn">tropelon একটা অনলাইন সার্ভিস সাইট। ডকুমেন্ট ও PDF, বাংলা টাইপিং, স্প্রেডশিট, প্রশ্নপত্র, ভিডিও স্ক্রিপ্ট লেখা, গ্রাফিক ডিজাইন, ভিডিও এডিটিং আর ছোট ওয়েবসাইটের কাজ আমরা করে দিই।</p>
+  <p class="bn">কম্পিউটারে লেখালেখি, ফাইল গোছানো বা ডিজাইনের কাজ করার সময় বা অভ্যাস সবার থাকে না। শিক্ষক, ছোট ব্যবসার মালিক, শিক্ষার্থী বা অফিসের কাগজপত্র সামলান এমন যে কেউ কাজটা আমাদের হাতে দিয়ে নিশ্চিন্তে থাকতে পারেন।</p>
+  <p class="bn">কাজ চলে সহজ নিয়মে। কী লাগবে অনুরোধ ফর্মে লিখে পাঠান। আমরা ইমেইলে দাম আর সময় জানাব। আপনি রাজি হলে কাজ শুরু হবে, আর একটা কোড দিয়ে অগ্রগতি দেখতে পারবেন। <a href="{{ '/services/' | relative_url }}">সার্ভিসগুলো</a> আর <a href="{{ '/pricing/' | relative_url }}">দামের তালিকা</a> আলাদা পেজে আছে।</p>
+  <p class="bn">tropelon ছোট একটা সার্ভিস, তাই যার সঙ্গে আপনার কথা হয়, কাজটাও সে-ই করে। মাঝখানে হাত বদল হয় না।</p>
 
-  <p class="en">We run a Bangla YouTube channel where we make documentaries, horror narrations and educational videos. Writing a full script for each video and shaping it is our own work.</p>
-  <p class="en">We want to give client work the same care we give our own. tropelon is a small studio, so the person you talk to is the person who does the work. Nothing gets handed around in between.</p>
-  <p class="en">You can see the kind of work we do on our channel.
-  {% for s in soc %}{% if s.key == 'youtube' %}<a href="{{ s.url }}" target="_blank" rel="noopener">Visit the YouTube channel</a>{% endif %}{% endfor %}</p>
+  <p class="en">tropelon is an online service site. We take on documents and PDFs, Bangla typing, spreadsheets, question papers, video script writing, graphic design, video editing and small websites.</p>
+  <p class="en">Not everyone has the time, or the habit, for typing documents, organising files or doing design work on a computer. Teachers, small business owners, students and anyone who handles office paperwork can hand the job to us and stop worrying about it.</p>
+  <p class="en">It works in a few simple steps. Write what you need in the request form. We reply by email with a price and timeline. If you agree, the work starts, and you can follow its progress with a code. See the <a href="{{ '/services/' | relative_url }}">services</a> and the <a href="{{ '/pricing/' | relative_url }}">price list</a> on their own pages.</p>
+  <p class="en">tropelon is a small service, so the person you talk to is the person who does the work. Nothing gets handed around in between.</p>
 </div>
 
 <h2 class="section-title"><span class="bn">কাজের ধরন</span><span class="en">How we work</span></h2>
@@ -78,11 +77,6 @@ permalink: /about/
     <p class="meta"><span class="bn">বিজয় ↔ ইউনিকোড, ছবি আর ইউনিট কনভার্টার বিনামূল্যে ব্যবহার করুন। সবকিছু আপনার ব্রাউজারেই চলে।</span><span class="en">Use the Bijoy ↔ Unicode, image and unit converters for free. Everything runs in your browser.</span></p>
     <p style="margin-top:10px"><a class="btn" href="{{ '/tools/' | relative_url }}" style="padding:8px 18px;font-size:.88rem"><span class="bn">টুলস খুলুন</span><span class="en">Open tools</span></a></p>
   </div>
-</div>
-
-<h2 class="section-title"><span class="bn">আমাদের সাথে থাকুন</span><span class="en">Follow along</span></h2>
-<div class="socials" style="justify-content:flex-start">
-  {% for s in soc %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}
 </div>
 
 <section class="ab-cta">
