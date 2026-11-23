@@ -300,4 +300,14 @@ permalink: /contact/
     $('doneCode').textContent = code;
     var a = $('doneTrack'); a.href = a.getAttribute('href').split('?')[0] + '?code=' + encodeURIComponent(code);
     form.reset();
-    window.scrollTo({ top: 0
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  $('doneCopy').addEventListener('click', function () {
+    copyText($('doneCode').textContent, function (ok) {
+      var s = $('doneStatus');
+      s.textContent = ok ? t('কোড কপি হয়েছে ✓', 'Code copied ✓') : t('কপি হয়নি, কোডটা চেপে ধরে কপি করুন।', 'Copy failed, long-press the code to copy it.');
+    });
+  });
+})();
+</script>
+{% endraw %}
