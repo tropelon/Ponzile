@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   {% if th == 'light' %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400..800&family=Noto+Sans:wght@400;600;700;800&display=swap">{% else %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">{% endif %}
-  <link rel="stylesheet" href="{% if th == 'light' %}{{ '/assets/css/site.css' | relative_url }}{% else %}{{ '/assets/css/style.css' | relative_url }}{% endif %}">
+  <link rel="stylesheet" href="{% if th == 'light' %}{{ '/assets/site.css' | relative_url }}{% else %}{{ '/assets/css/style.css' | relative_url }}{% endif %}">
   {% if th == 'light' %}<style>.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-top:16px}.foot-links a{text-decoration:underline;text-underline-offset:3px;color:var(--text);font-weight:600}.wa-chip{padding:8px 16px;border:1.5px solid var(--line-strong);border-radius:10px;background:#fff;color:var(--text);font-weight:600;font-size:.95rem}.site-footer a[href^=mailto]{color:var(--primary);font-weight:700;text-decoration:underline;text-underline-offset:3px}</style>{% else %}<style>.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:14px}.foot-links a{text-decoration:underline;text-underline-offset:3px}.wa-chip{padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04)}</style>{% endif %}
   <script>try{var l=localStorage.getItem('tp-lang');if(l==='bn'||l==='en')document.documentElement.lang=l}catch(e){}</script>
 </head>
