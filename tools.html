@@ -1,39 +1,40 @@
 ---
 layout: default
+theme: light
 title: টুলস
 permalink: /tools/
 ---
 <style>
-  .tabs{display:flex;gap:8px;overflow-x:auto;margin:14px -16px 0;padding:4px 16px 10px;scrollbar-width:none}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:4px 0 10px}
   .tabs::-webkit-scrollbar{display:none}
-  .tab,.mode{flex:none;font:inherit;font-size:.85rem;font-weight:600;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;white-space:nowrap}
-  .tab.on,.mode.on{color:#fff;background:var(--grad);border-color:transparent}
+  .tab,.mode{flex:none;font:inherit;font-size:1rem;font-weight:600;color:var(--text);background:#fff;border:1.5px solid var(--line-strong);border-radius:8px;padding:9px 18px;min-height:48px;cursor:pointer;white-space:nowrap}
+  .tab.on,.mode.on{color:var(--on-primary);background:var(--primary);border-color:var(--primary)}
   .modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
   .tool{display:none;margin-top:6px}
   .tool.on{display:block}
   .tool:hover{transform:none;border-color:var(--line)}
-  .tool h2{font-size:1.25rem}
+  .tool h2{font-size:1.35rem}
   .tool textarea{min-height:150px;resize:vertical;line-height:1.6}
   .bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  .bar .btn{padding:9px 18px;font-size:.9rem}
-  .note{color:var(--muted);font-size:.82rem;margin-top:10px}
-  .status{min-height:1.4em;font-size:.85rem;color:#d8b4fe;margin-top:8px}
-  .drop{display:block;border:1.5px dashed rgba(192,132,252,.45);border-radius:14px;padding:22px 14px;text-align:center;color:var(--muted);cursor:pointer;margin:0}
+  .bar .btn{min-height:50px}
+  .note{color:var(--muted);font-size:.95rem;margin-top:10px}
+  .status{min-height:1.4em;font-size:1rem;color:var(--primary-dark);font-weight:600;margin-top:8px}
+  .drop{display:block;border:2px dashed var(--primary);background:var(--primary-tint);border-radius:var(--r);padding:24px 14px;text-align:center;color:var(--muted);cursor:pointer;margin:0}
   .drop input{display:none}
-  .drop:hover{border-color:var(--accent)}
+  .drop:hover{border-color:var(--primary-dark)}
   .results{display:grid;gap:10px;margin-top:14px}
-  .res{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+  .res{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft)}
   .res img{width:56px;height:56px;object-fit:cover;border-radius:10px;flex:none;background:#000}
   .res .info{flex:1;min-width:0}
-  .res .info b{display:block;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .res .btn{padding:8px 16px;font-size:.85rem;flex:none}
+  .res .info b{display:block;font-size:1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .res .btn{padding:8px 18px;font-size:.95rem;min-height:46px;flex:none}
   .big{font-size:clamp(1.3rem,5vw,1.8rem);font-weight:800;margin-top:16px;word-break:break-word}
-  .all{display:grid;gap:6px 14px;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));margin-top:12px;font-size:.88rem;color:var(--muted)}
+  .all{display:grid;gap:6px 14px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));margin-top:12px;font-size:.95rem;color:var(--muted)}
   .all b{color:var(--text);font-weight:600}
-  input[type=range]{padding:0;height:34px;accent-color:#a855f7}
+  input[type=range]{padding:0;height:34px;min-height:34px;accent-color:var(--primary)}
 </style>
 
-<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">টুলস</span><span class="en">Tools</span></h1>
+<h1 class="section-title" style="margin-top:8px;font-size:1.5rem"><span class="bn">টুলস</span><span class="en">Tools</span></h1>
 <p class="meta"><span class="bn">সবকিছু আপনার ব্রাউজারেই চলে। আপনার লেখা বা ছবি কোথাও আপলোড হয় না।</span><span class="en">Everything runs in your browser. Your text and images are never uploaded.</span></p>
 
 <div class="tabs" id="tabs" role="tablist">
@@ -122,7 +123,7 @@ permalink: /tools/
   </div>
   <div class="bar"><button type="button" class="btn" id="uSwap"><span class="bn">⇄ অদলবদল</span><span class="en">⇄ Swap</span></button></div>
 
-  <p class="big grad-text" id="uOut"></p>
+  <p class="big" style="color:var(--primary)" id="uOut"></p>
   <div class="all" id="uAll"></div>
   <p class="note" id="uNote"></p>
 </section>
