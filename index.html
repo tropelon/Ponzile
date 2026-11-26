@@ -5,13 +5,13 @@ theme: light
 <style>
   /* ---------- হিরো ---------- */
   .hm-hero{display:grid;gap:28px;align-items:center;padding:20px 0 6px}
-  .hm-hero h1{font-size:clamp(1.9rem,6.4vw,3rem);font-weight:800;line-height:1.3}
+  .hm-hero h1{font-size:clamp(1.55rem,6.4vw,2.7rem);font-weight:800;line-height:1.3}
   .hm-hero .lead{margin-top:14px}
   .hm-checks{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:8px}
   .hm-checks li{display:flex;gap:10px;align-items:flex-start;font-weight:600;font-size:1.02rem}
   .hm-checks svg{flex:none;width:22px;height:22px;margin-top:4px;fill:none;stroke:var(--ok);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-  .hm-note{margin-top:18px;font-size:.95rem;color:var(--muted)}
-  .hm-note a{color:var(--primary);text-decoration:underline;text-underline-offset:3px;font-weight:700}
+  .hm-note{margin-top:8px;font-size:1rem;color:var(--muted)}
+  .hm-note a{display:inline-block;padding:12px 0;color:var(--primary);text-decoration:underline;text-underline-offset:3px;font-weight:700}
 
   /* হিরোর ডানের উদাহরণ কার্ড */
   .mk{position:relative;border-radius:16px;border:1px solid var(--line);background:var(--primary-tint);padding:48px 18px 46px}
@@ -29,11 +29,12 @@ theme: light
   .mk-row b{color:var(--text)}
   .mk-msg{margin-top:10px;font-size:.95rem;color:var(--text);padding:9px 12px;border-radius:8px;background:var(--soft)}
   .mk-btn{display:inline-block;margin-top:12px;font-size:.92rem;font-weight:700;color:var(--on-primary);padding:8px 16px;border-radius:8px;background:var(--primary)}
-  @media (min-width:860px){.hm-hero{grid-template-columns:1.1fr .9fr;gap:44px;padding-top:36px}.mk{padding-top:52px}}
+  .mk{display:none}
+  @media (min-width:860px){.hm-hero{grid-template-columns:1.1fr .9fr;gap:44px;padding-top:36px}.mk{display:block;padding-top:52px}}
 
   /* ---------- সার্ভিস কার্ড ---------- */
-  .hm-svcs{display:grid;gap:18px;grid-template-columns:1fr}
-  @media (min-width:600px){.hm-svcs{grid-template-columns:repeat(2,1fr)}}
+  .hm-svcs{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+  @media (min-width:600px){.hm-svcs{gap:18px}}
   @media (min-width:960px){.hm-svcs{grid-template-columns:repeat(3,1fr)}}
   .hm-svc{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05);transition:border-color .15s}
   .hm-svc:hover{border-color:var(--primary)}
@@ -41,8 +42,10 @@ theme: light
   .poster svg{position:absolute;inset:0;width:100%;height:100%;display:block}
   .p-doc{background:#e7eefa}.p-sheet{background:#e4f4ec}.p-script{background:#fcf0d6}.p-design{background:#efeafb}.p-video{background:#e1f2f6}.p-web{background:#e9eff8}
   .ph{animation:ph 5s ease-in-out infinite alternate}
-  .hm-svc-body{padding:16px 20px 20px}
-  .hm-svc-body h3{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+  .hm-svc-body{padding:12px 14px 14px}
+  .hm-svc-body h3{font-size:1.05rem;font-weight:800;line-height:1.4}
+  .hm-svc-body .meta{display:none;margin-top:4px}
+  @media (min-width:600px){.hm-svc-body{padding:16px 20px 20px}.hm-svc-body h3{font-size:1.2rem}.hm-svc-body .meta{display:block}}
   .hm-more{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;font-size:1rem;font-weight:700;color:var(--primary);text-decoration:underline;text-underline-offset:3px}
 
   /* ---------- ভিডিও ---------- */
@@ -57,27 +60,20 @@ theme: light
   .hm-video-cap{font-weight:700;font-size:1.05rem}
   .hm-video-sub{font-size:.9rem;color:var(--muted);max-width:34ch}
 
-  /* ---------- ধাপ ---------- */
-  .hm-steps{display:grid;gap:14px;padding:0;margin-top:6px;grid-template-columns:1fr}
-  @media (min-width:760px){.hm-steps{grid-template-columns:repeat(3,1fr)}}
-  .hm-steps a{color:var(--primary);text-decoration:underline;text-underline-offset:2px;font-weight:600}
-  .hm-steps li{list-style:none;position:relative;padding:18px;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05)}
-  .hm-steps li .n{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-weight:800;font-size:1.05rem;color:var(--on-primary);background:var(--primary);margin-bottom:10px}
-  .hm-steps li b{display:block;margin-bottom:4px;font-size:1.1rem}
-  .hm-steps li span.t{color:var(--muted);font-size:.95rem;line-height:1.7}
-
-  /* ---------- নিরাপত্তা ---------- */
-  .hm-trust{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-  .hm-trust h3{font-size:1.1rem;margin-bottom:6px}
-  .hm-ico{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;margin-bottom:12px;background:var(--primary-tint)}
-  .hm-ico svg{width:26px;height:26px;fill:none;stroke:var(--primary);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-
-  /* ---------- ফ্রি টুলস ---------- */
-  .hm-tools{display:grid;gap:16px;padding:22px;border-radius:var(--r);border:1px solid var(--line);background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05)}
-  .hm-tools h3{font-size:1.2rem}
-  .hm-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  .hm-chips span{font-size:.95rem;font-weight:600;padding:6px 14px;border-radius:8px;border:1px solid var(--line);background:var(--soft)}
-  @media (min-width:760px){.hm-tools{grid-template-columns:1fr auto;align-items:center}}
+  /* ---------- নিরাপত্তা, লেখা, টুলস (ছোট করে) ---------- */
+  .hm-trust{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .hm-trust li{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:#fff;font-weight:600;font-size:1.02rem;line-height:1.6}
+  .hm-trust svg{flex:none;width:24px;height:24px;margin-top:3px;fill:none;stroke:var(--ok);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .hm-trust a{color:var(--primary);text-decoration:underline;text-underline-offset:3px;font-weight:700}
+  .hm-posts{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .hm-posts a{display:block;padding:14px 16px;min-height:56px;border:1px solid var(--line);border-radius:var(--r);background:#fff;font-weight:700;font-size:1.05rem;line-height:1.5}
+  .hm-posts a:hover{border-color:var(--primary)}
+  .hm-posts .meta{display:block;font-weight:400;font-size:.9rem}
+  .hm-toolrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;min-height:64px;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+  .hm-toolrow:hover{border-color:var(--primary)}
+  .hm-toolrow b{display:block;font-size:1.1rem}
+  .hm-toolrow .meta{display:block}
+  .hm-toolrow i{flex:none;font-style:normal;font-weight:800;font-size:1.6rem;color:var(--primary)}
 
   .hm-cta{margin-top:40px;text-align:center;padding:34px 20px;border-radius:var(--r);background:var(--primary);color:#fff}
   .hm-cta h2{font-size:1.6rem;color:#fff}
@@ -125,6 +121,25 @@ theme: light
   </div>
 </section>
 
+<h2 class="section-title"><span class="bn">৩ ধাপে কাজ</span><span class="en">Work in 3 steps</span></h2>
+<ol class="how3">
+  <li><b><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></b><span class="t"><span class="bn">কী লাগবে লিখুন। একটা কোড পাবেন।</span><span class="en">Write what you need. You get a code.</span></span></li>
+  <li><b><span class="bn">দাম জেনে রাজি হন</span><span class="en">Agree on the price</span></b><span class="t"><span class="bn">লিখিত দাম ও সময় জানাব। আপনি রাজি হলে কাজ শুরু।</span><span class="en">We send the price and time in writing. Work starts when you agree.</span></span></li>
+  <li><b><span class="bn">দেখুন, তারপর ফাইল নিন</span><span class="en">Follow, then get your files</span></b><span class="t"><span class="bn">কোড দিয়ে নিজেই অগ্রগতি দেখুন। বিকাশে পেমেন্টের পর ফাইল ইমেইলে।</span><span class="en">Follow progress with your code. After the bKash payment, files come by email.</span></span></li>
+</ol>
+<details class="more">
+  <summary><span class="bn">বিস্তারিত নিয়ম: প্রিভিউ, পেমেন্ট, বাতিল</span><span class="en">Details: preview, payment, cancellation</span></summary>
+  <div class="more-body">
+    <ul>
+      <li><span class="bn">দাম, সময় আর কাজের পরিধি ইমেইলে লিখিতভাবে জানাই। আপনি অগ্রগতি পেজে বোতাম চেপে রাজি হলে তবেই কাজ শুরু। <a href="{{ '/pricing/' | relative_url }}">দামের তালিকা</a></span><span class="en">We confirm the price, timeline and scope by email. Work starts only after you agree on your progress page. <a href="{{ '/pricing/' | relative_url }}">Price list</a></span></li>
+      <li><span class="bn">কাজ প্রায় অর্ধেক হলে একবার প্রিভিউ দেখা যায়। তারপর আমরা সংশোধন করি।</span><span class="en">At about halfway you can view a one-time preview. Then we make the revisions.</span></li>
+      <li><span class="bn">পেমেন্ট শুধু বিকাশে, আলাদা পেমেন্ট পেজে। টাকা পাঠিয়ে Transaction ID জমা দিন। কুপন থাকলে ওখানেই বসান।</span><span class="en">Payment is by bKash only, on a separate payment page. Send the money, then submit the Transaction ID. Apply a coupon there if you have one.</span></li>
+      <li><span class="bn">পেমেন্ট নিশ্চিত হলে চূড়ান্ত ফাইল ইমেইলে যায়।</span><span class="en">Once payment is confirmed, the final files are emailed.</span></li>
+      <li><span class="bn">কাজ অর্ধেক হওয়ার পর অর্ডার বাতিল করা যায় না। <a href="{{ '/privacy/#cancel' | relative_url }}">নিয়মটা পড়ুন</a></span><span class="en">After the halfway point an order cannot be cancelled. <a href="{{ '/privacy/#cancel' | relative_url }}">Read the rule</a></span></li>
+    </ul>
+  </div>
+</details>
+
 <h2 class="section-title"><span class="bn">সার্ভিস</span><span class="en">Services</span></h2>
 <div class="hm-svcs">
   <a class="hm-svc" href="{{ '/services/#documents' | relative_url }}">
@@ -158,7 +173,7 @@ theme: light
     <p class="meta"><span class="bn">ফোনে সুন্দরভাবে চলা সাধারণ ওয়েবসাইট।</span><span class="en">Simple websites that look good on a phone.</span></p></div>
   </a>
 </div>
-<a class="hm-more" href="{{ '/services/' | relative_url }}"><span class="bn">সব সার্ভিসের বিস্তারিত দেখুন</span><span class="en">See every service in detail</span></a>
+<a class="hm-more" href="{{ '/services/' | relative_url }}"><span class="bn">সব সার্ভিসের বিস্তারিত</span><span class="en">See every service in detail</span></a>
 
 {%- comment -%}
   হোমের ভিডিও: _data/home.yml-এর video ঘরে YouTube লিংক দিলে এখানে ভিডিও দেখায়। ঘর ফাঁকা থাকলে নিচের ফাঁকা জায়গাটাই দেখায়।
@@ -173,7 +188,7 @@ theme: light
   {% elsif hv contains 'v=' %}{% assign hvid = hv | split: 'v=' | last | split: '&' | first %}
   {% endif %}
 {% endif %}
-<h2 class="section-title" id="video"><span class="bn">ভিডিওতে দেখুন: কীভাবে অর্ডার করবেন</span><span class="en">Watch: how to place an order</span></h2>
+<h2 class="section-title" id="video"><span class="bn">ভিডিওতে দেখুন</span><span class="en">Watch the video</span></h2>
 {% if hvid != '' %}
 <div class="hm-video" id="hmVideo">
   <button type="button" class="hm-video-btn" id="hmVideoBtn" data-vid="{{ hvid | escape }}">
@@ -208,68 +223,28 @@ theme: light
 </div>
 {% endif %}
 
-<h2 class="section-title"><span class="bn">কীভাবে কাজ হয়</span><span class="en">How it works</span></h2>
-<ol class="hm-steps">
-  <li><span class="n">1</span><b><span class="bn">অনুরোধ পাঠান</span><span class="en">Send a request</span></b><span class="t"><span class="bn">ফর্মে কী লাগবে লিখুন। সঙ্গে একটা ট্র্যাকিং কোড পাবেন।</span><span class="en">Describe what you need in the form. You get a tracking code.</span></span></li>
-  <li><span class="n">2</span><b><span class="bn">দাম আর সময় ঠিক হবে</span><span class="en">Price and timeline agreed</span></b><span class="t"><span class="bn">আমরা ইমেইলে লিখিতভাবে দাম, সময় আর পরিধি জানাই। আপনি অগ্রগতি পেজে বোতাম চেপে রাজি হলে তবেই কাজ শুরু। <a href="{{ '/pricing/' | relative_url }}">দামের তালিকা</a></span><span class="en">We confirm the price, timeline and scope in writing by email. Work starts only once you agree on your progress page. <a href="{{ '/pricing/' | relative_url }}">Price list</a></span></span></li>
-  <li><span class="n">3</span><b><span class="bn">অগ্রগতি নিজে দেখুন</span><span class="en">Follow the progress</span></b><span class="t"><span class="bn">কোড আর ইমেইল দিয়ে ট্র্যাক পেজে কত শতাংশ হলো দেখা যায়।</span><span class="en">Use your code and email on the track page to see how far along the work is.</span></span></li>
-  <li><span class="n">4</span><b><span class="bn">মাঝপথে একবার প্রিভিউ</span><span class="en">A preview midway</span></b><span class="t"><span class="bn">কাজ প্রায় অর্ধেক হলে একবারের জন্য প্রিভিউ দেখা যায়, তারপর আমরা সংশোধন করি।</span><span class="en">At around halfway you can view a one-time preview, then we make the revisions.</span></span></li>
-  <li><span class="n">5</span><b><span class="bn">বিকাশে পেমেন্ট</span><span class="en">Pay with bKash</span></b><span class="t"><span class="bn">দাম ঠিক হলে অগ্রগতি পেজের “এখনই পেমেন্ট করুন” বোতামে আলাদা পেমেন্ট পেজ খোলে। সেখানে কুপন থাকলে বসিয়ে বিকাশে টাকা দিন, তারপর Transaction ID জমা দিন। প্রিভিউ দেখার পর বা কাজ ৫০% হলে অগ্রগতি পেজে একটা অনুস্মারকও দেখা যায়।</span><span class="en">Once the price is set, the “Pay now” button on your progress page opens a separate payment page. Apply a coupon there if you have one, pay through bKash, then submit the Transaction ID. After a preview, or when the work reaches 50%, the progress page also shows a reminder.</span></span></li>
-  <li><span class="n">6</span><b><span class="bn">চূড়ান্ত ফাইল</span><span class="en">Final files</span></b><span class="t"><span class="bn">পেমেন্ট নিশ্চিত হলে আমরা চূড়ান্ত ফাইল ইমেইলে পাঠাই। কাজ অর্ধেক হওয়ার পর অর্ডার বাতিল করা যায় না, <a href="{{ '/privacy/#cancel' | relative_url }}">নিয়মটা পড়ুন</a>।</span><span class="en">Once payment is confirmed we email you the final files. After the halfway point an order cannot be cancelled, <a href="{{ '/privacy/#cancel' | relative_url }}">read the rule</a>.</span></span></li>
-</ol>
-
-<h2 class="section-title"><span class="bn">আপনার তথ্যের নিরাপত্তা</span><span class="en">Your information is safe</span></h2>
-<div class="hm-trust">
-  <div class="card">
-    <div class="hm-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
-    <h3><span class="bn">কোড ও ইমেইল, দুটোই লাগে</span><span class="en">Code and email, both required</span></h3>
-    <p class="meta"><span class="bn">আপনার কাজের অবস্থা শুধু আপনিই দেখতে পারেন, কারণ দেখতে দুটোই মেলাতে হয়।</span><span class="en">Only you can see your job status, because both must match.</span></p>
-  </div>
-  <div class="card">
-    <div class="hm-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></div>
-    <h3><span class="bn">পাসওয়ার্ড, PIN বা OTP চাই না</span><span class="en">No passwords, PINs or OTPs</span></h3>
-    <p class="meta"><span class="bn">অনুরোধ ফর্মে পাসওয়ার্ড, ব্যাংক বা কার্ডের তথ্য চাওয়া হয় না। বিকাশে টাকা দিলে আমরা শুধু Transaction ID নিই, আপনার PIN বা OTP কখনো না।</span><span class="en">The request form never asks for passwords, bank or card details. When you pay by bKash we take only the Transaction ID, never your PIN or OTP.</span></p>
-  </div>
-  <div class="card">
-    <div class="hm-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h4"/></svg></div>
-    <h3><span class="bn">খোলাখুলি নিয়ম</span><span class="en">Plain rules</span></h3>
-    <p class="meta"><span class="bn">আমরা কী তথ্য রাখি আর কতদিন, সব লেখা আছে গোপনীয়তা পেজে।</span><span class="en">What we keep, and for how long, is written on the privacy page.</span></p>
-    <a class="hm-more" href="{{ '/privacy/' | relative_url }}"><span class="bn">গোপনীয়তা ও নিয়মাবলি</span><span class="en">Privacy &amp; rules</span></a>
-  </div>
-</div>
+<h2 class="section-title"><span class="bn">আপনার তথ্য নিরাপদ</span><span class="en">Your information is safe</span></h2>
+<ul class="hm-trust">
+  <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span><span class="bn">কোড আর ইমেইল দুটোই লাগে, তাই আপনার কাজ শুধু আপনি দেখেন।</span><span class="en">Code and email are both needed, so only you see your job.</span></span></li>
+  <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span><span class="bn">পাসওয়ার্ড, PIN বা OTP কখনো চাই না।</span><span class="en">We never ask for passwords, PINs or OTPs.</span></span></li>
+  <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span><span class="bn">কী তথ্য রাখি, সব লেখা আছে। <a href="{{ '/privacy/' | relative_url }}">গোপনীয়তা ও নিয়মাবলি</a></span><span class="en">What we keep is written down. <a href="{{ '/privacy/' | relative_url }}">Privacy &amp; rules</a></span></span></li>
+</ul>
 
 {% if site.posts.size > 0 %}
 <h2 class="section-title"><span class="bn">সাম্প্রতিক লেখা</span><span class="en">Latest articles</span></h2>
-<div class="grid">
+<ul class="hm-posts">
   {% for post in site.posts limit: 3 %}
-    {% assign img = nil %}
-    {% if post.image %}
-      {% if post.image contains '://' %}{% assign img = post.image %}{% else %}{% assign img = post.image | relative_url %}{% endif %}
-    {% endif %}
-    <a class="card post-card" href="{{ post.url | relative_url }}">
-      {% if img %}<img src="{{ img }}" alt="" loading="lazy">{% endif %}
-      <div class="body">
-        <h3><span class="bn">{{ post.title }}</span><span class="en">{{ post.title_en | default: post.title }}</span></h3>
-        <p class="meta">{{ post.date | date: "%d-%m-%Y" }}</p>
-      </div>
-    </a>
+  <li><a href="{{ post.url | relative_url }}"><span class="bn">{{ post.title }}</span><span class="en">{{ post.title_en | default: post.title }}</span><span class="meta">{{ post.date | date: "%d-%m-%Y" }}</span></a></li>
   {% endfor %}
-</div>
+</ul>
 <a class="hm-more" href="{{ '/explore/' | relative_url }}"><span class="bn">সব লেখা দেখুন</span><span class="en">All articles</span></a>
 {% endif %}
 
 <h2 class="section-title"><span class="bn">বিনামূল্যের টুলস</span><span class="en">Free tools</span></h2>
-<div class="hm-tools">
-  <div>
-    <h3><span class="bn">ব্রাউজারেই চলে, কিছু আপলোড হয় না</span><span class="en">Runs in your browser, nothing uploaded</span></h3>
-    <div class="hm-chips">
-      <span><span class="bn">ইউনিকোড ↔ বিজয়</span><span class="en">Unicode ↔ Bijoy</span></span>
-      <span><span class="bn">ছবি কনভার্টার</span><span class="en">Image converter</span></span>
-      <span><span class="bn">ইউনিট কনভার্টার</span><span class="en">Unit converter</span></span>
-    </div>
-  </div>
-  <a class="btn" href="{{ '/tools/' | relative_url }}"><span class="bn">টুলস খুলুন</span><span class="en">Open tools</span></a>
-</div>
+<a class="hm-toolrow" href="{{ '/tools/' | relative_url }}">
+  <span><b><span class="bn">ইউনিকোড ↔ বিজয়, ছবি ও ইউনিট কনভার্টার</span><span class="en">Unicode ↔ Bijoy, image and unit converters</span></b><span class="meta"><span class="bn">ব্রাউজারেই চলে, কিছু আপলোড হয় না।</span><span class="en">Runs in your browser, nothing is uploaded.</span></span></span>
+  <i aria-hidden="true">›</i>
+</a>
 
 <section class="hm-cta">
   <h2><span class="bn">কাজটা কী, একবার জানান</span><span class="en">Describe your job</span></h2>
