@@ -48,22 +48,28 @@
   html[data-theme=light] .tpc-fab:focus-visible,html[data-theme=light] .tpc-panel button:focus-visible,html[data-theme=light] .tpc-panel a:focus-visible,html[data-theme=light] .tpc-panel input:focus-visible{outline-color:#f59e0b}
   html[data-theme=light] .tpc-panel{background:#fff;border-radius:14px;box-shadow:0 16px 40px -10px rgba(16,24,40,.35)}
   html[data-theme=light] .tpc-head{background:var(--soft)}
-  html[data-theme=light] .tpc-head h2{font-size:1.05rem}
-  html[data-theme=light] .tpc-head small{font-size:.85rem}
-  html[data-theme=light] .tpc-x{font-size:1.7rem;min-width:44px;min-height:44px}
-  html[data-theme=light] .tpc-tab{font-size:.95rem;min-height:46px}
-  html[data-theme=light] .tpc-msg{font-size:1rem;border-radius:12px}
+  html[data-theme=light] .tpc-head h2{font-size:calc(1.05rem*var(--cs,1))}
+  html[data-theme=light] .tpc-head small{font-size:calc(.85rem*var(--cs,1))}
+  html[data-theme=light] .tpc-x{font-size:calc(1.7rem*var(--cs,1));min-width:44px;min-height:44px}
+  html[data-theme=light] .tpc-tab{font-size:calc(.95rem*var(--cs,1));min-height:46px}
+  html[data-theme=light] .tpc-msg{font-size:calc(1rem*var(--cs,1));border-radius:12px}
   html[data-theme=light] .tpc-msg.bot{background:var(--soft)}
-  html[data-theme=light] .tpc-chip,html[data-theme=light] .tpc-link{font-size:.92rem;min-height:44px;border-radius:10px;background:#fff;border-color:var(--line-strong)}
+  html[data-theme=light] .tpc-chip,html[data-theme=light] .tpc-link{font-size:calc(.92rem*var(--cs,1));min-height:44px;border-radius:10px;background:#fff;border-color:var(--line-strong)}
   html[data-theme=light] .tpc-link{border-color:var(--primary);color:var(--primary-dark);font-weight:600}
   html[data-theme=light] .tpc-chip-go{border-color:#1a7f43;color:#0f5a30;font-weight:600}
   html[data-theme=light] .tpc-form input{background:#fff;border:1.5px solid var(--line-strong);border-radius:10px;padding:10px 14px}
   html[data-theme=light] .tpc-send{border-radius:10px;min-height:46px}
-  html[data-theme=light] .tpc-foot{font-size:.85rem}
-  html[data-theme=light] .tpc-foot button{color:var(--primary);font-size:.85rem}
-  html[data-theme=light] .tpc-human{font-size:1rem}
-  html[data-theme=light] .tpc-human .note{font-size:.9rem}
+  html[data-theme=light] .tpc-foot{font-size:calc(.85rem*var(--cs,1))}
+  html[data-theme=light] .tpc-foot button{color:var(--primary);font-size:calc(.85rem*var(--cs,1))}
+  html[data-theme=light] .tpc-human{font-size:calc(1rem*var(--cs,1))}
+  html[data-theme=light] .tpc-human .note{font-size:calc(.9rem*var(--cs,1))}
   html[data-theme=light] .tpc-wa{background:#1a7f43;color:#fff;border-radius:10px}
+    html[data-theme=light] .tpc-send{font-size:calc(.95rem*var(--cs,1))}
+  @media (max-width:767px){html[data-theme=light] .tpc-panel{max-height:calc(100vh - var(--nav-h) - 165px);max-height:calc(100dvh - var(--nav-h) - 165px)}}
+  html[data-theme=light] .tpc-log{min-height:110px}
+  html[data-theme=light][data-fs="1"] .tpc-panel{--cs:.93}
+  html[data-theme=light][data-fs="2"] .tpc-panel{--cs:.86}
+  html[data-theme=light][data-fs="2"] .tpc-head small{display:none}
   @media print{.tpc{display:none}}
 </style>
 
