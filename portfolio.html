@@ -1,5 +1,6 @@
 ---
 layout: default
+theme: light
 title: Portfolio
 description: ক্লায়েন্টের কাজ, নমুনা ও নিজের প্রকল্প, অনুমতি নিয়ে দেখানো | Client work, samples and own projects, shown with permission
 permalink: /portfolio/
@@ -15,87 +16,83 @@ permalink: /portfolio/
 {%- assign n_rev = 0 -%}
 {%- for r in site.data.reviews.reviews -%}{%- if r.consent == true and r.text_bn and r.text_bn != '' -%}{%- assign n_rev = n_rev | plus: 1 -%}{%- endif -%}{%- endfor -%}
 <style>
-  .pf-hero{padding:28px 0 6px}
-  .pf-hero h1{font-size:clamp(1.9rem,6.5vw,2.8rem);font-weight:800}
-  .pf-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}
+  .pf-hero{padding:24px 0 6px}
+  .pf-hero h1{font-size:clamp(1.55rem,6.5vw,2.7rem);font-weight:800}
+  .pf-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
   .pf-stat:last-child:nth-child(odd){grid-column:1/-1}
-  @media (min-width:700px){.pf-stats{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}.pf-stat:last-child:nth-child(odd){grid-column:auto}}
-  .pf-stat{border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
-  .pf-stat b{display:block;font-size:2.1rem;line-height:1.1;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .pf-stat span{font-size:.82rem;color:var(--muted)}
+  @media (min-width:700px){.pf-stats{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}.pf-stat:last-child:nth-child(odd){grid-column:auto}}
+  .pf-stat{border:1px solid var(--line);border-radius:var(--r);padding:14px 18px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+  .pf-stat b{display:block;font-size:2rem;line-height:1.2;font-weight:800;color:var(--primary)}
+  .pf-stat span{font-size:.95rem;color:var(--muted)}
 
-  .pf-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-  .pf-f{font:inherit;font-size:.85rem;font-weight:600;color:var(--text);padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);cursor:pointer}
-  .pf-f b{margin-left:6px;color:#d8b4fe}
-  .pf-f.on{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 8px 24px -10px rgba(124,58,237,.8)}
-  .pf-f.on b{color:#fff}
+  .pf-filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .pf-f{font:inherit;font-size:.95rem;font-weight:600;color:var(--text);padding:9px 16px;min-height:44px;border-radius:8px;border:1.5px solid var(--line-strong);background:#fff;cursor:pointer}
+  .pf-f:hover{border-color:var(--primary)}
+  .pf-f b{margin-left:8px;color:var(--primary)}
+  .pf-f.on{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+  .pf-f.on b{color:var(--on-primary)}
 
-  .pf-grid{display:grid;gap:16px;grid-template-columns:1fr}
+  .pf-grid{display:grid;gap:18px;grid-template-columns:1fr}
   @media (min-width:560px){.pf-grid{grid-template-columns:repeat(2,1fr)}}
   @media (min-width:900px){.pf-grid{grid-template-columns:repeat(3,1fr)}}
-  .pf-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
+  .pf-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05)}
   .pf-card[hidden]{display:none}
   .pf-thumb{position:relative;aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
   .pf-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .pf-badge{position:absolute;left:12px;top:12px;font-size:.7rem;font-weight:700;letter-spacing:.03em;padding:4px 10px;border-radius:999px;background:rgba(10,6,20,.72);border:1px solid rgba(255,255,255,.16);color:#e9d5ff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-  .pf-glyph{width:74px;height:74px;border-radius:22px;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)}
-  .pf-glyph svg,.pf-lock svg{width:36px;height:36px;fill:none;stroke:#e9d5ff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-  .pf-lockp{background:repeating-linear-gradient(135deg,rgba(255,255,255,.045) 0 10px,rgba(255,255,255,0) 10px 20px),radial-gradient(100% 100% at 50% 0%,rgba(124,58,237,.20),transparent 70%),#110a21}
-  .pf-lock{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 18px;text-align:center;font-size:.86rem;color:var(--muted)}
-  .pf-body{padding:14px 18px 18px;display:flex;flex-direction:column;flex:1}
+  .pf-badge{position:absolute;left:12px;top:12px;font-size:.9rem;font-weight:700;padding:3px 10px;border-radius:6px;background:#fff;border:1px solid var(--line-strong);color:var(--text)}
+  .pf-glyph{width:74px;height:74px;border-radius:16px;display:grid;place-items:center;background:#fff;border:1px solid var(--line)}
+  .pf-glyph svg,.pf-lock svg{width:36px;height:36px;fill:none;stroke:var(--primary);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .pf-lockp{background:var(--soft)}
+  .pf-lock svg{stroke:#6b7683}
+  .pf-lock{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 18px;text-align:center;font-size:.95rem;color:var(--muted)}
+  .pf-body{padding:16px 20px 20px;display:flex;flex-direction:column;flex:1}
   .pf-body .tag{align-self:flex-start;margin:0}
-  .pf-body h3{font-size:1.08rem;font-weight:800;margin:8px 0 4px}
+  .pf-body h3{font-size:1.15rem;font-weight:800;margin:8px 0 4px}
   .pf-body .meta{margin-bottom:12px}
-  .pf-body .btn{margin-top:auto;align-self:flex-start;padding:8px 16px;font-size:.85rem}
-  .pf-yr{float:right;font-size:.75rem;color:var(--muted);margin-top:3px}
-  .pf-empty{border:1px dashed rgba(255,255,255,.2);border-radius:var(--r);padding:20px;color:var(--muted);font-size:.92rem}
+  .pf-body .btn{margin-top:auto;align-self:flex-start;min-height:44px;padding:8px 18px;font-size:.95rem}
+  .pf-yr{float:right;font-size:.9rem;color:var(--muted);margin-top:3px}
+  .pf-empty{border:1.5px dashed var(--line-strong);border-radius:var(--r);padding:20px;color:var(--muted);font-size:1rem;background:#fff}
 
-  .p-doc{background:radial-gradient(120% 100% at 15% 0%,rgba(124,58,237,.55),transparent 60%),radial-gradient(90% 90% at 100% 100%,rgba(236,72,153,.30),transparent 60%),#150c27}
-  .p-sheet{background:radial-gradient(120% 100% at 0% 100%,rgba(52,211,153,.18),transparent 55%),radial-gradient(110% 100% at 90% 0%,rgba(124,58,237,.50),transparent 60%),#120a24}
-  .p-script{background:radial-gradient(110% 100% at 90% 0%,rgba(236,72,153,.38),transparent 60%),radial-gradient(100% 100% at 0% 100%,rgba(124,58,237,.45),transparent 60%),#140b26}
-  .p-design{background:radial-gradient(110% 100% at 0% 0%,rgba(251,191,36,.18),transparent 55%),radial-gradient(110% 100% at 100% 100%,rgba(236,72,153,.38),transparent 60%),#150b27}
-  .p-video{background:radial-gradient(110% 100% at 50% 0%,rgba(192,132,252,.38),transparent 60%),radial-gradient(100% 100% at 100% 100%,rgba(56,189,248,.16),transparent 55%),#130a25}
-  .p-web{background:radial-gradient(110% 100% at 100% 0%,rgba(124,58,237,.50),transparent 60%),radial-gradient(100% 100% at 0% 100%,rgba(192,132,252,.22),transparent 60%),#140b26}
+  .p-doc{background:#e7eefa}.p-sheet{background:#e4f4ec}.p-script{background:#fcf0d6}.p-design{background:#efeafb}.p-video{background:#e1f2f6}.p-web{background:#e9eff8}
 
   .rv-sec[hidden],.rv[hidden]{display:none}
   .rv-note{margin:-6px 0 14px}
-  .rv-grid{display:grid;gap:14px;grid-template-columns:1fr}
+  .rv-grid{display:grid;gap:16px;grid-template-columns:1fr}
   @media (min-width:700px){.rv-grid{grid-template-columns:repeat(2,1fr)}}
   @media (min-width:1000px){.rv-grid{grid-template-columns:repeat(3,1fr)}}
-  .rv{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:var(--r);padding:18px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
-  .rv blockquote{position:relative;margin:0;padding-top:22px;font-size:.98rem;line-height:1.75;white-space:pre-line;overflow-wrap:anywhere}
-  .rv blockquote::before{content:"\201C";position:absolute;left:-2px;top:-8px;font-size:3rem;line-height:1;color:var(--accent);opacity:.6}
-  .rv footer{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:.85rem}
+  .rv{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:var(--r);padding:20px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+  .rv blockquote{position:relative;margin:0;padding-top:24px;font-size:1.02rem;line-height:1.8;white-space:pre-line;overflow-wrap:anywhere}
+  .rv blockquote::before{content:"\201C";position:absolute;left:-2px;top:-8px;font-size:3rem;line-height:1;color:var(--primary);opacity:.5}
+  .rv footer{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:.95rem}
   .rv-name{font-weight:700}
   .rv footer .tag{margin:0}
-  .rv-yr{margin-left:auto;font-size:.75rem;color:var(--muted)}
-  .rv .btn{align-self:flex-start;padding:7px 14px;font-size:.82rem}
-  .pf-rules{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:6px}
-  .pf-rule{border:1px solid var(--line);border-radius:16px;padding:16px;background:rgba(255,255,255,.03)}
-  .pf-rule h3{font-size:1rem;margin-bottom:4px}
-  .pf-ico{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;margin-bottom:10px;background:rgba(192,132,252,.14);border:1px solid rgba(192,132,252,.28)}
-  .pf-ico svg{width:22px;height:22px;fill:none;stroke:#d8b4fe;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-  .pf-cta{margin-top:34px;text-align:center;padding:28px 18px;border-radius:var(--r);border:1px solid rgba(192,132,252,.35);background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(236,72,153,.10))}
-  .pf-cta h2{font-size:1.35rem}
-  .pf-cta p{color:var(--muted);margin:8px auto 0;max-width:52ch}
+  .rv-yr{margin-left:auto;font-size:.9rem;color:var(--muted)}
+  .rv .btn{align-self:flex-start;min-height:44px;padding:8px 16px;font-size:.95rem}
+  .pf-rules{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:6px}
+  .pf-rule{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+  .pf-rule h3{font-size:1.1rem;margin-bottom:4px}
+  .pf-ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:10px;background:var(--primary-tint)}
+  .pf-ico svg{width:24px;height:24px;fill:none;stroke:var(--primary);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .more-body .pf-rules{margin-top:0}
+  .more-body .pf-rule{box-shadow:none}
+  .pf-cta{margin-top:40px;text-align:center;padding:34px 20px;border-radius:var(--r);background:var(--primary);color:#fff}
+  .pf-cta h2{font-size:1.5rem;color:#fff}
+  .pf-cta p{color:#dbe6f8;margin:10px auto 0;max-width:52ch;font-size:1.05rem}
   .pf-cta .actions{justify-content:center}
+  .pf-cta .btn-primary{background:#fff;border-color:#fff;color:var(--primary-dark)}
+  .pf-cta .btn-primary:hover{background:var(--primary-tint)}
+  .pf-cta .btn{background:transparent;border-color:#fff;color:#fff}
+  .pf-cta .btn:hover{background:rgba(255,255,255,.14)}
 </style>
 
 <section class="pf-hero">
-  <h1 class="grad-text"><span class="bn">পোর্টফোলিও</span><span class="en">Portfolio</span></h1>
+  <h1><span class="bn">পোর্টফোলিও</span><span class="en">Portfolio</span></h1>
   <p class="lead">
-    <span class="bn">কী ধরনের কাজ করা হয়েছে, তার একটা সারসংক্ষেপ। ক্লায়েন্ট অনুমতি দিলে কাজের ডেমো দেখানো হয়, না দিলে শুধু কাজের ধরন।</span>
-    <span class="en">A summary of the kind of work done. When a client gives permission, a demo of the work is shown. When they do not, only the type of work is shown.</span>
+    <span class="bn">আমাদের করা কাজ আর নমুনা। ক্লায়েন্ট অনুমতি দিলে ডেমো দেখানো হয়।</span>
+    <span class="en">Our work and samples. A demo is shown when the client gives permission.</span>
   </p>
 </section>
 
-<div class="pf-stats">
-  {% if n_client > 0 %}<div class="pf-stat"><b class="num" data-n="{{ n_client }}">{{ n_client }}</b><span><span class="bn">ক্লায়েন্টের কাজ</span><span class="en">client jobs</span></span></div>{% endif %}
-  {% if n_sample > 0 %}<div class="pf-stat"><b class="num" data-n="{{ n_sample }}">{{ n_sample }}</b><span><span class="bn">নমুনা ও টেমপ্লেট</span><span class="en">samples and templates</span></span></div>{% endif %}
-  {% if n_own > 0 %}<div class="pf-stat"><b class="num" data-n="{{ n_own }}">{{ n_own }}</b><span><span class="bn">নিজের প্রকল্প</span><span class="en">own projects</span></span></div>{% endif %}
-  <div class="pf-stat"><b class="num" data-n="6">6</b><span><span class="bn">ধরনের সার্ভিস</span><span class="en">kinds of service</span></span></div>
-  <div class="pf-stat"><b class="num" data-n="2">2</b><span><span class="bn">ভাষা: বাংলা ও ইংরেজি</span><span class="en">languages: Bangla and English</span></span></div>
-</div>
 
 <h2 class="section-title"><span class="bn">কাজের ধরন</span><span class="en">Types of work</span></h2>
 <div class="pf-filters" id="pfFilters">
@@ -149,7 +146,7 @@ permalink: /portfolio/
                   {% else %}<path d="M12 3l1.8 5.2L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/>
                 {% endcase %}
               </svg></div>
-              {% if img != "" %}<img src="{{ img }}" alt="{{ w.title_en | default: w.title_bn | escape }}" loading="lazy">{% endif %}
+              {% if img != "" %}<img src="{{ img }}" alt="{{ w.title_bn | default: w.title_en | escape }}" loading="lazy">{% endif %}
             {% else %}
               <div class="pf-lock">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
@@ -213,7 +210,9 @@ permalink: /portfolio/
 </section>
 {% endif %}
 
-<h2 class="section-title"><span class="bn">প্রকাশের নিয়ম</span><span class="en">How work is shown</span></h2>
+<details class="more">
+  <summary><span class="bn">কাজ কীভাবে দেখানো হয়</span><span class="en">How work is shown</span></summary>
+  <div class="more-body">
 <div class="pf-rules">
   <div class="pf-rule">
     <div class="pf-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></div>
@@ -231,6 +230,8 @@ permalink: /portfolio/
     <p class="meta"><span class="bn">ক্লায়েন্ট পরে চাইলে তাঁর কাজ এখান থেকে সরিয়ে দেওয়া হয়।</span><span class="en">If a client asks later, their work is taken down from here.</span></p>
   </div>
 </div>
+  </div>
+</details>
 
 <section class="pf-cta">
   <h2><span class="bn">আপনার কাজটাও এখানে আসতে পারে</span><span class="en">Your job could be next</span></h2>
@@ -256,7 +257,7 @@ permalink: /portfolio/
   digits();
   try { new MutationObserver(digits).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] }); } catch (e) {}
 
-  // a demo image that fails to load is removed so the gradient shows instead of a broken icon
+  // a demo image that fails to load is removed so the tinted background shows instead of a broken icon
   [].forEach.call(document.querySelectorAll('.pf-thumb img'), function (im) {
     function drop() { if (im.parentNode) im.parentNode.removeChild(im); }
     im.addEventListener('error', drop);
