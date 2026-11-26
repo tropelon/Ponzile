@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="{% if th == 'light' %}{{ '/assets/site.css' | relative_url }}{% else %}{{ '/assets/css/style.css' | relative_url }}{% endif %}">
   {% if th == 'light' %}<style>.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-top:16px}.foot-links a{text-decoration:underline;text-underline-offset:3px;color:var(--text);font-weight:600}.wa-chip{padding:8px 16px;border:1.5px solid var(--line-strong);border-radius:10px;background:#fff;color:var(--text);font-weight:600;font-size:.95rem}.site-footer a[href^=mailto]{color:var(--primary);font-weight:700;text-decoration:underline;text-underline-offset:3px}</style>{% else %}<style>.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:14px}.foot-links a{text-decoration:underline;text-underline-offset:3px}.wa-chip{padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04)}</style>{% endif %}
   <script>try{var l=localStorage.getItem('tp-lang');if(l==='bn'||l==='en')document.documentElement.lang=l}catch(e){}</script>
+  {% if th == 'light' %}<script>try{var f=localStorage.getItem('tp-fs');if(f==='1'||f==='2')document.documentElement.setAttribute('data-fs',f)}catch(e){}</script>{% endif %}
 </head>
 <body>
   <header class="site-header">
@@ -41,6 +42,7 @@
       <span class="brand-name">{{ site.data.site.name }}</span>
     </a>
     {% include nav.html mode="top" %}
+    {% if th == 'light' %}<button class="fs-btn" id="fsBtn" type="button" aria-label="লেখা বড় বা ছোট করুন / Change text size"><span id="fsLbl" aria-hidden="true">A+</span></button>{% endif %}
     <button class="lang-btn" id="langBtn" type="button" aria-label="ভাষা বদলান / Switch language">
       <span class="bn">EN</span><span class="en">বাং</span>
     </button>
@@ -78,6 +80,18 @@
       document.documentElement.lang=n;
       try{localStorage.setItem('tp-lang',n)}catch(e){}
     });
+    (function(){
+      var b=document.getElementById('fsBtn'); if(!b) return;
+      var h=document.documentElement, lbl=document.getElementById('fsLbl');
+      function show(){ lbl.textContent=(h.getAttribute('data-fs')==='2')?'A\u2212':'A+'; }
+      show();
+      b.addEventListener('click',function(){
+        var c=h.getAttribute('data-fs'), n=(c==='1')?'2':(c==='2')?'0':'1';
+        if(n==='0') h.removeAttribute('data-fs'); else h.setAttribute('data-fs',n);
+        try{localStorage.setItem('tp-fs',n)}catch(e){}
+        show();
+      });
+    })();
   </script>
 </body>
 </html>
