@@ -1,42 +1,42 @@
 ---
 layout: default
+theme: light
 title: Contact
 description: কাজের অনুরোধ পাঠান বা যোগাযোগ করুন | Send a service request or get in touch
 permalink: /contact/
 ---
 <style>
   .c-card:hover{transform:none;border-color:var(--line)}
-  .c-card h2{font-size:1.15rem;margin-bottom:6px}
+  .c-card h2{font-size:1.3rem;margin-bottom:6px}
   .c-card textarea{min-height:130px;resize:vertical;line-height:1.6}
-  .mail-line{display:inline-block;margin-top:8px;font-weight:700;font-size:1.05rem;word-break:break-all}
-  .mail-line a{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .mail-line{display:inline-block;margin-top:8px;font-weight:700;font-size:1.1rem;word-break:break-all}
+  .mail-line a{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
   .bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .bar .btn{padding:10px 20px;font-size:.92rem}
-  .status{min-height:1.4em;font-size:.85rem;color:#d8b4fe;margin-top:10px}
-  .status.err{color:#fda4af}
+  .bar .btn{min-height:52px}
+  .status{min-height:1.4em;font-size:1rem;color:var(--primary-dark);font-weight:600;margin-top:10px}
+  .status.err{color:var(--bad)}
   .stack{display:grid;gap:14px;margin-top:6px}
   .f2{display:grid;gap:0 12px;grid-template-columns:1fr}
   @media (min-width:560px){.f2{grid-template-columns:1fr 1fr}}
   .opt{color:var(--muted);font-weight:400}
-  .consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0 0;font-size:.85rem;color:var(--muted);line-height:1.55}
-  .consent input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:#a855f7}
-  .consent a{color:var(--accent);text-decoration:underline}
-  .warn{margin-top:12px;font-size:.82rem;color:var(--muted);border-left:3px solid var(--accent);padding:8px 12px;background:rgba(255,255,255,.03);border-radius:0 10px 10px 0}
+  .consent{display:flex;gap:12px;align-items:flex-start;margin:16px 0 0;font-size:1rem;font-weight:400;color:var(--text);line-height:1.65}
+  .consent input{width:28px;height:28px;margin-top:2px;flex:none;accent-color:var(--primary)}
+  .consent a{color:var(--primary);text-decoration:underline;font-weight:600}
+  .warn{margin-top:12px;font-size:.95rem;color:var(--text);border-left:4px solid #d08a0e;padding:10px 14px;background:var(--warn-tint);border-radius:0 10px 10px 0}
   .done-card{text-align:center;padding:26px 18px}
-  .done-card .tick{width:54px;height:54px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;background:#34d399;color:#0b0714;font-size:1.7rem;font-weight:800}
-  .code-box{display:inline-block;margin:12px 0 4px;padding:12px 20px;border-radius:14px;border:1px dashed var(--accent);background:rgba(192,132,252,.08);font:700 1.5rem/1.2 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;user-select:all;-webkit-user-select:all}
+  .done-card .tick{width:54px;height:54px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;background:#1a7f43;color:#fff;font-size:1.7rem;font-weight:800}
+  .code-box{display:inline-block;margin:12px 0 4px;padding:12px 20px;border-radius:14px;border:2px dashed var(--primary);background:var(--primary-tint);font:700 1.5rem/1.2 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;user-select:all;-webkit-user-select:all}
   .done-card .bar{justify-content:center}
   [hidden]{display:none!important}
 </style>
 
-<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">যোগাযোগ ও কাজের অনুরোধ</span><span class="en">Contact &amp; service request</span></h1>
-<p class="meta"><span class="bn">কী কাজ লাগবে লিখে পাঠান। অনুরোধ পাঠালে একটা ট্র্যাকিং কোড পাবেন, তা দিয়ে কাজের অগ্রগতি দেখা যাবে।</span><span class="en">Tell us what you need. After you send a request you get a tracking code to follow the progress.</span></p>
+<h1 class="section-title" style="margin-top:8px;font-size:1.5rem"><span class="bn">যোগাযোগ ও কাজের অনুরোধ</span><span class="en">Contact &amp; service request</span></h1>
+<p class="sum"><span class="bn">ফর্মটা পূরণ করে পাঠান। জমা দিলেই একটা কোড পাবেন, তা দিয়ে কাজের অগ্রগতি দেখা যাবে।</span><span class="en">Fill in the form and send it. You get a code when you submit, and you can follow the job with it.</span></p>
 
 <div class="stack">
 
   <section class="card c-card" id="reqCard">
     <h2><span class="bn">কাজের অনুরোধ</span><span class="en">Service request</span></h2>
-    <p class="meta"><span class="bn">যত স্পষ্ট করে লিখবেন, দাম আর সময় তত দ্রুত জানানো যাবে।</span><span class="en">The clearer you write, the faster a price and timeline can be given.</span></p>
 
     <form id="rForm" data-api="{{ site.data.site.client_api }}" data-email="{{ site.data.site.email }}" novalidate>
       <label for="rService"><span class="bn">কোন সার্ভিস</span><span class="en">Which service</span></label>
@@ -55,18 +55,25 @@ permalink: /contact/
         <div><label for="rMail"><span class="bn">আপনার ইমেইল</span><span class="en">Your email</span></label><input id="rMail" type="email" autocomplete="email" inputmode="email" maxlength="120"></div>
       </div>
 
+      <label for="rDetails"><span class="bn">কাজের বিবরণ</span><span class="en">Job details</span></label>
+      <p class="meta" style="margin:-2px 0 8px"><span class="bn">লিখে দিন: কী কাজ, কতটা (যেমন কয়টা পেজ বা কয়টা প্রশ্ন), কবে লাগবে, আর কোনো নমুনা থাকলে তার লিংক।</span><span class="en">Please include: what the job is, how much of it (for example the number of pages or questions), when you need it, and a link to any sample.</span></p>
+      <textarea id="rDetails" maxlength="3000"></textarea>
+
+      <details class="more">
+        <summary><span class="bn">আরও তথ্য দিতে চান? (ঐচ্ছিক)</span><span class="en">Want to add more? (optional)</span></summary>
+        <div class="more-body">
       <div class="f2">
         <div><label for="rContact"><span class="bn">অন্য যোগাযোগ <span class="opt">(ঐচ্ছিক)</span></span><span class="en">Other contact <span class="opt">(optional)</span></span></label><input id="rContact" type="text" maxlength="120" placeholder="Telegram / WhatsApp"></div>
         <div><label for="rDeadline"><span class="bn">কবে লাগবে <span class="opt">(ঐচ্ছিক)</span></span><span class="en">Needed by <span class="opt">(optional)</span></span></label><input id="rDeadline" type="text" maxlength="60"></div>
       </div>
 
-      <label for="rDetails"><span class="bn">কাজের বিবরণ</span><span class="en">Job details</span></label>
-      <textarea id="rDetails" maxlength="3000"></textarea>
-
       <label for="rRef"><span class="bn">ফাইল বা রেফারেন্সের লিংক <span class="opt">(ঐচ্ছিক)</span></span><span class="en">File or reference link <span class="opt">(optional)</span></span></label>
       <input id="rRef" type="url" inputmode="url" maxlength="300" placeholder="https://">
 
       <p class="warn"><span class="bn">এখানে ফাইল আপলোড হয় না। ফাইল থাকলে Google Drive-এর মতো সেবায় তুলে “লিংক ধরে যে কেউ দেখতে পারবে” দিয়ে লিংকটা ওপরের ঘরে দিন। পাসওয়ার্ড, ব্যাংক বা কার্ডের তথ্য, NID নম্বর কখনো লিখবেন না।</span><span class="en">Files are not uploaded here. If you have files, put them on a service like Google Drive, share them as “anyone with the link can view”, and paste the link above. Never write passwords, bank or card details or ID numbers.</span></p>
+
+        </div>
+      </details>
 
       <label class="consent" for="rConsent">
         <input id="rConsent" type="checkbox">
@@ -90,7 +97,7 @@ permalink: /contact/
     <h2><span class="bn">অনুরোধ পাঠানো হয়েছে</span><span class="en">Request sent</span></h2>
     <p class="meta"><span class="bn">এটা আপনার ট্র্যাকিং কোড। কোডটা কোথাও লিখে বা কপি করে রাখুন, অন্য কাউকে দেবেন না।</span><span class="en">This is your tracking code. Save or copy it somewhere and do not share it.</span></p>
     <div class="code-box" id="doneCode">TP-XXXXXXXX</div>
-    <p class="meta"><span class="bn">কোডসহ একটা নিশ্চিতকরণ ইমেইলও গেছে। না পেলে স্প্যাম ফোল্ডার দেখুন।</span><span class="en">A confirmation email with the code was also sent. If you do not see it, check spam.</span></p>
+    <p class="meta"><span class="bn">কোডসহ একটা ইমেইলও পাঠানো হয়েছে। না পেলে স্প্যাম ফোল্ডার দেখুন। ইমেইল না এলেও সমস্যা নেই: এই কোডটা কপি করে রাখুন বা স্ক্রিনশট নিন, ওটা দিয়েই অগ্রগতি দেখা যাবে।</span><span class="en">An email with the code was also sent. If you do not see it, check spam. If it never arrives, that is fine: copy this code or take a screenshot, and you can follow your job with it.</span></p>
     <div class="bar">
       <button type="button" class="btn" id="doneCopy"><span class="bn">কোড কপি করুন</span><span class="en">Copy code</span></button>
       <a class="btn btn-primary" id="doneTrack" href="{{ '/track/' | relative_url }}"><span class="bn">অগ্রগতি দেখুন</span><span class="en">Track progress</span></a>
@@ -113,8 +120,8 @@ permalink: /contact/
     <p class="meta"><span class="bn">অনুরোধ ফর্ম আর ইমেইলের পাশাপাশি এই মাধ্যমগুলোতেও লিখতে পারেন। কাজের অনুরোধ ফর্মে পাঠালেই সবচেয়ে গোছানো থাকে।</span><span class="en">Besides the request form and email, you can also write to us here. A request sent through the form is the most organised.</span></p>
     {% if tg %}<p class="mail-line"><span class="bn">Telegram:</span><span class="en">Telegram:</span> <a href="{{ tg.url }}" target="_blank" rel="noopener">{{ tg.url | remove: 'https://' }}</a></p>{% endif %}
     {% if wa != "" %}
-    <p class="mail-line"><span class="bn">WhatsApp ইউজারনেম:</span><span class="en">WhatsApp username:</span> <b id="waName">@{{ wa | escape }}</b>
-      <button type="button" class="btn" id="waCopy" style="margin-left:8px"><span class="bn">কপি করুন</span><span class="en">Copy</span></button></p>
+    <p class="mail-line"><span class="bn">WhatsApp ইউজারনেম:</span><span class="en">WhatsApp username:</span> <b id="waName" style="white-space:nowrap">@{{ wa | escape }}</b></p>
+    <p style="margin:0 0 6px"><button type="button" class="btn" id="waCopy"><span class="bn">কপি করুন</span><span class="en">Copy</span></button></p>
     <p class="meta" style="margin-top:6px"><span class="bn">WhatsApp-এ নতুন চ্যাট খুলে এই ইউজারনেম লিখে খুঁজুন। ইউজারনেম দিয়ে মেসেজ করার সুবিধা সব দেশে এখনো আসেনি, না এলে ইমেইল বা ফর্ম ব্যবহার করুন।</span><span class="en">Open a new chat in WhatsApp and search for this username. Messaging by username has not reached every country yet; if it is not available to you, use email or the form.</span></p>
     <p class="status" id="waStatus" aria-live="polite"></p>
     {% endif %}
@@ -202,7 +209,7 @@ permalink: /contact/
     if (!v.name) { say(t('আপনার নাম লিখুন।', 'Please enter your name.'), true); $('rName').focus(); return false; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)) { say(t('সঠিক ইমেইল ঠিকানা দিন।', 'Please enter a valid email address.'), true); $('rMail').focus(); return false; }
     if (v.details.length < 10) { say(t('কাজের বিবরণ আরেকটু বিস্তারিত লিখুন (কমপক্ষে ১০ অক্ষর)।', 'Please describe the job in a bit more detail (at least 10 characters).'), true); $('rDetails').focus(); return false; }
-    if (v.ref && !/^https?:\/\/\S+$/i.test(v.ref)) { say(t('লিংকটা https:// দিয়ে শুরু হতে হবে।', 'The link must start with https://'), true); $('rRef').focus(); return false; }
+    if (v.ref && !/^https?:\/\/\S+$/i.test(v.ref)) { say(t('লিংকটা https:// দিয়ে শুরু হতে হবে।', 'The link must start with https://'), true); var rd = $('rRef').closest('details'); if (rd) rd.open = true; $('rRef').focus(); return false; }
     if (!v.consent) { say(t('এগিয়ে যেতে তথ্য ব্যবহারের সম্মতির ঘরে টিক দিন।', 'Tick the data-use consent box to continue.'), true); $('rConsent').focus(); return false; }
     if (!v.terms) { say(t('এগিয়ে যেতে বাতিল ও ফির নিয়মের ঘরে টিক দিন।', 'Tick the cancellation and fee rules box to continue.'), true); $('rTerms').focus(); return false; }
     return true;
