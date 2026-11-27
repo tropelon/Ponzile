@@ -1,5 +1,6 @@
 ---
 layout: default
+theme: light
 title: Preview maker
 description: ক্লায়েন্টকে দেখানোর জন্য কম রেজোলিউশনের ছাপ-দেওয়া প্রিভিউ ছবি বানান (ছবি, PDF বা ভিডিও থেকে) | Make low-resolution, watermarked preview images from images, PDFs or videos
 permalink: /preview-maker/
@@ -13,20 +14,20 @@ noindex: true
   .f2{display:grid;gap:0 12px;grid-template-columns:1fr}
   @media (min-width:560px){.f2{grid-template-columns:1fr 1fr}}
   .bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .bar .btn{padding:10px 20px;font-size:.92rem}
-  .status{min-height:1.4em;font-size:.85rem;color:#d8b4fe;margin-top:10px}
-  .status.err{color:#fda4af}
+  .bar .btn{min-height:50px}
+  .status{min-height:1.4em;font-size:1rem;color:var(--primary-dark);font-weight:600;margin-top:10px}
+  .status.err{color:var(--bad)}
   .outs{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin-top:14px}
-  .out{border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.03)}
+  .out{border:1px solid var(--line);border-radius:var(--r);padding:10px;background:var(--soft)}
   .out canvas{display:block;width:100%;height:auto;border-radius:8px;background:#000}
   .out .meta{margin:8px 0}
-  .out .btn{padding:8px 16px;font-size:.85rem}
-  .ok{color:#a7f3d0}.big{color:#fda4af}
-  .hint{font-size:.8rem;color:var(--muted);margin:4px 0 0}
+  .out .btn{padding:8px 18px;font-size:.95rem;min-height:46px}
+  .ok{color:var(--ok)}.big{color:var(--bad)}
+  .hint{font-size:.9rem;color:var(--muted);margin:4px 0 0}
   [hidden]{display:none!important}
 </style>
 
-<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">প্রিভিউ মেকার</span><span class="en">Preview maker</span></h1>
+<h1 class="section-title" style="margin-top:8px;font-size:1.5rem"><span class="bn">প্রিভিউ মেকার</span><span class="en">Preview maker</span></h1>
 <p class="meta"><span class="bn">কাজের ছবি, স্ক্রিনশট, PDF বা ভিডিও নিন। এই টুল সেগুলো থেকে ছোট ছবি বানিয়ে, কোনাকুনি “PREVIEW” ছাপ বসিয়ে ক্লায়েন্টকে দেখানোর উপযোগী করে দেবে। PDF হলে বেছে নেওয়া পেজগুলো, ভিডিও হলে বেছে নেওয়া মুহূর্তের ফ্রেম ছবি হয়ে যায়। সবকিছু আপনার ফোনের ব্রাউজারেই হয়, কিছু আপলোড হয় না।</span><span class="en">Pick work images, screenshots, PDFs or videos. This tool turns them into small images stamped with a diagonal “PREVIEW”, ready to show a client. For a PDF, the pages you choose become images; for a video, the frames at the moments you choose. Everything happens in your browser, nothing is uploaded.</span></p>
 
 <div id="pmCfg" hidden data-pdf="{{ '/assets/js/pdf.min.js' | relative_url }}" data-worker="{{ '/assets/js/pdf.worker.min.js' | relative_url }}"></div>
