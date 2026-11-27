@@ -84,7 +84,7 @@ layout: default
   {% assign svc_key = '' %}{% assign svc_bn = '' %}{% assign svc_en = '' %}
   {% if page.service %}{% for c in site.data.pricing.rates %}{% if c.key == page.service %}{% assign svc_key = c.key %}{% assign svc_bn = c.bn %}{% assign svc_en = c.en %}{% endif %}{% endfor %}{% endif %}
 
-  <section class="card" style="margin-top:32px;text-align:center;border-color:rgba(192,132,252,.35);background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(236,72,153,.08))">
+  <section class="card" style="margin-top:32px;text-align:center;border-color:var(--cta-border,rgba(192,132,252,.35));background:var(--cta-bg,linear-gradient(135deg,rgba(124,58,237,.18),rgba(236,72,153,.08)))">
     {% if svc_key != '' %}
     <h3 style="font-size:1.1rem"><span class="bn">{{ svc_bn | escape }}: কাজ লাগবে?</span><span class="en">{{ svc_en | escape }}: need a hand?</span></h3>
     {% else %}
