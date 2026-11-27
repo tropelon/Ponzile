@@ -50,19 +50,6 @@ works:
     link_en: Try it
     image: ""
 
-  - kind: own
-    service: script
-    year: 2026
-    public: true
-    title_bn: Tropelon BD
-    title_en: Tropelon BD
-    summary_bn: আমাদের নিজেদের ইউটিউব চ্যানেল। ডকুমেন্টারি, শিক্ষামূলক ও হরর বর্ণনার ভিডিওর স্ক্রিপ্ট আমাদের নিজেদের লেখা।
-    summary_en: Our own YouTube channel. Scripts for documentary, educational and horror narration videos, written by us.
-    link: "https://www.youtube.com/channel/UCijufPWJQ_Ym5HMDW66GXew"
-    link_bn: চ্যানেল দেখুন
-    link_en: Visit channel
-    image: ""
-
   - kind: sample
     service: documents
     year: 2026
