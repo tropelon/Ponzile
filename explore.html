@@ -1,16 +1,17 @@
 ---
 layout: default
+theme: light
 title: লেখা
 description: tropelon-এর লেখা ও গাইড | Articles and guides from tropelon
 permalink: /explore/
 ---
 <style>
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
-  .chip{font:inherit;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:5px 14px;cursor:pointer}
-  .chip.on{color:#fff;background:var(--grad);border-color:transparent}
+  .chip{font:inherit;font-size:.95rem;font-weight:600;color:var(--text);background:#fff;border:1.5px solid var(--line-strong);border-radius:8px;padding:7px 16px;min-height:44px;cursor:pointer}
+  .chip.on{color:var(--on-primary);background:var(--primary);border-color:var(--primary)}
 </style>
 
-<h1 class="section-title" style="margin-top:8px;font-size:1.6rem"><span class="bn">লেখা</span><span class="en">Articles</span></h1>
+<h1 class="section-title" style="margin-top:8px;font-size:1.5rem"><span class="bn">লেখা</span><span class="en">Articles</span></h1>
 
 <input id="q" type="search" placeholder="সার্চ করুন / Search" aria-label="Search" autocomplete="off">
 
@@ -38,7 +39,7 @@ permalink: /explore/
     {% assign d_en = post.description_en | default: post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 100 %}
     {% capture hay %}{{ post.title }} {{ post.title_en }} {{ post.description }} {{ post.description_en }} {{ post.tags | join: ' ' }}{% for pt in post.tags %} {{ site.data.tags[pt] }}{% endfor %}{% endcapture %}
     <a class="card post-card" href="{{ post.url | relative_url }}" data-text="{{ hay | strip_newlines | downcase | escape }}" data-tags="{{ post.tags | join: '|' | escape }}">
-      {% if img %}<img src="{{ img }}" alt="" loading="lazy">{% else %}<div style="aspect-ratio:16/9;background:var(--grad);opacity:.35"></div>{% endif %}
+      {% if img %}<img src="{{ img }}" alt="" loading="lazy">{% endif %}
       <div class="body">
         <h3><span class="bn">{{ post.title }}</span><span class="en">{{ t_en }}</span></h3>
         <p class="meta">{{ post.date | date: "%d-%m-%Y" }}</p>
